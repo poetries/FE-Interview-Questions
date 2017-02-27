@@ -45,7 +45,7 @@ var math = require('./math');
 math.add(2,3);
 ```
 
-* E6 模块
+* ES6 模块
 
  
 ```javascript
