@@ -380,12 +380,12 @@ ulEl.addEventListener('click', function(e){
   - IE: window.event.srcElement
 
 * 阻止事件默认行为
-  - W3C: window.event.cancelBubble = true
+  - W3C: e.preventDefault()
   - IE: window.event.returnValue = false
 
 * 阻止事件传播
   - W3C: e.stopPropagation()
-  - IE: window.event
+  - IE: window.event.cancelBubble = true
 
 
 **W3C事件的 target 与 currentTarget 的区别？**
