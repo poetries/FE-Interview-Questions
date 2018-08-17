@@ -34,6 +34,9 @@
 - [comprehensive](comprehensive.md)
 - [vue](vue.md)
 - [react](react.md)
+- [MVVM](MVVM.md)
+- [浏览器](浏览器.md)
+- [性能](性能.md)
 
 综合版本
 ---
