@@ -32,7 +32,8 @@
 - [computer-basic-knowledge](computer-basic-knowledge.md)
 - [other](other.md)
 - [comprehensive](comprehensive.md)
-
+- [vue](vue.md)
+- [react](react.md)
 
 综合版本
 ---
