@@ -1,0 +1,31 @@
+language: node_js
+node_js: stable
+
+# S: Build Lifecycle
+install:
+  - npm install
+
+
+#before_script:
+ # - npm install -g gulp
+
+script:
+  - hexo g
+
+after_script:
+  - cd ./docs/.vuepress/dist
+  - git init
+  - git config user.name "poetries"
+  - git config user.email "jingguanliuye@gmail.com"
+  - git add -A
+  - git commit -m "Update docs"
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages
+# E: Build LifeCycle
+
+branches:
+  only:
+    - dev
+env:
+ global:
+   - GH_REF: github.com/poetries/FE-Interview-Questions.git
+   
