@@ -1,18 +1,35 @@
 module.exports = {
     base:'/FE-Interview-Questions/',
-    // dest:'public',
+    // dest:'public', //指定 vuepress build 的输出目录
     title: '前端面试题',
     description: '前端面试题整理',
+    // 为每个代码块显示行号
+    markdown: {
+      lineNumbers: true
+    },
     themeConfig: {
         nav: [
-          { text: 'Home', link: '/' },
+          { text: '基础', link: '/' },
+          { text: '进阶', link: '/advance/' },
           { text: 'Blog', link: 'http://blog.poetries.top/' },
           { text: 'Github', link: 'https://github.com/poetries/FE-Interview-Questions' },
         ],
-        displayAllHeaders: true, // 默认值：false
         sidebar: [
-            '/'
-          ],
+          {
+            title: '基础题',
+            collapsable: false,
+            children: [
+              '/'
+            ]
+          },
+          {
+            title: ' 进阶题',
+            children: [
+              '/advance/'
+            ]
+          }
+        ]
+      },
           lastUpdated: 'Last Updated',
           // 假定是 GitHub. 同时也可以是一个完整的 GitLab URL
           // repo: 'vuejs/vuepress',
@@ -32,5 +49,5 @@ module.exports = {
             editLinks: true,
             // 默认为 "Edit this page"
             editLinkText: '帮助我们改善此页面！'
-      }
-  }
+    }
+  
