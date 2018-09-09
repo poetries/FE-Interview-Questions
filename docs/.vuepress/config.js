@@ -1,6 +1,6 @@
 module.exports = {
     base:'/FE-Interview-Questions/',
-    // dest:'public',
+    dest:'public',
     title: '前端面试题',
     description: '前端面试题整理',
     themeConfig: {

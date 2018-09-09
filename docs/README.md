@@ -4,7 +4,6 @@ sidebarDepth: 2
 
 ## 基础面试题
 
-
 ## $HTML， HTTP，web综合问题
 
 ### 1、前端需要注意哪些SEO
