@@ -10,7 +10,7 @@ install:
  # - npm install -g gulp
 
 script:
-  - hexo g
+  - npm run build
 
 after_script:
   - cd ./docs/.vuepress/dist
