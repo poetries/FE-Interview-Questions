@@ -5,7 +5,7 @@ module.exports = {
     description: '前端面试题整理',
     // 为每个代码块显示行号
     markdown: {
-      lineNumbers: true
+      lineNumbers: false
     },
     themeConfig: {
         nav: [
