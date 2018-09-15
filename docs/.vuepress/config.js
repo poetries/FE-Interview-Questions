@@ -11,6 +11,7 @@ module.exports = {
         nav: [
           { text: '基础', link: '/' },
           { text: '进阶', link: '/advance/' },
+          { text: '计算机基础', link: '/computed-base/' },
           { text: 'Blog', link: 'http://blog.poetries.top/' },
           { text: 'Github', link: 'https://github.com/poetries/FE-Interview-Questions' },
         ],
@@ -27,12 +28,18 @@ module.exports = {
             children: [
               '/advance/'
             ]
+          },
+          {
+            title: ' 计算机基础',
+            children: [
+              '/computed-base/'
+            ]
           }
         ]
       },
         lastUpdated: 'Last Updated',
         // 假定是 GitHub. 同时也可以是一个完整的 GitLab URL
-        // repo: 'vuejs/vuepress',
+        repo: 'poetries/FE-Interview-Questions',
         // 自定义仓库链接文字。默认从 `themeConfig.repo` 中自动推断为
         // "GitHub"/"GitLab"/"Bitbucket" 其中之一，或是 "Source"。
         //  repoLabel: '查看源码',
@@ -50,4 +57,3 @@ module.exports = {
           // 默认为 "Edit this page"
           editLinkText: '帮助我们改善此页面！'
     }
-  
