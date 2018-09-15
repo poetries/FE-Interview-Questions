@@ -1,5 +1,5 @@
 ---
-sidebarDepth: 2
+sidebarDepth: 4
 ---
 
 # 基础
@@ -61,12 +61,12 @@ sidebarDepth: 2
   - 减少`HTTP`请求：合并文件、`CSS`精灵、`inline Image`
   - 减少`DNS`查询：`DNS`缓存、将资源分布到恰当数量的主机名
   - 减少`DOM`元素数量
-  
+
 - `Server`方面
   - 使用`CDN`
   - 配置`ETag`
   -  对组件使用`Gzip`压缩
-  
+
 - `Cookie`方面
   - 减小`cookie`大小
 
@@ -81,7 +81,7 @@ sidebarDepth: 2
     - 压缩`javascript`和`css`
     - 删除不需要的脚本
     - 减少`DOM`访问
-    
+
 - 图片方面
    - 优化图片：根据实际颜色需要选择色深、压缩
    - 优化`css`精灵
@@ -135,16 +135,16 @@ sidebarDepth: 2
   - 语意化更好的内容元素，比如` article`、`footer`、`header`、`nav`、`section`
   - 表单控件，`calendar`、`date`、`time`、`email`、`url`、`search`
   - 新的技术`webworker`, `websocket`, `Geolocation`
-  
+
 - 移除的元素：
   - 纯表现的元素：`basefont`，`big`，`center`，`font`, `s`，`strike，`tt，u`
   - 对可用性产生负面影响的元素：`frame`，`frameset`，`noframes`
-  
+
 - 支持`HTML5`新标签：
   - `IE8/IE7/IE6`支持通过`document.createElement`方法产生的标签
   - 可以利用这一特性让这些浏览器支`持HTML5`新标签
   - 浏览器支持新标签后，还需要添加标签默认的样式
-  
+
 - 当然也可以直接使用成熟的框架、比如`html5shim`
 
 ### 10 `HTML5`的离线储存怎么使用，工作原理能不能解释一下？
@@ -183,7 +183,7 @@ FALLBACK:
 - 存储大小：
   - `cookie`数据大小不能超过4k
   - `sessionStorage`和`localStorage`虽然也有存储大小的限制，但比`cookie`大得多，可以达到5M或更大
-  
+
 - 有期时间：
   - `localStorage` 存储持久数据，浏览器关闭后数据不丢失除非主动删除数据
   - `sessionStorage`  数据在当前浏览器窗口关闭后自动删除
@@ -204,7 +204,7 @@ FALLBACK:
 
 - 一个是功能上的差别
   - 主要是`XHTML`可兼容各大浏览器、手机以及`PDA`，并且浏览器也能快速正确地编译网页
-  
+
 - 另外是书写习惯的差别
   - `XHTML` 元素必须被正确地嵌套，闭合，区分大小写，文档必须拥有根元素
 
@@ -275,7 +275,7 @@ FALLBACK:
 
 **局部处理**
 
-- `mate`标签中的 `viewport`属性 ，`initial-scale` 设置为 `1` 
+- `mate`标签中的 `viewport`属性 ，`initial-scale` 设置为 `1`
 - `rem `按照设计稿标准走，外加利用`transfrome` 的`scale(0.5)` 缩小一倍即可；
 
 **全局处理**
@@ -309,6 +309,45 @@ FALLBACK:
 - 少用全局变量、缓存`DOM`节点查找的结果。减少`IO`读取操作
 - 图片预加载，将样式表放在顶部，将脚本放在底部  加上时间戳
 - 对普通的网站有一个统一的思路，就是尽量向前端优化、减少数据库操作、减少磁盘`IO`
+
+### 25 meta viewport相关
+
+```html
+<!DOCTYPE html>  <!--H5标准声明，使用 HTML5 doctype，不区分大小写-->
+<head lang=”en”> <!--标准的 lang 属性写法-->
+<meta charset=’utf-8′>    <!--声明文档使用的字符编码-->
+<meta http-equiv=”X-UA-Compatible” content=”IE=edge,chrome=1″/>   <!--优先使用 IE 最新版本和 Chrome-->
+<meta name=”description” content=”不超过150个字符”/>       <!--页面描述-->
+<meta name=”keywords” content=””/>     <!-- 页面关键词-->
+<meta name=”author” content=”name, email@gmail.com”/>    <!--网页作者-->
+<meta name=”robots” content=”index,follow”/>      <!--搜索引擎抓取-->
+<meta name=”viewport” content=”initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no”> <!--为移动设备添加 viewport-->
+<meta name=”apple-mobile-web-app-title” content=”标题”> <!--iOS 设备 begin-->
+<meta name=”apple-mobile-web-app-capable” content=”yes”/>  <!--添加到主屏后的标题（iOS 6 新增）
+是否启用 WebApp 全屏模式，删除苹果默认的工具栏和菜单栏-->
+<meta name=”apple-itunes-app” content=”app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL”>
+<!--添加智能 App 广告条 Smart App Banner（iOS 6+ Safari）-->
+<meta name=”apple-mobile-web-app-status-bar-style” content=”black”/>
+<meta name=”format-detection” content=”telphone=no, email=no”/>  <!--设置苹果工具栏颜色-->
+<meta name=”renderer” content=”webkit”> <!-- 启用360浏览器的极速模式(webkit)-->
+<meta http-equiv=”X-UA-Compatible” content=”IE=edge”>     <!--避免IE使用兼容模式-->
+<meta http-equiv=”Cache-Control” content=”no-siteapp” />    <!--不让百度转码-->
+<meta name=”HandheldFriendly” content=”true”>     <!--针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓-->
+<meta name=”MobileOptimized” content=”320″>   <!--微软的老式浏览器-->
+<meta name=”screen-orientation” content=”portrait”>   <!--uc强制竖屏-->
+<meta name=”x5-orientation” content=”portrait”>    <!--QQ强制竖屏-->
+<meta name=”full-screen” content=”yes”>              <!--UC强制全屏-->
+<meta name=”x5-fullscreen” content=”true”>       <!--QQ强制全屏-->
+<meta name=”browsermode” content=”application”>   <!--UC应用模式-->
+<meta name=”x5-page-mode” content=”app”>   <!-- QQ应用模式-->
+<meta name=”msapplication-tap-highlight” content=”no”>    <!--windows phone 点击无高光
+设置页面不缓存-->
+<meta http-equiv=”pragma” content=”no-cache”>
+<meta http-equiv=”cache-control” content=”no-cache”>
+<meta http-equiv=”expires” content=”0″>
+```
+
+
 
 
 ## 二、CSS部分
@@ -398,7 +437,7 @@ FALLBACK:
 
 ### 9 css3有哪些新特性
 
-- 新增各种`css`选择器 
+- 新增各种`css`选择器
 - 圆角 `border-radius`
 - 多列布局
 - 阴影和反射
@@ -696,6 +735,14 @@ FALLBACK:
 - 适用于小图片
 - `base64`的体积约为原图的`4/3`
 
+### 36 自适应布局
+
+思路：
+
+- 左侧浮动或者绝对定位，然后右侧`margin`撑开
+- 使用`div`包含，然后靠负`margin`形成`bfc`
+- 使用`flex`
+
 ## 三、JavaScript
 
 ### 1 闭包
@@ -735,14 +782,14 @@ FALLBACK:
 - 关系：`instance.constructor.prototype = instance.__proto__`
 - 特点：
   - `JavaScript`对象是通过引用来传递的，我们创建的每个新对象实体中并没有一份属于自己的原型副本。当我们修改原型时，与之相关的对象也会继承这一改变
-  
+
 -  当我们需要一个属性的时，`Javascript`引擎会先看当前对象中是否有这个属性， 如果没有的
 -  就会查找他的`Prototype`对象是否有这个属性，如此递推下去，一直检索到 `Object` 内建对象
 
 ### 4 请解释什么是事件代理
 
 - 事件代理（`Event Delegation`），又称之为事件委托。是 `JavaScript` 中常用绑定事件的常用技巧。顾名思义，“事件代理”即是把原本需要绑定的事件委托给父元素，让父元素担当事件监听的职务。事件代理的原理是DOM元素的事件冒泡。使用事件代理的好处是可以提高性能
-- 可以大量节省内存占用，减少事件注册，比如在`table`上代理所有`td`的`click`事件就非常棒 
+- 可以大量节省内存占用，减少事件注册，比如在`table`上代理所有`td`的`click`事件就非常棒
 - 可以实现当新增子对象时无需再次对其绑定
 
 ### 5 Javascript如何实现继承？
@@ -867,7 +914,7 @@ function onBack(res) {
 ```
 
 2.）子窗口：(http://child.domain.com/b.html)
- 
+
 ```javascript
 document.domain = 'domain.com';
 // 获取父窗口中变量
@@ -877,7 +924,7 @@ alert('get js data from parent ---> ' + window.parent.user);
 - **nginx代理跨域**
 - **nodejs中间件代理跨域**
 - **后端在头部信息里面设置安全域名**
-            
+
 
 ### 11 模块化开发怎么做？
 - 立即执行函数,不暴露私有成员
@@ -914,13 +961,13 @@ var module1 = (function(){
 
 - 数据体积方面
   - `JSON`相对`于XML`来讲，数据的体积小，传递的速度更快些。
-  
+
 - 数据交互方面
   - `JSON`与`JavaScript`的交互更加方便，更容易解析处理，更好的数据交互
-  
+
 - 数据描述方面
   - `JSON`对数据的描述性比`XML`较差
-  
+
 - 传输速度方面
   - `JSON`的速度要远远快于`XML`
 
@@ -937,13 +984,13 @@ var module1 = (function(){
 
 - `sql`注入原理
   - 就是通过把`SQL`命令插入到`Web`表单递交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令
-  
+
 - 总的来说有以下几点
   - 永远不要信任用户的输入，要对用户的输入进行校验，可以通过正则表达式，或限制长度，对单引号和双`"-"`进行转换等
   - 永远不要使用动态拼装SQL，可以使用参数化的`SQL`或者直接使用存储过程进行数据查询存取
   - 永远不要使用管理员权限的数据库连接，为每个应用使用单独的权限有限的数据库连接
   - 不要把机密信息明文存放，请加密或者`hash`掉密码和敏感的信息
-  
+
 **XSS原理及防范**
 
 - `Xss(cross-site scripting)`攻击指的是攻击者往`Web`页面里插入恶意`html`标签或者`javascript`代码。比如：攻击者在论坛中放一个看似安全的链接，骗取用户点击后，窃取`cookie`中的用户私密信息；或者攻击者在论坛中加一个恶意表单，当用户提交表单的时候，却把信息传送到攻击者的服务器中，而不是用户原本以为的信任站点
@@ -1091,6 +1138,13 @@ promise.then(onFulfilled, onRejected)
 
 - `AMD`推荐的风格通过返回一个对象做为模块对象，`CommonJS`的风格通过对`module.exports`或`exports`的属性赋值来达到暴露模块对象的目的
 
+**es6模块 commonjs amd cmd**
+
+- `CommonJS` 的规范中，每个 `JavaScript` 文件就是一个独立的模块上下文（`module context`），在这个上下文中默认创建的属性都是私有的。也就是说，在一个文件定义的变量（还包括函数和类），都是私有的，对其他文件是不可见的。
+- `CommonJS`是同步加载模块,在浏览器中会出现堵塞情况，所以不适用
+- `AMD` 异步，需要定义回调`define`方式
+- `es6` 一个模块就是一个独立的文件，该文件内部的所有变量，外部无法获取。如果你希望外部能够读取模块内部的某个变量，就必须使用`export`关键字输出该变量
+`es6`还可以导出类、方法，自动适用严格模式
 
 ### 28 那些操作会造成内存泄漏
 
@@ -1210,13 +1264,13 @@ function Dog(){
 ```javascript
  function Car(name,price){
       this.name=name;
-      this.price=price; 
+      this.price=price;
     }
      Car.prototype.sell=function(){
        alert("我是"+this.name+"，我现在卖"+this.price+"万元");
       }
     var camry =new Car("凯美瑞",27);
-    camry.sell(); 
+    camry.sell();
 ```
 
 ### 35 eval是做什么的
@@ -1353,7 +1407,7 @@ var last=JSON.stringify(obj);
   - `instanceof` 运算符是用来测试一个对象是否在其原型链原型构造函数的属性
 
 ```javascript
-var arr = []; 
+var arr = [];
 arr instanceof Array; // true
 ```
 
@@ -1361,7 +1415,7 @@ arr instanceof Array; // true
   - `constructor `属性返回对创建此对象的数组函数的引用，就是返回对象相对应的构造函数
 
 ```javascript
-var arr = []; 
+var arr = [];
 arr.constructor == Array; //true
 ```
 
@@ -1372,7 +1426,7 @@ arr.constructor == Array; //true
 Object.prototype.toString.call(value) == '[object Array]'
 // 利用这个方法，可以写一个返回数据类型的方法
 var isType = function (obj) {
-     return Object.prototype.toString.call(obj).slice(8,-1); 
+     return Object.prototype.toString.call(obj).slice(8,-1);
 }
 ```
 
@@ -1530,6 +1584,56 @@ arr.sort(function(){
     return Math.random() - 0.5;
 })
 console.log(arr);
+```
+
+### 66 如何渲染几万条数据并不卡住界面
+
+> 这道题考察了如何在不卡住页面的情况下渲染数据，也就是说不能一次性将几万条都渲染出来，而应该一次渲染部分 `DOM`，那么就可以通过 `requestAnimationFrame` 来每 `16 ms` 刷新一次
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <ul>控件</ul>
+  <script>
+    setTimeout(() => {
+      // 插入十万条数据
+      const total = 100000
+      // 一次插入 20 条，如果觉得性能不好就减少
+      const once = 20
+      // 渲染数据总共需要几次
+      const loopCount = total / once
+      let countOfRender = 0
+      let ul = document.querySelector("ul");
+      function add() {
+        // 优化性能，插入不会造成回流
+        const fragment = document.createDocumentFragment();
+        for (let i = 0; i < once; i++) {
+          const li = document.createElement("li");
+          li.innerText = Math.floor(Math.random() * total);
+          fragment.appendChild(li);
+        }
+        ul.appendChild(fragment);
+        countOfRender += 1;
+        loop();
+      }
+      function loop() {
+        if (countOfRender < loopCount) {
+          window.requestAnimationFrame(add);
+        }
+      }
+      loop();
+    }, 0);
+  </script>
+</body>
+</html>
 ```
 
 ## 四、jQuery
@@ -1745,15 +1849,66 @@ $('#box').clearQueue("queue1"); // delete queue1 with clearQueue
 - 只有 `JQuery `对象才能使用 `JQuery` 方法
 - `JQuery` 对象是一个数组对象
 
+## 五、webpack相关
 
-## 五、编程题
+### 1 打包体积 优化思路
+
+- 提取第三方库或通过引用外部文件的方式引入第三方库
+- 代码压缩插件`UglifyJsPlugin`
+- 服务器启用gzip压缩
+- 按需加载资源文件 `require.ensure`
+- 优化`devtool`中的`source-map`
+- 剥离`css`文件，单独打包
+- 去除不必要插件，通常就是开发环境与生产环境用同一套配置文件导致
+
+### 2 打包效率
+
+- 开发环境采用增量构建，启用热更新
+- 开发环境不做无意义的工作如提取`css`计算文件hash等
+- 配置`devtool`
+- 选择合适的`loader`
+- 个别`loader`开启`cache` 如`babel-loader`
+- 第三方库采用引入方式
+- 提取公共代码
+- 优化构建时的搜索路径 指明需要构建目录及不需要构建目录
+- 模块化引入需要的部分
+
+### 3 Loader
+
+编写一个loader
+
+> `loader`就是一个`node`模块，它输出了一个函数。当某种资源需要用这个`loader`转换时，这个函数会被调用。并且，这个函数可以通过提供给它的`this`上下文访问`Loader API`。
+`reverse-txt-loader`
+
+```js
+// 定义
+module.exports = function(src) {
+  //src是原文件内容（abcde），下面对内容进行处理，这里是反转
+  var result = src.split('').reverse().join('');
+  //返回JavaScript源码，必须是String或者Buffer
+  return `module.exports = '${result}'`;
+}
+//使用
+{
+	test: /\.txt$/,
+	use: [
+		{
+			'./path/reverse-txt-loader'
+		}
+	]
+},
+```
+
+
+
+## 六、编程题
 
 ### 1 写一个通用的事件侦听器函数
 
 ```javascript
  // event(事件)工具集，来源：github.com/markyun
     markyun.Event = {
-       
+
         // 视能力分别使用dom0||dom2||IE方式 来绑定事件
         // 参数： 操作的元素,事件名称 ,事件处理程序
         addEvent : function(element, type, handler) {
@@ -1904,8 +2059,87 @@ Function.prototype.bind = function(ctx) {
 };
 ```
 
+## 七、其他
 
-## 六、其他
+### 1 负载均衡
+
+> 多台服务器共同协作，不让其中某一台或几台超额工作，发挥服务器的最大作用
+
+- `http`重定向负载均衡：调度者根据策略选择服务器以302响应请求，缺点只有第一次有效果，后续操作维持在该服务器
+dns负载均衡：解析域名时，访问多个`ip`服务器中的一个（可监控性较弱）
+- 反向代理负载均衡：访问统一的服务器，由服务器进行调度访问实际的某个服务器，对统一的服务器要求大，性能受到 服务器群的数量
+
+### 2 CDN
+
+> 内容分发网络，基本思路是尽可能避开互联网上有可能影响数据传输速度和稳定性的瓶颈和环节，使内容传输的更快、更稳定。
+
+### 3 内存泄漏
+
+> 定义：程序中己动态分配的堆内存由于某种原因程序未释放或无法释放引发的各种问题。
+
+**js中可能出现的内存泄漏情况**
+
+> 结果：变慢，崩溃，延迟大等，原因：
+
+- 全局变量
+- `dom`清空时，还存在引用
+- `ie`中使用闭包
+- 定时器未清理
+- 子元素存在引起的内存泄露
+
+
+**避免策略**
+
+- 减少不必要的全局变量，或者生命周期较长的对象，及时对无用的数据进行垃圾回收；
+- 注意程序逻辑，避免“死循环”之类的 ；
+- 避免创建过多的对象  原则：不用了的东西要及时归还。
+- 减少层级过多的引用
+
+### 4 babel原理
+
+> `ES6、7`代码输入 -> `babylon`进行解析 -> 得到`AST`（抽象语法树）-> `plugin`用b`abel-traverse`对`AST`树进行遍历转译 ->得到新的`AST`树->用`babel-generator`通过`AST`树生成`ES5`代码
+
+### 5 js自定义事件
+
+> 三要素： `document.createEvent()` `event.initEvent()` `element.dispatchEvent()`
+
+```js
+// (en:自定义事件名称，fn:事件处理函数，addEvent:为DOM元素添加自定义事件，triggerEvent:触发自定义事件)
+window.onload = function(){
+    var demo = document.getElementById("demo");
+    demo.addEvent("test",function(){console.log("handler1")});
+    demo.addEvent("test",function(){console.log("handler2")});
+    demo.onclick = function(){
+        this.triggerEvent("test");
+    }
+}
+Element.prototype.addEvent = function(en,fn){
+    this.pools = this.pools || {};
+    if(en in this.pools){
+        this.pools[en].push(fn);
+    }else{
+        this.pools[en] = [];
+        this.pools[en].push(fn);
+    }
+}
+Element.prototype.triggerEvent  = function(en){
+    if(en in this.pools){
+        var fns = this.pools[en];
+        for(var i=0,il=fns.length;i<il;i++){
+            fns[i]();
+        }
+    }else{
+        return;
+    }
+}
+```
+
+### 6 前后端路由差别
+
+- 后端每次路由请求都是重新访问服务器
+- 前端路由实际上只是`JS`根据`URL`来操作`DOM`元素，根据每个页面需要的去服务端请求数据，返回数据后和模板进行组合
+
+## 八、综合
 
 ### 1 谈谈你对重构的理解
 
@@ -1915,7 +2149,7 @@ Function.prototype.bind = function(ctx) {
   - 使网站前端兼容于现代浏览器(针对于不合规范的`CSS`、如对IE6有效的)
   - 对于移动平台的优化
   - 针对于`SEO`进行优化
-  
+
 ### 2 什么样的前端代码是好的
 
 - 高复用低耦合，这样文件小，好维护，而且好扩展。
@@ -1949,8 +2183,16 @@ Function.prototype.bind = function(ctx) {
 - `JS` 分文件夹存放 命名以该`JS`功能为准的英文翻译。
 - 图片采用整合的 `images.png png8` 格式文件使用 - 尽量整合在一起使用方便将来的管理
 
+### 6 组件封装
 
-## 七、人事面
+> 目的：为了重用，提高开发效率和代码质量 注意：低耦合，单一职责，可复用性，可维护性 常用操作
+
+- 分析布局
+- 初步开发
+- 化繁为简
+- 组件抽象
+
+## 九、人事面
 
 - 面试完你还有什么问题要问的吗
 - 你有什么爱好?
@@ -1963,7 +2205,7 @@ Function.prototype.bind = function(ctx) {
 - 未来三到五年的规划是怎样的？
 
 
-## 八、常问
+## 十、常问
 
 - 自我介绍
 - 你的项目中技术难点是什么？遇到了什么问题？你是怎么解决的？
