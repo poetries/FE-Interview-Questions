@@ -9,7 +9,7 @@ module.exports = {
     },
     themeConfig: {
         nav: [
-          { text: '基础', link: '/' },
+          { text: '基础', link: '/base/' },
           { text: '进阶', link: '/advance/' },
           { text: '计算机基础', link: '/computed-base/' },
           { text: 'Blog', link: 'http://blog.poetries.top/' },
@@ -20,7 +20,7 @@ module.exports = {
             title: '基础题',
             collapsable: false,
             children: [
-              '/'
+              '/base/'
             ]
           },
           {
