@@ -1077,6 +1077,53 @@ Content-Type: text/html; charset=iso-8859-1
 }
 ```
 
+### 45 水平居中的方法
+
+- 元素为行内元素，设置父元素`text-align:center`
+- 如果元素宽度固定，可以设置左右`margin`为`auto`;
+- 如果元素为绝对定位，设置父元素`position`为`relative`，元素设`left:0;right:0;margin:auto;`
+- 使用`flex-box`布局，指定`justify-content`属性为center
+- `display`设置为`tabel-ceil`
+
+### 46 垂直居中的方法
+
+- 将显示方式设置为表格，`display:table-cell`,同时设置`vertial-align：middle`
+- 使用`flex`布局，设置为`align-item：center`
+- 绝对定位中设置`bottom:0,top:0`,并设置`margin:auto`
+- 绝对定位中固定高度时设置`top:50%，margin-top`值为高度一半的负值
+- 文本垂直居中设置`line-height`为`height`值
+
+### 47 如何使用CSS实现硬件加速？
+
+> 硬件加速是指通过创建独立的复合图层，让GPU来渲染这个图层，从而提高性能，
+
+- 一般触发硬件加速的`CSS`属性有`transform`、`opacity`、`filter`，为了避免2D动画在
+开始和结束的时候的`repaint`操作，一般使用`tranform:translateZ(0)`
+
+### 48 重绘和回流（重排）是什么，如何避免？
+
+- DOM的变化影响到了元素的几何属性（宽高）,浏览器重新计算元素的几何属性，其他元素的几何
+- 属性和位置也会受到影响，浏览器需要重新构造渲染树，这个过程称为重排，浏览器将受到影响的部分
+- 重新绘制到屏幕上的过程称为重绘。引起重排的原因有
+  - 添加或者删除可见的DOM元素，
+  - 元素位置、尺寸、内容改变，
+  - 浏览器页面初始化，
+  - 浏览器窗口尺寸改变，重排一定重绘，重绘不一定重排，
+
+**减少重绘和重排的方法**：
+
+- 不在布局信息改变时做`DOM`查询
+- 使用`cssText`或者`className`一次性改变属性
+- 使用`fragment`
+- 对于多次重排的元素，如动画，使用绝对定位脱离文档流，让他的改变不影响到其他元素
+
+### 49 说一说css3的animation
+
+- css3的`animation`是css3新增的动画属性，这个css3动画的每一帧是通过`@keyframes`来声明的，`keyframes`声明了动画的名称，通过`from`、`to`或者是百分比来定义
+- 每一帧动画元素的状态，通过`animation-name`来引用这个动画，同时css3动画也可以定义动画运行的时长、动画开始时间、动画播放方向、动画循环次数、动画播放的方式，
+- 这些相关的动画子属性有：`animation-name`定义动画名、`animation-duration`定义动画播放的时长、`animation-delay`定义动画延迟播放的时间、`animation-direction`定义
+动画的播放方向、`animation-iteration-count`定义播放次数、`animation-fill-mode`定义动画播放之后的状态、`animation-play-state`定义播放状态，如暂停运行等、`animation-timing-function`
+- 定义播放的方式，如恒速播放、艰涩播放等。
 
 ## 三、JavaScript
 
