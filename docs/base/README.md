@@ -1117,6 +1117,7 @@ Content-Type: text/html; charset=iso-8859-1
 - 使用`fragment`
 - 对于多次重排的元素，如动画，使用绝对定位脱离文档流，让他的改变不影响到其他元素
 
+
 ### 49 说一说css3的animation
 
 - css3的`animation`是css3新增的动画属性，这个css3动画的每一帧是通过`@keyframes`来声明的，`keyframes`声明了动画的名称，通过`from`、`to`或者是百分比来定义
