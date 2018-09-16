@@ -120,6 +120,26 @@ pageClass: custom-code-highlight
     7. 此时文档完全解析完成，浏览器可能还在等待如图片等内容加载，等这些**内容完成载入并且所有异步脚本完成载入和执行**，document.readState变为complete,window触发load事件
 23. **显示页面**（HTML解析过程中会逐步显示页面）
 
+**详细简版**
+
+1. 从浏览器接收`url`到开启网络请求线程（这一部分可以展开浏览器的机制以及进程与线程之间的关系）
+
+2. 开启网络线程到发出一个完整的`http`请求（这一部分涉及到dns查询，`tcp/ip`请求，五层因特网协议栈等知识）
+
+3. 从服务器接收到请求到对应后台接收到请求（这一部分可能涉及到负载均衡，安全拦截以及后台内部的处理等等）
+
+4. 后台和前台的`http`交互（这一部分包括`http`头部、响应码、报文结构、`cookie`等知识，可以提下静态资源的`cookie`优化，以及编码解码，如`gzip`压缩等）
+
+5. 单独拎出来的缓存问题，`http`的缓存（这部分包括http缓存头部，`etag`，`catch-control`等）
+
+6. 浏览器接收到`http`数据包后的解析流程（解析`html`-词法分析然后解析成`dom`树、解析`css`生成`css`规则树、合并成`render`树，然后`layout`、`painting`渲染、复合图层的合成、`GPU`绘制、外链资源的处理、`loaded`和`domcontentloaded`等）
+
+7. `CSS`的可视化格式模型（元素的渲染规则，如包含块，控制框，`BFC`，`IFC`等概念）
+
+8. `JS`引擎解析过程（`JS`的解释阶段，预处理阶段，执行阶段生成执行上下文，`VO`，作用域链、回收机制等等）
+
+9. 其它（可以拓展不同的知识模块，如跨域，web安全，`hybrid`模式等等内容）
+
 ### 5 如何进行网站性能优化
 
 - `content`方面
@@ -1128,6 +1148,56 @@ Content-Type: text/html; charset=iso-8859-1
 动画的播放方向、`animation-iteration-count`定义播放次数、`animation-fill-mode`定义动画播放之后的状态、`animation-play-state`定义播放状态，如暂停运行等、`animation-timing-function`
 - 定义播放的方式，如恒速播放、艰涩播放等。
 
+### 50 右边宽度固定，左边自适应
+
+**方法一**
+
+```html
+<style>
+body{
+    display: flex;
+}
+.left{
+    background-color: rebeccapurple;
+    height: 200px;
+    flex: 1;
+}
+.right{
+    background-color: red;
+    height: 200px;
+    width: 100px;
+}
+</style>
+<body>
+    <div class="left"></div>
+    <div class="right"></div>
+</body>
+```
+
+**方法二**
+
+```html
+<style>
+    div {
+        height: 200px;
+    }
+    .left {
+        float: right;
+        width: 200px;
+        background-color: rebeccapurple;
+    }
+    .right {
+        margin-right: 200px;
+        background-color: red;
+    }
+</style>
+<body>
+    <div class="left"></div>
+    <div class="right"></div>
+</body>
+```
+
+
 ## 三、JavaScript
 
 ### 1 闭包
@@ -2132,6 +2202,545 @@ function ready(fn){
  };
 ```
 
+### 72 addEventListener()和attachEvent()的区别
+
+- `addEventListener()`是符合W3C规范的标准方法;  `attachEvent()`是IE低版本的非标准方法
+- `addEventListener()`支持事件冒泡和事件捕获; - 而`attachEvent()`只支持事件冒泡
+- `addEventListener()`的第一个参数中,事件类型不需要添加`on`; `attachEvent()`需要添加`'on'`
+- 如果为同一个元素绑定多个事件, `addEventListener()`会按照事件绑定的顺序依次执行,  `attachEvent()`会按照事件绑定的顺序倒序执行
+
+### 73 获取页面所有的checkbox
+
+```js
+var resultArr= [];
+var input = document.querySelectorAll('input');
+for( var i = 0; i < input.length; i++ ) {
+    if( input[i].type == 'checkbox' ) {
+        resultArr.push( input[i] );
+    }
+}
+//resultArr即中获取到了页面中的所有checkbox
+```
+
+### 74 数组去重方法总结(六种方法)
+
+**方法一**
+
+- 双层循环，外层循环元素，内层循环时比较值
+- 如果有相同的值则跳过，不相同则`push`进数组
+
+```js
+Array.prototype.distinct = function(){
+ var arr = this,
+  result = [],
+  i,
+  j,
+  len = arr.length;
+ for(i = 0; i < len; i++){
+  for(j = i + 1; j < len; j++){
+   if(arr[i] === arr[j]){
+    j = ++i;
+   }
+  }
+  result.push(arr[i]);
+ }
+ return result;
+}
+var arra = [1,2,3,4,4,1,1,2,1,1,1];
+arra.distinct();    //返回[3,4,2,1]
+```
+
+**方法二：利用splice直接在原数组进行操作**
+
+- 双层循环，外层循环元素，内层循环时比较值
+- 值相同时，则删去这个值
+- 注意点:删除元素之后，需要将数组的长度也减1.
+
+```js
+Array.prototype.distinct = function (){
+ var arr = this,
+  i,
+  j,
+  len = arr.length;
+ for(i = 0; i < len; i++){
+  for(j = i + 1; j < len; j++){
+   if(arr[i] == arr[j]){
+    arr.splice(j,1);
+    len--;
+    j--;
+   }
+  }
+ }
+ return arr;
+};
+var a = [1,2,3,4,5,6,5,3,2,4,56,4,1,2,1,1,1,1,1,1,];
+var b = a.distinct();
+console.log(b.toString()); //1,2,3,4,5,6,56
+```
+
+- 优点：简单易懂
+- 缺点：占用内存高，速度慢
+
+**方法三：利用对象的属性不能相同的特点进行去重**
+
+```js
+Array.prototype.distinct = function (){
+ var arr = this,
+  i,
+  obj = {},
+  result = [],
+  len = arr.length;
+ for(i = 0; i< arr.length; i++){
+  if(!obj[arr[i]]){ //如果能查找到，证明数组元素重复了
+   obj[arr[i]] = 1;
+   result.push(arr[i]);
+  }
+ }
+ return result;
+};
+var a = [1,2,3,4,5,6,5,3,2,4,56,4,1,2,1,1,1,1,1,1,];
+var b = a.distinct();
+console.log(b.toString()); //1,2,3,4,5,6,56
+```
+
+**方法四：数组递归去重**
+
+- 运用递归的思想
+- 先排序，然后从最后开始比较，遇到相同，则删除
+
+```js
+Array.prototype.distinct = function (){
+ var arr = this,
+  len = arr.length;
+ arr.sort(function(a,b){  //对数组进行排序才能方便比较
+  return a - b;
+ })
+ function loop(index){
+  if(index >= 1){
+   if(arr[index] === arr[index-1]){
+    arr.splice(index,1);
+   }
+   loop(index - 1); //递归loop函数进行去重
+  }
+ }
+ loop(len-1);
+ return arr;
+};
+var a = [1,2,3,4,5,6,5,3,2,4,56,4,1,2,1,1,1,1,1,1,56,45,56];
+var b = a.distinct();
+console.log(b.toString());  //1,2,3,4,5,6,45,56
+```
+
+**方法五：利用indexOf以及forEach**
+
+```js
+Array.prototype.distinct = function (){
+ var arr = this,
+  result = [],
+  len = arr.length;
+ arr.forEach(function(v, i ,arr){  //这里利用map，filter方法也可以实现
+  var bool = arr.indexOf(v,i+1);  //从传入参数的下一个索引值开始寻找是否存在重复
+  if(bool === -1){
+   result.push(v);
+  }
+ })
+ return result;
+};
+var a = [1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,3,2,3,3,2,2,1,23,1,23,2,3,2,3,2,3];
+var b = a.distinct();
+console.log(b.toString()); //1,23,2,3
+```
+
+**方法六：利用ES6的set**
+
+- `Set`数据结构，它类似于数组，其成员的值都是唯一的。
+- 利用`Array.from`将`Set`结构转换成数组
+
+```
+function dedupe(array){
+ return Array.from(new Set(array));
+}
+dedupe([1,1,2,3]) //[1,2,3]
+```
+
+> 拓展运算符(`...`)内部使用`for...of`循环
+
+```js
+let arr = [1,2,3,3];
+let resultarr = [...new Set(arr)];
+console.log(resultarr); //[1,2,3]
+```
+
+### 75 （设计题）想实现一个对页面某个节点的拖曳？如何做？（使用原生JS）
+
+- 给需要拖拽的节点绑定`mousedown`, `mousemove`, `mouseup`事件
+- `mousedown`事件触发后，开始拖拽
+- `mousemove`时，需要通过`event.clientX`和`clientY`获取拖拽位置，并实时更新位置
+- `mouseup`时，拖拽结束
+- 需要注意浏览器边界的情况
+
+### 76 Javascript全局函数和全局变量
+
+
+**全局变量**
+
+- `Infinity` 代表正的无穷大的数值。
+- `NaN` 指示某个值是不是数字值。
+- `undefined` 指示未定义的值。
+
+**全局函数**
+
+- `decodeURI()` 解码某个编码的 `URI`。
+- `decodeURIComponent()` 解码一个编码的 `URI` 组件。
+- `encodeURI() 把字符串编码为 URI。
+- `encodeURIComponent()` 把字符串编码为 `URI` 组件。
+- `escape()` 对字符串进行编码。
+- `eval()` 计算 `JavaScript` 字符串，并把它作为脚本代码来执行。
+- `isFinite()` 检查某个值是否为有穷大的数。
+- `isNaN()` 检查某个值是否是数字。
+- `Number()` 把对象的值转换为数字。
+- `parseFloat()` 解析一个字符串并返回一个浮点数。
+- `parseInt()` 解析一个字符串并返回一个整数。
+- `String()` 把对象的值转换为字符串。
+- `unescape()` 对由` escape()` 编码的字符串进行解码
+
+### 77 使用js实现一个持续的动画效果
+
+**定时器思路**
+
+```js
+var e = document.getElementById('e')
+var flag = true;
+var left = 0;
+setInterval(() => {
+    left == 0 ? flag = true : left == 100 ? flag = false : ''
+    flag ? e.style.left = ` ${left++}px` : e.style.left = ` ${left--}px`
+}, 1000 / 60)
+
+```
+
+**requestAnimationFrame**
+
+```js
+//兼容性处理
+window.requestAnimFrame = (function(){
+  return  window.requestAnimationFrame       ||
+          window.webkitRequestAnimationFrame ||
+          window.mozRequestAnimationFrame    ||
+          function(callback){
+            window.setTimeout(callback, 1000 / 60);
+          };
+})();
+
+var e = document.getElementById("e");
+var flag = true;
+var left = 0;
+
+function render() {
+    left == 0 ? flag = true : left == 100 ? flag = false : '';
+    flag ? e.style.left = ` ${left++}px` :
+        e.style.left = ` ${left--}px`;
+}
+
+(function animloop() {
+    render();
+    requestAnimFrame(animloop);
+})();
+
+```
+
+**使用css实现一个持续的动画效果**
+
+
+```css
+animation:mymove 5s infinite;
+@keyframes mymove {
+from {top:0px;}
+to {top:200px;}
+}
+```
+
+- `animation-name`
+规定需要绑定到选择器的 `keyframe `名称。
+- `animation-duration`
+规定完成动画所花费的时间，以秒或毫秒计。
+- `animation-timing-function`
+规定动画的速度曲线。
+- `animation-delay`
+规定在动画开始之前的延迟。
+- `animation-iteration-count`
+规定动画应该播放的次数。
+- `animation-direction` 规定是否应该轮流反向播放动画
+
+### 78 封装一个函数，参数是定时器的时间，.then执行回调函数
+
+
+```js
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+```
+
+### 79 怎么判断两个对象相等？
+
+
+```js
+obj={
+    a:1,
+    b:2
+}
+obj2={
+    a:1,
+    b:2
+}
+obj3={
+    a:1,
+    b:'2'
+}
+```
+
+> 可以转换为字符串来判断
+
+```js
+JSON.stringify(obj)==JSON.stringify(obj2);//true
+JSON.stringify(obj)==JSON.stringify(obj3);//false
+```
+
+### 80 项目做过哪些性能优化？
+
+- 减少 HTTP` 请求数
+- 减少 `DNS` 查询
+- 使用 `CDN`
+- 避免重定向
+- 图片懒加载
+- 减少 `DOM` 元素数量
+- 减少` DOM` 操作
+- 使用外部 `JavaScript` 和 `CSS`
+- 压缩 `JavaScript` 、 `CSS` 、字体、图片等
+- 优化 `CSS Sprite`
+- 使用 `iconfont`
+- 字体裁剪
+- 多域名分发划分内容到不同域名
+- 尽量减少 `iframe` 使用
+- 避免图片 `src` 为空
+- 把样式表放在`link`  中
+- 把脚本放在页面底部
+
+### 81 浏览器缓存
+
+> 浏览器缓存分为强缓存和协商缓存。当客户端请求某个资源时，获取缓存的流程如下
+
+
+- 先根据这个资源的一些 `http header` 判断它是否命中强缓存，如果命中，则直接从本地获取缓存资源，不会发请求到服务器；
+- 当强缓存没有命中时，客户端会发送请求到服务器，服务器通过另一些`request header`验证这个资源是否命中协商缓存，称为`http`再验证，如果命中，服务器将请求返回，但不返回资源，而是告诉客户端直接从缓存中获取，客户端收到返回后就会从缓存中获取资源；
+- 强缓存和协商缓存共同之处在于，如果命中缓存，服务器都不会返回资源；
+区别是，强缓存不对发送请求到服务器，但协商缓存会。
+- 当协商缓存也没命中时，服务器就会将资源发送回客户端。
+- 当 `ctrl+f5` 强制刷新网页时，直接从服务器加载，跳过强缓存和协商缓存；
+- 当 `f5 `刷新网页时，跳过强缓存，但是会检查协商缓存；
+
+**强缓存**
+
+- `Expires`（该字段是 `http1.0` 时的规范，值为一个绝对时间的 `GMT` 格式的时间字符串，代表缓存资源的过期时间）
+- `Cache-Control:max-age`（该字段是 `http1.1 `的规范，强缓存利用其 `max-age` 值来判断缓存资源的最大生命周期，它的值单位为秒）
+
+**协商缓存**
+
+- `Last-Modified`（值为资源最后更新时间，随服务器response返回）
+- `If-Modified-Since`（通过比较两个时间来判断资源在两次请求期间是否有过修改，如果没有修改，则命中协商缓存）
+- `ETag`（表示资源内容的唯一标识，随服务器`response`返回）
+- `If-None-Match`（服务器通过比较请求头部的`If-None-Match`与当前资源的`ETag`是否一致来判断资源是否在两次请求之间有过修改，如果没有修改，则命中协商缓存）
+
+### 82 WebSocket
+
+> 由于 `http` 存在一个明显的弊端（消息只能有客户端推送到服务器端，而服务器端不能主动推送到客户端），导致如果服务器如果有连续的变化，这时只能使用轮询，而轮询效率过低，并不适合。于是 `WebSocket `被发明出来
+
+> 相比与 `http` 具有以下有点
+
+- 支持双向通信，实时性更强；
+- 可以发送文本，也可以二进制文件；
+- 协议标识符是 `ws`，加密后是 `wss` ；
+- 较少的控制开销。连接创建后，`ws`客户端、服务端进行数据交换时，协议控制的数据包头部较小。在不包含头部的情况下，服务端到客户端的包头只有`2~10`字节（取决于数据包长度），客户端到服务端的的话，需要加上额外的4字节的掩码。而`HTTP`协议每次通信都需要携带完整的头部；
+- 支持扩展。ws协议定义了扩展，用户可以扩展协议，或者实现自定义的子协议。（比如支持自定义压缩算法等）
+- 无跨域问题。
+
+> 实现比较简单，服务端库如 `socket.io`、`ws `，可以很好的帮助我们入门。而客户端也只需要参照 `api` 实现即可
+
+### 83 尽可能多的说出你对 Electron 的理解
+
+
+> 最最重要的一点，`electron` 实际上是一个套了 `Chrome` 的 `node `程序
+
+**所以应该是从两个方面说开来**
+
+- `Chrome` （无各种兼容性问题）；
+- `Node`（`Node` 能做的它也能做）
+
+### 84 深浅拷贝
+
+**浅拷贝**
+
+- `Object.assign`
+- 或者展开运算符
+
+**深拷贝**
+
+- 可以通过 `JSON.parse(JSON.stringify(object))` 来解决
+
+```js
+let a = {
+    age: 1,
+    jobs: {
+        first: 'FE'
+    }
+}
+let b = JSON.parse(JSON.stringify(a))
+a.jobs.first = 'native'
+console.log(b.jobs.first) // FE
+```
+
+**该方法也是有局限性的**
+
+- 会忽略 `undefined`
+- 不能序列化函数
+- 不能解决循环引用的对象
+
+### 85 防抖/节流
+
+**防抖**
+
+> 在滚动事件中需要做个复杂计算或者实现一个按钮的防二次点击操作。可以通过函数防抖动来实现
+
+```js
+// 使用 underscore 的源码来解释防抖动
+
+/**
+ * underscore 防抖函数，返回函数连续调用时，空闲时间必须大于或等于 wait，func 才会执行
+ *
+ * @param  {function} func        回调函数
+ * @param  {number}   wait        表示时间窗口的间隔
+ * @param  {boolean}  immediate   设置为ture时，是否立即调用函数
+ * @return {function}             返回客户调用函数
+ */
+_.debounce = function(func, wait, immediate) {
+    var timeout, args, context, timestamp, result;
+
+    var later = function() {
+      // 现在和上一次时间戳比较
+      var last = _.now() - timestamp;
+      // 如果当前间隔时间少于设定时间且大于0就重新设置定时器
+      if (last < wait && last >= 0) {
+        timeout = setTimeout(later, wait - last);
+      } else {
+        // 否则的话就是时间到了执行回调函数
+        timeout = null;
+        if (!immediate) {
+          result = func.apply(context, args);
+          if (!timeout) context = args = null;
+        }
+      }
+    };
+
+    return function() {
+      context = this;
+      args = arguments;
+      // 获得时间戳
+      timestamp = _.now();
+      // 如果定时器不存在且立即执行函数
+      var callNow = immediate && !timeout;
+      // 如果定时器不存在就创建一个
+      if (!timeout) timeout = setTimeout(later, wait);
+      if (callNow) {
+        // 如果需要立即执行函数的话 通过 apply 执行
+        result = func.apply(context, args);
+        context = args = null;
+      }
+
+      return result;
+    };
+  };
+```
+
+> 整体函数实现
+
+对于按钮防点击来说的实现
+
+- 开始一个定时器，只要我定时器还在，不管你怎么点击都不会执行回调函数。一旦定时器结束并设置为 null，就可以再次点击了
+- 对于延时执行函数来说的实现：每次调用防抖动函数都会判断本次调用和之前的时间间隔，如果小于需要的时间间隔，就会重新创建一个定时器，并且定时器的延时为设定时间减去之前的时间间隔。一旦时间到了，就会执行相应的回调函数
+
+**节流**
+
+> 防抖动和节流本质是不一样的。防抖动是将多次执行变为最后一次执行，节流是将多次执行变成每隔一段时间执行
+
+```javascript
+/**
+ * underscore 节流函数，返回函数连续调用时，func 执行频率限定为 次 / wait
+ *
+ * @param  {function}   func      回调函数
+ * @param  {number}     wait      表示时间窗口的间隔
+ * @param  {object}     options   如果想忽略开始函数的的调用，传入{leading: false}。
+ *                                如果想忽略结尾函数的调用，传入{trailing: false}
+ *                                两者不能共存，否则函数不能执行
+ * @return {function}             返回客户调用函数   
+ */
+_.throttle = function(func, wait, options) {
+    var context, args, result;
+    var timeout = null;
+    // 之前的时间戳
+    var previous = 0;
+    // 如果 options 没传则设为空对象
+    if (!options) options = {};
+    // 定时器回调函数
+    var later = function() {
+      // 如果设置了 leading，就将 previous 设为 0
+      // 用于下面函数的第一个 if 判断
+      previous = options.leading === false ? 0 : _.now();
+      // 置空一是为了防止内存泄漏，二是为了下面的定时器判断
+      timeout = null;
+      result = func.apply(context, args);
+      if (!timeout) context = args = null;
+    };
+    return function() {
+      // 获得当前时间戳
+      var now = _.now();
+      // 首次进入前者肯定为 true
+	  // 如果需要第一次不执行函数
+	  // 就将上次时间戳设为当前的
+      // 这样在接下来计算 remaining 的值时会大于0
+      if (!previous && options.leading === false) previous = now;
+      // 计算剩余时间
+      var remaining = wait - (now - previous);
+      context = this;
+      args = arguments;
+      // 如果当前调用已经大于上次调用时间 + wait
+      // 或者用户手动调了时间
+ 	  // 如果设置了 trailing，只会进入这个条件
+	  // 如果没有设置 leading，那么第一次会进入这个条件
+	  // 还有一点，你可能会觉得开启了定时器那么应该不会进入这个 if 条件了
+	  // 其实还是会进入的，因为定时器的延时
+	  // 并不是准确的时间，很可能你设置了2秒
+	  // 但是他需要2.2秒才触发，这时候就会进入这个条件
+      if (remaining <= 0 || remaining > wait) {
+        // 如果存在定时器就清理掉否则会调用二次回调
+        if (timeout) {
+          clearTimeout(timeout);
+          timeout = null;
+        }
+        previous = now;
+        result = func.apply(context, args);
+        if (!timeout) context = args = null;
+      } else if (!timeout && options.trailing !== false) {
+        // 判断是否设置了定时器和 trailing
+	    // 没有的话就开启一个定时器
+        // 并且不能不能同时设置 leading 和 trailing
+        timeout = setTimeout(later, remaining);
+      }
+      return result;
+    };
+  };
+ ```
+
+
 
 ## 四、jQuery
 
@@ -2723,13 +3332,18 @@ if (!String.prototype.trim) {
  alert(str == "test string"); // alerts "true"
 ```
 
-### 14 （设计题）想实现一个对页面某个节点的拖曳？如何做？（使用原生JS）
 
-- 给需要拖拽的节点绑定`mousedown`, `mousemove`, `mouseup`事件
-- `mousedown`事件触发后，开始拖拽
-- `mousemove`时，需要通过`event.clientX`和`clientY`获取拖拽位置，并实时更新位置
-- `mouseup`时，拖拽结束
-- 需要注意浏览器边界的情况
+### 14 实现每隔一秒钟输出1,2,3...数字
+
+```js
+for(var i=0;i<10;i++){
+  (function(j){
+     setTimeout(function(){
+       console.log(j+1)
+     },j*1000)
+   })(i)
+}
+```
 
 
 ## 七、其他
@@ -2865,8 +3479,9 @@ Element.prototype.triggerEvent  = function(en){
 - 化繁为简
 - 组件抽象
 
-## 九、人事面
+## 九、一些常见问题
 
+- 自我介绍
 - 面试完你还有什么问题要问的吗
 - 你有什么爱好?
 - 你最大的优点和缺点是什么?
@@ -2876,14 +3491,14 @@ Element.prototype.triggerEvent  = function(en){
 - 你对工资有什么要求?
 - 如何看待前端开发？
 - 未来三到五年的规划是怎样的？
-
-
-## 十、常问
-
-- 自我介绍
 - 你的项目中技术难点是什么？遇到了什么问题？你是怎么解决的？
+- 你们部门的开发流程是怎样的
 - 你认为哪个项目做得最好？
 - 说下工作中你做过的一些性能优化处理
 - 最近在看哪些前端方面的书？
 - 平时是如何学习前端开发的？
 - 你最有成就感的一件事
+- 你为什么要离开前一家公司？
+- 你对加班的看法
+- 你希望通过这份工作获得什么？
+  - 我想通过这份工作好好的锻炼自己，提升自己的能力，同时为公司贡献自己的一份力量
