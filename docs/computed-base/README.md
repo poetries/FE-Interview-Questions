@@ -1,5 +1,6 @@
 ---
 sidebarDepth: 4
+pageClass: custom-code-highlight
 ---
 
 # 基础
