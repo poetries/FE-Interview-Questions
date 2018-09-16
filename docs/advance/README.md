@@ -2554,6 +2554,17 @@ this.setState((prevState, props) => {
 - 使用 `production` 版本的`react.js`
 - 使用`key`来帮助`React`识别列表中所有子组件的最小变化
 
+
+### 16 简述flux 思想
+
+> `Flux` 的最大特点，就是数据的"单向流动"。
+
+- 用户访问 `View`
+- `View `发出用户的 `Action`
+- `Dispatcher` 收到` Action`，要求 `Store` 进行相应的更新
+- `Store` 更新后，发出一个`"change"`事件
+- `View` 收到`"change"`事件后，更新页面
+
 ## 七、Vue
 
 ### 1 对于MVVM的理解

@@ -51,10 +51,72 @@ pageClass: custom-code-highlight
 
 ### 4 从浏览器地址栏输入url到显示页面的步骤
 
+**基础版本**
+
 - 浏览器根据请求的`URL`交给`DNS`域名解析，找到真实`IP`，向服务器发起请求；
 - 服务器交给后台处理完成后返回数据，浏览器接收文件（`HTML、JS、CSS`、图象等）；
 - 浏览器对加载到的资源（`HTML、JS、CSS`等）进行语法解析，建立相应的内部数据结构（如`HTML`的`DOM`）；
 - 载入解析到的资源文件，渲染页面，完成。
+
+**详细版**
+
+1. 在浏览器地址栏输入URL
+2. 浏览器查看**缓存**，如果请求资源在缓存中并且新鲜，跳转到转码步骤
+    1. 如果资源未缓存，发起新请求
+    2. 如果已缓存，检验是否足够新鲜，足够新鲜直接提供给客户端，否则与服务器进行验证。
+    3. 检验新鲜通常有两个HTTP头进行控制`Expires`和`Cache-Control`：
+        - HTTP1.0提供Expires，值为一个绝对时间表示缓存新鲜日期
+        - HTTP1.1增加了Cache-Control: max-age=,值为以秒为单位的最大新鲜时间
+3. 浏览器**解析URL**获取协议，主机，端口，path
+4. 浏览器**组装一个HTTP（GET）请求报文**
+5. 浏览器**获取主机ip地址**，过程如下：
+    1. 浏览器缓存
+    2. 本机缓存
+    3. hosts文件
+    4. 路由器缓存
+    5. ISP DNS缓存
+    6. DNS递归查询（可能存在负载均衡导致每次IP不一样）
+6. **打开一个socket与目标IP地址，端口建立TCP链接**，三次握手如下：
+    1. 客户端发送一个TCP的**SYN=1，Seq=X**的包到服务器端口
+    2. 服务器发回**SYN=1， ACK=X+1， Seq=Y**的响应包
+    3. 客户端发送**ACK=Y+1， Seq=Z**
+7. TCP链接建立后**发送HTTP请求**
+8. 服务器接受请求并解析，将请求转发到服务程序，如虚拟主机使用HTTP Host头部判断请求的服务程序
+9. 服务器检查**HTTP请求头是否包含缓存验证信息**如果验证缓存新鲜，返回**304**等对应状态码
+10. 处理程序读取完整请求并准备HTTP响应，可能需要查询数据库等操作
+11. 服务器将**响应报文通过TCP连接发送回浏览器**
+12. 浏览器接收HTTP响应，然后根据情况选择**关闭TCP连接或者保留重用，关闭TCP连接的四次握手如下**：
+    1. 主动方发送**Fin=1， Ack=Z， Seq= X**报文
+    2. 被动方发送**ACK=X+1， Seq=Z**报文
+    3. 被动方发送**Fin=1， ACK=X， Seq=Y**报文
+    4. 主动方发送**ACK=Y， Seq=X**报文
+13. 浏览器检查响应状态吗：是否为1XX，3XX， 4XX， 5XX，这些情况处理与2XX不同
+14. 如果资源可缓存，**进行缓存**
+15. 对响应进行**解码**（例如gzip压缩）
+16. 根据资源类型决定如何处理（假设资源为HTML文档）
+17. **解析HTML文档，构件DOM树，下载资源，构造CSSOM树，执行js脚本**，这些操作没有严格的先后顺序，以下分别解释
+18. **构建DOM树**：
+    1. **Tokenizing**：根据HTML规范将字符流解析为标记
+    2. **Lexing**：词法分析将标记转换为对象并定义属性和规则
+    3. **DOM construction**：根据HTML标记关系将对象组成DOM树
+19. 解析过程中遇到图片、样式表、js文件，**启动下载**
+20. 构建**CSSOM树**：
+    1. **Tokenizing**：字符流转换为标记流
+    2. **Node**：根据标记创建节点
+    3. **CSSOM**：节点创建CSSOM树
+21. **[根据DOM树和CSSOM树构建渲染树](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction)**:
+    1. 从DOM树的根节点遍历所有**可见节点**，不可见节点包括：1）`script`,`meta`这样本身不可见的标签。2)被css隐藏的节点，如`display: none`
+    2. 对每一个可见节点，找到恰当的CSSOM规则并应用
+    3. 发布可视节点的内容和计算样式
+22. **js解析如下**：
+    1. 浏览器创建Document对象并解析HTML，将解析到的元素和文本节点添加到文档中，此时**document.readystate为loading**
+    2. HTML解析器遇到**没有async和defer的script时**，将他们添加到文档中，然后执行行内或外部脚本。这些脚本会同步执行，并且在脚本下载和执行时解析器会暂停。这样就可以用document.write()把文本插入到输入流中。**同步脚本经常简单定义函数和注册事件处理程序，他们可以遍历和操作script和他们之前的文档内容**
+    3. 当解析器遇到设置了**async**属性的script时，开始下载脚本并继续解析文档。脚本会在它**下载完成后尽快执行**，但是**解析器不会停下来等它下载**。异步脚本**禁止使用document.write()**，它们可以访问自己script和之前的文档元素
+    4. 当文档完成解析，document.readState变成interactive
+    5. 所有**defer**脚本会**按照在文档出现的顺序执行**，延迟脚本**能访问完整文档树**，禁止使用document.write()
+    6. 浏览器**在Document对象上触发DOMContentLoaded事件**
+    7. 此时文档完全解析完成，浏览器可能还在等待如图片等内容加载，等这些**内容完成载入并且所有异步脚本完成载入和执行**，document.readState变为complete,window触发load事件
+23. **显示页面**（HTML解析过程中会逐步显示页面）
 
 ### 5 如何进行网站性能优化
 
@@ -348,8 +410,139 @@ FALLBACK:
 <meta http-equiv=”expires” content=”0″>
 ```
 
+### 26 你做的页面在哪些流览器测试过？这些浏览器的内核分别是什么?
+
+- `IE`: `trident`内核
+- `Firefox`：`gecko`内核
+- `Safari`:`webkit`内核
+- `Opera`:以前是`presto`内核，`Opera`现已改用Google - `Chrome`的`Blink`内核
+- `Chrome:Blink`(基于`webkit`，Google与Opera Software共同开发)
+
+### 27 div+css的布局较table布局有什么优点？
+
+- 改版的时候更方便 只要改`css`文件。
+- 页面加载速度更快、结构化清晰、页面显示简洁。
+- 表现与结构相分离。
+- 易于优化（`seo`）搜索引擎更友好，排名更容易靠前。
+
+### 28 a：img的alt与title有何异同？b：strong与em的异同？
+
+- `alt(alt text)`:为不能显示图像、窗体或`applets`的用户代理（`UA`），`alt`属性用来指定替换文字。替换文字的语言由`lang`属性指定。(在IE浏览器下会在没有`title`时把`alt`当成 `tool tip`显示)
+- `title(tool tip)`:该属性为设置该属性的元素提供建议性的信息
+
+- `strong`:粗体强调标签，强调，表示内容的重要性
+- `em`:斜体强调标签，更强烈强调，表示内容的强调点
+
+### 29 你能描述一下渐进增强和优雅降级之间的不同吗
+
+- 渐进增强：针对低版本浏览器进行构建页面，保证最基本的功能，然后再针对高级浏览器进行效果、交互等改进和追加功能达到更好的用户体验。
+- 优雅降级：一开始就构建完整的功能，然后再针对低版本浏览器进行兼容。
+
+> 区别：优雅降级是从复杂的现状开始，并试图减少用户体验的供给，而渐进增强则是从一个非常基础的，能够起作用的版本开始，并不断扩充，以适应未来环境的需要。降级（功能衰减）意味着往回看；而渐进增强则意味着朝前看，同时保证其根基处于安全地带
+
+### 30 为什么利用多个域名来存储网站资源会更有效？
+
+- `CDN`缓存更方便
+- 突破浏览器并发限制
+- 节约`cookie`带宽
+- 节约主域名的连接数，优化页面响应速度
+- 防止不必要的安全问题
+
+### 31 简述一下src与href的区别
+
+- `src`用于替换当前元素，href用于在当前文档和引用资源之间确立联系。
+- `src`是`source`的缩写，指向外部资源的位置，指向的内容将会嵌入到文档中当前标签所在位置；在请求`src`资源时会将其指向的资源下载并应用到文档内，例如`js`脚本，`img`图片和`frame`等元素
+
+> `<script src ="js.js"></script>` 当浏览器解析到该元素时，会暂停其他资源的下载和处理，直到将该资源加载、编译、执行完毕，图片和框架等元素也如此，类似于将所指向资源嵌入当前标签内。这也是为什么将js脚本放在底部而不是头部
+
+- `href`是`Hypertext Reference`的缩写，指向网络资源所在位置，建立和当前元素（锚点）或当前文档（链接）之间的链接，如果我们在文档中添加
+- `<link href="common.css" rel="stylesheet"/>`那么浏览器会识别该文档为`css`文件，就会并行下载资源并且不会停止对当前文档的处理。这也是为什么建议使用`link`方式来加载`css`，而不是使用`@import`方式
+
+### 32 知道的网页制作会用到的图片格式有哪些？
+
+- `png-8`，`png-24`，`jpeg`，`gif`，`svg`
+
+> 但是上面的那些都不是面试官想要的最后答案。面试官希望听到是`Webp`,`Apng`。（是否有关注新技术，新鲜事物）
+
+- **Webp**：`WebP`格式，谷歌（google）开发的一种旨在加快图片加载速度的图片格式。图片压缩体积大约只有`JPEG`的`2/3`，并能节省大量的服务器带宽资源和数据空间。`Facebook Ebay`等知名网站已经开始测试并使用`WebP`格式。
+- 在质量相同的情况下，WebP格式图像的体积要比JPEG格式图像小`40%`。
+- **Apng**：全称是`“Animated Portable Network Graphics”`, 是PNG的位图动画扩展，可以实现png格式的动态图片效果。04年诞生，但一直得不到各大浏览器厂商的支持，直到日前得到 `iOS safari 8`的支持，有望代替`GIF`成为下一代动态图标准
+
+### 33 在css/js代码上线之后开发人员经常会优化性能，从用户刷新网页开始，一次js请求一般情况下有哪些地方会有缓存处理？
+
+> `dns`缓存，`cdn`缓存，浏览器缓存，服务器缓存
 
 
+### 33 一个页面上有大量的图片（大型电商网站），加载很慢，你有哪些方法优化这些图片的加载，给用户更好的体验。
+
+- 图片懒加载，在页面上的未可视区域可以添加一个滚动条事件，判断图片位置与浏览器顶端的距离与页面的距离，如果前者小于后者，优先加载。
+- 如果为幻灯片、相册等，可以使用图片预加载技术，将当前展示图片的前一张和后一张优先下载。
+- 如果图片为css图片，可以使用`CSSsprite`，`SVGsprite`，`Iconfont`、`Base64`等技术。
+- 如果图片过大，可以使用特殊编码的图片，加载时会先加载一张压缩的特别厉害的缩略图，以提高用户体验。
+- 如果图片展示区域小于图片的真实大小，则因在服务器端根据业务需要先行进行图片压缩，图片压缩后大小与展示一致。
+
+### 34 常见排序算法的时间复杂度,空间复杂度
+
+![](https://github.com/qiu-deqing/FE-interview/raw/master/img/sort-compare.png)
+
+### 35 web开发中会话跟踪的方法有哪些
+
+- `cookie`
+- `session`
+- `url`重写
+- 隐藏`input`
+- `ip`地址
+
+### 36 HTTP request报文结构是怎样的
+
+1. 首行是**Request-Line**包括：**请求方法**，**请求URI**，**协议版本**，**CRLF**
+2. 首行之后是若干行**请求头**，包括**general-header**，**request-header**或者**entity-header**，每个一行以CRLF结束
+3. 请求头和消息实体之间有一个**CRLF分隔**
+4. 根据实际请求需要可能包含一个**消息实体**
+一个请求报文例子如下：
+
+```
+GET /Protocols/rfc2616/rfc2616-sec5.html HTTP/1.1
+Host: www.w3.org
+Connection: keep-alive
+Cache-Control: max-age=0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36
+Referer: https://www.google.com.hk/
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: zh-CN,zh;q=0.8,en;q=0.6
+Cookie: authorstyle=yes
+If-None-Match: "2cc8-3e3073913b100"
+If-Modified-Since: Wed, 01 Sep 2004 13:24:52 GMT
+
+name=qiu&age=25
+```
+
+### 37 HTTP response报文结构是怎样的
+
+
+- 首行是状态行包括：**HTTP版本，状态码，状态描述**，后面跟一个CRLF
+- 首行之后是**若干行响应头**，包括：**通用头部，响应头部，实体头部**
+- 响应头部和响应实体之间用**一个CRLF空行**分隔
+- 最后是一个可能的**消息实体**
+响应报文例子如下：
+
+
+```
+HTTP/1.1 200 OK
+Date: Tue, 08 Jul 2014 05:28:43 GMT
+Server: Apache/2
+Last-Modified: Wed, 01 Sep 2004 13:24:52 GMT
+ETag: "40d7-3e3073913b100"
+Accept-Ranges: bytes
+Content-Length: 16599
+Cache-Control: max-age=21600
+Expires: Tue, 08 Jul 2014 11:28:43 GMT
+P3P: policyref="http://www.w3.org/2001/05/P3P/p3p.xml"
+Content-Type: text/html; charset=iso-8859-1
+
+{"name": "qiu", "age": 25}
+```
 
 ## 二、CSS部分
 
@@ -743,6 +936,147 @@ FALLBACK:
 - 左侧浮动或者绝对定位，然后右侧`margin`撑开
 - 使用`div`包含，然后靠负`margin`形成`bfc`
 - 使用`flex`
+
+### 37 请用Css写一个简单的幻灯片效果页面
+
+> 知道是要用`css3`。使用`animation`动画实现一个简单的幻灯片效果
+
+```css3/**HTML**/
+/**css**/
+.ani{
+  width:480px;
+  height:320px;
+  margin:50px auto;
+  overflow: hidden;
+  box-shadow:0 0 5px rgba(0,0,0,1);
+  background-size: cover;
+  background-position: center;
+  -webkit-animation-name: "loops";
+  -webkit-animation-duration: 20s;
+  -webkit-animation-iteration-count: infinite;
+}
+@-webkit-keyframes "loops" {
+    0% {
+        background:url(http://d.hiphotos.baidu.com/image/w%3D400/sign=c01e6adca964034f0fcdc3069fc27980/e824b899a9014c08e5e38ca4087b02087af4f4d3.jpg) no-repeat;             
+    }
+    25% {
+        background:url(http://b.hiphotos.baidu.com/image/w%3D400/sign=edee1572e9f81a4c2632edc9e72b6029/30adcbef76094b364d72bceba1cc7cd98c109dd0.jpg) no-repeat;
+    }
+    50% {
+        background:url(http://b.hiphotos.baidu.com/image/w%3D400/sign=937dace2552c11dfded1be2353266255/d8f9d72a6059252d258e7605369b033b5bb5b912.jpg) no-repeat;
+    }
+    75% {
+        background:url(http://g.hiphotos.baidu.com/image/w%3D400/sign=7d37500b8544ebf86d71653fe9f9d736/0df431adcbef76095d61f0972cdda3cc7cd99e4b.jpg) no-repeat;
+    }
+    100% {
+        background:url(http://c.hiphotos.baidu.com/image/w%3D400/sign=cfb239ceb0fb43161a1f7b7a10a54642/3b87e950352ac65ce2e73f76f9f2b21192138ad1.jpg) no-repeat;
+    }
+}
+```
+
+### 38 什么是外边距重叠？重叠的结果是什么？
+
+> 外边距重叠就是margin-collapse
+
+- 在CSS当中，相邻的两个盒子（可能是兄弟关系也可能是祖先关系）的外边距可以结合成一个单独的外边距。这种合并外边距的方式被称为折叠，并且因而所结合成的外边距称为折叠外边距。
+
+**折叠结果遵循下列计算规则**：
+
+- 两个相邻的外边距都是正数时，折叠结果是它们两者之间较大的值。
+- 两个相邻的外边距都是负数时，折叠结果是两者绝对值的较大值。
+- 两个外边距一正一负时，折叠结果是两者的相加的和。
+
+### 39 rgba()和opacity的透明效果有什么不同？
+
+- `rgba()`和`opacity`都能实现透明效果，但最大的不同是`opacity`作用于元素，以及元素内的所有内容的透明度，
+- 而`rgba()`只作用于元素的颜色或其背景色。（设置`rgba`透明的元素的子元素不会继承透明效果！）
+
+### 40 css中可以让文字在垂直和水平方向上重叠的两个属性是什么？
+
+- 垂直方向：`line-height`
+- 水平方向：`letter-spacing`
+
+
+### 41 如何垂直居中一个浮动元素？
+
+```css
+/**方法一：已知元素的高宽**/
+
+#div1{
+  background-color:#6699FF;
+  width:200px;
+  height:200px;
+
+  position: absolute;        //父元素需要相对定位
+  top: 50%;
+  left: 50%;
+  margin-top:-100px ;   //二分之一的height，width
+  margin-left: -100px;
+}
+
+/**方法二:**/
+
+#div1{
+  width: 200px;
+  height: 200px;
+  background-color: #6699FF;
+
+  margin:auto;
+  position: absolute;        //父元素需要相对定位
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+```
+
+**如何垂直居中一个`<img>`?（用更简便的方法。）**
+
+```css
+#container     /**<img>的容器设置如下**/
+{
+    display:table-cell;
+    text-align:center;
+    vertical-align:middle;
+}
+```
+
+### 42 px和em的区别
+
+- `px`和`em`都是长度单位，区别是，`px`的值是固定的，指定是多少就是多少，计算比较容易。`em`得值不是固定的，并且`em`会继承父级元素的字体大小。
+- 浏览器的默认字体高都是`16px`。所以未经调整的浏览器都符合: `1em=16px`。那么`12px=0.75em`, `10px=0.625em`。
+
+
+### 43 Sass、LESS是什么？大家为什么要使用他们？
+
+- 他们是`CSS`预处理器。他是`CSS`上的一种抽象层。他们是一种特殊的语法/语言编译成`CSS`。
+- 例如Less是一种动态样式语言. 将CSS赋予了动态语言的特性，如变量，继承，运算， 函数. `LESS` 既可以在客户端上运行 (支持`IE 6+`, `Webkit`, `Firefox`)，也可一在服务端运行 (借助 `Node.js`)
+
+**为什么要使用它们？**
+
+- 结构清晰，便于扩展。
+- 可以方便地屏蔽浏览器私有语法差异。这个不用多说，封装对- 浏览器语法差异的重复处理，减少无意义的机械劳动。
+- 可以轻松实现多重继承。
+- 完全兼容 CSS 代码，可以方便地应用到老项目中。LESS 只- 是在 CSS 语法上做了扩展，所以老的 CSS 代码也可以与 LESS 代码一同编译
+
+### 44 知道css有个content属性吗？有什么作用？有什么应用？
+
+> css的`content`属性专门应用在 `before/after `伪元素上，用于来插入生成内容。最常见的应用是利用伪类清除浮动。
+
+```css
+/**一种常见利用伪类清除浮动的代码**/
+ .clearfix:after {
+    content:".";       //这里利用到了content属性
+    display:block;
+    height:0;
+    visibility:hidden;
+    clear:both; }
+
+.clearfix {
+    *zoom:1;
+}
+```
+
 
 ## 三、JavaScript
 
@@ -1637,18 +1971,116 @@ console.log(arr);
 </html>
 ```
 
-### 67 从输入 URL 到页面加载完成的过程
 
-- 首先做 `DNS` 查询，如果这一步做了智能 `DNS` 解析的话，会提供访问速度最快的 `IP` 地址回来
-- 接下来是 `TCP` 握手，应用层会下发数据给传输层，这里 `TCP` 协议会指明两端的端口号，然后下发给网络层。网络层中的 `IP` 协议会确定 `IP` 地址，并且指示了数据传输中如何跳转路由器。然后包会再被封装到数据链路层的数据帧结构中，最后就是物理层面的传输了
-- `TCP` 握手结束后会进行 `TLS` 握手，然后就开始正式的传输数据
-- 数据在进入服务端之前，可能还会先经过负责负载均衡的服务器，它的作用就是将请求合理的分发到多台服务器上，这时假设服务端会响应一个 HTML 文件
-- 首先浏览器会判断状态码是什么，如果是 `200` 那就继续解析，如果 `400` 或 `500` 的话就会报错，如果 `300 `的话会进行重定向，这里会有个重定向计数器，避免过多次的重定向，超过次数也会报错
-- 浏览器开始解析文件，如果是 `gzip` 格式的话会先解压一下，然后通过文件的编码格式知道该如何去解码文件
-- 文件解码成功后会正式开始渲染流程，先会根据 `HTML` 构建 `DOM` 树，有 `CSS` 的话会去构建 `CSSOM` 树。-如果遇到 `script` 标签的话，会判断是否存在 `async` 或者 `defer` ，前者会并行进行下载并执行 `JS`，后者会先下载文件，然后等待 `HTML` 解析完成后顺序执行，如果以上都没有，就会阻塞住渲染流程直到 `JS` 执行完毕。遇到文件下载的会去下载文件，这里如果使用 `HTTP 2.0` 协议的话会极大的提高多图的下载效率。
-- 初始的 `HTML` 被完全加载和解析后会触发 `DOMContentLoaded` 事件
-- `CSSOM` 树和 `DOM` 树构建完成后会开始生成 `Render` 树，这一步就是确定页面元素的布局、样式等等诸多方面的东西
-- 在生成 `Render` 树的过程中，浏览器就开始调用 `GPU` 绘制，合成图层，将内容显示在屏幕上了
+### 67 希望获取到页面中所有的checkbox怎么做？
+
+> 不使用第三方框架
+
+```js
+ var domList = document.getElementsByTagName(‘input’)
+ var checkBoxList = [];
+ var len = domList.length;　　//缓存到局部变量
+ while (len--) {　　//使用while的效率会比for循环更高
+ 　　if (domList[len].type == ‘checkbox’) {
+     　　checkBoxList.push(domList[len]);
+ 　　}
+ }
+
+```
+
+
+### 68 怎样添加、移除、移动、复制、创建和查找节点
+
+**创建新节点**
+
+```js
+createDocumentFragment()    //创建一个DOM片段
+createElement()   //创建一个具体的元素
+createTextNode()   //创建一个文本节点
+```
+
+**添加、移除、替换、插入**
+
+```js
+appendChild()      //添加
+removeChild()      //移除
+replaceChild()      //替换
+insertBefore()      //插入
+```
+
+**查找**
+
+```js
+getElementsByTagName()    //通过标签名称
+getElementsByName()     //通过元素的Name属性的值
+getElementById()        //通过元素Id，唯一性
+```
+
+
+### 69 正则表达式
+
+> 正则表达式构造函数`var reg=new RegExp(“xxx”)`与正则表达字面量`var reg=//`有什么不同？匹配邮箱的正则表达式？
+
+- 当使用`RegExp()`构造函数的时候，不仅需要转义引号（即`\`”表示”），并且还需要双反斜杠（即`\\`表示一个`\`）。使用正则表达字面量的效率更高
+
+邮箱的正则匹配：
+
+```js
+var regMail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+```
+
+
+### 70 Javascript中callee和caller的作用？
+
+- `caller`是返回一个对函数的引用，该函数调用了当前函数；
+- `callee`是返回正在被执行的`function`函数，也就是所指定的`function`对象的正文
+
+> 那么问题来了？如果一对兔子每月生一对兔子；一对新生兔，从第二个月起就开始生兔子；假定每对兔子都是一雌一雄，试问一对兔子，第n个月能繁殖成多少对兔子？（使用`callee`完成）
+
+```js
+var result=[];
+  function fn(n){  //典型的斐波那契数列
+     if(n==1){
+          return 1;
+     }else if(n==2){
+             return 1;
+     }else{
+          if(result[n]){
+                  return result[n];
+         }else{
+                 //argument.callee()表示fn()
+                 result[n]=arguments.callee(n-1)+arguments.callee(n-2);
+                 return result[n];
+         }
+    }
+ }
+```
+
+### 71 window.onload和$(document).ready
+
+> 原生`JS`的`window.onload`与`Jquery`的`$(document).ready(function(){})`有什么不同？如何用原生JS实现Jq的`ready`方法？
+
+- `window.onload()`方法是必须等到页面内包括图片的所有元素加载完毕后才能执行。
+- `$(document).ready()`是`DOM`结构绘制完毕后就执行，不必等到加载完毕
+
+```js
+function ready(fn){
+      if(document.addEventListener) {        //标准浏览器
+          document.addEventListener('DOMContentLoaded', function() {
+              //注销事件, 避免反复触发
+              document.removeEventListener('DOMContentLoaded',arguments.callee, false);
+              fn();            //执行函数
+          }, false);
+      }else if(document.attachEvent) {        //IE
+          document.attachEvent('onreadystatechange', function() {
+             if(document.readyState == 'complete') {
+                 document.detachEvent('onreadystatechange', arguments.callee);
+                 fn();        //函数执行
+             }
+         });
+     }
+ };
+```
 
 
 ## 四、jQuery
@@ -2073,6 +2505,182 @@ Function.prototype.bind = function(ctx) {
     };
 };
 ```
+
+### 7 实现一个函数clone
+
+> 可以对`JavaScript`中的5种主要的数据类型,包括`Number`、`String`、`Object`、`Array`、`Boolean`）进行值复
+
+- 考察点1：对于基本数据类型和引用数据类型在内存中存放的是值还是指针这一区别是否清楚
+- 考察点2：是否知道如何判断一个变量是什么类型的
+- 考察点3：递归算法的设计
+
+```
+// 方法一：
+  Object.prototype.clone = function(){
+          var o = this.constructor === Array ? [] : {};
+          for(var e in this){
+                  o[e] = typeof this[e] === "object" ? this[e].clone() : this[e];
+          }
+          return o;
+  }
+
+ //方法二：
+   /**
+      * 克隆一个对象
+      * @param Obj
+      * @returns
+      */
+     function clone(Obj) {   
+         var buf;   
+         if (Obj instanceof Array) {   
+             buf = [];                    //创建一个空的数组
+             var i = Obj.length;   
+             while (i--) {   
+                 buf[i] = clone(Obj[i]);   
+             }   
+             return buf;    
+         }else if (Obj instanceof Object){   
+             buf = {};                   //创建一个空对象
+             for (var k in Obj) {           //为这个对象添加新的属性
+                 buf[k] = clone(Obj[k]);   
+             }   
+             return buf;   
+         }else{                         //普通变量直接赋值
+             return Obj;   
+         }   
+     }
+```
+
+### 8 下面这个ul，如何点击每一列的时候alert其index
+
+> 考察闭包
+
+```html
+ <ul id=”test”>
+ <li>这是第一条</li>
+ <li>这是第二条</li>
+ <li>这是第三条</li>
+ </ul>
+```
+
+```js
+  // 方法一：
+  var lis=document.getElementById('2223').getElementsByTagName('li');
+  for(var i=0;i<3;i++)
+  {
+      lis[i].index=i;
+      lis[i].onclick=function(){
+          alert(this.index);
+  }
+
+ //方法二：
+ var lis=document.getElementById('2223').getElementsByTagName('li');
+ for(var i=0;i<3;i++)
+ {
+     lis[i].index=i;
+     lis[i].onclick=(function(a){
+         return function() {
+             alert(a);
+         }
+     })(i);
+ }
+```
+
+### 9 定义一个log方法，让它可以代理console.log的方法
+
+```js
+可行的方法一：
+
+ function log(msg)　{
+     console.log(msg);
+ }
+
+ log("hello world!") // hello world!
+```
+
+> 如果要传入多个参数呢？显然上面的方法不能满足要求，所以更好的方法是：
+
+```js
+ function log(){
+     console.log.apply(console, arguments);
+ };
+```
+
+### 10 输出今天的日期
+
+> 以`YYYY-MM-DD`的方式，比如今天是2014年9月26日，则输出2014-09-26
+
+```js
+var d = new Date();
+  // 获取年，getFullYear()返回4位的数字
+  var year = d.getFullYear();
+  // 获取月，月份比较特殊，0是1月，11是12月
+  var month = d.getMonth() + 1;
+  // 变成两位
+  month = month < 10 ? '0' + month : month;
+  // 获取日
+  var day = d.getDate();
+ day = day < 10 ? '0' + day : day;
+ alert(year + '-' + month + '-' + day);
+```
+
+### 11 用js实现随机选取10–100之间的10个数字，存入一个数组，并排序
+
+```js
+var iArray = [];
+ funtion getRandom(istart, iend){
+         var iChoice = istart - iend +1;
+         return Math.floor(Math.random() * iChoice + istart;
+ }
+ for(var i=0; i<10; i++){
+         iArray.push(getRandom(10,100));
+ }
+ iArray.sort();
+```
+
+
+### 12 写一段JS程序提取URL中的各个GET参数
+
+> 有这样一个`UR`L：`http://item.taobao.com/item.htm?a=1&b=2&c=&d=xxx&e`，请写一段JS程序提取URL中的各个GET参数(参数名和参数个数不确定)，将其按`key-value`形式返回到一个`json`结构中，如`{a:’1′, b:’2′, c:”, d:’xxx’, e:undefined}`
+
+```js
+function serilizeUrl(url) {
+     var result = {};
+     url = url.split("?")[1];
+     var map = url.split("&");
+     for(var i = 0, len = map.length; i < len; i++) {
+         result[map[i].split("=")[0]] = map[i].split("=")[1];
+     }
+     return result;
+ }
+```
+
+
+
+### 13 写一个`function`，清除字符串前后的空格
+
+> 使用自带接口`trim()`，考虑兼容性：
+
+```js
+if (!String.prototype.trim) {
+  String.prototype.trim = function() {
+  return this.replace(/^\s+/, "").replace(/\s+$/,"");
+  }
+ }
+
+ // test the function
+ var str = " \t\n test string ".trim();
+ alert(str == "test string"); // alerts "true"
+```
+
+### 14 （设计题）想实现一个对页面某个节点的拖曳？如何做？（使用原生JS）
+
+- 给需要拖拽的节点绑定`mousedown`, `mousemove`, `mouseup`事件
+- `mousedown`事件触发后，开始拖拽
+- `mousemove`时，需要通过`event.clientX`和`clientY`获取拖拽位置，并实时更新位置
+- `mouseup`时，拖拽结束
+- 需要注意浏览器边界的情况
+
 
 ## 七、其他
 
