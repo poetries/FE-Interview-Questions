@@ -1148,54 +1148,111 @@ Content-Type: text/html; charset=iso-8859-1
 动画的播放方向、`animation-iteration-count`定义播放次数、`animation-fill-mode`定义动画播放之后的状态、`animation-play-state`定义播放状态，如暂停运行等、`animation-timing-function`
 - 定义播放的方式，如恒速播放、艰涩播放等。
 
-### 50 右边宽度固定，左边自适应
+### 50 左边宽度固定，右边自适应
 
-**方法一**
+> 左侧固定宽度，右侧自适应宽度的两列布局实现
+
+html结构
 
 ```html
-<style>
-body{
-    display: flex;
+<div class="outer">
+    <div class="left">固定宽度</div>
+    <div class="right">自适应宽度</div>
+</div>
+```
+
+> 在外层`div`（类名为`outer`）的`div`中，有两个子`div`，类名分别为`left`和`right`，其中`left`为固定宽度，而`right`为自适应宽度
+
+**方法1：左侧div设置成浮动：float: left，右侧div宽度会自拉升适应**
+
+```css
+.outer {
+    width: 100%;
+    height: 500px;
+    background-color: yellow;
 }
-.left{
-    background-color: rebeccapurple;
+.left {
+    width: 200px;
     height: 200px;
+    background-color: red;
+    float: left;
+}
+.right {
+    height: 200px;
+    background-color: blue;
+}
+```
+
+**方法2：对右侧:div进行绝对定位，然后再设置right=0，即可以实现宽度自适应**
+
+> 绝对定位元素的第一个高级特性就是其具有自动伸缩的功能，当我们将 `width `设置为 `auto` 的时候（或者不设置，默认为 `auto` ），绝对定位元素会根据其 `left` 和 `right` 自动伸缩其大小
+
+```css
+.outer {
+    width: 100%;
+    height: 500px;
+    background-color: yellow;
+    position: relative;
+}
+.left {
+    width: 200px;
+    height: 200px;
+    background-color: red;
+}
+.right {
+    height: 200px;
+    background-color: blue;
+    position: absolute;
+    left: 200px;
+    top:0;          
+    right: 0;
+}
+```
+
+**方法3：将左侧div进行绝对定位，然后右侧div设置margin-left: 200px**
+
+```css
+.outer {
+    width: 100%;
+    height: 500px;
+    background-color: yellow;
+    position: relative;
+}
+.left {
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    position: absolute;
+}
+.right {
+    height: 200px;
+    background-color: blue;
+    margin-left: 200px;
+}
+```
+
+**方法4：使用flex布局**
+
+```css
+.outer {
+    width: 100%;
+    height: 500px;
+    background-color: yellow;
+    display: flex;
+    flex-direction: row;
+}
+.left {
+    width: 200px;
+    height: 200px;
+    background-color: red;
+}
+.right {
+    height: 200px;
+    background-color: blue;
     flex: 1;
 }
-.right{
-    background-color: red;
-    height: 200px;
-    width: 100px;
-}
-</style>
-<body>
-    <div class="left"></div>
-    <div class="right"></div>
-</body>
 ```
 
-**方法二**
-
-```html
-<style>
-    div {
-        height: 200px;
-    }
-    .left {
-        float: right;
-        width: 200px;
-        background-color: rebeccapurple;
-    }
-    .right {
-        margin-right: 200px;
-        background-color: red;
-    }
-</style>
-<body>
-    <div class="left"></div>
-    <div class="right"></div>
-</body>
-```
 
 
 ## 三、JavaScript
