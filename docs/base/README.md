@@ -3,9 +3,12 @@ sidebarDepth: 4
 pageClass: custom-code-highlight
 ---
 
-![面试经验谈--来自知乎芋头Live ](http://upload-images.jianshu.io/upload_images/1480597-c6dc5a6ac33ece47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 # 第一部分：基础篇
+
+> [如果您觉得有帮助，可以打赏我](https://upload-images.jianshu.io/upload_images/1480597-1f247397539045cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) ![](![](https://upload-images.jianshu.io/upload_images/1480597-1f247397539045cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240))
+
+![面试经验谈--来自知乎芋头Live ](http://upload-images.jianshu.io/upload_images/1480597-c6dc5a6ac33ece47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ##  一、HTML、HTTP、web综合问题
 
