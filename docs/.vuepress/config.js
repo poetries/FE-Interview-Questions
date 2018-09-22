@@ -18,26 +18,26 @@ module.exports = {
         ],
         sidebar: [
           {
-            title: '基础题',
+            title: '基础',
             collapsable: false,
             children: [
               '/base/'
             ]
           },
           {
-            title: '进阶题',
+            title: '进阶',
             children: [
               '/improve/'
             ]
           },
           {
-            title: ' 高级题',
+            title: ' 高级',
             children: [
               '/advance/'
             ]
           },
           {
-            title: ' 计算机基础',
+            title: ' 通识',
             children: [
               '/computed-base/'
             ]
