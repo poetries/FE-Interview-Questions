@@ -10,7 +10,8 @@ module.exports = {
     themeConfig: {
         nav: [
           { text: '基础', link: '/base/' },
-          { text: '进阶', link: '/advance/' },
+          { text: '进阶', link: '/improve/' },
+          { text: '高级', link: '/advance/' },
           { text: '计算机基础', link: '/computed-base/' },
           { text: 'Blog', link: 'http://blog.poetries.top/' },
           { text: 'Github', link: 'https://github.com/poetries/FE-Interview-Questions' },
@@ -24,7 +25,13 @@ module.exports = {
             ]
           },
           {
-            title: ' 进阶题',
+            title: '进阶题',
+            children: [
+              '/improve/'
+            ]
+          },
+          {
+            title: ' 高级题',
             children: [
               '/advance/'
             ]
