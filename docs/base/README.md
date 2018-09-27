@@ -3852,3 +3852,17 @@ Element.prototype.triggerEvent  = function(en){
 - 你对加班的看法
 - 你希望通过这份工作获得什么？
   - 我想通过这份工作好好的锻炼自己，提升自己的能力，同时为公司贡献自己的一份力量
+
+
+<script>
+export default {
+  mounted () {
+    var script = document.createElement("script");
+    script.type = "text/javascript"
+    script.charset="UTF-8"
+    script.src = "http://tajs.qq.com/stats?sId=59154049"
+    document.body.appendChild(script);
+  }
+}
+</script>
+

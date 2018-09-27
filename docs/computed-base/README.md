@@ -1398,3 +1398,17 @@ var maxDepth = function(root) {
 ```
 
 > 对于该递归函数可以这样理解：一旦没有找到节点就会返回 0，每弹出一次递归函数就会加一，树有三层就会得到3
+
+
+<script>
+export default {
+  mounted () {
+    var script = document.createElement("script");
+    script.type = "text/javascript"
+    script.charset="UTF-8"
+    script.src = "http://tajs.qq.com/stats?sId=59154049"
+    document.body.appendChild(script);
+  }
+}
+</script>
+

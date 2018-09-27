@@ -3499,3 +3499,16 @@ setTimeout(() => {
   console.log('结束更新')
 }, 1000)
 ```
+
+<script>
+export default {
+  mounted () {
+    var script = document.createElement("script");
+    script.type = "text/javascript"
+    script.charset="UTF-8"
+    script.src = "http://tajs.qq.com/stats?sId=59154049"
+    document.body.appendChild(script);
+  }
+}
+</script>
+
