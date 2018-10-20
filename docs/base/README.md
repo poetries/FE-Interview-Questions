@@ -2914,6 +2914,30 @@ var b = 'Hello world'
 
 > 复制代码`var` 会产生很多错误，所以在 `ES6`中引入了 `let`。`let` 不能在声明前使用，但是这并不是常说的 `let` 不会提升，`let` 提升了，在第一阶段内存也已经为他开辟好了空间，但是因为这个声明的特性导致了并不能在声明前使用
 
+### 87 什么是单线程，和异步的关系
+
+- 单线程 - 只有一个线程，只能做一件事
+- 原因 - 避免 `DOM` 渲染的冲突
+  - 浏览器需要渲染 `DOM`
+  - `JS` 可以修改 `DOM` 结构
+  - `JS` 执行的时候，浏览器 `DOM` 渲染会暂停
+  - 两段 JS 也不能同时执行（都修改 `DOM` 就冲突了）
+  - `webworker` 支持多线程，但是不能访问 `DOM`
+- 解决方案 - 异步
+
+### 88 是否用过 jQuery 的 Deferred
+
+![image.png](https://upload-images.jianshu.io/upload_images/1480597-77a330fbdcc1f1cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://upload-images.jianshu.io/upload_images/1480597-6f79b726f5341f7d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://upload-images.jianshu.io/upload_images/1480597-82ac861eced36a45.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://upload-images.jianshu.io/upload_images/1480597-69092d725f2b1e79.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://upload-images.jianshu.io/upload_images/1480597-9d9b67a6859cf8cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://upload-images.jianshu.io/upload_images/1480597-9970b83118b10829.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://upload-images.jianshu.io/upload_images/1480597-243444771c6b30ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://upload-images.jianshu.io/upload_images/1480597-d2db463132d1572a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://upload-images.jianshu.io/upload_images/1480597-c589d6f7caf8b27c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://upload-images.jianshu.io/upload_images/1480597-ab3b7f684e99e6cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 
 ## 四、jQuery
 
