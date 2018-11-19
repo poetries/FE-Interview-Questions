@@ -1256,6 +1256,52 @@ html结构
 }
 ```
 
+### 51 两种以上方式实现已知或者未知宽度的垂直水平居中
+
+```css
+// 1
+.wraper {
+  position: relative;
+  .box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    margin: -50px 0 0 -50px;
+  }
+}
+
+// 2
+.wraper {
+  position: relative;
+  .box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+// 3
+.wraper {
+  .box {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    height: 100px;
+  }
+}
+
+// 4
+.wraper {
+  display: table;
+  .box {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+```
 
 ## 三、JavaScript
 
@@ -2950,6 +2996,131 @@ var b = 'Hello world'
 
 > [http://blog.poetries.top/2018/10/20/fe-interview-mvvm/](http://blog.poetries.top/2018/10/20/fe-interview-mvvm/)
 
+### 92 实现效果，点击容器内的图标，图标边框变成border 1px solid red，点击空白处重置
+
+```js
+const box = document.getElementById('box');
+function isIcon(target) {
+  return target.className.includes('icon');
+}
+
+box.onClick = function(e) {
+  e.stopPropagation();
+  const target = e.target;
+  if (isIcon(target)) {
+    target.style.border = '1px solid red';
+  }
+}
+const doc = document;
+doc.onclick = function(e) {
+  const children = box.children;
+  for(let i; i < children.length; i++) {
+    if (isIcon(children[i])) {
+      children[i].style.border = 'none';
+    }
+  }
+}
+```
+
+### 93 请简单实现双向数据绑定mvvm
+
+```
+<input id="input"/>
+```
+
+```js
+const data = {};
+const input = document.getElementById('input');
+Object.defineProperty(data, 'text', {
+  set(value) {
+    input.value = value;
+    this.value = value;
+  }
+});
+input.onChange = function(e) {
+  data.text = e.target.value;
+}
+```
+
+### 94 实现Storage，使得该对象为单例，并对localStorage进行封装设置值setItem(key,value)和getItem(key)
+
+```js
+var instance = null;
+class Storage {
+  static getInstance() {
+    if (!instance) {
+      instance = new Storage();
+    }
+    return instance;
+  }
+  setItem = (key, value) => localStorage.setItem(key, value),
+  getItem = key => localStorage.getItem(key)
+}
+```
+
+### 95 说说event loop
+
+> 首先，`js`是单线程的，主要的任务是处理用户的交互，而用户的交互无非就是响应`DOM`的增删改，使用事件队列的形式，一次事件循环只处理一个事件响应，使得脚本执行相对连续，所以有了事件队列，用来储存待执行的事件，那么事件队列的事件从哪里被`push`进来的呢。那就是另外一个线程叫事件触发线程做的事情了，他的作用主要是在定时触发器线程、异步`HTTP`请求线程满足特定条件下的回调函数`push`到事件队列中，等待`js`引擎空闲的时候去执行，当然js引擎执行过程中有优先级之分，首先js引擎在一次事件循环中，会先执行js线程的主任务，然后会去查找是否有微任务`microtask（promise）`，如果有那就优先执行微任务，如果没有，在去查找宏任务`macrotask（setTimeout、setInterval）`进行执行
+
+### 96 说说事件流
+
+**事件流分为两种，捕获事件流和冒泡事件流**
+
+- 捕获事件流从根节点开始执行，一直往子节点查找执行，直到查找执行到目标节点
+- 冒泡事件流从目标节点开始执行，一直往父节点冒泡查找执行，直到查到到根节点
+
+> 事件流分为三个阶段，一个是捕获节点，一个是处于目标节点阶段，一个是冒泡阶段
+
+### 97 为什么canvas的图片为什么过有跨域问题
+
+### 98 我现在有一个canvas，上面随机布着一些黑块，请实现方法，计算canvas上有多少个黑块
+
+> https://www.jianshu.com/p/f54d265f7aa4
+
+### 99 请手写实现一个promise
+
+> https://segmentfault.com/a/1190000013396601
+
+
+### 100 说说从输入URL到看到页面发生的全过程，越详细越好
+
+- 首先浏览器主进程接管，开了一个下载线程。
+- 然后进行HTTP请求（DNS查询、IP寻址等等），中间会有三次捂手，等待响应，开始下载响应报文。
+- 将下载完的内容转交给Renderer进程管理。
+- Renderer进程开始解析css rule tree和dom tree，这两个过程是并行的，所以一般我会把link标签放在页面顶部。
+- 解析绘制过程中，当浏览器遇到link标签或者script、img等标签，浏览器会去下载这些内容，遇到时候缓存的使用缓存，不适用缓存的重新下载资源。
+- css rule tree和dom tree生成完了之后，开始合成render tree，这个时候浏览器会进行layout，开始计算每一个节点的位置，然后进行绘制。
+- 绘制结束后，关闭TCP连接，过程有四次挥手
+
+### 101 描述一下this
+
+> `this`，函数执行的上下文，可以通过`apply`，`call`，`bind`改变`this`的指向。对于匿名函数或者直接调用的函数来说，this指向全局上下文（浏览器为window，nodejs为`global`），剩下的函数调用，那就是谁调用它，this就指向谁。当然还有es6的箭头函数，箭头函数的指向取决于该箭头函数声明的位置，在哪里声明，this就指向哪里
+
+### 102 说一下浏览器的缓存机制
+
+> 浏览器缓存机制有两种，一种为强缓存，一种为协商缓存
+
+- 对于强缓存，浏览器在第一次请求的时候，会直接下载资源，然后缓存在本地，第二次请求的时候，直接使用缓存。
+- 对于协商缓存，第一次请求缓存且保存缓存标识与时间，重复请求向服务器发送缓存标识和最后缓存时间，服务端进行校验，如果失效则使用缓存
+
+**协商缓存方**
+
+- `Exprires`：服务端的响应头，第一次请求的时候，告诉客户端，该资源什么时候会过期。`Exprires`的缺陷是必须保证服务端时间和客户端时间严格同步。
+- `Cache-control：max-age`，表示该资源多少时间后过期，解决了客户端和服务端时间必须同步的问题，
+- `If-None-Match/ETag`：缓存标识，对比缓存时使用它来标识一个缓存，第一次请求的时候，服务端会返回该标识给客户端，客户端在第二次请求的时候会带上该标识与服务端进行对比并返回`If-None-Match`标识是否表示匹配。
+- `Last-modified/If-Modified-Since`：第一次请求的时候服务端返回`Last-modified`表明请求的资源上次的修改时间，第二次请求的时候客户端带上请求头`If-Modified-Since`，表示资源上次的修改时间，服务端拿到这两个字段进行对比
+
+### 103 现在要你完成一个Dialog组件，说说你设计的思路？它应该有什么功能？
+
+- 该组件需要提供`hook`指定渲染位置，默认渲染在body下面。
+- 然后改组件可以指定外层样式，如宽度等
+- 组件外层还需要一层`mask`来遮住底层内容，点击mask可以执行传进来的`onCancel`函数关闭`Dialog`。
+- 另外组件是可控的，需要外层传入`visible`表示是否可见。
+- 然后`Dialog`可能需要自定义头head和底部`footer`，默认有头部和底部，底部有一个确认按钮和取消按钮，确认按钮会执行外部传进来的`onOk`事件，然后取消按钮会执行外部传进来的`onCancel`事件。
+- 当组件的`visible`为`true`时候，设置`body`的`overflow`为`hidden`，隐藏`body`的滚动条，反之显示滚动条。
+- 组件高度可能大于页面高度，组件内部需要滚动条。
+- 只有组件的`visible`有变化且为`ture`时候，才重渲染组件内的所有内容
+
 
 ## 四、jQuery
 
@@ -3391,7 +3562,20 @@ module.exports = function(src) {
 },
 ```
 
+### 4 说一下webpack的一些plugin，怎么使用webpack对项目进行优化
 
+**构建优化**
+
+- 减少编译体积 `ContextReplacementPugin`、`IgnorePlugin`、`babel-plugin-import`、`babel-plugin-transform-runtime`
+- 并行编译 `happypack`、`thread-loader`、`uglifyjsWebpackPlugin`开启并行
+- 缓存 `cache-loader`、`hard-source-webpack-plugin`、`uglifyjsWebpackPlugin`开启缓存、`babel-loader`开启缓存
+- 预编译 `dllWebpackPlugin && DllReferencePlugin`、`auto-dll-webapck-plugin`
+
+**性能优化**
+
+- 减少编译体积 `Tree-shaking`、`Scope Hositing`
+- `hash`缓存 `webpack-md5-plugin`
+- 拆包 `splitChunksPlugin`、`import()`、`require.ensure`
 
 ## 八、编程题
 
@@ -3728,6 +3912,15 @@ for(var i=0;i<10;i++){
        console.log(j+1)
      },j*1000)
    })(i)
+}
+```
+
+### 15 实现一个函数，判断输入是不是回文字符串
+
+```js
+function run(input) {
+  if (typeof input !== 'string') return false;
+  return input.split('').reverse().join('') === input;
 }
 ```
 
