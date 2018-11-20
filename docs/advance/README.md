@@ -3585,6 +3585,7 @@ export default {
     script.charset="UTF-8"
     script.src = "http://tajs.qq.com/stats?sId=59154049"
     document.body.appendChild(script);
+ }
 }
 </script>
 
