@@ -3924,6 +3924,18 @@ function run(input) {
 }
 ```
 
+### 16、数组扁平化处理
+
+> 实现一个`flatten`方法，使得输入一个数组，该数组里面的元素也可以是数组，该方法会输出一个扁平化的数组
+
+```js
+function flatten(arr){
+    return arr.reduce(function(prev,item){
+        return prev.concat(Array.isArray(item)?flatten(item):item);
+    },[]);
+}
+```
+
 
 ## 九、其他
 
