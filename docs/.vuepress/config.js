@@ -13,7 +13,7 @@ module.exports = {
           { text: '进阶', link: '/improve/' },
           { text: '高级', link: '/advance/' },
           { text: '通识', link: '/computed-base/' },
-          { text: '精华', link: '/excellent/' },
+          { text: '综合', link: '/excellent/' },
           { text: 'Blog', link: 'http://blog.poetries.top/' },
           { text: 'Github', link: 'https://github.com/poetries/' },
         ],
@@ -32,19 +32,19 @@ module.exports = {
             ]
           },
           {
-            title: ' 高级',
+            title: '高级',
             children: [
               '/advance/'
             ]
           },
           {
-            title: ' 通识',
+            title: '通识',
             children: [
               '/computed-base/'
             ]
           },
           {
-            title: ' 精华',
+            title: '综合',
             children: [
               '/excellent/'
             ]
