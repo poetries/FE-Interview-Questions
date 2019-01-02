@@ -42,6 +42,12 @@ module.exports = {
             children: [
               '/computed-base/'
             ]
+          },
+          {
+            title: ' 精华',
+            children: [
+              '/excellent/'
+            ]
           }
         ],
         lastUpdated: 'Last Updated',
