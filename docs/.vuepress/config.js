@@ -13,6 +13,7 @@ module.exports = {
           { text: '进阶', link: '/improve/' },
           { text: '高级', link: '/advance/' },
           { text: '通识', link: '/computed-base/' },
+          { text: '精华', link: '/excellent/' },
           { text: 'Blog', link: 'http://blog.poetries.top/' },
           { text: 'Github', link: 'https://github.com/poetries/' },
         ],
