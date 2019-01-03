@@ -1944,12 +1944,1033 @@ Content-Security-Policy: child-src 'none'
 
 ## 23 从 V8 中看 JS 性能优化
 
+> 注意：该知识点属于性能优化领域。
+
+### 23.1 测试性能工具
+
+> `Chrome` 已经提供了一个大而全的性能测试工具 `Audits`
+
+![](https://user-gold-cdn.xitu.io/2018/12/3/16772c479b194d48)
+
+> 点我们点击 `Audits` 后，可以看到如下的界面
+
+![](https://user-gold-cdn.xitu.io/2018/12/3/16772c52e83d97c7)
+
+> 在这个界面中，我们可以选择想测试的功能然后点击 `Run audits` ，工具就会自动运行帮助我们测试问题并且给出一个完整的报告
+
+![](https://user-gold-cdn.xitu.io/2018/12/3/16772ca3d13a68ab)
+
+> 上图是给掘金首页测试性能后给出的一个报告，可以看到报告中分别为性能、体验、SEO 都给出了打分，并且每一个指标都有详细的评估
+
+![](https://user-gold-cdn.xitu.io/2018/12/3/16772cae50f7eb81)
+
+评估结束后，工具还提供了一些建议便于我们提高这个指标的分数
+
+![](https://user-gold-cdn.xitu.io/2018/12/3/16772cbdcdaccf15)
+
+我们只需要一条条根据建议去优化性能即可。
+
+> 除了 `Audits` 工具之外，还有一个 `Performance `工具也可以供我们使用。
+
+![](https://user-gold-cdn.xitu.io/2018/12/3/16772cf78a4fa18f)
+
+> 在这张图中，我们可以详细的看到每个时间段中浏览器在处理什么事情，哪个过程最消耗时间，便于我们更加详细的了解性能瓶颈
 
 
+### 23.2 JS 性能优化
+
+> `JS` 是编译型还是解释型语言其实并不固定。首先 `JS` 需要有引擎才能运行起来，无论是浏览器还是在 `Node` 中，这是解释型语言的特性。但是在 V8 引擎下，又引入了 `TurboFan` 编译器，他会在特定的情况下进行优化，将代码编译成执行效率更高的 `Machine Code`，当然这个编译器并不是 `JS` 必须需要的，只是为了提高代码执行性能，所以总的来说 `JS` 更偏向于解释型语言。
+
+那么这一小节的内容主要会针对于 `Chrome` 的 `V8` 引擎来讲解。
+
+> 在这一过程中，`JS` 代码首先会解析为抽象语法树（`AST`），然后会通过解释器或者编译器转化为 `Bytecode` 或者` Machine Code`
+
+![](https://user-gold-cdn.xitu.io/2018/12/3/167736409eebe688)
+
+> 从上图中我们可以发现，`JS` 会首先被解析为 `AST`，解析的过程其实是略慢的。代码越多，解析的过程也就耗费越长，这也是我们需要压缩代码的原因之一。另外一种减少解析时间的方式是预解析，会作用于未执行的函数，这个我们下面再谈
+
+这里需要注意一点，对于函数来说，应该尽可能避免声明嵌套函数（类也是函数），因为这样会造成函数的重复解析
+
+```js
+function test1() {
+  // 会被重复解析
+  function test2() {}
+}
+```
+
+> 然后 `Ignition` 负责将 `AST` 转化为 `Bytecode`，`TurboFan` 负责编译出优化后的 `Machine Code`，并且 `Machine Code` 在执行效率上优于 `Bytecode`
+
+![](https://user-gold-cdn.xitu.io/2018/12/3/16773b904cfb732f)
+
+> 那么我们就产生了一个疑问，什么情况下代码会编译为 `Machine Code`？
+
+> `JS` 是一门动态类型的语言，并且还有一大堆的规则。简单的加法运算代码，内部就需要考虑好几种规则，比如数字相加、字符串相加、对象和字符串相加等等。这样的情况也就势必导致了内部要增加很多判断逻辑，降低运行效率。
 
 
+```js
+function test(x) {
+  return x + x
+}
+
+test(1)
+test(2)
+test(3)
+test(4)
+```
+
+- 对于以上代码来说，如果一个函数被多次调用并且参数一直传入 `number` 类型，那么 `V8` 就会认为该段代码可以编译为 `Machine Code`，因为你固定了类型，不需要再执行很多判断逻辑了。
+- 但是如果一旦我们传入的参数类型改变，那么 `Machine Code` 就会被 `DeOptimized `为 `Bytecode`，这样就有性能上的一个损耗了。所以如果我们希望代码能多的编译为 `Machine Code` 并且 `DeOptimized `的次数减少，就应该尽可能保证传入的类型一致。
+- 那么你可能会有一个疑问，到底优化前后有多少的提升呢，接下来我们就来实践测试一下到底有多少的提升
+
+```js
+const { performance, PerformanceObserver } = require('perf_hooks')
+
+function test(x) {
+  return x + x
+}
+// node 10 中才有 PerformanceObserver
+// 在这之前的 node 版本可以直接使用 performance 中的 API
+const obs = new PerformanceObserver((list, observer) => {
+  console.log(list.getEntries())
+  observer.disconnect()
+})
+obs.observe({ entryTypes: ['measure'], buffered: true })
+
+performance.mark('start')
+
+let number = 10000000
+// 不优化代码
+%NeverOptimizeFunction(test)
+
+while (number--) {
+  test(1)
+}
+
+performance.mark('end')
+performance.measure('test', 'start', 'end')
+```
+
+> 以上代码中我们使用了 `performance API`，这个 `API` 在性能测试上十分好用。不仅可以用来测量代码的执行时间，还能用来测量各种网络连接中的时间消耗等等，并且这个 API 也可以在浏览器中使
+
+![](https://user-gold-cdn.xitu.io/2018/12/4/16778338eb8b7130)
+
+> 从上图中我们可以发现，优化过的代码执行时间只需要 `9ms`，但是不优化过的代码执行时间却是前者的二十倍，已经接近 `200ms` 了。在这个案例中，我相信大家已经看到了 `V8` 的性能优化到底有多强，只需要我们符合一定的规则书写代码，引擎底层就能帮助我们自动优化代码。
+
+> 另外，编译器还有个骚操作 `Lazy-Compile`，当函数没有被执行的时候，会对函数进行一次预解析，直到代码被执行以后才会被解析编译。对于上述代码来说，`test` 函数需要被预解析一次，然后在调用的时候再被解析编译。但是对于这种函数马上就被调用的情况来说，预解析这个过程其实是多余的，那么有什么办法能够让代码不被预解析呢？
+
+```js
+(function test(obj) {
+  return x + x
+})
+```
+
+> 但是不可能我们为了性能优化，给所有的函数都去套上括号，并且也不是所有函数都需要这样做。我们可以通过 `optimize-js` 实现这个功能，这个库会分析一些函数的使用情况，然后给需要的函数添加括号，当然这个库很久没人维护了，如果需要使用的话，还是需要测试过相关内容的。
+
+其实很简单，我们只需要给函数套上括号就可以了
 
 
+## 24 性能优化
+
+> 总的来说性能优化这个领域的很多内容都很碎片化，这一章节我们将来学习这些碎片化的内容。
+
+### 24.1 图片优化
+
+**计算图片大小**
+
+> 对于一张 `100 * 100` 像素的图片来说，图像上有 `10000` 个像素点，如果每个像素的值是 `RGBA` 存储的话，那么也就是说每个像素有 `4` 个通道，每个通道 `1` 个字节（`8` 位 = `1`个字节），所以该图片大小大概为 `39KB`（`10000 * 1 * 4 / 1024`）。
+
+- 但是在实际项目中，一张图片可能并不需要使用那么多颜色去显示，我们可以通过减少每个像素的调色板来相应缩小图片的大小。
+- 了解了如何计算图片大小的知识，那么对于如何优化图片，想必大家已经有 2 个思路了：
+
+1. 减少像素点
+2. 减少每个像素点能够显示的颜色
+
+### 24.2 图片加载优化
+
+- 不用图片。很多时候会使用到很多修饰类图片，其实这类修饰图片完全可以用 `CSS` 去代替。
+- 对于移动端来说，屏幕宽度就那么点，完全没有必要去加载原图浪费带宽。一般图片都用 `CDN` 加载，可以计算出适配屏幕的宽度，然后去请求相应裁剪好的图片。
+- 小图使用 `base64` 格式
+- 将多个图标文件整合到一张图片中（雪碧图）
+- 选择正确的图片格式：
+  - 对于能够显示 `WebP `格式的浏览器尽量使用 `WebP` 格式。因为 `WebP` 格式具有更好的图像数据压缩算法，能带来更小的图片体积，而且拥有肉眼识别无差异的图像质量，缺点就是兼容性并不好
+  - 小图使用 `PNG`，其实对于大部分图标这类图片，完全可以使用 `SVG `代替
+  - 照片使用 `JPEG`
+
+### 24.3 DNS 预解析
+
+> `DNS` 解析也是需要时间的，可以通过预解析的方式来预先获得域名所对应的 `IP`。
+
+```html
+<link rel="dns-prefetch" href="//blog.poetries.top">
+```
+
+### 24.4 节流
+
+> 考虑一个场景，滚动事件中会发起网络请求，但是我们并不希望用户在滚动过程中一直发起请求，而是隔一段时间发起一次，对于这种情况我们就可以使用节流。
+
+理解了节流的用途，我们就来实现下这个函数
+
+```js
+// func是用户传入需要防抖的函数
+// wait是等待时间
+const throttle = (func, wait = 50) => {
+  // 上一次执行该函数的时间
+  let lastTime = 0
+  return function(...args) {
+    // 当前时间
+    let now = +new Date()
+    // 将当前时间和上一次执行函数时间对比
+    // 如果差值大于设置的等待时间就执行函数
+    if (now - lastTime > wait) {
+      lastTime = now
+      func.apply(this, args)
+    }
+  }
+}
+
+setInterval(
+  throttle(() => {
+    console.log(1)
+  }, 500),
+  1
+)
+
+```
+
+### 24.5 防抖
+
+> 考虑一个场景，有一个按钮点击会触发网络请求，但是我们并不希望每次点击都发起网络请求，而是当用户点击按钮一段时间后没有再次点击的情况才去发起网络请求，对于这种情况我们就可以使用防抖。
+
+理解了防抖的用途，我们就来实现下这个函数
+
+```js
+// func是用户传入需要防抖的函数
+// wait是等待时间
+const debounce = (func, wait = 50) => {
+  // 缓存一个定时器id
+  let timer = 0
+  // 这里返回的函数是每次用户实际调用的防抖函数
+  // 如果已经设定过定时器了就清空上一次的定时器
+  // 开始一个新的定时器，延迟执行用户传入的方法
+  return function(...args) {
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(() => {
+      func.apply(this, args)
+    }, wait)
+  }
+}
+```
+
+### 24.6 预加载
+
+
+- 在开发中，可能会遇到这样的情况。有些资源不需要马上用到，但是希望尽早获取，这时候就可以使用预加载。
+- 预加载其实是声明式的 `fetch` ，强制浏览器请求资源，并且不会阻塞 `onload` 事件，可以使用以下代码开启预加载
+
+```html
+<link rel="preload" href="http://blog.poetries.top">
+```
+
+> 预加载可以一定程度上降低首屏的加载时间，因为可以将一些不影响首屏但重要的文件延后加载，唯一缺点就是兼容性不好。
+
+
+### 24.7 预渲染
+
+> 可以通过预渲染将下载的文件预先在后台渲染，可以使用以下代码开启预渲染
+
+```html
+<link rel="prerender" href="http://blog.poetries.top">
+```
+
+> 预渲染虽然可以提高页面的加载速度，但是要确保该页面大概率会被用户在之后打开，否则就是白白浪费资源去渲染。
+
+### 24.8 懒执行
+
+> 懒执行就是将某些逻辑延迟到使用时再计算。该技术可以用于首屏优化，对于某些耗时逻辑并不需要在首屏就使用的，就可以使用懒执行。懒执行需要唤醒，一般可以通过定时器或者事件的调用来唤醒。
+
+
+### 24.9 懒加载
+
+- 懒加载就是将不关键的资源延后加载。
+- 懒加载的原理就是只加载自定义区域（通常是可视区域，但也可以是即将进入可视区域）内需要加载的东西。对于图片来说，先设置图片标签的 `src` 属性为一张占位图，将真实的图片资源放入一个自定义属性中，当进入自定义区域时，就将自定义属性替换为 `src` 属性，这样图片就会去下载资源，实现了图片懒加载。
+- 懒加载不仅可以用于图片，也可以使用在别的资源上。比如进入可视区域才开始播放视频等等。
+
+### 24.10 CDN
+
+> `CDN`的原理是尽可能的在各个地方分布机房缓存数据，这样即使我们的根服务器远在国外，在国内的用户也可以通过国内的机房迅速加载资源。
+
+> 因此，我们可以将静态资源尽量使用 `CDN` 加载，由于浏览器对于单个域名有并发请求上限，可以考虑使用多个 `CDN` 域名。并且对于 `CDN` 加载静态资源需要注意 `CDN`  域名要与主站不同，否则每次请求都会带上主站的 `Cookie`，平白消耗流量
+
+## 25 Webpack 性能优化
+
+> 在这部分的内容中，我们会聚焦于以下两个知识点，并且每一个知识点都属于高频考点：
+
+- 有哪些方式可以减少 `Webpack` 的打包时间
+- 有哪些方式可以让 `Webpack` 打出来的包更小
+
+### 25.1 减少 Webpack 打包时间
+
+**1. 优化 Loader**
+
+> 对于 `Loader` 来说，影响打包效率首当其冲必属 `Babel` 了。因为 `Babel` 会将代码转为字符串生成 `AST`，然后对 `AST` 继续进行转变最后再生成新的代码，项目越大，转换代码越多，效率就越低。当然了，我们是有办法优化的
+
+> 首先我们可以优化 `Loader` 的文件搜索范围
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        // js 文件才使用 babel
+        test: /\.js$/,
+        loader: 'babel-loader',
+        // 只在 src 文件夹下查找
+        include: [resolve('src')],
+        // 不会去查找的路径
+        exclude: /node_modules/
+      }
+    ]
+  }
+}
+```
+
+> 对于 `Babel` 来说，我们肯定是希望只作用在 `JS `代码上的，然后 `node_modules` 中使用的代码都是编译过的，所以我们也完全没有必要再去处理一遍
+
+- 当然这样做还不够，我们还可以将 `Babel` 编译过的文件缓存起来，下次只需要编译更改过的代码文件即可，这样可以大幅度加快打包时间
+
+```js
+loader: 'babel-loader?cacheDirectory=true'
+```
+
+**2. HappyPack**
+
+> 受限于 `Node` 是单线程运行的，所以 `Webpack` 在打包的过程中也是单线程的，特别是在执行` Loader` 的时候，长时间编译的任务很多，这样就会导致等待的情况。
+
+> `HappyPack` 可以将 `Loader` 的同步执行转换为并行的，这样就能充分利用系统资源来加快打包效率了
+
+```js
+module: {
+  loaders: [
+    {
+      test: /\.js$/,
+      include: [resolve('src')],
+      exclude: /node_modules/,
+      // id 后面的内容对应下面
+      loader: 'happypack/loader?id=happybabel'
+    }
+  ]
+},
+plugins: [
+  new HappyPack({
+    id: 'happybabel',
+    loaders: ['babel-loader?cacheDirectory'],
+    // 开启 4 个线程
+    threads: 4
+  })
+]
+```
+
+**3. DllPlugin**
+
+> `DllPlugin` 可以将特定的类库提前打包然后引入。这种方式可以极大的减少打包类库的次数，只有当类库更新版本才有需要重新打包，并且也实现了将公共代码抽离成单独文件的优化方案。
+
+接下来我们就来学习如何使用 `DllPlugin`
+
+```js
+// 单独配置在一个文件中
+// webpack.dll.conf.js
+const path = require('path')
+const webpack = require('webpack')
+module.exports = {
+  entry: {
+    // 想统一打包的类库
+    vendor: ['react']
+  },
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].dll.js',
+    library: '[name]-[hash]'
+  },
+  plugins: [
+    new webpack.DllPlugin({
+      // name 必须和 output.library 一致
+      name: '[name]-[hash]',
+      // 该属性需要与 DllReferencePlugin 中一致
+      context: __dirname,
+      path: path.join(__dirname, 'dist', '[name]-manifest.json')
+    })
+  ]
+}
+```
+
+> 然后我们需要执行这个配置文件生成依赖文件，接下来我们需要使用 `DllReferencePlugin` 将依赖文件引入项目中
+
+```js
+// webpack.conf.js
+module.exports = {
+  // ...省略其他配置
+  plugins: [
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      // manifest 就是之前打包出来的 json 文件
+      manifest: require('./dist/vendor-manifest.json'),
+    })
+  ]
+}
+```
+
+**4. 代码压缩**
+
+> 在 `Webpack3` 中，我们一般使用 `UglifyJS` 来压缩代码，但是这个是单线程运行的，为了加快效率，我们可以使用 `webpack-parallel-uglify-plugin` 来并行运行 `UglifyJS`，从而提高效率。
+
+> 在 `Webpack4` 中，我们就不需要以上这些操作了，只需要将 `mode` 设置为 `production` 就可以默认开启以上功能。代码压缩也是我们必做的性能优化方案，当然我们不止可以压缩 `JS` 代码，还可以压缩 `HTML`、`CSS` 代码，并且在压缩 `JS` 代码的过程中，我们还可以通过配置实现比如删除 `console.log` 这类代码的功能。
+
+**5. 一些小的优化点**
+
+> 我们还可以通过一些小的优化点来加快打包速度
+
+
+- `resolve.extensions`：用来表明文件后缀列表，默认查找顺序是 `['.js', '.json']`，如果你的导入文件没有添加后缀就会按照这个顺序查找文件。我们应该尽可能减少后缀列表长度，然后将出现频率高的后缀排在前面
+- `resolve.alias`：可以通过别名的方式来映射一个路径，能让 `Webpack` 更快找到路径
+- `module.noParse`：如果你确定一个文件下没有其他依赖，就可以使用该属性让 Webpack 不扫描该文件，这种方式对于大型的类库很有帮助
+
+### 25.2 减少 Webpack 打包后的文件体积
+
+**1. 按需加载**
+
+> 想必大家在开发 `SPA` 项目的时候，项目中都会存在十几甚至更多的路由页面。如果我们将这些页面全部打包进一个 `JS `文件的话，虽然将多个请求合并了，但是同样也加载了很多并不需要的代码，耗费了更长的时间。那么为了首页能更快地呈现给用户，我们肯定是希望首页能加载的文件体积越小越好，这时候我们就可以使用按需加载，将每个路由页面单独打包为一个文件。当然不仅仅路由可以按需加载，对于 `loadash` 这种大型类库同样可以使用这个功能。
+
+> 按需加载的代码实现这里就不详细展开了，因为鉴于用的框架不同，实现起来都是不一样的。当然了，虽然他们的用法可能不同，但是底层的机制都是一样的。都是当使用的时候再去下载对应文件，返回一个 `Promise`，当 `Promise `成功以后去执行回调。
+
+**2. Scope Hoisting**
+
+> `Scope Hoisting` 会分析出模块之间的依赖关系，尽可能的把打包出来的模块合并到一个函数中去。
+
+比如我们希望打包两个文件
+
+```js
+// test.js
+export const a = 1
+
+// index.js
+import { a } from './test.js'
+```
+
+> 对于这种情况，我们打包出来的代码会类似这样
+
+```js
+[
+  /* 0 */
+  function (module, exports, require) {
+    //...
+  },
+  /* 1 */
+  function (module, exports, require) {
+    //...
+  }
+]
+```
+
+
+> 但是如果我们使用 `Scope Hoisting` 的话，代码就会尽可能的合并到一个函数中去，也就变成了这样的类似代码
+
+```js
+[
+  /* 0 */
+  function (module, exports, require) {
+    //...
+  }
+]
+
+```
+
+> 这样的打包方式生成的代码明显比之前的少多了。如果在 `Webpack4` 中你希望开启这个功能，只需要启用 `optimization.concatenateModules `就可以了。
+
+```js
+module.exports = {
+  optimization: {
+    concatenateModules: true
+  }
+}
+```
+
+
+**3. Tree Shaking**
+
+
+> `Tree Shaking` 可以实现删除项目中未被引用的代码，比如
+
+
+```js
+// test.js
+export const a = 1
+export const b = 2
+// index.js
+import { a } from './test.js'
+```
+
+- 对于以上情况，`test` 文件中的变量 `b` 如果没有在项目中使用到的话，就不会被打包到文件中。
+- 如果你使用 `Webpack 4` 的话，开启生产环境就会自动启动这个优化功能。
+
+## 26 实现小型打包工具
+
+> 该工具可以实现以下两个功能
+
+- 将 `ES6` 转换为 `ES5`
+- 支持在 `JS` 文件中 `import CSS` 文件
+
+> 通过这个工具的实现，大家可以理解到打包工具的原理到底是什么
+
+**实现**
+
+> 因为涉及到 `ES6` 转 `ES5`，所以我们首先需要安装一些 `Babel` 相关的工具
+
+```
+yarn add babylon babel-traverse babel-core babel-preset-env  
+```
+
+接下来我们将这些工具引入文件中
+
+```js
+const fs = require('fs')
+const path = require('path')
+const babylon = require('babylon')
+const traverse = require('babel-traverse').default
+const { transformFromAst } = require('babel-core')
+```
+
+首先，我们先来实现如何使用 `Babel` 转换代码
+
+```js
+function readCode(filePath) {
+  // 读取文件内容
+  const content = fs.readFileSync(filePath, 'utf-8')
+  // 生成 AST
+  const ast = babylon.parse(content, {
+    sourceType: 'module'
+  })
+  // 寻找当前文件的依赖关系
+  const dependencies = []
+  traverse(ast, {
+    ImportDeclaration: ({ node }) => {
+      dependencies.push(node.source.value)
+    }
+  })
+  // 通过 AST 将代码转为 ES5
+  const { code } = transformFromAst(ast, null, {
+    presets: ['env']
+  })
+  return {
+    filePath,
+    dependencies,
+    code
+  }
+}
+```
+
+- 首先我们传入一个文件路径参数，然后通过 `fs` 将文件中的内容读取出来
+- 接下来我们通过 `babylon` 解析代码获取 `AST`，目的是为了分析代码中是否还引入了别的文件
+- 通过 `dependencies` 来存储文件中的依赖，然后再将 `AST` 转换为 `ES5` 代码
+- 最后函数返回了一个对象，对象中包含了当前文件路径、当前文件依赖和当前文件转换后的代码
+
+> 接下来我们需要实现一个函数，这个函数的功能有以下几点
+
+- 调用 `readCode` 函数，传入入口文件
+- 分析入口文件的依赖
+- 识别 `JS` 和 `CSS` 文件
+
+```js
+function getDependencies(entry) {
+  // 读取入口文件
+  const entryObject = readCode(entry)
+  const dependencies = [entryObject]
+  // 遍历所有文件依赖关系
+  for (const asset of dependencies) {
+    // 获得文件目录
+    const dirname = path.dirname(asset.filePath)
+    // 遍历当前文件依赖关系
+    asset.dependencies.forEach(relativePath => {
+      // 获得绝对路径
+      const absolutePath = path.join(dirname, relativePath)
+      // CSS 文件逻辑就是将代码插入到 `style` 标签中
+      if (/\.css$/.test(absolutePath)) {
+        const content = fs.readFileSync(absolutePath, 'utf-8')
+        const code = `
+          const style = document.createElement('style')
+          style.innerText = ${JSON.stringify(content).replace(/\\r\\n/g, '')}
+          document.head.appendChild(style)
+        `
+        dependencies.push({
+          filePath: absolutePath,
+          relativePath,
+          dependencies: [],
+          code
+        })
+      } else {
+        // JS 代码需要继续查找是否有依赖关系
+        const child = readCode(absolutePath)
+        child.relativePath = relativePath
+        dependencies.push(child)
+      }
+    })
+  }
+  return dependencies
+}
+```
+
+- 首先我们读取入口文件，然后创建一个数组，该数组的目的是存储代码中涉及到的所有文件
+- 接下来我们遍历这个数组，一开始这个数组中只有入口文件，在遍历的过程中，如果入口文件有依赖其他的文件，那么就会被 `push` 到这个数组中
+- 在遍历的过程中，我们先获得该文件对应的目录，然后遍历当前文件的依赖关系
+- 在遍历当前文件依赖关系的过程中，首先生成依赖文件的绝对路径，然后判断当前文件是 `CSS` 文件还是 `JS` 文件
+- 如果是 `CSS` 文件的话，我们就不能用 `Babel` 去编译了，只需要读取 `CSS` 文件中的代码，然后创建一个 `style` 标签，将代码插入进标签并且放入 `head` 中即可
+- 如果是 `JS` 文件的话，我们还需要分析 `JS` 文件是否还有别的依赖关系
+- 最后将读取文件后的对象 `push` 进数组中
+- 现在我们已经获取到了所有的依赖文件，接下来就是实现打包的功能了
+
+```js
+function bundle(dependencies, entry) {
+  let modules = ''
+  // 构建函数参数，生成的结构为
+  // { './entry.js': function(module, exports, require) { 代码 } }
+  dependencies.forEach(dep => {
+    const filePath = dep.relativePath || entry
+    modules += `'${filePath}': (
+      function (module, exports, require) { ${dep.code} }
+    ),`
+  })
+  // 构建 require 函数，目的是为了获取模块暴露出来的内容
+  const result = `
+    (function(modules) {
+      function require(id) {
+        const module = { exports : {} }
+        modules[id](module, module.exports, require)
+        return module.exports
+      }
+      require('${entry}')
+    })({${modules}})
+  `
+  // 当生成的内容写入到文件中
+  fs.writeFileSync('./bundle.js', result)
+}
+```
+
+> 这段代码需要结合着 `Babel` 转换后的代码来看，这样大家就能理解为什么需要这样写了
+
+```js
+// entry.js
+var _a = require('./a.js')
+var _a2 = _interopRequireDefault(_a)
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : { default: obj }
+}
+console.log(_a2.default)
+// a.js
+Object.defineProperty(exports, '__esModule', {
+    value: true
+})
+var a = 1
+exports.default = a
+```
+
+> `Babel` 将我们 `ES6 `的模块化代码转换为了 `CommonJS`的代码，但是浏览器是不支持 `CommonJS` 的，所以如果这段代码需要在浏览器环境下运行的话，我们需要自己实现 `CommonJS` 相关的代码，这就是 `bundle` 函数做的大部分事情。
+
+**接下来我们再来逐行解析 bundle 函数**
+
+- 首先遍历所有依赖文件，构建出一个函数参数对象
+- 对象的属性就是当前文件的相对路径，属性值是一个函数，函数体是当前文件下的代码，函数接受三个参数 `module`、`exports`、 `require`
+  - `module` 参数对应 `CommonJS` 中的 `module`
+  - `exports` 参数对应 `CommonJS` 中的 `module.export`
+  - `require` 参数对应我们自己创建的 `require` 函数
+- 接下来就是构造一个使用参数的函数了，函数做的事情很简单，就是内部创建一个 `require `函数，然后调用 `require(entry)`，也就是 `require('./entry.js')`，这样就会从函数参数中找到 `./entry.js` 对应的函数并执行，最后将导出的内容通过 `module.export` 的方式让外部获取到
+- 最后再将打包出来的内容写入到单独的文件中
+
+> 如果你对于上面的实现还有疑惑的话，可以阅读下打包后的部分简化代码
+
+
+```js
+;(function(modules) {
+  function require(id) {
+    // 构造一个 CommonJS 导出代码
+    const module = { exports: {} }
+    // 去参数中获取文件对应的函数并执行
+    modules[id](module, module.exports, require)
+    return module.exports
+  }
+  require('./entry.js')
+})({
+  './entry.js': function(module, exports, require) {
+    // 这里继续通过构造的 require 去找到 a.js 文件对应的函数
+    var _a = require('./a.js')
+    console.log(_a2.default)
+  },
+  './a.js': function(module, exports, require) {
+    var a = 1
+    // 将 require 函数中的变量 module 变成了这样的结构
+    // module.exports = 1
+    // 这样就能在外部取到导出的内容了
+    exports.default = a
+  }
+  // 省略
+})
+```
+
+> 虽然实现这个工具只写了不到 `100` 行的代码，但是打包工具的核心原理就是这些了
+
+- 找出入口文件所有的依赖关系
+- 然后通过构建 `CommonJS` 代码来获取 `exports` 导出的内容
+
+## 27 MVVM/虚拟DOM/前端路由
+
+### 27.1 MVVM
+
+> 涉及面试题：什么是 `MVVM`？比之 `MVC` 有什么区别？
+
+**首先先来说下 View 和 Model**
+
+- `View` 很简单，就是用户看到的视图
+- `Model` 同样很简单，一般就是本地数据和数据库中的数据
+
+> 基本上，我们写的产品就是通过接口从数据库中读取数据，然后将数据经过处理展现到用户看到的视图上。当然我们还可以从视图上读取用户的输入，然后又将用户的输入通过接口写入到数据库中。但是，如何将数据展示到视图上，然后又如何将用户的输入写入到数据中，不同的人就产生了不同的看法，从此出现了很多种架构设计。
+
+> 传统的 `MVC` 架构通常是使用控制器更新模型，视图从模型中获取数据去渲染。当用户有输入时，会通过控制器去更新模型，并且通知视图进行更新
+
+![](https://user-gold-cdn.xitu.io/2018/12/20/167cad938817eb7e)
+
+
+- 但是 `MVC` 有一个巨大的缺陷就是控制器承担的责任太大了，随着项目愈加复杂，控制器中的代码会越来越臃肿，导致出现不利于维护的情况。
+- 在 `MVVM` 架构中，引入了 `ViewModel` 的概念。`ViewModel` 只关心数据和业务的处理，不关心 `View` 如何处理数据，在这种情况下，`View `和 `Model` 都可以独立出来，任何一方改变了也不一定需要改变另一方，并且可以将一些可复用的逻辑放在一个 `ViewModel` 中，让多个 `View` 复用这个 `ViewModel`。
+
+![](https://user-gold-cdn.xitu.io/2018/12/21/167ced454926a458)
+
+- 以 `Vue` 框架来举例，`ViewModel` 就是组件的实例。`View` 就是模板，`Model` 的话在引入 `Vuex` 的情况下是完全可以和组件分离的。
+- 除了以上三个部分，其实在 `MVVM` 中还引入了一个隐式的 `Binder` 层，实现了 `View` 和 `ViewModel` 的绑定
+
+![](https://user-gold-cdn.xitu.io/2018/12/21/167cf01bd8430243)
+
+- 同样以 `Vue` 框架来举例，这个隐式的 `Binder` 层就是 `Vue` 通过解析模板中的插值和指令从而实现 `View` 与 `ViewModel` 的绑定。
+- 对于 `MVVM `来说，其实最重要的并不是通过双向绑定或者其他的方式将 `View` 与 `ViewModel` 绑定起来，而是通过 `ViewModel` 将视图中的状态和用户的行为分离出一个抽象，这才是 `MVVM` 的精髓
+
+### 27.2 Virtual DOM
+
+> 涉及面试题：什么是 `Virtual DOM`？为什么 `Virtual DOM `比原生 `DOM` 快？
+
+- 大家都知道操作 `DOM` 是很慢的，为什么慢的原因以及在「浏览器渲染原理」章节中说过，这里就不再赘述了- 那么相较于 `DOM`来说，操作 `JS` 对象会快很多，并且我们也可以通过 `JS `来模拟 `DOM`
+
+```js
+const ul = {
+  tag: 'ul',
+  props: {
+    class: 'list'
+  },
+  children: {
+    tag: 'li',
+    children: '1'
+  }
+}
+```
+
+上述代码对应的 `DOM` 就是
+
+```html
+<ul class='list'>
+  <li>1</li>
+</ul>
+```
+
+- 那么既然 `DOM` 可以通过 `JS` 对象来模拟，反之也可以通过 `JS` 对象来渲染出对应的 `DOM`。当然了，通过 `JS` 来模拟 `DOM` 并且渲染对应的 `DOM` 只是第一步，难点在于如何判断新旧两个 `JS` 对象的最小差异并且实现局部更新 `DOM`
+
+> 首先 `DOM` 是一个多叉树的结构，如果需要完整的对比两颗树的差异，那么需要的时间复杂度会是 `O(n ^ 3)`，这个复杂度肯定是不能接受的。于是 `React` 团队优化了算法，实现了 `O(n)` 的复杂度来对比差异。 实现 `O(n)` 复杂度的关键就是只对比同层的节点，而不是跨层对比，这也是考虑到在实际业务中很少会去跨层的移动 `DOM` 元素。 所以判断差异的算法就分为了两步
+
+- 首先从上至下，从左往右遍历对象，也就是树的深度遍历，这一步中会给每个节点添加索引，便于最后渲染差异
+- 一旦节点有子元素，就去判断子元素是否有不同
+
+> 在第一步算法中我们需要判断新旧节点的 `tagName` 是否相同，如果不相同的话就代表节点被替换了。如果没有更改 `tagName` 的话，就需要判断是否有子元素，有的话就进行第二步算法。
+
+> 在第二步算法中，我们需要判断原本的列表中是否有节点被移除，在新的列表中需要判断是否有新的节点加入，还需要判断节点是否有移动。
+
+举个例子来说，假设页面中只有一个列表，我们对列表中的元素进行了变更
+
+```js
+// 假设这里模拟一个 ul，其中包含了 5 个 li
+[1, 2, 3, 4, 5]
+// 这里替换上面的 li
+[1, 2, 5, 4]
+```
+
+> 从上述例子中，我们一眼就可以看出先前的 `ul` 中的第三个` li`被移除了，四五替换了位置。
+
+> 那么在实际的算法中，我们如何去识别改动的是哪个节点呢？这就引入了 `key` 这个属性，想必大家在 `Vue` 或者 `React` 的列表中都用过这个属性。这个属性是用来给每一个节点打标志的，用于判断是否是同一个节点。
+
+- 当然在判断以上差异的过程中，我们还需要判断节点的属性是否有变化等等。
+- 当我们判断出以上的差异后，就可以把这些差异记录下来。当对比完两棵树以后，就可以通过差异去局部更新 `DOM`，实现性能的最优化。
+
+> 当然了 `Virtual DOM` 提高性能是其中一个优势，其实最大的优势还是在于：
+
+- 将 `Virtual DOM `作为一个兼容层，让我们还能对接非 `Web` 端的系统，实现跨端开发。
+- 同样的，通过 `Virtual DOM `我们可以渲染到其他的平台，比如实现 `SSR`、同构渲染等等。
+- 实现组件的高度抽象化
+
+### 27.3 路由原理
+
+> 涉及面试题：前端路由原理？两种实现方式有什么区别？
+
+> 前端路由实现起来其实很简单，本质就是监听 `URL` 的变化，然后匹配路由规则，显示相应的页面，并且无须刷新页面。目前前端使用的路由就只有两种实现方式
+
+- `Hash` 模式
+- `History` 模式
+
+**1. Hash 模式**
+
+> `www.test.com/#/` 就是 `Hash URL`，当 `#` 后面的哈希值发生变化时，可以通过 `hashchange` 事件来监听到 `URL` 的变化，从而进行跳转页面，并且无论哈希值如何变化，服务端接收到的 `URL` 请求永远是 `www.test.com`
+
+```js
+window.addEventListener('hashchange', () => {
+  // ... 具体逻辑
+})
+```
+
+> `Hash` 模式相对来说更简单，并且兼容性也更好
+
+**2. History 模式**
+
+> `History` 模式是 `HTML5` 新推出的功能，主要使用 `history.pushState` 和 `history.replaceState` 改变 `URL`
+
+- 通过 `History` 模式改变 `URL` 同样不会引起页面的刷新，只会更新浏览器的历史记录。
+
+```js
+// 新增历史记录
+history.pushState(stateObject, title, URL)
+// 替换当前历史记录
+history.replaceState(stateObject, title, URL)
+```
+
+> 当用户做出浏览器动作时，比如点击后退按钮时会触发 `popState` 事件
+
+```js
+window.addEventListener('popstate', e => {
+  // e.state 就是 pushState(stateObject) 中的 stateObject
+  console.log(e.state)
+})
+```
+
+**两种模式对比**
+
+- `Hash `模式只可以更改 `#` 后面的内容，`History` 模式可以通过 `API` 设置任意的同源 `URL`
+- `History` 模式可以通过 `API` 添加任意类型的数据到历史记录中，`Hash` 模式只能更改哈希值，也就是字符串
+- `Hash` 模式无需后端配置，并且兼容性好。`History` 模式在用户手动输入地址或者刷新页面的时候会发起 `URL` 请求，后端需要配置 `index.html` 页面用于匹配不到静态资源的时候
+
+### 27.4 Vue 和 React 之间的区别
+
+- `Vue` 的表单可以使用 `v-model` 支持双向绑定，相比于 `React` 来说开发上更加方便，当然了 `v-model` 其实就是个语法糖，本质上和 `React` 写表单的方式没什么区别
+- 改变数据方式不同，`Vue` 修改状态相比来说要简单许多，`React` 需要使用 `setState` 来改变状态，并且使用这个 `API` 也有一些坑点。并且 `Vue` 的底层使用了依赖追踪，页面更新渲染已经是最优的了，但是 `React` 还是需要用户手动去优化这方面的问题。
+- `React 16`以后，有些钩子函数会执行多次，这是因为引入 `Fiber` 的原因
+- `React` 需要使用 `JSX`，有一定的上手成本，并且需要一整套的工具链支持，但是完全可以通过 `JS` 来控制页面，更加的灵活。`Vue` 使用了模板语法，相比于 `JSX` 来说没有那么灵活，但是完全可以脱离工具链，通过直接编写 `render` 函数就能在浏览器中运行。
+- 在生态上来说，两者其实没多大的差距，当然 `React`的用户是远远高于` Vue` 的
+
+## 28 Vue常考知识点
+
+### 28.1 生命周期钩子函数
+
+- 在 `beforeCreate` 钩子函数调用的时候，是获取不到 `props` 或者 `data` 中的数据的，因为这些数据的初始化都在 `initState` 中。
+- 然后会执行 `created` 钩子函数，在这一步的时候已经可以访问到之前不能访问到的数据，但是这时候组件还没被挂载，所以是看不到的。
+- 接下来会先执行 `beforeMount` 钩子函数，开始创建 `VDOM`，最后执行 `mounted` 钩子，并将 `VDOM`渲染为真实 `DOM` 并且渲染数据。组件中如果有子组件的话，会递归挂载子组件，只有当所有子组件全部挂载完毕，才会执行根组件的挂载钩子。
+- 接下来是数据更新时会调用的钩子函数 `beforeUpdate` 和 `updated`，这两个钩子函数没什么好说的，就是分别在数据更新前和更新后会调用。
+- 另外还有 `keep-alive` 独有的生命周期，分别为 `activated` 和 `deactivated `。用 `keep-alive` 包裹的组件在切换时不会进行销毁，而是缓存到内存中并执行 `deactivated` 钩子函数，命中缓存渲染后会执行 `actived` 钩子函数。
+- 最后就是销毁组件的钩子函数 `beforeDestroy` 和 `destroyed`。前者适合移除事件、定时器等等，否则可能会引起内存泄露的问题。然后进行一系列的销毁操作，如果有子组件的话，也会递归销毁子组件，所有子组件都销毁完毕后才会执行根组件的 `destroyed` 钩子函数
+
+### 28.2 组件通信
+
+> 组件通信一般分为以下几种情况：
+
+- 父子组件通信
+- 兄弟组件通信
+- 跨多层级组件通信
+
+> 对于以上每种情况都有多种方式去实现，接下来就来学习下如何实现。
+
+**1. 父子通信**
+
+- 父组件通过 `props` 传递数据给子组件，子组件通过 `emit` 发送事件传递数据给父组件，这两种方式是最常用的父子通信实现办法。
+- 这种父子通信方式也就是典型的单向数据流，父组件通过 `props` 传递数据，子组件不能直接修改 `props`，而是必须通过发送事件的方式告知父组件修改数据。
+- 另外这两种方式还可以使用语法糖 `v-model` 来直接实现，因为 `v-model` 默认会解析成名为 `value` 的 `prop` 和名为 `input` 的事件。这种语法糖的方式是典型的双向绑定，常用于 `UI` 控件上，但是究其根本，还是通过事件的方法让父组件修改数据。
+- 当然我们还可以通过访问 `$parent` 或者 `$children` 对象来访问组件实例中的方法和数据。
+- 另外如果你使用 Vue 2.3 及以上版本的话还可以使用 `$listeners` 和 `.sync` 这两个属性。
+- `$listeners` 属性会将父组件中的 (不含 `.native` 修饰器的) `v-on` 事件监听器传递给子组件，子组件可以通过访问 `$listeners` 来自定义监听器。
+- `.sync` 属性是个语法糖，可以很简单的实现子组件与父组件通信
+
+```html
+<!--父组件中-->
+<input :value.sync="value" />
+<!--以上写法等同于-->
+<input :value="value" @update:value="v => value = v"></comp>
+<!--子组件中-->
+<script>
+  this.$emit('update:value', 1)
+</script>
+```
+
+**2. 兄弟组件通信**
+
+
+> 对于这种情况可以通过查找父组件中的子组件实现，也就是 `this.$parent.$children`，在 `$children` 中可以通过组件 `name` 查询到需要的组件实例，然后进行通信。
+
+**3. 跨多层次组件通信**
+
+> 对于这种情况可以使用 `Vue 2.2` 新增的 `API provide / inject`，虽然文档中不推荐直接使用在业务中，但是如果用得好的话还是很有用的。
+
+假设有父组件 `A`，然后有一个跨多层级的子组件 `B`
+
+```js
+// 父组件 A
+export default {
+  provide: {
+    data: 1
+  }
+}
+// 子组件 B
+export default {
+  inject: ['data'],
+  mounted() {
+    // 无论跨几层都能获得父组件的 data 属性
+    console.log(this.data) // => 1
+  }
+}
+```
+
+**终极办法解决一切通信问题**
+
+> 只要你不怕麻烦，可以使用 `Vuex` 或者 `Event Bus` 解决上述所有的通信情况。
+
+### 28.3 extend 能做什么
+
+> 这个 `API` 很少用到，作用是扩展组件生成一个构造器，通常会与 `$mount` 一起使用。
+
+```js
+// 创建组件构造器
+let Component = Vue.extend({
+  template: '<div>test</div>'
+})
+// 挂载到 #app 上
+new Component().$mount('#app')
+// 除了上面的方式，还可以用来扩展已有的组件
+let SuperComponent = Vue.extend(Component)
+new SuperComponent({
+    created() {
+        console.log(1)
+    }
+})
+new SuperComponent().$mount('#app')
+```
+
+### 28.4 mixin 和 mixins 区别
+
+> `mixin` 用于全局混入，会影响到每个组件实例，通常插件都是这样做初始化的
+
+```js
+Vue.mixin({
+    beforeCreate() {
+        // ...逻辑
+        // 这种方式会影响到每个组件的 beforeCreate 钩子函数
+    }
+})
+```
+
+- 虽然文档不建议我们在应用中直接使用 `mixin`，但是如果不滥用的话也是很有帮助的，比如可以全局混入封装好的 `ajax` 或者一些工具函数等等。
+- `mixins` 应该是我们最常使用的扩展组件的方式了。如果多个组件中有相同的业务逻辑，就可以将这些逻辑剥离出来，通过 `mixins` 混入代码，比如上拉下拉加载数据这种逻辑等等。
+- 另外需要注意的是 `mixins` 混入的钩子函数会先于组件内的钩子函数执行，并且在遇到同名选项的时候也会有选择性的进行合并，具体可以阅读 文档。
+
+### 28.5 computed 和 watch 区别
+
+- `computed` 是计算属性，依赖其他属性计算值，并且 `computed` 的值有缓存，只有当计算值变化才会返回内容。
+- `watch` 监听到值的变化就会执行回调，在回调中可以进行一些逻辑操作。
+- 所以一般来说需要依赖别的属性来动态获得值的时候可以使用 `computed`，对于监听到值的变化需要做一些复杂业务逻辑的情况可以使用 `watch`。
+- 另外 `computer` 和 `watch` 还都支持对象的写法，这种方式知道的人并不多。
+
+```js
+vm.$watch('obj', {
+    // 深度遍历
+    deep: true,
+    // 立即触发
+    immediate: true,
+    // 执行的函数
+    handler: function(val, oldVal) {}
+})
+var vm = new Vue({
+  data: { a: 1 },
+  computed: {
+    aPlus: {
+      // this.aPlus 时触发
+      get: function () {
+        return this.a + 1
+      },
+      // this.aPlus = 1 时触发
+      set: function (v) {
+        this.a = v - 1
+      }
+    }
+  }
+})
+```
+
+### 28.6 keep-alive 组件有什么作用
+
+- 如果你需要在组件切换的时候，保存一些组件的状态防止多次渲染，就可以使用 `keep-alive` 组件包裹需要保存的组件。
+- 对于 `keep-alive` 组件来说，它拥有两个独有的生命周期钩子函数，分别为 `activated` 和 `deactivated` 。用 `keep-alive` 包裹的组件在切换时不会进行销毁，而是缓存到内存中并执行 `deactivated` 钩子函数，命中缓存渲染后会执行 `actived` 钩子函数。
+
+### 28.7 v-show 与 v-if 区别
+
+- `v-show` 只是在 `display: none` 和 `display: block` 之间切换。无论初始条件是什么都会被渲染出来，后面只需要切换 `CSS`，`DOM` 还是一直保留着的。所以总的来说 `v-show` 在初始渲染时有更高的开销，但是切换开销很小，更适合于频繁切换的场景。
+- `v-if` 的话就得说到 `Vue` 底层的编译了。当属性初始为 `false` 时，组件就不会被渲染，直到条件为 `true`，并且切换条件时会触发销毁/挂载组件，所以总的来说在切换时开销更高，更适合不经常切换的场景。
+- 并且基于 `v-if` 的这种惰性渲染机制，可以在必要的时候才去渲染组件，减少整个页面的初始渲染开销。
+
+### 28.8 组件中 data 什么时候可以使用对象
+
+> 这道题目其实更多考的是 JS 功底。
+
+- 组件复用时所有组件实例都会共享 `data`，如果 `data` 是对象的话，就会造成一个组件修改 `data` 以后会影响到其他所有组件，所以需要将 `data` 写成函数，每次用到就调用一次函数获得新的数据。
+- 当我们使用 `new Vue()` 的方式的时候，无论我们将 `data` 设置为对象还是函数都是可以的，因为 `new Vue()` 的方式是生成一个根组件，该组件不会复用，也就不存在共享 `data` 的情况了
+
+## 29 React常考知识点
+
+> 更新中...
+
+
+## 30 监控
+
+> 更新中...
+
+## 31 TCP/UDP
+
+> 更新中...
+
+## 32 HTTP/TLS
+
+> 更新中...
+
+## 33 HTTP2.0
+
+> 更新中...
+
+## 34 输入URL到页面渲染流程
+
+> 更新中...
+
+
+## 35 设计模式
+
+> 更新中...
+
+## 36 常见数据结构
+
+> 更新中...
+
+## 37 常考算法题解析
+
+> 更新中...
+
+## 38 css常考面试题解析
+
+> 更新中...
 
 <script>
 export default {
