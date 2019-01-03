@@ -1307,6 +1307,17 @@ html结构
 }
 ```
 
+### 52 如何实现小于12px的字体效果
+
+> `transform:scale()`这个属性只可以缩放可以定义宽高的元素，而行内元素是没有宽高的，我们可以加上一个`display:inline-block`;
+
+```
+transform: scale(0.7);
+```
+
+`css`的属性，可以缩放大小
+
+
 ## 三、JavaScript
 
 ### 1 闭包
@@ -3157,6 +3168,79 @@ function a() {
   console.log(arguments.callee)
 }
 ```
+
+### 105 ajax、axios、fetch区别
+
+**jQuery ajax**
+
+```js
+$.ajax({
+   type: 'POST',
+   url: url,
+   data: data,
+   dataType: dataType,
+   success: function () {},
+   error: function () {}
+});
+```
+
+优缺点：
+
+- 本身是针对`MVC`的编程,不符合现在前端`MVVM`的浪潮
+- 基于原生的`XHR`开发，`XHR`本身的架构不清晰，已经有了`fetch`的替代方案
+- `JQuery`整个项目太大，单纯使用`ajax`却要引入整个`JQuery`非常的不合理（采取个性化打包的方案又不能享受CDN服务）
+
+**axios**
+
+```js
+axios({
+    method: 'post',
+    url: '/user/12345',
+    data: {
+        firstName: 'Fred',
+        lastName: 'Flintstone'
+    }
+})
+.then(function (response) {
+    console.log(response);
+})
+.catch(function (error) {
+    console.log(error);
+});
+```
+
+优缺点：
+
+- 从浏览器中创建 `XMLHttpRequest`
+- 从 `node.js` 发出 `http` 请求
+- 支持 `Promise API`
+- 拦截请求和响应
+- 转换请求和响应数据
+- 取消请求
+- 自动转换`JSON`数据
+- 客户端支持防止`CSRF/XSRF`
+
+**fetch**
+
+```js
+try {
+  let response = await fetch(url);
+  let data = response.json();
+  console.log(data);
+} catch(e) {
+  console.log("Oops, error", e);
+
+}
+```
+
+优缺点：
+
+
+- `fetcht`只对网络请求报错，对`400`，`500`都当做成功的请求，需要封装去处理
+- `fetch`默认不会带`cookie`，需要添加配置项
+- `fetch`不支持`abort`，不支持超时控制，使用`setTimeout`及`Promise.reject`的实现的超时控制并不能阻止请求过程继续在后台运行，造成了量的浪费
+- `fetch`没有办法原生监测请求的进度，而XHR可以
+
 
 ## 四、jQuery
 
