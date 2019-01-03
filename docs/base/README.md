@@ -3125,6 +3125,38 @@ class Storage {
 - 组件高度可能大于页面高度，组件内部需要滚动条。
 - 只有组件的`visible`有变化且为`ture`时候，才重渲染组件内的所有内容
 
+### 104 caller和callee的区别
+
+> `caller`返回一个函数的引用，这个函数调用了当前的函数。
+
+**使用这个属性要注意**
+
+- 这个属性只有当函数在执行时才有用
+- 如果在`javascript`程序中，函数是由顶层调用的，则返回`null`
+
+> `functionName.caller: functionName`是当前正在执行的函数。
+
+```js
+function a() {
+  console.log(a.caller)
+}
+```
+
+**callee**
+
+> `callee`放回正在执行的函数本身的引用，它是`arguments`的一个属性
+
+> 使用callee时要注意:
+
+- 这个属性只有在函数执行时才有效
+- 它有一个`length`属性，可以用来获得形参的个数，因此可以用来比较形参和实参个数是否一致，即比较`arguments.length`是否等于`arguments.callee.length`
+- 它可以用来递归匿名函数。
+
+```js
+function a() {
+  console.log(arguments.callee)
+}
+```
 
 ## 四、jQuery
 
@@ -4110,4 +4142,3 @@ export default {
   }
 }
 </script>
-
