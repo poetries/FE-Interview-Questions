@@ -4,9 +4,9 @@
 
 [>> 面试问题答案综合版](https://github.com/poetries/FE-Interview-Questions/issues/2)
 
-目录
----
+## 目录
 
+- [面试题精简版本](面试题精简版本.md)
 - [HTML](HTML.md)
 - [CSS](CSS.md)
 - [JavaScript](JavaScript.md)
@@ -48,8 +48,8 @@
 - [HTTP协议](HTTP协议.md)
 
 
-综合版本
----
+## 综合版本
+
 
 - [Interview-Questions](Interview-Questions/Front-end-Developer-Questions[question-version].md)
 - [Front-end-Developer-Questions[question-and-answer-version]](Interview-Questions/Front-end-Developer-Questions[question-and-answer-version].md)
