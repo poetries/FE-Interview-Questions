@@ -14,6 +14,8 @@ module.exports = {
           { text: '高级', link: '/advance/' },
           { text: '通识', link: '/computed-base/' },
           { text: '精华', link: '/excellent/' },
+          { text: '简版', link: '/simply/' },
+          { text: '综合', link: '/comprehensive/' },
           { text: 'Blog', link: 'http://blog.poetries.top/' },
           { text: 'Github', link: 'https://github.com/poetries/' },
         ],
@@ -47,6 +49,18 @@ module.exports = {
             title: '精华',
             children: [
               '/excellent/'
+            ]
+          },
+          {
+            title: '简版',
+            children: [
+              '/simply/'
+            ]
+          },
+          {
+            title: '综合',
+            children: [
+              '/comprehensive/'
             ]
           }
         ],
