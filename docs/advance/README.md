@@ -2781,7 +2781,7 @@ class Demo {
 - `vue-router`：`vue`官方推荐使用的路由框架。
 - `vuex`：专为 `Vue.js` 应用项目开发的状态管理器，主要用于维护`vue`组件间共用的一些 变量 和 方法。
 - `axios`（ 或者 `fetch` 、`ajax` ）：用于发起 `GET` 、或 `POST` 等 `http`请求，基于 `Promise` 设计。
-- `vuex`等：一个专为`vue`设计的移动端UI组件库。
+- `vuex`等：一个专为`vue`设计的移动端`UI`组件库。
 - 创建一个`emit.js`文件，用于`vue`事件机制的管理。
 - `webpack`：模块加载和`vue-cli`工程打包器。
 
