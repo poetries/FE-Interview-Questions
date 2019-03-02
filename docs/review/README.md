@@ -104,3 +104,59 @@ pageClass: custom-code-highlight
 - `:after / <br> : clear: both`
 - 创建父级 `BFC`
 - 父级设置高度
+
+### 7.link 与 @import 的区别
+
+- `link`功能较多，可以定义 `RSS`，定义 `Rel` 等作用，而`@import`只能用于加载 `css`
+- 当解析到`link`时，页面会同步加载所引的 `css`，而`@import`所引用的 `css` 会等到页面加载完才被加载
+- `@import`需要 `IE5` 以上才能使用
+- `link`可以使用 `js` 动态引入，`@import`不行
+
+### 8. CSS预处理器(Sass/Less/Postcss)
+
+> `CSS`预处理器的原理: 是将类 `CSS`语言通过 `Webpack` 编译 转成浏览器可读的真正 `CSS`。在这层编译之上，便可以赋予 `CSS` 更多更强大的功能，常用功能:
+
+- 嵌套
+- 变量
+- 循环语句
+- 条件语句
+- 自动前缀
+- 单位转换
+- `mixin`复用
+
+> 面试中一般不会重点考察该点，一般介绍下自己在实战项目中的经验即可~
+
+### 9.CSS动画
+
+**transition: 过渡动画**
+
+- `transition-property`: 属性
+- `transition-duration`: 间隔
+- `transition-timing-function`: 曲线
+- `transition-delay`: 延迟
+- 常用钩子: `transitionend`
+
+**animation / keyframes**
+
+- `animation-name`: 动画名称，对应`@keyframes`
+- `animation-duration`: 间隔
+- `animation-timing-function`: 曲线
+- `animation-delay`: 延迟
+- `animation-iteration-count`: 次数
+   - `infinite`: 循环动画
+- `animation-direction`: 方向
+   - `alternate`: 反向播放
+- `animation-fill-mode`: 静止模式
+   - `forwards`: 停止时，保留最后一帧
+   - `backwards`: 停止时，回到第一帧
+   - `both`: 同时运用 `forwards / backwards`
+- 常用钩子: `animationend`
+
+> 动画属性: 尽量使用动画属性进行动画，能拥有较好的性能表现
+
+- `translate`
+- `scale`
+- `rotate`
+- `skew`
+- `opacity`
+- `color`
