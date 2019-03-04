@@ -124,22 +124,22 @@ pageClass: custom-code-highlight
     4. 当文档完成解析，document.readState变成interactive
     5. 所有**defer**脚本会**按照在文档出现的顺序执行**，延迟脚本**能访问完整文档树**，禁止使用document.write()
     6. 浏览器**在Document对象上触发DOMContentLoaded事件**
-    7. 此时文档完全解析完成，浏览器可能还在等待如图片等内容加载，等这些**内容完成载入并且所有异步脚本完成载入和执行**，document.readState变为complete,window触发load事件
+    7. 此时文档完全解析完成，浏览器可能还在等待如图片等内容加载，等这些**内容完成载入并且所有异步脚本完成载入和执行**，document.readState变为complete，window触发load事件
 23. **显示页面**（HTML解析过程中会逐步显示页面）
 
 **详细简版**
 
 1. 从浏览器接收`url`到开启网络请求线程（这一部分可以展开浏览器的机制以及进程与线程之间的关系）
 
-2. 开启网络线程到发出一个完整的`http`请求（这一部分涉及到dns查询，`tcp/ip`请求，五层因特网协议栈等知识）
+2. 开启网络线程到发出一个完整的`HTTP`请求（这一部分涉及到dns查询，`TCP/IP`请求，五层因特网协议栈等知识）
 
 3. 从服务器接收到请求到对应后台接收到请求（这一部分可能涉及到负载均衡，安全拦截以及后台内部的处理等等）
 
-4. 后台和前台的`http`交互（这一部分包括`http`头部、响应码、报文结构、`cookie`等知识，可以提下静态资源的`cookie`优化，以及编码解码，如`gzip`压缩等）
+4. 后台和前台的`HTTP`交互（这一部分包括`HTTP`头部、响应码、报文结构、`cookie`等知识，可以提下静态资源的`cookie`优化，以及编码解码，如`gzip`压缩等）
 
-5. 单独拎出来的缓存问题，`http`的缓存（这部分包括http缓存头部，`etag`，`catch-control`等）
+5. 单独拎出来的缓存问题，`HTTP`的缓存（这部分包括http缓存头部，`ETag`，`catch-control`等）
 
-6. 浏览器接收到`http`数据包后的解析流程（解析`html`-词法分析然后解析成`dom`树、解析`css`生成`css`规则树、合并成`render`树，然后`layout`、`painting`渲染、复合图层的合成、`GPU`绘制、外链资源的处理、`loaded`和`domcontentloaded`等）
+6. 浏览器接收到`HTTP`数据包后的解析流程（解析`html`-词法分析然后解析成`dom`树、解析`css`生成`css`规则树、合并成`render`树，然后`layout`、`painting`渲染、复合图层的合成、`GPU`绘制、外链资源的处理、`loaded`和`DOMContentLoaded`等）
 
 7. `CSS`的可视化格式模型（元素的渲染规则，如包含块，控制框，`BFC`，`IFC`等概念）
 
@@ -205,7 +205,7 @@ pageClass: custom-code-highlight
 ### 7 语义化的理解
 
 - 用正确的标签做正确的事情！
-- `html`语义化就是让页面的内容结构化，便于对浏览器、搜索引擎解析；
+- `HTML`语义化就是让页面的内容结构化，便于对浏览器、搜索引擎解析；
 - 在没有样式`CSS`情况下也以一种文档格式显示，并且是容易阅读的。
 - 搜索引擎的爬虫依赖于标记来确定上下文和各个关键字的权重，利于 `SEO`。
 - 使阅读源代码的人对网站更容易将网站分块，便于阅读维护理解
@@ -226,15 +226,15 @@ pageClass: custom-code-highlight
   - `sessionStorage` 的数据在浏览器关闭后自动删除
   - 语意化更好的内容元素，比如` article`、`footer`、`header`、`nav`、`section`
   - 表单控件，`calendar`、`date`、`time`、`email`、`url`、`search`
-  - 新的技术`webworker`, `websocket`, `Geolocation`
+  - 新的技术`webworker`、 `websocket`、 `Geolocation`
 
 - 移除的元素：
-  - 纯表现的元素：`basefont`，`big`，`center`，`font`, `s`，`strike，`tt，u`
-  - 对可用性产生负面影响的元素：`frame`，`frameset`，`noframes`
+  - 纯表现的元素：`basefont`、`big`、`center`、`font`、 `s`、`strike`、`tt`、`u`
+  - 对可用性产生负面影响的元素：`frame`、`frameset`、`noframes`
 
 - 支持`HTML5`新标签：
   - `IE8/IE7/IE6`支持通过`document.createElement`方法产生的标签
-  - 可以利用这一特性让这些浏览器支`持HTML5`新标签
+  - 可以利用这一特性让这些浏览器支持`HTML5`新标签
   - 浏览器支持新标签后，还需要添加标签默认的样式
 
 - 当然也可以直接使用成熟的框架、比如`html5shim`
@@ -250,7 +250,7 @@ pageClass: custom-code-highlight
   - 在`cache.manifest`文件的编写离线存储的资源
   - 在离线状态时，操作`window.applicationCache`进行需求实现
 
-```javascript
+```json
 CACHE MANIFEST
 #v0.11
 CACHE:
@@ -259,12 +259,12 @@ css/style.css
 NETWORK:
 resourse/logo.png
 FALLBACK:
-/ /offline.html
+/offline.html
 ```
 
 ### 11 浏览器是怎么对`HTML5`的离线储存资源进行管理和加载的呢
 
-- 在线的情况下，浏览器发现`html`头部有`manifest`属性，它会请求`manifest`文件，如果是第一次访问`app`，那么浏览器就会根据manifest文件的内容下载相应的资源并且进行离线存储。如果已经访问过`app`并且资源已经离线存储了，那么浏览器就会使用离线的资源加载页面，然后浏览器会对比新的`manifest`文件与旧的`manifes`t文件，如果文件没有发生改变，就不做任何操作，如果文件改变了，那么就会重新下载文件中的资源并进行离线存储。
+- 在线的情况下，浏览器发现`html`头部有`manifest`属性，它会请求`manifest`文件，如果是第一次访问`app`，那么浏览器就会根据manifest文件的内容下载相应的资源并且进行离线存储。如果已经访问过`app`并且资源已经离线存储了，那么浏览器就会使用离线的资源加载页面，然后浏览器会对比新的`manifest`文件与旧的`manifest`文件，如果文件没有发生改变，就不做任何操作，如果文件改变了，那么就会重新下载文件中的资源并进行离线存储。
 
 - 离线的情况下，浏览器就直接使用离线存储的资源。
 
@@ -278,8 +278,8 @@ FALLBACK:
 
 - 有期时间：
   - `localStorage` 存储持久数据，浏览器关闭后数据不丢失除非主动删除数据
-  - `sessionStorage`  数据在当前浏览器窗口关闭后自动删除
-  - `cookie`  设置的`cookie`过期时间之前一直有效，即使窗口或浏览器关闭
+  - `sessionStorage` 数据在当前浏览器窗口关闭后自动删除
+  - `cookie` 设置的`cookie`过期时间之前一直有效，即使窗口或浏览器关闭
 
 ### 13 iframe有那些缺点？
 
@@ -312,7 +312,7 @@ FALLBACK:
 ### 17 行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？行内元素和块级元素有什么区别？
 
 - 行内元素有：`a b span img input select strong`
-- 块级元素有：`div ul ol li dl dt dd h1 h2 h3 h4…p`
+- 块级元素有：`div ul ol li dl dt dd h1 h2 h3 h4… p`
 - 空元素：`<br> <hr> <img> <input> <link> <meta>`
 - 行内元素不可以设置宽高，不独占一行
 - 块级元素可以设置宽高，独占一行
@@ -330,7 +330,7 @@ FALLBACK:
 ### 19 Canvas和SVG有什么区别？
 
 - `svg`绘制出来的每一个图形的元素都是独立的`DOM`节点，能够方便的绑定事件或用来修改。`canvas`输出的是一整幅画布
-- `svg`输出的图形是矢量图形，后期可以修改参数来自由放大缩小，不会是真和锯齿。而`canvas`输出标量画布，就像一张图片一样，放大会失真或者锯齿
+- `svg`输出的图形是矢量图形，后期可以修改参数来自由放大缩小，不会失真和锯齿。而`canvas`输出标量画布，就像一张图片一样，放大会失真或者锯齿
 
 ### 20 HTML5 为什么只需要写 <!DOCTYPE HTML>
 
@@ -392,9 +392,9 @@ FALLBACK:
     - 减少`HTTP`请求
     - 避免文件跨域
     - 修改及时生效
-- 页面头部的`<style></style>` `<script</script>` 会阻塞页面；（因为 `Renderer`进程中 `JS`线程和渲染线程是互斥的）
+- 页面头部的`<style></style>` `<script></script>` 会阻塞页面；（因为 `Renderer`进程中 `JS`线程和渲染线程是互斥的）
 - 页面中空的 `href` 和 `src` 会阻塞页面其他资源的加载 (阻塞下载进程)
-- 网页`Gzip`，`CDN`托管，`data`缓存 ，图片服务器
+- 网页`gzip`，`CDN`托管，`data`缓存 ，图片服务器
 - 前端模板 JS+数据，减少由于`HTML`标签导致的带宽浪费，前端用变量保存AJAX请求结果，每次操作本地变量，不用请求，减少请求次数
 - 用`innerHTML`代替`DOM`操作，减少`DOM`操作次数，优化`javascript`性能
 - 当需要设置的样式很多时设置`className`而不是直接操作`style`
@@ -432,7 +432,7 @@ FALLBACK:
 <meta name=”x5-fullscreen” content=”true”>       <!--QQ强制全屏-->
 <meta name=”browsermode” content=”application”>   <!--UC应用模式-->
 <meta name=”x5-page-mode” content=”app”>   <!-- QQ应用模式-->
-<meta name=”msapplication-tap-highlight” content=”no”>    <!--windows phone 点击无高光
+<meta name=”msapplication-tap-highlight” content=”no”>    <!--windows phone 点击无高亮
 设置页面不缓存-->
 <meta http-equiv=”pragma” content=”no-cache”>
 <meta http-equiv=”cache-control” content=”no-cache”>
@@ -489,7 +489,7 @@ FALLBACK:
 
 ### 32 知道的网页制作会用到的图片格式有哪些？
 
-- `png-8`，`png-24`，`jpeg`，`gif`，`svg`
+- `png-8`、`png-24`、`jpeg`、`gif`、`svg`
 
 > 但是上面的那些都不是面试官想要的最后答案。面试官希望听到是`Webp`,`Apng`。（是否有关注新技术，新鲜事物）
 
@@ -504,7 +504,7 @@ FALLBACK:
 
 ### 33 一个页面上有大量的图片（大型电商网站），加载很慢，你有哪些方法优化这些图片的加载，给用户更好的体验。
 
-- 图片懒加载，在页面上的未可视区域可以添加一个滚动条事件，判断图片位置与浏览器顶端的距离与页面的距离，如果前者小于后者，优先加载。
+- 图片懒加载，在页面上的未可视区域可以添加一个滚动事件，判断图片位置与浏览器顶端的距离与页面的距离，如果前者小于后者，优先加载。
 - 如果为幻灯片、相册等，可以使用图片预加载技术，将当前展示图片的前一张和后一张优先下载。
 - 如果图片为css图片，可以使用`CSSsprite`，`SVGsprite`，`Iconfont`、`Base64`等技术。
 - 如果图片过大，可以使用特殊编码的图片，加载时会先加载一张压缩的特别厉害的缩略图，以提高用户体验。
@@ -606,7 +606,7 @@ Content-Type: text/html; charset=iso-8859-1
 ### 3 `link`与`@import`的区别
 
 1. ``link``是`HTML`方式， ``@import``是CSS方式
-2. ``link``最大限度支持并行下载，``@import``过多嵌套导致串行下载，出现`FOUC`
+2. ``link``最大限度支持并行下载，``@import``过多嵌套导致串行下载，出现`FOUC`(文档样式短暂失效)
 4. ``link``可以通过``rel="alternate stylesheet"``指定候选样式
 5. 浏览器对``link``支持早于``@import``，可以使用``@import``对老浏览器隐藏样式
 6. ``@import``必须在样式规则之前，可以在css文件中引用其他文件
@@ -616,17 +616,17 @@ Content-Type: text/html; charset=iso-8859-1
 ### 4 什么是FOUC?如何避免
 
 - `Flash Of Unstyled Content`：用户定义样式表加载之前浏览器使用默认样式显示文档，用户样式加载渲染之后再从新显示文档，造成页面闪烁。
-- **解决方法**：把样式表放到文档的`head`
+- **解决方法**：把样式表放到文档的`<head>`
 
 ### 5 如何创建块级格式化上下文(block formatting context),BFC有什么用
 
 - 创建规则：
 
   - 根元素
-  - 浮动元素（``float``不是``none``）
+  - 浮动元素（``float``不取值为``none``）
   - 绝对定位元素（``position``取值为``absolute``或``fixed``）
-  - ``display``取值为``inline-block``,``table-cell``, ``table-caption``,``flex``, ``inline-flex``之一的元素
-  - ``overflow``不是``visible``的元素
+  - ``display``取值为``inline-block``、``table-cell``、``table-caption``、``flex``、``inline-flex``之一的元素
+  - ``overflow``不取值为``visible``的元素
 
 - 作用：
 
@@ -634,10 +634,10 @@ Content-Type: text/html; charset=iso-8859-1
   - 不被浮动元素覆盖
   - 阻止父子元素的`margin`折叠
 
-### 6 display,float,position的关系
+### 6 display、float、position的关系
 
-- 如果`display`为`none`，那么`position`和`float`都不起作用，这种情况下元素不产生框
-- 否则，如果`position`值为`absolute`或者`fixed`，框就是绝对定位的，`float`的计算值为`none`，`display`根据下面的表格进行调整。
+- 如果`display`取值为`none`，那么`position`和`float`都不起作用，这种情况下元素不产生框
+- 否则，如果`position`取值为`absolute`或者`fixed`，框就是绝对定位的，`float`的计算值为`none`，`display`根据下面的表格进行调整。
 - 否则，如果`float`不是`none`，框是浮动的，`display`根据下表进行调整
 - 否则，如果元素是根元素，`display`根据下表进行调整
 - 其他情况下`display`的值为指定值
@@ -676,15 +676,16 @@ Content-Type: text/html; charset=iso-8859-1
 - `p:only-child `       选择属于其父元素的唯一子元素的每个 `<p>` 元素。
 - `p:nth-child(2)`  选择属于其父元素的第二个子元素的每个 `<p>` 元素。
 - `:after  `        在元素之前添加内容,也可以用来做清除浮动。
-- `:before  `       在元素之后添加内容
-- `:enabled `       
-- `:disabled `      控制表单控件的禁用状态。
-- `:checked `       单选框或复选框被选中
+- `:before  `       在元素之后添加内容。
+- `:enabled `       已启用的表单元素。
+- `:disabled `      已禁用的表单元素。
+- `:checked `       单选框或复选框被选中。
 
 ### 10 display有哪些值？说明他们的作用
 
-- `block   `      象块类型元素一样显示。
-- `none    `      缺省值。象行内元素类型一样显示。
+- `block`         转换成块状元素。
+- `inline`        转换成行内元素。
+- `none`          设置元素不可见。
 - `inline-block ` 象行内元素一样显示，但其内容象块类型元素一样显示。
 - `list-item  `   象块类型元素一样显示，并添加样式列表标记。
 - `table  `       此元素会作为块级表格来显示
@@ -699,7 +700,7 @@ Content-Type: text/html; charset=iso-8859-1
 
 - 优先级就近原则，同权重情况下样式定义最近者为准
 - 载入样式以最后载入的定位为准
-- 优先级为: `!important >  id > class > tag` `important` 比 内联优先级高
+- 优先级为: `!important >  id > class > tag`; `!important` 比 内联优先级高
 
 ### 13 对BFC规范的理解？
 
@@ -724,7 +725,7 @@ Content-Type: text/html; charset=iso-8859-1
 - `letter-spacing`
 - `word-spacing`
 
-### 17 PNG,GIF,JPG的区别及如何选
+### 17 PNG\GIF\JPG的区别及如何选
 
 - `GIF`
   - `8`位像素，`256`色
@@ -746,7 +747,7 @@ Content-Type: text/html; charset=iso-8859-1
 
 ### 18 行内元素float:left后是否变为块级元素？
 
-- 浮动后，行内元素不会成为块状元素，但是可以设置宽高。行内元素要想变成块状元素，占一行，直接设置`display:block`;。但如果元素设置了浮动后再设置`display:block`;那就不会占一行。
+- 浮动后，行内元素不会成为块状元素，但是可以设置宽高。行内元素要想变成块状元素，占一行，直接设置`display: block`;。但如果元素设置了浮动后再设置`display: block`;那就不会占一行。
 
 ### 19 在网页中的应该使用奇数还是偶数的字体？为什么呢？
 
@@ -754,12 +755,12 @@ Content-Type: text/html; charset=iso-8859-1
 
 ### 20 ::before 和 :after中双冒号和单冒号 有什么区别？解释一下这2个伪元素的作用
 
-- 单冒号(`:`)用于CSS3伪类，双冒号(`::`)用于`CSS3`伪元素
+- 单冒号(`:`)用于`CSS3`伪类，双冒号(`::`)用于`CSS3`伪元素
 - 用于区分伪类和伪元素
 
 ### 21 如果需要手动写动画，你认为最小时间间隔是多久，为什么？（阿里）
 
-- 多数显示器默认频率是`60Hz`，即`1`秒刷新`60`次，所以理论上最小间隔为`1/60＊1000ms ＝ 16.7ms`
+- 多数显示器默认频率是`60Hz`，即`1`秒刷新`60`次，所以理论上最小间隔为`1/60*1000ms ＝ 16.7ms`
 
 
 ### 22 CSS合并方法
@@ -778,7 +779,7 @@ Content-Type: text/html; charset=iso-8859-1
 
 ### 24 列出你所知道可以改变页面布局的属性
 
-- `position`、`display`、`float`、`width`、`heigh`t、`margin`、`padding`、`top`、`left`、`right`、`
+- `position`、`display`、`float`、`width`、`height`、`margin`、`padding`、`top`、`left`、`right`、`
 
 ### 25 CSS在性能优化方面的实践
 
@@ -793,7 +794,7 @@ Content-Type: text/html; charset=iso-8859-1
 - `animation`：动画定义了动作的每一帧（`@keyframes`）有什么效果，包括`animation-name`，`animation-duration`、`animation-timing-function`、`animation-delay`、`animation-iteration-count`、`animation-direction`
 
 ### 27 base64的原理及优缺点
-- 优点可以加密，减少了`http`请求
+- 优点可以加密，减少了`HTTTP`请求
 - 缺点是需要消耗`CPU`进行编解码
 
 ### 28 几种常见的CSS布局
@@ -801,7 +802,7 @@ Content-Type: text/html; charset=iso-8859-1
 #### 流体布局
 
 ```css
-.left {
+	.left {
 		float: left;
 		width: 100px;
 		height: 200px;
@@ -832,33 +833,33 @@ Content-Type: text/html; charset=iso-8859-1
 
 ```css
 .container {
-            margin-left: 120px;
-            margin-right: 220px;
-        }
-        .main {
-            float: left;
-            width: 100%;
-            height:300px;
-            background: green;
-        }
-        .left {
-            position: relative;
-            left: -120px;
-            float: left;
-            height: 300px;
-            width: 100px;
-            margin-left: -100%;
-            background: red;
-        }
-        .right {
-            position: relative;
-            right: -220px;
-            float: right;
-            height: 300px;
-            width: 200px;
-            margin-left: -200px;
-            background: blue;
-        }
+    margin-left: 120px;
+    margin-right: 220px;
+}
+.main {
+    float: left;
+    width: 100%;
+    height:300px;
+    background: green;
+}
+.left {
+    position: relative;
+    left: -120px;
+    float: left;
+    height: 300px;
+    width: 100px;
+    margin-left: -100%;
+    background: red;
+}
+.right {
+    position: relative;
+    right: -220px;
+    float: right;
+    height: 300px;
+    width: 200px;
+    margin-left: -200px;
+    background: blue;
+}
 ```
 
 ```html
@@ -872,38 +873,38 @@ Content-Type: text/html; charset=iso-8859-1
 #### 双飞翼布局
 
 ```css
- .content {
-            float: left;
-            width: 100%;
-        }
-        .main {
-            height: 200px;
-            margin-left: 110px;
-            margin-right: 220px;
-            background: green;
-        }
-        .main::after {
-            content: '';
-            display: block;
-            font-size:0;
-            height: 0;
-            zoom: 1;
-            clear: both;
-        }
-        .left {
-            float:left;
-            height: 200px;
-            width: 100px;
-            margin-left: -100%;
-            background: red;
-        }
-        .right {
-            float: right;
-            height: 200px;
-            width: 200px;
-            margin-left: -200px;
-            background: blue;
-        }
+.content {
+    float: left;
+    width: 100%;
+}
+.main {
+    height: 200px;
+    margin-left: 110px;
+    margin-right: 220px;
+    background: green;
+}
+.main::after {
+    content: '';
+    display: block;
+    font-size:0;
+    height: 0;
+    zoom: 1;
+    clear: both;
+}
+.left {
+    float:left;
+    height: 200px;
+    width: 100px;
+    margin-left: -100%;
+    background: red;
+}
+.right {
+    float: right;
+    height: 200px;
+    width: 200px;
+    margin-left: -200px;
+    background: blue;
+}
 ```
 
 ```html
@@ -942,9 +943,9 @@ Content-Type: text/html; charset=iso-8859-1
 
 ### 33 如何美化CheckBox
 
-- `label（for）` 和`id`
-- 隐藏原生的 `input`
-- `:checked + label`
+- `<label>` 属性 `for` 和 `id`
+- 隐藏原生的 `<input>`
+- `:checked + <label>`
 
 ### 34 伪类和伪元素的区别
 
@@ -963,14 +964,14 @@ Content-Type: text/html; charset=iso-8859-1
 思路：
 
 - 左侧浮动或者绝对定位，然后右侧`margin`撑开
-- 使用`div`包含，然后靠负`margin`形成`bfc`
+- 使用`<div>`包含，然后靠负`margin`形成`bfc`
 - 使用`flex`
 
-### 37 请用Css写一个简单的幻灯片效果页面
+### 37 请用CSS写一个简单的幻灯片效果页面
 
-> 知道是要用`css3`。使用`animation`动画实现一个简单的幻灯片效果
+> 知道是要用`CSS3`。使用`animation`动画实现一个简单的幻灯片效果
 
-```css3/**HTML**/
+```css
 /**css**/
 .ani{
   width:480px;
@@ -1035,7 +1036,6 @@ Content-Type: text/html; charset=iso-8859-1
   background-color:#6699FF;
   width:200px;
   height:200px;
-
   position: absolute;        //父元素需要相对定位
   top: 50%;
   left: 50%;
@@ -1049,7 +1049,6 @@ Content-Type: text/html; charset=iso-8859-1
   width: 200px;
   height: 200px;
   background-color: #6699FF;
-
   margin:auto;
   position: absolute;        //父元素需要相对定位
   left: 0;
@@ -1094,13 +1093,13 @@ Content-Type: text/html; charset=iso-8859-1
 
 ```css
 /**一种常见利用伪类清除浮动的代码**/
- .clearfix:after {
+.clearfix:after {
     content:".";       //这里利用到了content属性
     display:block;
     height:0;
     visibility:hidden;
-    clear:both; }
-
+    clear:both; 
+ }
 .clearfix {
     *zoom:1;
 }
@@ -1263,7 +1262,7 @@ html结构
 ### 51 两种以上方式实现已知或者未知宽度的垂直水平居中
 
 ```css
-// 1
+/** 1 **/
 .wraper {
   position: relative;
   .box {
@@ -1276,7 +1275,7 @@ html结构
   }
 }
 
-// 2
+/** 2 **/
 .wraper {
   position: relative;
   .box {
@@ -1287,7 +1286,7 @@ html结构
   }
 }
 
-// 3
+/** 3 **/
 .wraper {
   .box {
     display: flex;
@@ -1297,7 +1296,7 @@ html结构
   }
 }
 
-// 4
+/** 4 **/
 .wraper {
   display: table;
   .box {
@@ -1353,7 +1352,7 @@ transform: scale(0.7);
 ### 3 JavaScript原型，原型链 ? 有什么特点？
 
 - 每个对象都会在其内部初始化一个属性，就是`prototype`(原型)，当我们访问一个对象的属性时
-- 如果这个对象内部不存在这个属性，那么他就会去`prototype`里找这个属性，这`个prototype`又会有自己的`prototype`，于是就这样一直找下去，也就是我们平时所说的原型链的概念
+- 如果这个对象内部不存在这个属性，那么他就会去`prototype`里找这个属性，这个`prototype`又会有自己的`prototype`，于是就这样一直找下去，也就是我们平时所说的原型链的概念
 - 关系：`instance.constructor.prototype = instance.__proto__`
 - 特点：
   - `JavaScript`对象是通过引用来传递的，我们创建的每个新对象实体中并没有一份属于自己的原型副本。当我们修改原型时，与之相关的对象也会继承这一改变
@@ -1377,19 +1376,19 @@ transform: scale(0.7);
 - 原型`prototype`机制或`apply`和`call`方法去实现较简单，建议使用构造函数与原型混合方式
 
 ```javascript
- function Parent(){
-        this.name = 'wang';
-    }
+function Parent(){
+	this.name = 'wang';
+}
 
-    function Child(){
+function Child(){
         this.age = 28;
-    }
-    Child.prototype = new Parent();//继承了Parent，通过原型
+}
+    
+Child.prototype = new Parent();//继承了Parent，通过原型
 
-    var demo = new Child();
-    alert(demo.age);
-    alert(demo.name);//得到被继承的属性
-  }
+var demo = new Child();
+alert(demo.age);
+alert(demo.name);//得到被继承的属性
 ```
 
 ### 6 谈谈This对象的理解
@@ -1404,8 +1403,8 @@ transform: scale(0.7);
 - 冒泡型事件：当你使用事件冒泡时，子级元素先触发，父级元素后触发
 - 捕获型事件：当你使用事件捕获时，父级元素先触发，子级元素后触发
 - `DOM`事件流：同时支持两种事件模型：捕获型事件和冒泡型事件
-- 阻止冒泡：在`W3c`中，使用`stopPropagation（）`方法；在IE下设置`cancelBubble = true`
-- 阻止捕获：阻止事件的默认行为，例如`click - <a>`后的跳转。在`W3c`中，使用`preventDefault（）`方法，在`IE`下设置`window.event.returnValue = false`
+- 阻止冒泡：在`W3c`中，使用`stopPropagation()`方法；在IE下设置`cancelBubble = true`
+- 阻止捕获：阻止事件的默认行为，例如`click - <a>`后的跳转。在`W3c`中，使用`preventDefault()`方法，在`IE`下设置`window.event.returnValue = false`
 
 
 ### 8 new操作符具体干了什么呢?
@@ -1420,23 +1419,24 @@ transform: scale(0.7);
 - `Ajax`的过程只涉及`JavaScript`、`XMLHttpRequest`和`DOM`。`XMLHttpRequest`是`aja`x的核心机制
 
 ```javascript
- // 1. 创建连接
-    var xhr = null;
-    xhr = new XMLHttpRequest()
-    // 2. 连接服务器
-    xhr.open('get', url, true)
-    // 3. 发送请求
-    xhr.send(null);
-    // 4. 接受请求
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState == 4){
-            if(xhr.status == 200){
-                success(xhr.responseText);
-            } else { // fail
-                fail && fail(xhr.status);
-            }
-        }
-    }
+/** 1. 创建连接 **/
+var xhr = null;
+xhr = new XMLHttpRequest()
+/** 2. 连接服务器 **/
+xhr.open('get', url, true)
+/** 3. 发送请求 **/
+xhr.send(null);
+/** 4. 接受请求 **/
+xhr.onreadystatechange = function(){
+	if(xhr.readyState == 4){
+		if(xhr.status == 200){
+			success(xhr.responseText);
+		} else { 
+			/** false **/
+			fail && fail(xhr.status);
+		}
+	}
+}
 ```
 
 **ajax 有那些优缺点?**
@@ -1517,7 +1517,7 @@ var module1 = (function(){
 　　　　　　m1 : m1,
 　　　　　　m2 : m2
 　　　　};
-　　})();
+})();
 ```
 
 ### 12 异步加载JS的方式有哪些？
@@ -1704,7 +1704,7 @@ promise.then(onFulfilled, onRejected)
   - 高并发（最重要的优点）
 
 - 缺点：
-  - 1、只支持单`核CPU`，不能充分利用`CPU`
+  - 1、只支持单核`CPU`，不能充分利用`CPU`
   - 2、可靠性低，一旦代码某个环节崩溃，整个系统都崩溃
 
 ### 27 谈谈你对AMD、CMD的理解
@@ -1713,7 +1713,7 @@ promise.then(onFulfilled, onRejected)
 
 - `AMD`推荐的风格通过返回一个对象做为模块对象，`CommonJS`的风格通过对`module.exports`或`exports`的属性赋值来达到暴露模块对象的目的
 
-**es6模块 commonjs amd cmd**
+**es6模块 CommonJS、AMD、CMD**
 
 - `CommonJS` 的规范中，每个 `JavaScript` 文件就是一个独立的模块上下文（`module context`），在这个上下文中默认创建的属性都是私有的。也就是说，在一个文件定义的变量（还包括函数和类），都是私有的，对其他文件是不可见的。
 - `CommonJS`是同步加载模块,在浏览器中会出现堵塞情况，所以不适用
@@ -1759,7 +1759,7 @@ promise.then(onFulfilled, onRejected)
 
 ### 33 JavaScript有几种类型的值
 
-- 栈：原始数据类型（`Undefined`，`Null`，`Boolean`，`Numbe`r、`String`）
+- 栈：原始数据类型（`Undefined`，`Null`，`Boolean`，`Number`、`String`）
 - 堆：引用数据类型（对象、数组和函数）
 - 两种类型的区别是：存储位置不同；
 - 原始数据类型直接存储在栈(`stack`)中的简单数据段，占据空间小、大小固定，属于被频繁使用数据，所以放入栈中存储；
@@ -1782,13 +1782,13 @@ person={firstname:"Mark",lastname:"Yun",age:25,eyecolor:"black"};
 - 用`function`来模拟无参的构造函数
 
 ```javascript
- function Person(){}
-    var person=new Person();//定义一个function，如果使用new"实例化",该function可以看作是一个Class
+function Person(){}
+	var person=new Person();//定义一个function，如果使用new"实例化",该function可以看作是一个Class
         person.name="Mark";
         person.age="25";
         person.work=function(){
         alert(person.name+" hello...");
-    }
+}
 person.work();
 ```
 
@@ -1800,11 +1800,11 @@ function Pet(name,age,hobby){
        this.age=age;
        this.hobby=hobby;
        this.eat=function(){
-          alert("我叫"+this.name+",我喜欢"+this.hobby+",是个程序员");
+           alert("我叫"+this.name+",我喜欢"+this.hobby+",是个程序员");
        }
-    }
-    var maidou =new Pet("麦兜",25,"coding");//实例化、创建对象
-    maidou.eat();//调用eat方法
+}
+var maidou =new Pet("麦兜",25,"coding");//实例化、创建对象
+maidou.eat();//调用eat方法
 ```
 
 - 用工厂方式来创建（内置对象）
@@ -1822,15 +1822,13 @@ var wcDog =new Object();
 - 用原型方式来创建
 
 ```javascript
-function Dog(){
-
-     }
-     Dog.prototype.name="旺财";
-     Dog.prototype.eat=function(){
-     alert(this.name+"是个吃货");
-     }
-     var wangcai =new Dog();
-     wangcai.eat();
+function Dog(){}
+Dog.prototype.name="旺财";
+Dog.prototype.eat=function(){
+	alert(this.name+"是个吃货");
+}
+var wangcai =new Dog();
+wangcai.eat();
 
 ```
 
@@ -1838,14 +1836,14 @@ function Dog(){
 
 ```javascript
  function Car(name,price){
-      this.name=name;
-      this.price=price;
-    }
-     Car.prototype.sell=function(){
-       alert("我是"+this.name+"，我现在卖"+this.price+"万元");
-      }
-    var camry =new Car("凯美瑞",27);
-    camry.sell();
+	this.name=name;
+	this.price=price;
+}
+Car.prototype.sell=function(){
+	alert("我是"+this.name+"，我现在卖"+this.price+"万元");
+}
+var camry =new Car("凯美瑞",27);
+camry.sell();
 ```
 
 ### 35 eval是做什么的
@@ -2168,7 +2166,6 @@ console.log(arr);
 ```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -2344,7 +2341,7 @@ for( var i = 0; i < input.length; i++ ) {
 
 ### 74 数组去重方法总结
 
-**方法一、利用ES6 Set去重（ES6中最常用）**
+**方法一、利用ES6 Set去重（ES6中最常用）**
 
 ```js
 function unique (arr) {
@@ -2367,10 +2364,10 @@ function unique(arr){
                 }
             }
         }
-return arr;
+	return arr;
 }
 var arr = [1,1,'true','true',true,true,15,15,false,false, undefined,undefined, null,null, NaN, NaN,'NaN', 0, 0, 'a', 'a',{},{}];
-    console.log(unique(arr))
+console.log(unique(arr))
     //[1, "true", 15, false, undefined, NaN, NaN, "NaN", "a", {…}, {…}]     //NaN和{}没有去重，两个null直接消失了
 ```
 
@@ -2417,8 +2414,8 @@ function unique(arr) {
     }
     return arrry;
 }
-     var arr = [1,1,'true','true',true,true,15,15,false,false, undefined,undefined, null,null, NaN, NaN,'NaN', 0, 0, 'a', 'a',{},{}];
-        console.log(unique(arr))
+var arr = [1,1,'true','true',true,true,15,15,false,false, undefined,undefined, null,null, NaN, NaN,'NaN', 0, 0, 'a', 'a',{},{}];
+console.log(unique(arr))
 // [0, 1, 15, "NaN", NaN, NaN, {…}, {…}, "a", false, null, true, "true", undefined]      //NaN、{}没有去重
 ```
 
@@ -2444,8 +2441,8 @@ function unique(arr) {
     }
     return arrry;
 }
-    var arr = [1,1,'true','true',true,true,15,15,false,false, undefined,undefined, null,null, NaN, NaN,'NaN', 0, 0, 'a', 'a',{},{}];
-        console.log(unique(arr))
+var arr = [1,1,'true','true',true,true,15,15,false,false, undefined,undefined, null,null, NaN, NaN,'NaN', 0, 0, 'a', 'a',{},{}];
+console.log(unique(arr))
 //[1, "true", 15, false, undefined, null, NaN, 0, "a", {…}]    //两个true直接去掉了，NaN和{}去重
 ```
 
@@ -2466,7 +2463,7 @@ function unique(arr) {
     return array
 }
 var arr = [1,1,'true','true',true,true,15,15,false,false, undefined,undefined, null,null, NaN, NaN,'NaN', 0, 0, 'a', 'a',{},{}];
-    console.log(unique(arr))
+console.log(unique(arr))
     //[1, "true", true, 15, false, undefined, null, NaN, "NaN", 0, "a", {…}, {…}]     //{}没有去重
 ```
 
@@ -2495,8 +2492,8 @@ function unique(arr) {
     return arr.indexOf(item, 0) === index;
   });
 }
-    var arr = [1,1,'true','true',true,true,15,15,false,false, undefined,undefined, null,null, NaN, NaN,'NaN', 0, 0, 'a', 'a',{},{}];
-        console.log(unique(arr))
+var arr = [1,1,'true','true',true,true,15,15,false,false, undefined,undefined, null,null, NaN, NaN,'NaN', 0, 0, 'a', 'a',{},{}];
+console.log(unique(arr))
 //[1, "true", true, 15, false, undefined, null, "NaN", 0, "a", {…}, {…}]
 ```
 
@@ -2505,25 +2502,25 @@ function unique(arr) {
 
 ```js
 function unique(arr) {
-        var array= arr;
-        var len = array.length;
+    var array= arr;
+    var len = array.length;
 
-    array.sort(function(a,b){   //排序后更加方便去重
-        return a - b;
-    })
+	array.sort(function(a,b){   //排序后更加方便去重
+		return a - b;
+	})
 
-    function loop(index){
+	function loop(index){
         if(index >= 1){
             if(array[index] === array[index-1]){
-                array.splice(index,1);
+            array.splice(index,1);
             }
             loop(index - 1);    //递归loop，然后数组去重
         }
-    }
-    loop(len-1);
-    return array;
+	}
+	loop(len-1);
+	return array;
 }
- var arr = [1,1,'true','true',true,true,15,15,false,false, undefined,undefined, null,null, NaN, NaN,'NaN', 0, 0, 'a', 'a',{},{}];
+var arr = [1,1,'true','true',true,true,15,15,false,false, undefined,undefined, null,null, NaN, NaN,'NaN', 0, 0, 'a', 'a',{},{}];
 console.log(unique(arr))
 //[1, "a", "true", true, 15, false, 1, {…}, null, NaN, NaN, "NaN", 0, "a", {…}, undefined]
 ```
@@ -2532,17 +2529,17 @@ console.log(unique(arr))
 
 ```js
 function arrayNonRepeatfy(arr) {
-  let map = new Map();
-  let array = new Array();  // 数组用于返回结果
-  for (let i = 0; i < arr.length; i++) {
-    if(map .has(arr[i])) {  // 如果有该key值
-      map .set(arr[i], true);
-    } else {
-      map .set(arr[i], false);   // 如果没有该key值
-      array .push(arr[i]);
-    }
-  }
-  return array ;
+	let map = new Map();
+		let array = new Array();  // 数组用于返回结果
+		for (let i = 0; i < arr.length; i++) {
+			if(map .has(arr[i])) {  // 如果有该key值
+			map .set(arr[i], true);
+		} else {
+			map .set(arr[i], false);   // 如果没有该key值
+			array .push(arr[i]);
+		}
+	}
+	return array ;
 }
  var arr = [1,1,'true','true',true,true,15,15,false,false, undefined,undefined, null,null, NaN, NaN,'NaN', 0, 0, 'a', 'a',{},{}];
     console.log(unique(arr))
@@ -2590,7 +2587,7 @@ console.log(unique(arr));
 
 - `decodeURI()` 解码某个编码的 `URI`。
 - `decodeURIComponent()` 解码一个编码的 `URI` 组件。
-- `encodeURI() 把字符串编码为 URI。
+- `encodeURI()` 把字符串编码为 URI。
 - `encodeURIComponent()` 把字符串编码为 `URI` 组件。
 - `escape()` 对字符串进行编码。
 - `eval()` 计算 `JavaScript` 字符串，并把它作为脚本代码来执行。
@@ -2622,12 +2619,12 @@ setInterval(() => {
 ```js
 //兼容性处理
 window.requestAnimFrame = (function(){
-  return  window.requestAnimationFrame       ||
-          window.webkitRequestAnimationFrame ||
-          window.mozRequestAnimationFrame    ||
-          function(callback){
-            window.setTimeout(callback, 1000 / 60);
-          };
+    return window.requestAnimationFrame       ||
+           window.webkitRequestAnimationFrame ||
+           window.mozRequestAnimationFrame    ||
+           function(callback){
+                window.setTimeout(callback, 1000 / 60);
+           };
 })();
 
 var e = document.getElementById("e");
@@ -2652,9 +2649,10 @@ function render() {
 
 ```css
 animation:mymove 5s infinite;
+
 @keyframes mymove {
-from {top:0px;}
-to {top:200px;}
+    from {top:0px;}
+    to {top:200px;}
 }
 ```
 
@@ -2675,7 +2673,7 @@ to {top:200px;}
 
 ```js
 function sleep (time) {
-  return new Promise((resolve) => setTimeout(resolve, time));
+    return new Promise((resolve) => setTimeout(resolve, time));
 }
 ```
 
@@ -2706,7 +2704,7 @@ JSON.stringify(obj)==JSON.stringify(obj3);//false
 
 ### 80 项目做过哪些性能优化？
 
-- 减少 HTTP` 请求数
+- 减少 `HTTP` 请求数
 - 减少 `DNS` 查询
 - 使用 `CDN`
 - 避免重定向
@@ -2722,7 +2720,7 @@ JSON.stringify(obj)==JSON.stringify(obj3);//false
 - 尽量减少 `iframe` 使用
 - 避免图片 `src` 为空
 - 把样式表放在`link`  中
-- 把脚本放在页面底部
+- 把`JavaScript`放在页面底部
 
 ### 81 浏览器缓存
 
@@ -2767,12 +2765,12 @@ JSON.stringify(obj)==JSON.stringify(obj3);//false
 ### 83 尽可能多的说出你对 Electron 的理解
 
 
-> 最最重要的一点，`electron` 实际上是一个套了 `Chrome` 的 `node `程序
+> 最最重要的一点，`electron` 实际上是一个套了 `Chrome` 的 `nodeJS `程序
 
 **所以应该是从两个方面说开来**
 
 - `Chrome` （无各种兼容性问题）；
-- `Node`（`Node` 能做的它也能做）
+- `NodeJS`（`NodeJS` 能做的它也能做）
 
 ### 84 深浅拷贝
 
@@ -3037,9 +3035,9 @@ doc.onclick = function(e) {
 }
 ```
 
-### 93 请简单实现双向数据绑定mvvm
+### 93 请简单实现双向数据绑定`mvvm`
 
-```
+```html
 <input id="input"/>
 ```
 
@@ -3057,7 +3055,7 @@ input.onChange = function(e) {
 }
 ```
 
-### 94 实现Storage，使得该对象为单例，并对localStorage进行封装设置值setItem(key,value)和getItem(key)
+### 94 实现Storage，使得该对象为单例，并对`localStorage`进行封装设置值setItem(key,value)和getItem(key)
 
 ```js
 var instance = null;
@@ -3073,7 +3071,7 @@ class Storage {
 }
 ```
 
-### 95 说说event loop
+### 95 说说`event loop`
 
 > 首先，`js`是单线程的，主要的任务是处理用户的交互，而用户的交互无非就是响应`DOM`的增删改，使用事件队列的形式，一次事件循环只处理一个事件响应，使得脚本执行相对连续，所以有了事件队列，用来储存待执行的事件，那么事件队列的事件从哪里被`push`进来的呢。那就是另外一个线程叫事件触发线程做的事情了，他的作用主要是在定时触发器线程、异步`HTTP`请求线程满足特定条件下的回调函数`push`到事件队列中，等待`js`引擎空闲的时候去执行，当然js引擎执行过程中有优先级之分，首先js引擎在一次事件循环中，会先执行js线程的主任务，然后会去查找是否有微任务`microtask（promise）`，如果有那就优先执行微任务，如果没有，在去查找宏任务`macrotask（setTimeout、setInterval）`进行执行
 
@@ -3086,13 +3084,13 @@ class Storage {
 
 > 事件流分为三个阶段，一个是捕获节点，一个是处于目标节点阶段，一个是冒泡阶段
 
-### 97 为什么canvas的图片为什么过有跨域问题
+### 97 为什么`canvas`的图片为什么过有跨域问题
 
-### 98 我现在有一个canvas，上面随机布着一些黑块，请实现方法，计算canvas上有多少个黑块
+### 98 我现在有一个`canvas`，上面随机布着一些黑块，请实现方法，计算canvas上有多少个黑块
 
 > https://www.jianshu.com/p/f54d265f7aa4
 
-### 99 请手写实现一个promise
+### 99 请手写实现一个`promise`
 
 > https://segmentfault.com/a/1190000013396601
 
@@ -3107,9 +3105,9 @@ class Storage {
 - css rule tree和dom tree生成完了之后，开始合成render tree，这个时候浏览器会进行layout，开始计算每一个节点的位置，然后进行绘制。
 - 绘制结束后，关闭TCP连接，过程有四次挥手
 
-### 101 描述一下this
+### 101 描述一下`this`
 
-> `this`，函数执行的上下文，可以通过`apply`，`call`，`bind`改变`this`的指向。对于匿名函数或者直接调用的函数来说，this指向全局上下文（浏览器为window，nodejs为`global`），剩下的函数调用，那就是谁调用它，this就指向谁。当然还有es6的箭头函数，箭头函数的指向取决于该箭头函数声明的位置，在哪里声明，this就指向哪里
+> `this`，函数执行的上下文，可以通过`apply`，`call`，`bind`改变`this`的指向。对于匿名函数或者直接调用的函数来说，this指向全局上下文（浏览器为window，NodeJS为`global`），剩下的函数调用，那就是谁调用它，`this`就指向谁。当然还有es6的箭头函数，箭头函数的指向取决于该箭头函数声明的位置，在哪里声明，`this`就指向哪里
 
 ### 102 说一下浏览器的缓存机制
 
@@ -3118,10 +3116,10 @@ class Storage {
 - 对于强缓存，浏览器在第一次请求的时候，会直接下载资源，然后缓存在本地，第二次请求的时候，直接使用缓存。
 - 对于协商缓存，第一次请求缓存且保存缓存标识与时间，重复请求向服务器发送缓存标识和最后缓存时间，服务端进行校验，如果失效则使用缓存
 
-**协商缓存方**
+**协商缓存相关设置**
 
 - `Exprires`：服务端的响应头，第一次请求的时候，告诉客户端，该资源什么时候会过期。`Exprires`的缺陷是必须保证服务端时间和客户端时间严格同步。
-- `Cache-control：max-age`，表示该资源多少时间后过期，解决了客户端和服务端时间必须同步的问题，
+- `Cache-control：max-age`：表示该资源多少时间后过期，解决了客户端和服务端时间必须同步的问题，
 - `If-None-Match/ETag`：缓存标识，对比缓存时使用它来标识一个缓存，第一次请求的时候，服务端会返回该标识给客户端，客户端在第二次请求的时候会带上该标识与服务端进行对比并返回`If-None-Match`标识是否表示匹配。
 - `Last-modified/If-Modified-Since`：第一次请求的时候服务端返回`Last-modified`表明请求的资源上次的修改时间，第二次请求的时候客户端带上请求头`If-Modified-Since`，表示资源上次的修改时间，服务端拿到这两个字段进行对比
 
@@ -3129,14 +3127,16 @@ class Storage {
 
 - 该组件需要提供`hook`指定渲染位置，默认渲染在body下面。
 - 然后改组件可以指定外层样式，如宽度等
-- 组件外层还需要一层`mask`来遮住底层内容，点击mask可以执行传进来的`onCancel`函数关闭`Dialog`。
+- 组件外层还需要一层`mask`来遮住底层内容，点击`mask`可以执行传进来的`onCancel`函数关闭`Dialog`。
 - 另外组件是可控的，需要外层传入`visible`表示是否可见。
 - 然后`Dialog`可能需要自定义头head和底部`footer`，默认有头部和底部，底部有一个确认按钮和取消按钮，确认按钮会执行外部传进来的`onOk`事件，然后取消按钮会执行外部传进来的`onCancel`事件。
 - 当组件的`visible`为`true`时候，设置`body`的`overflow`为`hidden`，隐藏`body`的滚动条，反之显示滚动条。
 - 组件高度可能大于页面高度，组件内部需要滚动条。
 - 只有组件的`visible`有变化且为`ture`时候，才重渲染组件内的所有内容
 
-### 104 caller和callee的区别
+### 104 `caller`和`callee`的区别
+
+**callee**
 
 > `caller`返回一个函数的引用，这个函数调用了当前的函数。
 
@@ -3360,10 +3360,10 @@ $('#box').clearQueue("queue1"); // delete queue1 with clearQueue
 ### 7 jQuery 中的 bind(), live(), delegate(), on()的区别
 
 
-* `bind` 直接绑定在目标元素上
-* `live` 通过冒泡传播事件，默认`document`上，支持动态数据
-* `delegate` 更精确的小范围使用事件代理，性能优于 live
-* `on` 是最新的`1.9`版本整合了之前的三种方式的新事件绑定机制
+* `bind()` 直接绑定在目标元素上
+* `live()` 通过冒泡传播事件，默认`document`上，支持动态数据
+* `delegate()` 更精确的小范围使用事件代理，性能优于 live
+* `on()` 是最新的`1.9`版本整合了之前的三种方式的新事件绑定机制
 
 ### 8 是否知道自定义事件
 
@@ -3486,10 +3486,10 @@ $('#box').clearQueue("queue1"); // delete queue1 with clearQueue
 
 ### 5 对于各类尺寸的设备，Bootstrap设置的class前缀分别是什么
 
-- 超小设备手机（`<768px`）：`.col-xs-`
-- 小型设备平板电脑（`>=768px`）：`.col-sm-`
-- 中型设备台式电脑（`>=992px`）：`.col-md-`
-- 大型设备台式电脑（`>=1200px`）：`.col-lg-`
+- 超小设备手机（`<768px`）：`.col-xs-*`
+- 小型设备平板电脑（`>=768px`）：`.col-sm-*`
+- 中型设备台式电脑（`>=992px`）：`.col-md-*`
+- 大型设备台式电脑（`>=1200px`）：`.col-lg-*`
 
 ### 6 Bootstrap 网格系统列与列之间的间隙宽度是多少
 
@@ -3863,7 +3863,7 @@ Function.prototype.bind = function(ctx) {
 - 考察点2：是否知道如何判断一个变量是什么类型的
 - 考察点3：递归算法的设计
 
-```
+```javascript
 // 方法一：
   Object.prototype.clone = function(){
           var o = this.constructor === Array ? [] : {};
@@ -3906,9 +3906,9 @@ Function.prototype.bind = function(ctx) {
 
 ```html
  <ul id=”test”>
- <li>这是第一条</li>
- <li>这是第二条</li>
- <li>这是第三条</li>
+     <li>这是第一条</li>
+     <li>这是第二条</li>
+     <li>这是第三条</li>
  </ul>
 ```
 
@@ -3990,7 +3990,7 @@ var iArray = [];
 
 ### 12 写一段JS程序提取URL中的各个GET参数
 
-> 有这样一个`UR`L：`http://item.taobao.com/item.htm?a=1&b=2&c=&d=xxx&e`，请写一段JS程序提取URL中的各个GET参数(参数名和参数个数不确定)，将其按`key-value`形式返回到一个`json`结构中，如`{a:’1′, b:’2′, c:”, d:’xxx’, e:undefined}`
+> 有这样一个`URL`：`http://item.taobao.com/item.htm?a=1&b=2&c=&d=xxx&e`，请写一段JS程序提取URL中的各个GET参数(参数名和参数个数不确定)，将其按`key-value`形式返回到一个`json`结构中，如`{a:'1', b:'2', c:'', d:'xxx', e:undefined}`
 
 ```js
 function serilizeUrl(url) {
@@ -4012,10 +4012,10 @@ function serilizeUrl(url) {
 
 ```js
 if (!String.prototype.trim) {
-  String.prototype.trim = function() {
-  return this.replace(/^\s+/, "").replace(/\s+$/,"");
-  }
- }
+    String.prototype.trim = function() {
+        return this.replace(/^\s+/, "").replace(/\s+$/,"");
+    }
+}
 
  // test the function
  var str = " \t\n test string ".trim();
@@ -4082,7 +4082,7 @@ dns负载均衡：解析域名时，访问多个`ip`服务器中的一个（可�
 - 全局变量
 - `dom`清空时，还存在引用
 - `ie`中使用闭包
-- 定时器未清理
+- 定时器未清除
 - 子元素存在引起的内存泄露
 
 
@@ -4151,13 +4151,15 @@ Element.prototype.triggerEvent  = function(en){
 ### 2 什么样的前端代码是好的
 
 - 高复用低耦合，这样文件小，好维护，而且好扩展。
+- 具有可用性、健壮性、可靠性、宽容性等特点
+- 遵循设计模式的六大原则
 
 ### 3 对前端工程师这个职位是怎么样理解的？它的前景会怎么样
 
 - 前端是最贴近用户的程序员，比后端、数据库、产品经理、运营、安全都近
   - 实现界面交互
   - 提升用户体验
-  - 有了Node.js，前端可以实现服务端的一些事情
+  - 基于NodeJS，可跨平台开发
 - 前端是最贴近用户的程序员，前端的能力就是能让产品从 90分进化到 100 分，甚至更好，
 - 与团队成员，`UI`设计，产品经理的沟通；
 - 做好的页面结构，页面重构和用户体验；
@@ -4212,7 +4214,6 @@ Element.prototype.triggerEvent  = function(en){
 - 你为什么要离开前一家公司？
 - 你对加班的看法
 - 你希望通过这份工作获得什么？
-  - 我想通过这份工作好好的锻炼自己，提升自己的能力，同时为公司贡献自己的一份力量
 
 
 <script>
