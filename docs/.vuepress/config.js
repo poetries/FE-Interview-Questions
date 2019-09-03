@@ -16,7 +16,7 @@ module.exports = {
           /**{ text: '精华', link: '/excellent/' },
           { text: '简版', link: '/simply/' },
           { text: '综合', link: '/comprehensive/' },
-          { text: '复习篇上', link: '/review/' },**/}
+          { text: '复习篇上', link: '/review/' },**/
           { text: 'Blog', link: 'http://blog.poetries.top/' },
           { text: 'Github', link: 'https://github.com/poetries/' },
         ],
