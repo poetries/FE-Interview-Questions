@@ -3,15 +3,15 @@ node_js: stable
 
 # S: Build Lifecycle
 install:
-  - npm install yarn terser@3.14 -g
-  - yarn install
+  - npm install cnpm -g
+  - cnpm install
 
 
 #before_script:
  # - npm install -g gulp
 
 script:
-  - yarn run build
+  - npm run build
 
 after_script:
   - cd  ./docs/.vuepress/dist
