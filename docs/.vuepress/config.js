@@ -16,7 +16,8 @@ module.exports = {
           { text: '精华', link: '/excellent/' },
           { text: '简版', link: '/simply/' },
           { text: '综合', link: '/comprehensive/' },
-          { text: '复习篇上', link: '/review/' },
+          { text: '其他', link: '/review/' },
+          { text: 'QA', link: '/qa/' },
           { text: 'Blog', link: 'http://blog.poetries.top/' },
           { text: 'Github', link: 'https://github.com/poetries/' },
         ],
@@ -65,9 +66,15 @@ module.exports = {
             ]
           },
           {
-            title: '复习篇上',
+            title: '其他',
             children: [
               '/review/'
+            ]
+          },
+           {
+            title: 'QA',
+            children: [
+              '/qa/'
             ]
           }
         ],
