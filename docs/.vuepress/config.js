@@ -18,8 +18,8 @@ module.exports = {
           { text: '综合', link: '/comprehensive/' },
           { text: '其他', link: '/review/' },
           { text: 'QA', link: '/qa/' },
-          { text: 'Blog', link: 'http://blog.poetries.top/' },
-          { text: 'Github', link: 'https://github.com/poetries/' },
+          //{ text: 'Blog', link: 'http://blog.poetries.top/' },
+          //{ text: 'Github', link: 'https://github.com/poetries/' },
         ],
         sidebar: [
           {
@@ -80,7 +80,7 @@ module.exports = {
         ],
         lastUpdated: 'Last Updated',
         // 假定是 GitHub. 同时也可以是一个完整的 GitLab URL
-        repo: 'poetries/FE-Interview-Questions',
+        repo: 'poetries/FE-Interview-Questions/tree/dev',
         // 自定义仓库链接文字。默认从 `themeConfig.repo` 中自动推断为
         // "GitHub"/"GitLab"/"Bitbucket" 其中之一，或是 "Source"。
         repoLabel: '查看源码',
