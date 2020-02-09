@@ -1,6 +1,6 @@
 # FE-Interview-Questions
 
-> 前端面试常考问题分类整理汇总 在线预览版 http://blog.poetries.top/FE-Interview-Questions
+> 前端面试常考问题分类整理汇总
 
 [>> 面试问题答案综合版](https://github.com/poetries/FE-Interview-Questions/issues/2)
 
