@@ -7,6 +7,10 @@ module.exports = {
     markdown: {
       lineNumbers: false
     },
+    head: [
+      ['script', { src: 'https://my.openwrite.cn/js/readmore.js' }],
+      ['script', { src: 'https://blog.poetries.top/img-repo/2020/06/openwrite.js' }],
+    ],
     themeConfig: {
         nav: [
           { text: '基础', link: '/base/' },
