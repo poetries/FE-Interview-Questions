@@ -14,6 +14,8 @@ pageClass: custom-code-highlight
 
 ![面试经验谈--来自知乎芋头Live ](http://blog.poetries.top/img-repo/2020/01/23.png)
 
+<div id="container">
+
 ##  一、HTML、HTTP、web综合问题
 
 ### 1 前端需要注意哪些SEO
@@ -671,3 +673,6 @@ Content-Type: text/html; charset=iso-8859-1
 **CSS3新增伪类有那些？**
 
 - `p:first-of
+
+
+</div>
