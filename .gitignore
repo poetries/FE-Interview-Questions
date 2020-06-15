@@ -9,3 +9,4 @@ build_lib/
 package-lock.json
 
 .idea
+.vscode/
