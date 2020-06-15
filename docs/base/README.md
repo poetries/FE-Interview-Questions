@@ -4217,6 +4217,7 @@ Element.prototype.triggerEvent  = function(en){
 - 你对加班的看法
 - 你希望通过这份工作获得什么？
 
+</div>
 
 <script>
 export default {
