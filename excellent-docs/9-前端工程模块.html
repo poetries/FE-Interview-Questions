@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>1 webpack原理简述 | 面试指南</title>
+    <meta name="description" content="前端面试指南，前端面试题整理，按模块分类整理总结，打造最全面的前端面试题">
+    <link rel="icon" href="/FE-Interview-Questions/logo.png">
+  <link rel="manifest" href="/FE-Interview-Questions/manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="/FE-Interview-Questions/icons/apple-touch-icon-152x152.png">
+  <link rel="mask-icon" href="/FE-Interview-Questions/icons/safari-pinned-tab.svg" color="#3eaf7c">
+  <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+  <meta name="apple-mobile-web-app-status-bar-style">
+    
+    <link rel="preload" href="/FE-Interview-Questions/assets/css/0.styles.0591d029.css" as="style"><link rel="preload" href="/FE-Interview-Questions/assets/js/app.13d69697.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/6.b48232c6.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/3.9d86cf58.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/83.df1321d3.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/11.fb060006.js" as="script"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/1.9e1b498f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/10.fbc04ea9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/100.c06a0f53.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/101.54402ede.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/102.d3860a7d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/103.51a83ab2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/104.b19afdd3.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/105.aada2418.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/106.4ce7d3b7.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/107.ca87a327.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/108.df939701.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/109.9f0c8605.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/110.19cb01b2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/111.51fc9fa1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/112.ab20caec.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/113.6c12e76f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/114.48e1a019.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/115.f291caf1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/116.100da54b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/117.9b579bae.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/118.89da516f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/119.c70b5105.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/12.9774db85.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/120.fcf3186f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/13.ac14541c.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/14.155007f0.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/15.2d9ec2b2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/16.aec442e8.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/17.59c81a6b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/18.c38ff446.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/19.8203bd99.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/20.103004c4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/21.1e6e08c9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/22.5abbfd40.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/23.4cd5fd4d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/24.602403ee.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/25.da971f83.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/26.e9e76559.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/27.6d18f825.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/28.58923361.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/29.81e33cc0.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/30.7a4491ed.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/31.4275e9d2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/32.6e6c282b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/33.35641348.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/34.3d76a237.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/35.fb57a983.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/36.78f70288.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/37.ed0997e2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/38.0ece0665.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/39.3b4241bb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/4.cda2fc13.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/40.dd7b6d84.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/41.05fcd6ed.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/42.24fc3ac4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/43.21f8f3ec.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/44.ac552dd9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/45.b2d653cc.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/46.8bf4b340.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/47.57a13e6c.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/48.8ef881a7.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/49.b76df872.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/5.eb1f29dc.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/50.f04492e5.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/51.e000ebea.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/52.bfbd5e6e.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/53.fc0a60dd.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/54.a798cd42.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/55.5ccb6ae1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/56.1605b000.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/57.79350f4e.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/58.dcff3859.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/59.a366020b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/60.199914fb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/61.4d471001.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/62.07f7a685.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/63.3774b497.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/64.d8437f45.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/65.eaf10ccb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/66.74665605.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/67.072c35ca.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/68.764ab8cb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/69.6a27592a.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/7.aa832117.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/70.2e7f3527.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/71.c6365fbe.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/72.15cfe1be.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/73.d56ee920.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/74.f848ccac.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/75.905f5556.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/76.49d98a04.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/77.4b62003f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/78.5a4046ff.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/79.eb3ec067.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/8.bccf8145.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/80.bd38c9e9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/81.dfdea12a.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/82.4439fbe3.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/84.23d01b47.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/85.c983047a.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/86.29b0f2d4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/87.12e2e192.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/88.fb19aa58.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/89.ee2be7d8.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/9.ce1180ae.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/90.479f4d9d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/91.619e0c8d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/92.ae858703.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/93.f90a7ae1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/94.8894adb4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/95.683396f3.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/96.f65dc164.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/97.75bd77e0.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/98.892b530a.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/99.dc5626e1.js">
+    <link rel="stylesheet" href="/FE-Interview-Questions/assets/css/0.styles.0591d029.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/FE-Interview-Questions/" class="home-link router-link-active"><img src="/FE-Interview-Questions/logo.png" alt="面试指南" class="logo"> <span class="site-name can-hide">面试指南</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!----> <div style="padding-left:1.5rem;"><div class="qr"><img src="/FE-Interview-Questions/assets/img/qr.ee193d28.jpg" alt="poetries" width="120" height="120" loading="lazy"> <p class="we-intro">
+    关注公众号，获取更多资讯
+  </p></div></div> <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>精选模块</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FE-Interview-Questions/excellent-docs/1-HTML模块.html" class="sidebar-link">1 HTML模块</a></li><li><a href="/FE-Interview-Questions/excellent-docs/2-CSS模块.html" class="sidebar-link">2 CSS模块</a></li><li><a href="/FE-Interview-Questions/excellent-docs/3-JS模块.html" class="sidebar-link">3 JS模块</a></li><li><a href="/FE-Interview-Questions/excellent-docs/4-ES6模块.html" class="sidebar-link">4 ES6模块</a></li><li><a href="/FE-Interview-Questions/excellent-docs/5-浏览器模块.html" class="sidebar-link">5 浏览器模块</a></li><li><a href="/FE-Interview-Questions/excellent-docs/6-React.html" class="sidebar-link">6 React模块</a></li><li><a href="/FE-Interview-Questions/excellent-docs/7-Vue.html" class="sidebar-link">7 Vue模块</a></li><li><a href="/FE-Interview-Questions/excellent-docs/8-Node模块.html" class="sidebar-link">8 Node模块</a></li><li><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html" class="active sidebar-link">9 前端工程相关</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#_1-webpack原理简述" class="sidebar-link">1 webpack原理简述</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#_1-1-核心概念" class="sidebar-link">1.1 核心概念</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#_1-2-工作流程-加载-编译-输出" class="sidebar-link">1.2 工作流程 (加载 - 编译 - 输出)</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#_1-3-模块包装" class="sidebar-link">1.3 模块包装:</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#_1-4-webpack的打包原理" class="sidebar-link">1.4 webpack的打包原理</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#_1-5-总结" class="sidebar-link">1.5 总结</a></li></ul></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#_2-webpack热更新原理" class="sidebar-link">2 webpack热更新原理</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#_3-webpack-loader" class="sidebar-link">3 webpack Loader</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#_4-webpack-plugin" class="sidebar-link">4 webpack Plugin</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#实现一个编译结束退出命令的插件" class="sidebar-link">实现一个编译结束退出命令的插件</a></li></ul></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#_5-webpack编译优化" class="sidebar-link">5 webpack编译优化</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#优化webpack打包速度" class="sidebar-link">优化webpack打包速度</a></li></ul></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#_6-webpack-import-原理" class="sidebar-link">6 webpack import()原理</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#动态导入原理" class="sidebar-link">动态导入原理</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#webpack中如何实现动态导入？" class="sidebar-link">webpack中如何实现动态导入？</a></li></ul></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#_7-webpack有哪几种文件指纹？" class="sidebar-link">7 webpack有哪几种文件指纹？</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#webpack如果使用了hash命名，那是每次都会重写生成hash吗" class="sidebar-link">webpack如果使用了hash命名，那是每次都会重写生成hash吗</a></li></ul></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#_8-webpack中如何处理图片的？" class="sidebar-link">8 webpack中如何处理图片的？</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#_9-webpack常用插件总结" class="sidebar-link">9 webpack常用插件总结</a></li></ul></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#_10-抽象语法树ast" class="sidebar-link">10 抽象语法树AST</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#_11-使用babel-loader会有哪些问题？可以怎样优化？" class="sidebar-link">11 使用babel-loader会有哪些问题？可以怎样优化？</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#_12-babel-原理" class="sidebar-link">12 Babel 原理</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#_13-babel是如何编译class的？" class="sidebar-link">13 Babel是如何编译Class的？</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#_14-babel-polyfill是什么" class="sidebar-link">14 babel-polyfill是什么</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#_15-tree-shaking原理是什么" class="sidebar-link">15 Tree Shaking原理是什么</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#对tree-shaking的了解" class="sidebar-link">对tree-shaking的了解</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#原理" class="sidebar-link">原理</a></li></ul></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/excellent-docs/9-前端工程模块.html#_16-vite了解吗" class="sidebar-link">16 Vite了解吗</a></li></ul></li><li><a href="/FE-Interview-Questions/excellent-docs/10-移动多端开发.html" class="sidebar-link">10 移动多端开发</a></li><li><a href="/FE-Interview-Questions/excellent-docs/11-小程序模块.html" class="sidebar-link">11 小程序模块</a></li><li><a href="/FE-Interview-Questions/excellent-docs/12-前端安全模块.html" class="sidebar-link">12 前端安全模块</a></li><li><a href="/FE-Interview-Questions/excellent-docs/13-性能优化模块.html" class="sidebar-link">13 性能优化相关</a></li><li><a href="/FE-Interview-Questions/excellent-docs/14-HTTP模块.html" class="sidebar-link">14 HTTP模块</a></li><li><a href="/FE-Interview-Questions/excellent-docs/15-设计模式.html" class="sidebar-link">15 常用设计模式</a></li><li><a href="/FE-Interview-Questions/excellent-docs/16-框架通识.html" class="sidebar-link">16 框架通识</a></li><li><a href="/FE-Interview-Questions/excellent-docs/17-排序算法.html" class="sidebar-link">17 排序算法</a></li><li><a href="/FE-Interview-Questions/excellent-docs/18-计算机通识.html" class="sidebar-link">18 计算机通识</a></li></ul></section></li></ul> </aside> <main class="page"> <div id="container" class="theme-default-content lock"><div class="content__default"><h2 id="_1-webpack原理简述"><a href="#_1-webpack原理简述" class="header-anchor">#</a> 1 webpack原理简述</h2> <h3 id="_1-1-核心概念"><a href="#_1-1-核心概念" class="header-anchor">#</a> 1.1 核心概念</h3> <blockquote><p>JavaScript 的 模块打包工具 (module bundler)。通过分析模块之间的依赖，最终将所有模块打包成一份或者多份代码包 (bundler)，供 HTML 直接引用。实质上，Webpack 仅仅提供了 打包功能 和一套 文件处理机制，然后通过生态中的各种 Loader 和 Plugin 对代码进行预编译和打包。因此 Webpack 具有高度的可拓展性，能更好的发挥社区生态的力量。</p></blockquote> <ul><li>Entry: 入口文件，Webpack会从该文件开始进行分析与编译；</li> <li>Output: 出口路径，打包后创建 bundler的文件路径以及文件名；</li> <li>Module: 模块，在 Webpack 中任何文件都可以作为一个模块，会根据配置的不同的 Loader 进行加载和打包；</li> <li>Chunk: 代码块，可以根据配置，将所有模块代码合并成一个或多个代码块，以便按需加载，提高性能；</li> <li>Loader: 模块加载器，进行各种文件类型的加载与转换；</li> <li>Plugin: 拓展插件，可以通过 Webpack 相应的事件钩子，介入到打包过程中的任意环节，从而对代码按需修改；</li></ul> <h3 id="_1-2-工作流程-加载-编译-输出"><a href="#_1-2-工作流程-加载-编译-输出" class="header-anchor">#</a> 1.2 工作流程 (加载 - 编译 - 输出)</h3> <ol><li>读取配置文件，按命令 初始化 配置参数，创建 Compiler 对象；</li> <li>调用插件的 apply 方法 挂载插件 监听，然后从入口文件开始执行编译；</li> <li>按文件类型，调用相应的 Loader 对模块进行 编译，并在合适的时机点触发对应的事件，调用 Plugin 执行，最后再根据模块 依赖查找 到所依赖的模块，递归执行第三步；</li> <li>将编译后的所有代码包装成一个个代码块 (Chuck)， 并按依赖和配置确定 输出内容。这个步骤，仍然可以通过 Plugin 进行文件的修改;</li> <li>最后，根据 Output 把文件内容一一写入到指定的文件夹中，完成整个过程；</li></ol> <h3 id="_1-3-模块包装"><a href="#_1-3-模块包装" class="header-anchor">#</a> 1.3 模块包装:</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">modules</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token comment">// 模拟 require 函数，从内存中加载模块；</span>
+	<span class="token keyword">function</span> <span class="token function">__webpack_require__</span><span class="token punctuation">(</span><span class="token parameter">moduleId</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token comment">// 缓存模块</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>installedModules<span class="token punctuation">[</span>moduleId<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+			<span class="token keyword">return</span> installedModules<span class="token punctuation">[</span>moduleId<span class="token punctuation">]</span><span class="token punctuation">.</span>exports<span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+		
+		<span class="token keyword">var</span> module <span class="token operator">=</span> installedModules<span class="token punctuation">[</span>moduleId<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+			i<span class="token punctuation">:</span> moduleId<span class="token punctuation">,</span>
+			l<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+			exports<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+		<span class="token punctuation">}</span><span class="token punctuation">;</span>
+		
+		<span class="token comment">// 执行代码；</span>
+		modules<span class="token punctuation">[</span>moduleId<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>module<span class="token punctuation">.</span>exports<span class="token punctuation">,</span> module<span class="token punctuation">,</span> module<span class="token punctuation">.</span>exports<span class="token punctuation">,</span> __webpack_require__<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+		<span class="token comment">// Flag: 标记是否加载完成；</span>
+		module<span class="token punctuation">.</span>l <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+		
+		<span class="token keyword">return</span> module<span class="token punctuation">.</span>exports<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	
+	<span class="token comment">// ...</span>
+	
+	<span class="token comment">// 开始执行加载入口文件；</span>
+	<span class="token keyword">return</span> <span class="token function">__webpack_require__</span><span class="token punctuation">(</span>__webpack_require__<span class="token punctuation">.</span>s <span class="token operator">=</span> <span class="token string">&quot;./src/index.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+ 	<span class="token string">&quot;./src/index.js&quot;</span><span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">module<span class="token punctuation">,</span> __webpack_exports__<span class="token punctuation">,</span> __webpack_require__</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token comment">// 使用 eval 执行编译后的代码；</span>
+		<span class="token comment">// 继续递归引用模块内部依赖；</span>
+		<span class="token comment">// 实际情况并不是使用模板字符串，这里是为了代码的可读性；</span>
+		<span class="token function">eval</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+			__webpack_require__.r(__webpack_exports__);
+			//
+			var _test__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(&quot;test&quot;, ./src/test.js&quot;);
+		</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span>
+	<span class="token string">&quot;./src/test.js&quot;</span><span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">module<span class="token punctuation">,</span> __webpack_exports__<span class="token punctuation">,</span> __webpack_require__</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token comment">// ...</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span>
+ <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><p><strong>总结:</strong></p> <ul><li><strong>模块机制</strong>: webpack自己实现了一套模拟模块的机制，将其包裹于业务代码的外部，从而提供了一套模块机制；</li> <li><strong>文件编译</strong>: webpack 规定了一套编译规则，通过 Loader 和 Plugin，以管道的形式对文件字符串进行处理；</li></ul> <h3 id="_1-4-webpack的打包原理"><a href="#_1-4-webpack的打包原理" class="header-anchor">#</a> 1.4 webpack的打包原理</h3> <ul><li><code>初始化参数</code>：从配置文件和 Shell 语句中读取与合并参数，得出最终的参数</li> <li><code>开始编译</code>：用上一步得到的参数初始化 Compiler 对象，加载所有配置的插件，执行对象的 run 方法开始执行编译</li> <li><code>确定入口</code>：根据配置中的 entry 找出所有的入口文件</li> <li><code>编译模块</code>：从入口文件出发，调用所有配置的 Loader 对模块进行翻译，再找出该模块依赖的模块，再递归本步骤直到所有入口依赖的文件都经过了本步骤的处理</li> <li><code>完成模块编译</code>：在经过第4步使用 Loader 翻译完所有模块后，得到了每个模块被翻译后的最终内容以及它们之间的依赖关系</li> <li><code>输出资源</code>：根据入口和模块之间的依赖关系，组装成一个个包含多个模块的 Chunk，再把每个 Chunk 转换成一个单独的文件加入到输出列表，这步是可以修改输出内容的最后机会</li> <li><code>输出完成</code>：在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统</li></ul> <h3 id="_1-5-总结"><a href="#_1-5-总结" class="header-anchor">#</a> 1.5 总结</h3> <ol><li>初始化参数：从配置文件和 Shell 语句中读取并合并参数，得出最终的配置参数。</li> <li>开始编译：从上一步得到的参数初始化 <code>Compiler</code> 对象，加载所有配置的插件，执行对象的 <code>run</code> 方法开始执行编译。</li> <li>确定入口：根scope据配置中的 <code>entry</code> 找出所有的入口文件。</li> <li>编译模块：从入口文件出发，调用所有配置的 <code>loader</code> 对模块进行翻译，再找出该模块依赖的模块，这个步骤是递归执行的，直至所有入口依赖的模块文件都经过本步骤的处理。</li> <li>完成模块编译：经过第 4 步使用 loader 翻译完所有模块后，得到了每个模块被翻译后的最终内容以及它们之间的依赖关系。</li> <li>输出资源：根据入口和模块之间的依赖关系，组装成一个个包含多个模块的 <code>chunk</code>，再把每个 <code>chunk</code> 转换成一个单独的文件加入到输出列表，这一步是可以修改输出内容的最后机会。</li> <li>输出完成：在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统。</li></ol> <h2 id="_2-webpack热更新原理"><a href="#_2-webpack热更新原理" class="header-anchor">#</a> 2 webpack热更新原理</h2> <p><img src="http://img-repo.poetries.top/images/20210319101659.png" alt=""></p> <ul><li>当修改了一个或多个文件；</li> <li>文件系统接收更改并通知 <code>webpack</code>；</li> <li><code>webpack</code> 重新编译构建一个或多个模块，并通知 HMR 服务器进行更新；</li> <li><code>HMR Server</code> 使用 <code>webSocket</code> 通知 <code>HMR runtime</code> 需要更新，<code>HMR</code> 运行时通过 <code>HTTP</code> 请求更新 <code>jsonp</code></li> <li><code>HMR</code> 运行时替换更新中的模块，如果确定这些模块无法更新，则触发整个页面刷新</li></ul> <h2 id="_3-webpack-loader"><a href="#_3-webpack-loader" class="header-anchor">#</a> 3 webpack Loader</h2> <blockquote><p>由于 Webpack 是基于 Node，因此 Webpack 其实是只能识别 js 模块，比如 css / html / 图片等类型的文件并无法加载，因此就需要一个对 不同格式文件转换器。其实 Loader 做的事，也并不难理解: 对 Webpack 传入的字符串进行按需修改。例如一个最简单的 Loader:</p></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// html-loader/index.js</span>
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">htmlSource</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token comment">// 返回处理后的代码字符串</span>
+	<span class="token comment">// 删除 html 文件中的所有注释</span>
+	<span class="token keyword">return</span> htmlSource<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex">/&lt;!--[\w\W]*?--&gt;/g</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><p>当然，实际的 Loader 不会这么简单，通常是需要将代码进行分析，构建 AST (抽象语法树)， 遍历进行定向的修改后，再重新生成新的代码字符串。如我们常用的 Babel-loader 会执行以下步骤:</p></blockquote> <ul><li><code>babylon</code> 将 <code>ES6/ES7</code> 代码解析成 <code>AST</code></li> <li><code>babel-traverse</code> 对 <code>AST</code> 进行遍历转译，得到新的 AST</li> <li>新 <code>AST</code> 通过 <code>babel-generator</code> 转换成 <code>ES5</code></li></ul> <p><strong>Loader 特性:</strong></p> <ul><li>链式传递，按照配置时相反的顺序链式执行；</li> <li>基于 Node 环境，拥有 较高权限，比如文件的增删查改；</li> <li>可同步也可异步；</li></ul> <p><strong>常用 Loader:</strong></p> <ul><li><code>file-loader</code>: 加载文件资源，如 字体 / 图片 等，具有移动/复制/命名等功能；</li> <li><code>url-loader</code>: 通常用于加载图片，可以将小图片直接转换为 Date Url，减少请求；</li> <li><code>babel-loader</code>: 加载 js / jsx 文件， 将 ES6 / ES7 代码转换成 ES5，抹平兼容性问题；</li> <li><code>ts-loader</code>: 加载 ts / tsx 文件，编译 TypeScript；</li> <li><code>style-loader</code>: 将 css 代码以<code>&lt;style&gt;</code>标签的形式插入到 html 中；</li> <li><code>css-loader</code>: 分析@import和url()，引用 css 文件与对应的资源；</li> <li><code>postcss-loader</code>: 用于 css 的兼容性处理，具有众多功能，例如 添加前缀，单位转换 等；</li> <li><code>less-loader / sass-loader</code>: css预处理器，在 css 中新增了许多语法，提高了开发效率；</li></ul> <p><strong>编写原则:</strong></p> <ul><li>单一原则: 每个 Loader 只做一件事；</li> <li>链式调用: Webpack 会按顺序链式调用每个 Loader；</li> <li>统一原则: 遵循 Webpack制定的设计规则和结构，输入与输出均为字符串，各个 Loader 完全独立，即插即用；</li></ul> <h2 id="_4-webpack-plugin"><a href="#_4-webpack-plugin" class="header-anchor">#</a> 4 webpack Plugin</h2> <blockquote><p>插件系统是 Webpack 成功的一个关键性因素。在编译的整个生命周期中，Webpack 会触发许多事件钩子，Plugin 可以监听这些事件，根据需求在相应的时间点对打包内容进行定向的修改。</p></blockquote> <p><strong>一个最简单的 plugin 是这样的:</strong></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">class</span> <span class="token class-name">Plugin</span><span class="token punctuation">{</span>
+  	<span class="token comment">// 注册插件时，会调用 apply 方法</span>
+  	<span class="token comment">// apply 方法接收 compiler 对象</span>
+  	<span class="token comment">// 通过 compiler 上提供的 Api，可以对事件进行监听，执行相应的操作</span>
+  	<span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  		<span class="token comment">// compilation 是监听每次编译循环</span>
+  		<span class="token comment">// 每次文件变化，都会生成新的 compilation 对象并触发该事件</span>
+    	compiler<span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">'compilation'</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">compilation</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+  	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><strong>注册插件:</strong></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// webpack.config.js</span>
+module<span class="token punctuation">.</span>export <span class="token operator">=</span> <span class="token punctuation">{</span>
+	plugins<span class="token punctuation">:</span><span class="token punctuation">[</span>
+		<span class="token keyword">new</span> <span class="token class-name">Plugin</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span><span class="token punctuation">,</span>
+	<span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><strong>事件流机制:</strong></p> <blockquote><p>Webpack 就像工厂中的一条产品流水线。原材料经过 Loader 与 Plugin 的一道道处理，最后输出结果。</p></blockquote> <ul><li>通过链式调用，按顺序串起一个个 Loader；</li> <li>通过事件流机制，让 Plugin 可以插入到整个生产过程中的每个步骤中；</li></ul> <blockquote><p>Webpack 事件流编程范式的核心是基础类 Tapable，是一种 观察者模式 的实现事件的订阅与广播：</p></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> <span class="token punctuation">{</span> SyncHook <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;tapable&quot;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> hook <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SyncHook</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'arg'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 订阅</span>
+hook<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span><span class="token string">'event'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">arg</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+	<span class="token comment">// 'event-hook'</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 广播</span>
+<span class="token function">hook</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token string">'event-hook'</span><span class="token punctuation">)</span>
+</code></pre></div><blockquote><p><code>Webpack</code> 中两个最重要的类 <code>Compiler</code> 与 <code>Compilation</code> 便是继承于 <code>Tapable</code>，也拥有这样的事件流机制。</p></blockquote> <ul><li><p><strong>Compiler</strong>: 可以简单的理解为 Webpack 实例，它包含了当前 Webpack 中的所有配置信息，如 options， loaders, plugins 等信息，全局唯一，只在启动时完成初始化创建，随着生命周期逐一传递；</p></li> <li><p><code>Compilation</code>: 可以称为 编译实例。当监听到文件发生改变时，Webpack 会创建一个新的 Compilation 对象，开始一次新的编译。它包含了当前的输入资源，输出资源，变化的文件等，同时通过它提供的 api，可以监听每次编译过程中触发的事件钩子；</p></li> <li><p><strong>区别:</strong></p> <ul><li><code>Compiler</code> 全局唯一，且从启动生存到结束；</li> <li><code>Compilation</code>对应每次编译，每轮编译循环均会重新创建；</li></ul></li> <li><p><strong>常用 Plugin:</strong></p> <ul><li>UglifyJsPlugin: 压缩、混淆代码；</li> <li>CommonsChunkPlugin: 代码分割；</li> <li>ProvidePlugin: 自动加载模块；</li> <li>html-webpack-plugin: 加载 html 文件，并引入 css / js 文件；</li> <li>extract-text-webpack-plugin / mini-css-extract-plugin: 抽离样式，生成 css 文件；
+DefinePlugin: 定义全局变量；</li> <li>optimize-css-assets-webpack-plugin: CSS 代码去重；</li> <li>webpack-bundle-analyzer: 代码分析；</li> <li>compression-webpack-plugin: 使用 gzip 压缩 js 和 css；</li> <li>happypack: 使用多进程，加速代码构建；</li> <li>EnvironmentPlugin: 定义环境变量；</li></ul></li> <li><p>调用插件 <code>apply</code> 函数传入 <code>compiler</code> 对象</p></li> <li><p>通过 <code>compiler</code> 对象监听事件</p></li></ul> <p><strong>loader和plugin有什么区别？</strong></p> <blockquote><p>webapck默认只能打包JS和JOSN模块，要打包其它模块，需要借助loader，loader就可以让模块中的内容转化成webpack或其它laoder可以识别的内容。</p></blockquote> <ul><li><code>loader</code>就是模块转换化，或叫加载器。不同的文件，需要不同的<code>loader</code>来处理。</li> <li><code>plugin</code>是插件，可以参与到整个webpack打包的流程中，不同的插件，在合适的时机，可以做不同的事件。</li></ul> <p><strong>webpack中都有哪些插件，这些插件有什么作用？</strong></p> <ul><li><code>html-webpack-plugin</code> 自动创建一个HTML文件，并把打包好的JS插入到HTML文件中</li> <li><code>clean-webpack-plugin</code> 在每一次打包之前，删除整个输出文件夹下所有的内容</li> <li><code>mini-css-extrcat-plugin</code> 抽离CSS代码，放到一个单独的文件中</li> <li><code>optimize-css-assets-plugin</code> 压缩css</li></ul> <h3 id="实现一个编译结束退出命令的插件"><a href="#实现一个编译结束退出命令的插件" class="header-anchor">#</a> 实现一个编译结束退出命令的插件</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">apply</span> <span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token function-variable function">afterEmit</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">compilation<span class="token punctuation">,</span> cb</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token function">cb</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      process<span class="token punctuation">.</span><span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  compiler<span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span><span class="token string">'after-emit'</span><span class="token punctuation">,</span> afterEmit<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> BuildEndPlugin
+</code></pre></div><div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token function">mounted</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> isGithub <span class="token operator">=</span> location<span class="token punctuation">.</span>href<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">'FE-Interview-Questions'</span><span class="token punctuation">)</span><span class="token operator">!==</span><span class="token operator">-</span><span class="token number">1</span>
+    <span class="token keyword">var</span> sId <span class="token operator">=</span> isGithub <span class="token operator">?</span> <span class="token string">'59154049'</span> <span class="token punctuation">:</span> <span class="token string">'66575297'</span>
+    <span class="token keyword">var</span> script <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">&quot;script&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    script<span class="token punctuation">.</span>type <span class="token operator">=</span> <span class="token string">&quot;text/javascript&quot;</span>
+    script<span class="token punctuation">.</span>charset<span class="token operator">=</span><span class="token string">&quot;UTF-8&quot;</span>
+    script<span class="token punctuation">.</span>src <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">http://tajs.qq.com/stats?sId=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>sId<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
+    document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>script<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h2 id="_5-webpack编译优化"><a href="#_5-webpack编译优化" class="header-anchor">#</a> 5 webpack编译优化</h2> <p><strong>代码优化:</strong></p> <blockquote><p>无用代码消除，是许多编程语言都具有的优化手段，这个过程称为 DCE (dead code elimination)，即 删除不可能执行的代码；</p></blockquote> <p>例如我们的 <code>UglifyJs</code>，它就会帮我们在生产环境中删除不可能被执行的代码，例如:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> <span class="token function-variable function">fn</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+	<span class="token comment">// 下面代码便属于 不可能执行的代码；</span>
+	<span class="token comment">// 通过 UglifyJs (Webpack4+ 已内置) 便会进行 DCE；</span>
+	<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> a<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><p>摇树优化 (Tree-shaking)，这是一种形象比喻。我们把打包后的代码比喻成一棵树，这里其实表示的就是，通过工具 &quot;摇&quot; 我们打包后的 js 代码，将没有使用到的无用代码 &quot;摇&quot; 下来 (删除)。即 消除那些被 引用了但未被使用 的模块代码。</p></blockquote> <ul><li>原理: 由于是在编译时优化，因此最基本的前提就是语法的静态分析，ES6的模块机制 提供了这种可能性。不需要运行时，便可进行代码字面上的静态分析，确定相应的依赖关系。</li> <li>问题: 具有 副作用 的函数无法被 <code>tree-shaking</code> <ul><li>在引用一些第三方库，需要去观察其引入的代码量是不是符合预期；</li> <li>尽量写纯函数，减少函数的副作用；</li> <li>可使用 <code>webpack-deep-scope-plugin</code>，可以进行作用域分析，减少此类情况的发生，但仍需要注意；</li></ul></li></ul> <p><strong>code-spliting: 代码分割技术</strong>，将代码分割成多份进行 懒加载 或 异步加载，避免打包成一份后导致体积过大，影响页面的首屏加载；</p> <ul><li><code>Webpack</code> 中使用 <code>SplitChunksPlugin</code> 进行拆分；</li> <li>按 页面 拆分: 不同页面打包成不同的文件；</li> <li>按 功能 拆分:
+<ul><li>将类似于播放器，计算库等大模块进行拆分后再懒加载引入；</li> <li>提取复用的业务代码，减少冗余代码；</li></ul></li> <li>按 文件修改频率 拆分: 将第三方库等不常修改的代码单独打包，而且不改变其文件 hash 值，能最大化运用浏览器的缓存；</li></ul> <p><strong>scope hoisting</strong>: 作用域提升，将分散的模块划分到同一个作用域中，避免了代码的重复引入，有效减少打包后的代码体积和运行时的内存损耗；</p> <p><strong>编译性能优化:</strong></p> <ul><li>升级至 最新 版本的 <code>webpack</code>，能有效提升编译性能；</li> <li>使用 <code>dev-server</code> / 模块热替换 (<code>HMR</code>) 提升开发体验；
+<ul><li>监听文件变动 忽略 node_modules 目录能有效提高监听时的编译效率；</li></ul></li> <li>缩小编译范围
+<ul><li><code>modules</code>: 指定模块路径，减少递归搜索；</li> <li><code>mainFields</code>: 指定入口文件描述字段，减少搜索；</li> <li><code>noParse</code>: 避免对非模块化文件的加载；</li> <li><code>includes/exclude</code>: 指定搜索范围/排除不必要的搜索范围；</li> <li><code>alias</code>: 缓存目录，避免重复寻址；</li></ul></li> <li><code>babel-loader</code> <ul><li>忽略<code>node_moudles</code>，避免编译第三方库中已经被编译过的代码</li> <li>使用<code>cacheDirectory</code>，可以缓存编译结果，避免多次重复编译</li></ul></li> <li>多进程并发
+<ul><li><code>webpack-parallel-uglify-plugin</code>: 可多进程并发压缩 js 文件，提高压缩速度；</li> <li><code>HappyPack</code>: 多进程并发文件的 <code>Loader</code> 解析；</li></ul></li> <li>第三方库模块缓存:
+<ul><li><code>DLLPlugin</code> 和 <code>DLLReferencePlugin</code> 可以提前进行打包并缓存，避免每次都重新编译；</li></ul></li> <li>使用分析
+<ul><li><code>Webpack Analyse / webpack-bundle-analyzer</code> 对打包后的文件进行分析，寻找可优化的地方</li> <li>配置profile：true，对各个编译阶段耗时进行监控，寻找耗时最多的地方</li></ul></li> <li><code>source-map</code>:
+<ul><li>开发: <code>cheap-module-eval-source-map</code></li> <li>生产: <code>hidden-source-map</code>；</li></ul></li></ul> <h3 id="优化webpack打包速度"><a href="#优化webpack打包速度" class="header-anchor">#</a> 优化webpack打包速度</h3> <ul><li>减少文件搜索范围
+<ul><li>比如通过别名</li> <li><code>loader</code> 的 <code>test</code>，<code>include &amp; exclude</code></li></ul></li> <li><code>Webpack4</code> 默认压缩并行</li> <li><code>Happypack</code> 并发调用</li> <li><code>babel</code> 也可以缓存编译</li></ul> <h2 id="_6-webpack-import-原理"><a href="#_6-webpack-import-原理" class="header-anchor">#</a> 6 webpack import()原理</h2> <h3 id="动态导入原理"><a href="#动态导入原理" class="header-anchor">#</a> 动态导入原理</h3> <blockquote><p>用于动态加载的<code>import()</code>方法</p></blockquote> <ul><li>这个功能可以实现按需加载我们的代码，并且使用了<code>promise</code>式的回调，获取加载的包</li> <li>在代码中所有被<code>import()</code>的模块，都将打成一个单独的包，放在<code>chunk</code>存储的目录下。在浏览器运行到这一行代码时，就会自动请求这个资源，实现异步加载</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 这里是一个简单的demo。</span>
+<span class="token comment">// 可以看到，import()的语法十分简单。该函数只接受一个参数，就是引用包的地址</span>
+<span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'lodash'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">_</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// Do something with lodash (a.k.a '_')...</span>
+ <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><h3 id="webpack中如何实现动态导入？"><a href="#webpack中如何实现动态导入？" class="header-anchor">#</a> webpack中如何实现动态导入？</h3> <ol><li>使用<code>import(/** webpackChunkName: &quot;lodash&quot; **/ 'lodash').then(_ =&gt; {})</code>，同时可以在<code>webpack.config.js</code>中配置一下<code>output的chunkFilename</code>为<code>[name].bunld.js</code>将要导入的模块单独抽离到一个<code>bundle</code>中，以此实现代码分离。</li> <li>使用<code>async</code>，由于<code>import()</code>返回的是一个<code>promise</code>, 因此我们可以使用<code>async</code>函数来简化它，不过需要<code>babel</code>这样的预处理器及处理转换<code>async</code>的插件。<code>const _ = await import(/* webpackChunkName: &quot;lodash&quot; */ 'lodash');</code></li></ol> <h2 id="_7-webpack有哪几种文件指纹？"><a href="#_7-webpack有哪几种文件指纹？" class="header-anchor">#</a> 7 webpack有哪几种文件指纹？</h2> <ul><li><code>hash</code>是跟整个项目的构建相关，只要项目里有文件更改，整个项目构建的<code>hash</code>值都会更改，并且全部文件都共用相同的<code>hash</code>值。(粒度整个项目)</li> <li><code>chunkhash</code>是根据不同的入口进行依赖文件解析，构建对应的<code>chunk</code>(模块)，生成对应的<code>hash</code>值。只有被修改的<code>chunk</code>(模块)在重新构建之后才会生成新的<code>hash</code>值，不会影响其它的<code>chunk</code>。(粒度<code>entry</code>的每个入口文件)</li> <li><code>contenthash</code>是跟每个生成的文件有关，每个文件都有一个唯一的<code>hash</code>值。当要构建的文件内容发生改变时，就会生成新的<code>hash</code>值，且该文件的改变并不会影响和它同一个模块下的其它文件。(粒度每个文件的内容)</li></ul> <h3 id="webpack如果使用了hash命名，那是每次都会重写生成hash吗"><a href="#webpack如果使用了hash命名，那是每次都会重写生成hash吗" class="header-anchor">#</a> webpack如果使用了hash命名，那是每次都会重写生成hash吗</h3> <p>有三种情况：</p> <ul><li>如果是<code>hash</code>的话，是和整个项目有关的，有一处文件发生更改则所有文件的<code>hash</code>值都会发生改变且它们共用一个<code>hash</code>值；</li> <li>如果是<code>chunkhash</code>的话，只和<code>entry</code>的每个入口文件有关，也就是同一个<code>chunk</code>下的文件有所改动该<code>chunk</code>下的文件的<code>hash</code>值就会发生改变</li> <li>如果是<code>contenthash</code>的话，和每个生成的文件有关，只有当要构建的文件内容发生改变时才会给该文件生成新的<code>hash</code>值，并不会影响其它文件。</li></ul> <h2 id="_8-webpack中如何处理图片的？"><a href="#_8-webpack中如何处理图片的？" class="header-anchor">#</a> 8 webpack中如何处理图片的？</h2> <p>在<code>webpack</code>中有两种处理图片的<code>loader</code>：</p> <ul><li><code>file-loader</code>：解决<code>CSS</code>等中引入图片的路径问题；(解决通过<code>url</code>,<code>import/require()</code>等引入图片的问题)</li> <li><code>url-loader</code>：当图片小于设置的<code>limit</code>参数值时，<code>url-loader</code>将图片进行<code>base64</code>编码(当项目中有很多图片，通过<code>url-loader</code>进行<code>base64</code>编码后会减少<code>http</code>请求数量，提高性能)，大于limit参数值，则使用<code>file-loader</code>拷贝图片并输出到编译目录中；</li></ul> <h3 id="_9-webpack常用插件总结"><a href="#_9-webpack常用插件总结" class="header-anchor">#</a> 9 webpack常用插件总结</h3> <p><strong>1. 功能类</strong></p> <p><strong>1.1 html-webpack-plugin</strong></p> <blockquote><p>自动生成<code>html</code>，基本用法：</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>new HtmlWebpackPlugin({
+  filename: 'index.html', // 生成文件名
+  template: path.join(process.cwd(), './index.html') // 模班文件
+})
+</code></pre></div><p><strong>1.2 copy-webpack-plugin</strong></p> <blockquote><p>拷贝资源插件</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>new CopyWebpackPlugin([
+  {
+    from: path.join(process.cwd(), './vendor/'),
+    to: path.join(process.cwd(), './dist/'),
+    ignore: ['*.json']
+  }
+])
+</code></pre></div><p><strong>1.3 webpack-manifest-plugin &amp;&amp; assets-webpack-plugin</strong></p> <blockquote><p>俩个插件效果一致，都是生成编译结果的资源单，只是资源单的数据结构不一致而已</p></blockquote> <p><strong>webpack-manifest-plugin 基本用法</strong></p> <div class="language- extra-class"><pre class="language-text"><code>module.exports = {
+  plugins: [
+    new ManifestPlugin()
+  ]
+}
+</code></pre></div><p><strong>assets-webpack-plugin 基本用法</strong></p> <div class="language- extra-class"><pre class="language-text"><code>module.exports = {
+  plugins: [
+    new AssetsPlugin()
+  ]
+}
+</code></pre></div><p><strong>1.4 clean-webpack-plugin</strong></p> <blockquote><p>在编译之前清理指定目录指定内容</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>// 清理目录
+const pathsToClean = [
+  'dist',
+  'build'
+]
+ 
+// 清理参数
+const cleanOptions = {
+  exclude:  ['shared.js'], // 跳过文件
+}
+module.exports = {
+  // ...
+  plugins: [
+    new CleanWebpackPlugin(pathsToClean, cleanOptions)
+  ]
+}
+</code></pre></div><p><strong>1.5 compression-webpack-plugin</strong></p> <blockquote><p>提供带 <code>Content-Encoding</code> 编码的压缩版的资源</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>module.exports = {
+  plugins: [
+    new CompressionPlugin()
+  ]
+}
+</code></pre></div><p><strong>1.6 progress-bar-webpack-plugin</strong></p> <blockquote><p>编译进度条插件</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>module.exports = {
+  //...
+  plugins: [
+    new ProgressBarPlugin()
+  ]
+}
+</code></pre></div><p><strong>2. 代码相关类</strong></p> <p><strong>2.1 webpack.ProvidePlugin</strong></p> <blockquote><p>自动加载模块，如 <code>$</code> 出现，就会自动加载模块；<code>$</code> 默认为<code>'jquery'</code>的<code>exports</code></p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>new webpack.ProvidePlugin({
+  $: 'jquery',
+})
+</code></pre></div><p><strong>2.2 webpack.DefinePlugin</strong></p> <blockquote><p>定义全局常量</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>new webpack.DefinePlugin({
+  'process.env': {
+    NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+  }
+})
+</code></pre></div><p><strong>2.3 mini-css-extract-plugin &amp;&amp; extract-text-webpack-plugin</strong></p> <blockquote><p>提取css样式，对比</p></blockquote> <ul><li><code>mini-css-extract-plugin</code> 为<code>webpack4</code>及以上提供的<code>plugin</code>，支持<code>css chunk</code></li> <li><code>extract-text-webpack-plugin</code> 只能在<code>webpack3</code> 及一下的版本使用，不支持<code>css chunk</code></li></ul> <p><strong>基本用法 extract-text-webpack-plugin</strong></p> <div class="language- extra-class"><pre class="language-text"><code>const ExtractTextPlugin = require(&quot;extract-text-webpack-plugin&quot;);
+ 
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: &quot;style-loader&quot;,
+          use: &quot;css-loader&quot;
+        })
+      }
+    ]
+  },
+  plugins: [
+    new ExtractTextPlugin(&quot;styles.css&quot;),
+  ]
+}
+</code></pre></div><p><strong>基本用法 mini-css-extract-plugin</strong></p> <div class="language- extra-class"><pre class="language-text"><code>const MiniCssExtractPlugin = require(&quot;mini-css-extract-plugin&quot;);
+module.exports = {
+    module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '/'  // chunk publicPath
+            }
+          },
+          &quot;css-loader&quot;
+        ]
+      }
+    ]
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: &quot;[name].css&quot;, // 主文件名
+      chunkFilename: &quot;[id].css&quot;  // chunk文件名
+    })
+  ]
+}
+</code></pre></div><p><strong>3. 编译结果优化类</strong></p> <p><strong>3.1 wbepack.IgnorePlugin</strong></p> <blockquote><p>忽略<code>regExp</code>匹配的模块</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+</code></pre></div><p><strong>3.2 uglifyjs-webpack-plugin</strong></p> <blockquote><p>代码丑化，用于js压缩</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>module.exports = {
+  //...
+  optimization: {
+    minimizer: [new UglifyJsPlugin({
+      cache: true,   // 开启缓存
+      parallel: true, // 开启多线程编译
+      sourceMap: true,  // 是否sourceMap
+      uglifyOptions: {  // 丑化参数
+        comments: false,
+        warnings: false,
+        compress: {
+          unused: true,
+          dead_code: true,
+          collapse_vars: true,
+          reduce_vars: true
+        },
+        output: {
+          comments: false
+        }
+      }
+    }]
+  }
+};
+</code></pre></div><p><strong>3.3 optimize-css-assets-webpack-plugin</strong></p> <blockquote><p>css压缩，主要使用 <code>cssnano</code> 压缩器 https://github.com/cssnano/cssnano</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>module.exports = {
+  //...
+  optimization: {
+    minimizer: [new OptimizeCssAssetsPlugin({
+      cssProcessor: require('cssnano'),   // css 压缩优化器
+      cssProcessorOptions: { discardComments: { removeAll: true } } // 去除所有注释
+    })]
+  }
+};
+</code></pre></div><p><strong>3.4 webpack-md5-hash</strong></p> <blockquote><p>使你的<code>chunk</code>根据内容生成<code>md5</code>，用这个<code>md5</code>取代 <code>webpack chunkhash</code>。</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>var WebpackMd5Hash = require('webpack-md5-hash');
+ 
+module.exports = {
+  // ...
+  output: {
+    //...
+    chunkFilename: &quot;[chunkhash].[id].chunk.js&quot;
+  },
+  plugins: [
+    new WebpackMd5Hash()
+  ]
+};
+</code></pre></div><p><strong>3.5 SplitChunksPlugin</strong></p> <ul><li><code>CommonChunkPlugin</code> 的后世，用于<code>chunk</code>切割。</li></ul> <blockquote><p><code>webpack</code> 把 <code>chunk</code> 分为两种类型，一种是初始加载<code>initial chunk</code>，另外一种是异步加载 <code>async chunk</code>，如果不配置<code>SplitChunksPlugin</code>，<code>webpack</code>会在<code>production</code>的模式下自动开启，默认情况下，<code>webpack</code>会将 <code>node_modules</code> 下的所有模块定义为异步加载模块，并分析你的 <code>entry</code>、动态加载（<code>import()</code>、<code>require.ensure</code>）模块，找出这些模块之间共用的<code>node_modules</code>下的模块，并将这些模块提取到单独的<code>chunk</code>中，在需要的时候异步加载到页面当中，其中默认配置如下</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      chunks: 'async', // 异步加载chunk
+      minSize: 30000,
+      maxSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~', // 文件名中chunk分隔符
+      name: true,
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,  // 
+          priority: -10
+        },
+        default: {
+          minChunks: 2,  // 最小的共享chunk数
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    }
+  }
+};
+</code></pre></div><p><strong>4. 编译优化类</strong></p> <p><strong>4.1 DllPlugin &amp;&amp; DllReferencePlugin &amp;&amp; autodll-webpack-plugin</strong></p> <ul><li><code>dllPlugin</code>将模块预先编译，<code>DllReferencePlugin</code> 将预先编译好的模块关联到当前编译中，当 <code>webpack</code> 解析到这些模块时，会直接使用预先编译好的模块。</li> <li><code>autodll-webpack-plugin</code> 相当于 <code>dllPlugin</code> 和 <code>DllReferencePlugin</code> 的简化版，其实本质也是使用 <code>dllPlugin &amp;&amp; DllReferencePlugin</code>，它会在第一次编译的时候将配置好的需要预先编译的模块编译在缓存中，第二次编译的时候，解析到这些模块就直接使用缓存，而不是去编译这些模块</li></ul> <p><strong>dllPlugin 基本用法：</strong></p> <div class="language- extra-class"><pre class="language-text"><code>const output = {
+  filename: '[name].js',
+  library: '[name]_library',
+  path: './vendor/'
+}
+
+module.exports = {
+  entry: {
+    vendor: ['react', 'react-dom']  // 我们需要事先编译的模块，用entry表示
+  },
+  output: output,
+  plugins: [
+    new webpack.DllPlugin({  // 使用dllPlugin
+      path: path.join(output.path, `${output.filename}.json`),
+      name: output.library // 全局变量名， 也就是 window 下 的 [output.library]
+    })
+  ]
+}
+</code></pre></div><p><strong>DllReferencePlugin 基本用法：</strong></p> <div class="language- extra-class"><pre class="language-text"><code>const manifest = path.resolve(process.cwd(), 'vendor', 'vendor.js.json')
+
+module.exports = {
+  plugins: [
+    new webpack.DllReferencePlugin({
+      manifest: require(manifest), // 引进dllPlugin编译的json文件
+      name: 'vendor_library' // 全局变量名，与dllPlugin声明的一致
+    }
+  ]
+}
+</code></pre></div><p><strong>autodll-webpack-plugin 基本用法：</strong></p> <div class="language- extra-class"><pre class="language-text"><code>module.exports = {
+  plugins: [
+    new AutoDllPlugin({
+      inject: true, // 与 html-webpack-plugin 结合使用，注入html中
+      filename: '[name].js',
+      entry: {
+        vendor: [
+          'react',
+          'react-dom'
+        ]
+      }
+    })
+  ]
+}
+</code></pre></div><p><strong>4.2 happypack &amp;&amp; thread-loader</strong></p> <blockquote><p>多线程编译，加快编译速度，<code>thread-loader</code>不可以和 <code>mini-css-extract-plugin</code> 结合使用</p></blockquote> <p><strong>happypack 基本用法</strong></p> <div class="language- extra-class"><pre class="language-text"><code>const HappyPack = require('happypack');
+const os = require('os');
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
+const happyLoaderId = 'happypack-for-react-babel-loader';
+
+module.exports = {
+  module: {
+    rules: [{
+      test: /\.jsx?$/,
+      loader: 'happypack/loader',
+      query: {
+        id: happyLoaderId
+      },
+      include: [path.resolve(process.cwd(), 'src')]
+    }]
+  },
+  plugins: [new HappyPack({
+    id: happyLoaderId,
+    threadPool: happyThreadPool,
+    loaders: ['babel-loader']
+  })]
+}
+</code></pre></div><p><strong>thread-loader 基本用法</strong></p> <div class="language- extra-class"><pre class="language-text"><code>module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        include: path.resolve(&quot;src&quot;),
+        use: [
+          &quot;thread-loader&quot;,
+          // your expensive loader (e.g babel-loader)
+          &quot;babel-loader&quot;
+        ]
+      }
+    ]
+  }
+}
+</code></pre></div><p><strong>4.3 hard-source-webpack-plugin &amp;&amp; cache-loader</strong></p> <blockquote><p>使用模块编译缓存，加快编译速度</p></blockquote> <p><strong>hard-source-webpack-plugin 基本用法</strong></p> <div class="language- extra-class"><pre class="language-text"><code>module.exports = {
+  plugins: [
+    new HardSourceWebpackPlugin()
+  ]
+}
+</code></pre></div><p><strong>cache-loader 基本用法</strong></p> <div class="language- extra-class"><pre class="language-text"><code>module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.ext$/,
+        use: [
+          'cache-loader',
+          ...loaders
+        ],
+        include: path.resolve('src')
+      }
+    ]
+  }
+}
+</code></pre></div><p><strong>5. 编译分析类</strong></p> <p><strong>5.1 webpack-bundle-analyzer</strong></p> <blockquote><p>编译模块分析插件</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>new BundleAnalyzerPlugin({
+  analyzerMode: 'server',
+  analyzerHost: '127.0.0.1',
+  analyzerPort: 8889,
+  reportFilename: 'report.html',
+  defaultSizes: 'parsed',
+  generateStatsFile: false,
+  statsFilename: 'stats.json',
+  statsOptions: null,
+  logLevel: 'info'
+}),
+</code></pre></div><p><strong>5.2 stats-webpack-plugin &amp;&amp; PrefetchPlugin</strong></p> <blockquote><p><code>stats-webpack-plugin</code> 将构建的统计信息写入文件，该文件可在 http://webpack.github.io/analyse中上传进行编译分析，并根据分析结果，可使用 <code>PrefetchPlugin</code> 对部分模块进行预解析编译</p></blockquote> <p><strong>stats-webpack-plugin 基本用法：</strong></p> <div class="language- extra-class"><pre class="language-text"><code>module.exports = {
+  plugins: [
+    new StatsPlugin('stats.json', {
+      chunkModules: true,
+      exclude: [/node_modules[\\\/]react/]
+    })
+  ]
+};
+</code></pre></div><p><strong>PrefetchPlugin 基本用法：</strong></p> <div class="language- extra-class"><pre class="language-text"><code>module.exports = {
+  plugins: [
+    new webpack.PrefetchPlugin('/web/', 'app/modules/HeaderNav.jsx'),
+    new webpack.PrefetchPlugin('/web/', 'app/pages/FrontPage.jsx')
+];
+}
+</code></pre></div><p><strong>5.3 speed-measure-webpack-plugin</strong></p> <blockquote><p>统计编译过程中，各<code>loader</code>和<code>plugin</code>使用的时间</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>const SpeedMeasurePlugin = require(&quot;speed-measure-webpack-plugin&quot;);
+ 
+const smp = new SpeedMeasurePlugin();
+ 
+const webpackConfig = {
+  plugins: [
+    new MyPlugin(),
+    new MyOtherPlugin()
+  ]
+}
+module.exports = smp.wrap(webpackConfig);
+</code></pre></div><h2 id="_10-抽象语法树ast"><a href="#_10-抽象语法树ast" class="header-anchor">#</a> 10 抽象语法树AST</h2> <blockquote><p><strong>抽象语法树（<code>Abstract Syntax Tree</code>）</strong>，是将代码逐字母解析成 <strong>树状对象</strong> 的形式。这是语言之间的转换、代码语法检查、代码风格检查、代码格式化、代码高亮、代码错误提示、代码自动补全等等的基础</p></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 转换前</span>
+<span class="token keyword">function</span> <span class="token function">square</span><span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> n <span class="token operator">*</span> n
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 转换后</span>
+<span class="token keyword">const</span> element <span class="token operator">=</span> <span class="token punctuation">{</span>
+  type<span class="token punctuation">:</span> <span class="token string">&quot;FunctionDeclaration&quot;</span><span class="token punctuation">,</span>
+  start<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  end<span class="token punctuation">:</span> <span class="token number">35</span><span class="token punctuation">,</span>
+  id<span class="token punctuation">:</span> Identifier<span class="token punctuation">,</span>
+  expression<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  generator<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  params<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> element<span class="token punctuation">]</span><span class="token punctuation">,</span>
+  body<span class="token punctuation">:</span> BlockStatement
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="_11-使用babel-loader会有哪些问题？可以怎样优化？"><a href="#_11-使用babel-loader会有哪些问题？可以怎样优化？" class="header-anchor">#</a> 11 使用babel-loader会有哪些问题？可以怎样优化？</h2> <ol><li>会使得编译很慢。解决办法是可以在<code>webpack</code>的<code>babel-loader</code>配置中使用<code>exclude</code>这个可选项来去除一些不需要编译的文件夹(例如<code>node_modules</code>和<code>bower_components</code>)，另一种可以设置<code>cacheDirectory</code>选项为<code>true</code>, 开启缓存, 转译的结果将会缓存到文件系统中, 这样使<code>babel-loader</code>至少提速两倍(代码量越多效果应该越明显)。</li> <li><code>babel-loader</code>使得打包文件体积过大。Babel 对一些公共方法使用了非常小的辅助代码, 比如 <code>_extend</code>.默认情况下会被添加到每一个需要它的文件中, 所以会导致打包文件体积过大.解决办法: 引入<code>babel runtime</code>作为一个单独的模块, 来避免重复。也就是可以使用<code>@babel/plugin-transform-runtime</code>和<code>babel-runtime</code>。</li></ol> <h2 id="_12-babel-原理"><a href="#_12-babel-原理" class="header-anchor">#</a> 12 Babel 原理</h2> <blockquote><p><code>babel</code> 的编译过程分为三个阶段：<strong>parsing</strong>、<strong>transforming</strong>、<strong>generating</strong>，以 ES6 编译为 ES5 作为例子：</p></blockquote> <ol><li><code>ES6</code> 代码输入；</li> <li><code>babylon</code> 进行解析得到 AST；</li> <li><code>plugin</code> 用 <code>babel-traverse</code> 对 <code>AST</code>树进行遍历编译，得到新的 <code>AST</code>树；</li> <li>用 <code>babel-generator</code> 通过 <code>AST</code>树生成 <code>ES5</code> 代码。</li></ol> <p><a href="http://interview.poetries.top/principle-docs/webpack/05-Babel%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8.html" target="_blank" rel="noopener noreferrer">Babel原理及其使用<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="_13-babel是如何编译class的？"><a href="#_13-babel是如何编译class的？" class="header-anchor">#</a> 13 Babel是如何编译Class的？</h2> <p>就拿下面的类来说：</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">class</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> name <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function-variable function">getSex</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token string">'boy'</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">getName</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>name
+  <span class="token punctuation">}</span>
+  <span class="token keyword">static</span> <span class="token function">getLook</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token string">'sunshine'</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>当我们在使用<code>babel</code>的这些<code>plugin</code>或者使用<code>preset</code>的时候，有一个配置属性<code>loose</code>它默认是为<code>false</code>，在这样的条件下：</p> <p><code>Class</code>编译后：</p> <ul><li>总体来说<code>Class</code>会被封装成一个<code>IIFE</code>立即执行函数</li> <li>立即执行函数返回的是一个与类同名的构造函数</li> <li>实例属性和方法定义在构造函数内(如<code>name</code>和<code>getSex()</code>)</li> <li>类内部声明的属性方法(<code>getName</code>)和静态属性方法(<code>getLook</code>)是会被<code>Object.defineProperty</code>所处理，将其可枚举属性设置为<code>false</code></li></ul> <p>编译后的代码：</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token string">&quot;use strict&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">_classCallCheck</span><span class="token punctuation">(</span><span class="token parameter">instance<span class="token punctuation">,</span> Constructor</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>instance <span class="token keyword">instanceof</span> <span class="token class-name">Constructor</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">TypeError</span><span class="token punctuation">(</span><span class="token string">&quot;Cannot call a class as a function&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">_defineProperties</span><span class="token punctuation">(</span><span class="token parameter">target<span class="token punctuation">,</span> props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> props<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> descriptor <span class="token operator">=</span> props<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    descriptor<span class="token punctuation">.</span>enumerable <span class="token operator">=</span> descriptor<span class="token punctuation">.</span>enumerable <span class="token operator">||</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    descriptor<span class="token punctuation">.</span>configurable <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">&quot;value&quot;</span> <span class="token keyword">in</span> descriptor<span class="token punctuation">)</span> descriptor<span class="token punctuation">.</span>writable <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    Object<span class="token punctuation">.</span><span class="token function">defineProperty</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> descriptor<span class="token punctuation">.</span>key<span class="token punctuation">,</span> descriptor<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">_createClass</span><span class="token punctuation">(</span><span class="token parameter">Constructor<span class="token punctuation">,</span> protoProps<span class="token punctuation">,</span> staticProps</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>protoProps<span class="token punctuation">)</span> <span class="token function">_defineProperties</span><span class="token punctuation">(</span><span class="token class-name">Constructor</span><span class="token punctuation">.</span>prototype<span class="token punctuation">,</span> protoProps<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>staticProps<span class="token punctuation">)</span> <span class="token function">_defineProperties</span><span class="token punctuation">(</span>Constructor<span class="token punctuation">,</span> staticProps<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> Constructor<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> Person <span class="token operator">=</span> <span class="token comment">/*#__PURE__*/</span> <span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">function</span> <span class="token function">Person</span><span class="token punctuation">(</span><span class="token parameter">_ref</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> name <span class="token operator">=</span> _ref<span class="token punctuation">.</span>name<span class="token punctuation">;</span>
+
+    <span class="token function">_classCallCheck</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> Person<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function-variable function">getSex</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token string">&quot;boy&quot;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">_createClass</span><span class="token punctuation">(</span>
+    Person<span class="token punctuation">,</span>
+    <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        key<span class="token punctuation">:</span> <span class="token string">&quot;getName&quot;</span><span class="token punctuation">,</span>
+        <span class="token function-variable function">value</span><span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        key<span class="token punctuation">:</span> <span class="token string">&quot;getLook&quot;</span><span class="token punctuation">,</span>
+        <span class="token function-variable function">value</span><span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token function">getLook</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">return</span> <span class="token string">&quot;sunshine&quot;</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> Person<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>为什么<code>Babel</code>对于类的处理会使用<code>Object.defineProperty</code>这种形式呢？它和直接使用原型链有什么不同吗？</p> <ul><li>通过原型链声明的属性和方法是可枚举的，也就是可以被<code>for...of...</code>搜寻到</li> <li>而类内部声明的方法是不可枚举的</li></ul> <p>所以，babel为了符合ES6真正的语义，编译类时采取了<code>Object.defineProperty</code>来定义原型方法。</p> <p>但是可以通过设置<code>babel</code>的<code>loose</code>模式(宽松模式)为<code>true</code>，它会不严格遵循ES6的语义，而采取更符合我们平常编写代码时的习惯去编译代码，在<code>.babelrc</code>中可以如下设置：</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token punctuation">{</span>
+  <span class="token string">&quot;presets&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">&quot;env&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token string">&quot;loose&quot;</span><span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>比如上述的<code>Person</code>类的属性方法将会编译成直接在原型链上声明方法：</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token string">&quot;use strict&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> Person <span class="token operator">=</span> <span class="token comment">/*#__PURE__*/</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">function</span> <span class="token function">Person</span><span class="token punctuation">(</span><span class="token parameter">_ref</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> name <span class="token operator">=</span> _ref<span class="token punctuation">.</span>name<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function-variable function">getSex</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token string">'boy'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">var</span> _proto <span class="token operator">=</span> <span class="token class-name">Person</span><span class="token punctuation">.</span>prototype<span class="token punctuation">;</span>
+
+  _proto<span class="token punctuation">.</span><span class="token function-variable function">getName</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  Person<span class="token punctuation">.</span><span class="token function-variable function">getLook</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token function">getLook</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token string">'sunshine'</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> Person<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p><strong>总结</strong></p> <ul><li><p>当使用<code>Babel</code>编译时默认的<code>loose</code>为<code>false</code>，即非宽松模式</p></li> <li><p>无论哪种模式，转换后的定义在类内部的属性方法是被定义在构造函数的原型对象上的；静态属性被定义到构造函数上</p></li> <li><p>只不过非宽松模式时，这些属性方法会被<code>_createClass</code>函数处理，函数内通过<code>Object.defineProperty()</code>设置属性的可枚举值<code>enumerable</code>为<code>false</code></p></li> <li><p>由于在<code>_createClass</code>函数内使用了<code>Object</code>，所以非宽松模式下是会产生副作用的，而宽松模式下不会。</p></li> <li><p><code>webpack</code>中的<code>UglifyJS</code>依旧还是会将宽松模式认为是有副作用的，而<code>rollup</code>有<strong>程序流程分析</strong>的功能，可以更好的判断代码是否真正产生副作用，所以它会认为宽松模式没有副作用。</p> <p>(副作用大致理解为：一个函数会、或者可能会对函数外部变量产生影响的行为。)</p></li></ul> <h2 id="_14-babel-polyfill是什么"><a href="#_14-babel-polyfill是什么" class="header-anchor">#</a> 14 babel-polyfill是什么</h2> <p>ployfill是补丁</p> <p><img src="http://img-repo.poetries.top/images/20210409165913.png" alt=""></p> <p><code>babel-polyfill</code>现在已经被弃用</p> <ul><li><code>babel 7.4</code>之后弃用<code>babel-polyfill</code></li> <li>直接推荐使用<code>core-js</code>和<code>regenerator</code></li></ul> <p><strong>babel-polyfill按需引入</strong></p> <ul><li>文件较大</li> <li>只用一部分功能，无需全部引入</li> <li>配置按需引入</li></ul> <p><img src="http://img-repo.poetries.top/images/20210409170227.png" alt=""> <img src="http://img-repo.poetries.top/images/20210409170237.png" alt=""></p> <p><strong>babel-polyfill的问题</strong></p> <ul><li>会污染全局环境</li> <li>如果做一个独立的web系统，无碍</li> <li>如果做一个第三个的lib，会有问题</li></ul> <p><img src="http://img-repo.poetries.top/images/20210409170414.png" alt=""> <img src="http://img-repo.poetries.top/images/20210409170424.png" alt=""></p> <h2 id="_15-tree-shaking原理是什么"><a href="#_15-tree-shaking原理是什么" class="header-anchor">#</a> 15 Tree Shaking原理是什么</h2> <h3 id="对tree-shaking的了解"><a href="#对tree-shaking的了解" class="header-anchor">#</a> 对tree-shaking的了解</h3> <p><strong>作用：</strong></p> <p>它表示在打包的时候会去除一些无用的代码</p> <p><strong>原理</strong>：</p> <ul><li><code>ES6</code>的模块引入是静态分析的，所以在编译时能正确判断到底加载了哪些模块</li> <li>分析程序流，判断哪些变量未被使用、引用，进而删除此代码</li></ul> <p><strong>特点：</strong></p> <ul><li>在生产模式下它是默认开启的，但是由于经过<code>babel</code>编译全部模块被封装成<code>IIFE</code>，它存在副作用无法被<code>tree-shaking</code>掉</li> <li>可以在<code>package.json</code>中配置<code>sideEffects</code>来指定哪些文件是有副作用的。它有两种值，一个是布尔类型，如果是<code>false</code>则表示所有文件都没有副作用；如果是一个数组的话，数组里的文件路径表示改文件有副作用</li> <li><code>rollup</code>和<code>webpack</code>中对<code>tree-shaking</code>的层度不同，例如对<code>babel</code>转译后的<code>class</code>，如果<code>babel</code>的转译是宽松模式下的话(也就是<code>loose</code>为<code>true</code>)，<code>webpack</code>依旧会认为它有副作用不会<code>tree-shaking</code>掉，而<code>rollup</code>会。这是因为<code>rollup</code>有程序流分析的功能，可以更好的判断代码是否真正会产生副作用。</li></ul> <h3 id="原理"><a href="#原理" class="header-anchor">#</a> 原理</h3> <ul><li><code>ES6 Module</code> 引入进行静态分析，故而编译的时候正确判断到底加载了那些模块</li> <li>静态分析程序流，判断那些模块和变量未被使用或者引用，进而删除对应代码</li></ul> <blockquote><p>依赖于<code>import/export</code></p></blockquote> <p>通过导入所有的包后再进行条件获取。如下：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> foo <span class="token keyword">from</span> <span class="token string">&quot;foo&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> bar <span class="token keyword">from</span> <span class="token string">&quot;bar&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span><span class="token punctuation">(</span>condition<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// foo.xxxx</span>
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token comment">// bar.xxx</span>
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><p>ES6的import语法完美可以使用tree shaking，因为可以在代码不运行的情况下就能分析出不需要的代码</p></blockquote> <p><strong>CommonJS的动态特性模块意味着tree shaking不适用</strong>。因为它是不可能确定哪些模块实际运行之前是需要的或者是不需要的。在ES6中，进入了完全静态的导入语法：import。这也意味着下面的导入是不可行的：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 不可行，ES6 的import是完全静态的</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>condition<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    myDynamicModule <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;foo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    myDynamicModule <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;bar&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="_16-vite了解吗"><a href="#_16-vite了解吗" class="header-anchor">#</a> 16 Vite了解吗</h2> <blockquote><p>是一个基于浏览器原生ES模块导入的开发服务器，在开发环境下，利用浏览器去解析import，在服务器端按需编译返回，完全跳过了打包这个概念，服务器随启随用。同时不仅对Vue文件提供了支持，还支持热更新，而且热更新的速度不会随着模块增多而变慢。在生产环境下使用Rollup打包</p></blockquote> <p><strong>Vite 特点</strong></p> <ul><li>快速的冷启动</li> <li>按需编译</li> <li>即时热模块更新</li></ul> <p><strong>生产环境需要打包吗</strong></p> <blockquote><p>可以不打包，需要启动server，需要浏览器支持</p></blockquote> <p><img src="http://img-repo.poetries.top/images/20210315165345.png" alt=""></p></div> <!----> <div class="readMore-wrapper"><span class="readMore">阅读全文</span></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/FE-Interview-Questions/excellent-docs/8-Node模块.html" class="prev">8 Node模块</a></span> <span class="next"><a href="/FE-Interview-Questions/excellent-docs/10-移动多端开发.html">10 移动多端开发</a>
+      →
+    </span></p></div>  <div class="el-dialog__wrapper" style="display:none;"><div role="dialog" aria-modal="true" aria-label="请先阅读购买协议" class="el-dialog el-dialog--center" style="margin-top:15vh;width:30%;"><div class="el-dialog__header"><span class="el-dialog__title">请先阅读购买协议</span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><div class="el-dialog__footer"><span class="dialog-footer"><button disabled="disabled" type="button" class="el-button el-button--danger is-disabled" style="width:100%;"><!----><!----><span>我已阅读（8s）</span></button></span></div></div></div> <div class="el-dialog__wrapper" style="display:none;"><div role="dialog" aria-modal="true" aria-label="付费阅读" class="el-dialog" style="margin-top:15vh;width:30%;"><div class="el-dialog__header"><span class="el-dialog__title">付费阅读</span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><div class="el-dialog__footer"><span class="dialog-footer"><button disabled="disabled" type="button" class="el-button el-button--danger is-disabled" style="width:100%;"><!----><!----><span>确 定</span></button></span></div></div></div> <div class="el-dialog__wrapper" style="display:none;"><div role="dialog" aria-modal="true" aria-label="dialog" class="el-dialog" style="margin-top:15vh;width:30%;"><div class="el-dialog__header"><span class="el-dialog__title"></span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><!----></div></div> <img src="data:image/png;base64,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" class="theme-float-btn"></main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/FE-Interview-Questions/assets/js/app.13d69697.js" defer></script><script src="/FE-Interview-Questions/assets/js/6.b48232c6.js" defer></script><script src="/FE-Interview-Questions/assets/js/3.9d86cf58.js" defer></script><script src="/FE-Interview-Questions/assets/js/83.df1321d3.js" defer></script><script src="/FE-Interview-Questions/assets/js/11.fb060006.js" defer></script>
+  </body>
+</html>

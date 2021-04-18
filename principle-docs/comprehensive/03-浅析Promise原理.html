@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>一、Promise基础用法 | 面试指南</title>
+    <meta name="description" content="前端面试指南，前端面试题整理，按模块分类整理总结，打造最全面的前端面试题">
+    <link rel="icon" href="/FE-Interview-Questions/logo.png">
+  <link rel="manifest" href="/FE-Interview-Questions/manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="/FE-Interview-Questions/icons/apple-touch-icon-152x152.png">
+  <link rel="mask-icon" href="/FE-Interview-Questions/icons/safari-pinned-tab.svg" color="#3eaf7c">
+  <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+  <meta name="apple-mobile-web-app-status-bar-style">
+    
+    <link rel="preload" href="/FE-Interview-Questions/assets/css/0.styles.0591d029.css" as="style"><link rel="preload" href="/FE-Interview-Questions/assets/js/app.13d69697.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/6.b48232c6.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/3.9d86cf58.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/88.fb19aa58.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/11.fb060006.js" as="script"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/1.9e1b498f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/10.fbc04ea9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/100.c06a0f53.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/101.54402ede.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/102.d3860a7d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/103.51a83ab2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/104.b19afdd3.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/105.aada2418.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/106.4ce7d3b7.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/107.ca87a327.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/108.df939701.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/109.9f0c8605.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/110.19cb01b2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/111.51fc9fa1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/112.ab20caec.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/113.6c12e76f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/114.48e1a019.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/115.f291caf1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/116.100da54b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/117.9b579bae.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/118.89da516f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/119.c70b5105.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/12.9774db85.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/120.fcf3186f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/13.ac14541c.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/14.155007f0.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/15.2d9ec2b2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/16.aec442e8.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/17.59c81a6b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/18.c38ff446.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/19.8203bd99.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/20.103004c4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/21.1e6e08c9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/22.5abbfd40.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/23.4cd5fd4d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/24.602403ee.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/25.da971f83.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/26.e9e76559.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/27.6d18f825.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/28.58923361.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/29.81e33cc0.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/30.7a4491ed.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/31.4275e9d2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/32.6e6c282b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/33.35641348.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/34.3d76a237.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/35.fb57a983.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/36.78f70288.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/37.ed0997e2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/38.0ece0665.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/39.3b4241bb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/4.cda2fc13.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/40.dd7b6d84.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/41.05fcd6ed.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/42.24fc3ac4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/43.21f8f3ec.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/44.ac552dd9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/45.b2d653cc.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/46.8bf4b340.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/47.57a13e6c.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/48.8ef881a7.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/49.b76df872.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/5.eb1f29dc.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/50.f04492e5.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/51.e000ebea.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/52.bfbd5e6e.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/53.fc0a60dd.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/54.a798cd42.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/55.5ccb6ae1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/56.1605b000.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/57.79350f4e.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/58.dcff3859.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/59.a366020b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/60.199914fb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/61.4d471001.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/62.07f7a685.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/63.3774b497.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/64.d8437f45.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/65.eaf10ccb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/66.74665605.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/67.072c35ca.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/68.764ab8cb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/69.6a27592a.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/7.aa832117.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/70.2e7f3527.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/71.c6365fbe.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/72.15cfe1be.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/73.d56ee920.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/74.f848ccac.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/75.905f5556.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/76.49d98a04.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/77.4b62003f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/78.5a4046ff.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/79.eb3ec067.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/8.bccf8145.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/80.bd38c9e9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/81.dfdea12a.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/82.4439fbe3.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/83.df1321d3.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/84.23d01b47.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/85.c983047a.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/86.29b0f2d4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/87.12e2e192.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/89.ee2be7d8.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/9.ce1180ae.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/90.479f4d9d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/91.619e0c8d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/92.ae858703.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/93.f90a7ae1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/94.8894adb4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/95.683396f3.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/96.f65dc164.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/97.75bd77e0.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/98.892b530a.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/99.dc5626e1.js">
+    <link rel="stylesheet" href="/FE-Interview-Questions/assets/css/0.styles.0591d029.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/FE-Interview-Questions/" class="home-link router-link-active"><img src="/FE-Interview-Questions/logo.png" alt="面试指南" class="logo"> <span class="site-name can-hide">面试指南</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!----> <div style="padding-left:1.5rem;"><div class="qr"><img src="/FE-Interview-Questions/assets/img/qr.ee193d28.jpg" alt="poetries" width="120" height="120" loading="lazy"> <p class="we-intro">
+    关注公众号，获取更多资讯
+  </p></div></div> <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Vue</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FE-Interview-Questions/principle-docs/vue/01-从源码解读Vue生命周期.html" class="sidebar-link">从源码解读Vue生命周期</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/02-组件的本质.html" class="sidebar-link">组件的本质</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/03-有状态组件的设计.html" class="sidebar-link">有状态组件的设计</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/04-设计 VNode.html" class="sidebar-link">设计 VNode</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/05-辅助创建 VNode 的 h 函数.html" class="sidebar-link">辅助创建 VNode 的 h 函数</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/06-自定义渲染器和异步渲染.html" class="sidebar-link">自定义渲染器和异步渲染</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/07-渲染器之挂载.html" class="sidebar-link">渲染器之挂载</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/08-渲染器的核心 Diff 算法.html" class="sidebar-link">渲染器的核心 Diff 算法</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/09-渲染器之patch.html" class="sidebar-link">渲染器之patch</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/10-图解 Vue 响应式原理.html" class="sidebar-link">图解 Vue 响应式原理</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/11-图解 Vue 异步更新.html" class="sidebar-link">图解 Vue 异步更新</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/12-剖析 Vue 内部运行机制.html" class="sidebar-link">剖析 Vue 内部运行机制</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/13-vue响应式原理模拟.html" class="sidebar-link">vue响应式原理模拟</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/14-vue状态管理之vuex.html" class="sidebar-link">vue状态管理之vuex</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>React</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FE-Interview-Questions/principle-docs/react/01-React-router原理.html" class="sidebar-link">React</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html" class="sidebar-link">Dva总结</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/03-MobX总结.html" class="sidebar-link">MobX总结</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/04-浅析redux-saga中间件及用法.html" class="sidebar-link">浅析redux</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/05-Redux之浅析中间件.html" class="sidebar-link">Redux之浅析中间件</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/06-Redux之源码分析.html" class="sidebar-link">Redux之源码分析</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/07-Redux之异步Action及操作.html" class="sidebar-link">Redux之异步Action及操作</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Webpack</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FE-Interview-Questions/principle-docs/webpack/01-Webpack4打包机制原理解析.html" class="sidebar-link">Webpack4打包机制原理解析</a></li><li><a href="/FE-Interview-Questions/principle-docs/webpack/02-webpack中的HMR热更新原理剖析.html" class="sidebar-link">webpack中的HMR热更新原理剖析</a></li><li><a href="/FE-Interview-Questions/principle-docs/webpack/03-从源码窥探Webpack4.x原理.html" class="sidebar-link">从源码窥探Webpack4.x原理</a></li><li><a href="/FE-Interview-Questions/principle-docs/webpack/04-实现webpack小型打包工具.html" class="sidebar-link">实现webpack小型打包工具</a></li><li><a href="/FE-Interview-Questions/principle-docs/webpack/05-Babel原理及其使用.html" class="sidebar-link">Babel原理及其使用</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>综合</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/01-虚拟DOM原理分析.html" class="sidebar-link">虚拟DOM原理分析</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/02-setTimeout实现原理和使用注意.html" class="sidebar-link">setTimeout实现原理和使用注意</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/03-浅析Promise原理.html" class="active sidebar-link">浅析Promise原理</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/comprehensive/03-浅析Promise原理.html#一、promise基础用法" class="sidebar-link">一、Promise基础用法</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/comprehensive/03-浅析Promise原理.html#_1-1-基本用法" class="sidebar-link">1.1 基本用法</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/comprehensive/03-浅析Promise原理.html#_1-2-promise捕获错误" class="sidebar-link">1.2 promise捕获错误</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/comprehensive/03-浅析Promise原理.html#_1-3-常用的promise方法" class="sidebar-link">1.3 常用的promise方法</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/comprehensive/03-浅析Promise原理.html#_1-4-async-await简化写法" class="sidebar-link">1.4 Async/await简化写法</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/comprehensive/03-浅析Promise原理.html#_1-5-generator" class="sidebar-link">1.5 Generator</a></li></ul></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/comprehensive/03-浅析Promise原理.html#二、promise实现原理剖析" class="sidebar-link">二、Promise实现原理剖析</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/comprehensive/03-浅析Promise原理.html#_2-1-promise标准" class="sidebar-link">2.1 Promise标准</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/comprehensive/03-浅析Promise原理.html#_2-2-实现promise" class="sidebar-link">2.2 实现Promise</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/comprehensive/03-浅析Promise原理.html#_2-3-极简promise雏形" class="sidebar-link">2.3 极简promise雏形</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/comprehensive/03-浅析Promise原理.html#_2-4-加入延时机制" class="sidebar-link">2.4 加入延时机制</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/comprehensive/03-浅析Promise原理.html#_2-5-加入状态" class="sidebar-link">2.5 加入状态</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/comprehensive/03-浅析Promise原理.html#_2-6-链式promise" class="sidebar-link">2.6 链式Promise</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/comprehensive/03-浅析Promise原理.html#_2-7-失败处理" class="sidebar-link">2.7 失败处理</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/comprehensive/03-浅析Promise原理.html#_2-8-异常处理" class="sidebar-link">2.8 异常处理</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/comprehensive/03-浅析Promise原理.html#_2-9-完整实现" class="sidebar-link">2.9 完整实现</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/comprehensive/03-浅析Promise原理.html#_2-10-小结" class="sidebar-link">2.10 小结</a></li></ul></li></ul></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/04-浏览器渲染原理.html" class="sidebar-link">浏览器渲染原理</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/05-前端面试之MVVM浅析.html" class="sidebar-link">前端面试之MVVM浅析</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/06-前端面试之组件化.html" class="sidebar-link">前端面试之组件化</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/07-虚拟DOM（一）.html" class="sidebar-link">虚拟DOM（一）</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/08-虚拟DOM（二）.html" class="sidebar-link">虚拟DOM（二）</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/09-前端性能之Performance.html" class="sidebar-link">前端性能之Performance</a></li></ul></section></li></ul> </aside> <main class="page"> <div id="container" class="theme-default-content lock"><div class="content__default"><h2 id="一、promise基础用法"><a href="#一、promise基础用法" class="header-anchor">#</a> 一、Promise基础用法</h2> <h3 id="_1-1-基本用法"><a href="#_1-1-基本用法" class="header-anchor">#</a> 1.1 基本用法</h3> <div class="language- extra-class"><pre class="language-text"><code>new Promise(function(resolve, reject) {
+    //待处理的异步逻辑
+    //处理结束后，调用resolve或reject方法
+})
+</code></pre></div><blockquote><ul><li>新建一个<code>promise</code>很简单，只需要<code>new</code>一个<code>promise</code>对象即可。所以<code>promise</code>本质上就是一个函数，它接受一个函数作为参数，并且会返回<code>promise</code>对象，这就给链式调用提供了基础</li> <li>其实<code>Promise</code>函数的使命，就是构建出它的实例，并且负责帮我们管理这些实例。而这些实例有以下三种状态：</li></ul></blockquote> <ul><li><code>pending</code>: 初始状态，位履行或拒绝</li> <li><code>fulfilled</code>: 意味着操作成功完成</li> <li><code>rejected</code>: 意味着操作失败</li></ul> <blockquote><p><code>pending</code> 状态的 <code>Promise</code>对象可能以 <code>fulfilled</code>状态返回了一个值，也可能被某种理由（异常信息）拒绝（<code>reject</code>）了。当其中任一种情况出现时，<code>Promise</code> 对象的 <code>then</code> 方法绑定的处理方法（handlers）就会被调用，then方法分别指定了<code>resolve</code>方法和<code>reject</code>方法的回调函数</p></blockquote> <p><img src="https://mengera88.github.io/images/promises.png" alt="img"></p> <div class="language- extra-class"><pre class="language-text"><code>var promise = new Promise(function(resolve, reject) {
+  if (/* 异步操作成功 */){
+    resolve(value);
+  } else {
+    reject(error);
+  }
+});
+promise.then(function(value) {
+  // 如果调用了resolve方法，执行此函数
+}, function(value) {
+  // 如果调用了reject方法，执行此函数
+});
+</code></pre></div><blockquote><p>上述代码很清晰的展示了<code>promise</code>对象运行的机制。下面再看一个示例：</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>var getJSON = function(url) {
+  var promise = new Promise(function(resolve, reject){
+    var client = new XMLHttpRequest();
+    client.open(&quot;GET&quot;, url);
+    client.onreadystatechange = handler;
+    client.responseType = &quot;json&quot;;
+    client.setRequestHeader(&quot;Accept&quot;, &quot;application/json&quot;);
+    client.send();
+    function handler() {
+      if (this.status === 200) { 
+              resolve(this.response); 
+          } else { 
+              reject(new Error(this.statusText)); 
+          }
+    };
+  });
+  return promise;
+};
+getJSON(&quot;/posts.json&quot;).then(function(json) {
+  console.log('Contents: ' + json);
+}, function(error) {
+  console.error('出错了', error);
+});
+</code></pre></div><blockquote><p>上面代码中，<code>resolve</code>方法和<code>reject</code>方法调用时，都带有参数。它们的参数会被传递给回调函数。<code>reject</code>方法的参数通常是<code>Error</code>对象的实例，而<code>resolve</code>方法的参数除了正常的值以外，还可能是另一个<code>Promise</code>实例，比如像下面这样。</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>var p1 = new Promise(function(resolve, reject){
+  // ... some code
+});
+var p2 = new Promise(function(resolve, reject){
+  // ... some code
+  resolve(p1);
+})
+</code></pre></div><blockquote><p>上面代码中，<code>p1</code>和<code>p2</code>都是<code>Promise</code>的实例，但是<code>p2</code>的<code>resolve</code>方法将<code>p1</code>作为参数，这时<code>p1</code>的状态就会传递给<code>p2</code>。如果调用的时候，<code>p1</code>的状态是<code>pending</code>，那么<code>p2</code>的回调函数就会等待<code>p1</code>的状态改变；如果<code>p1</code>的状态已经是<code>fulfilled</code>或者<code>rejected</code>，那么<code>p2</code>的回调函数将会立刻执行</p></blockquote> <h3 id="_1-2-promise捕获错误"><a href="#_1-2-promise捕获错误" class="header-anchor">#</a> 1.2 promise捕获错误</h3> <blockquote><p><code>Promise.prototype.catch</code>方法是<code>Promise.prototype.then(null, rejection)</code>的别名，用于指定发生错误时的回调函数</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>getJSON(&quot;/visa.json&quot;).then(function(result) {
+  // some code
+}).catch(function(error) {
+  // 处理前一个回调函数运行时发生的错误
+  console.log('出错啦！', error);
+});
+</code></pre></div><blockquote><p><code>Promise</code>对象的错误具有“冒泡”性质，会一直向后传递，直到被捕获为止。也就是说，错误总是会被下一个<code>catch</code>语句捕获</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>getJSON(&quot;/visa.json&quot;).then(function(json) {
+  return json.name;
+}).then(function(name) {
+  // proceed
+}).catch(function(error) {
+    //处理前面任一个then函数抛出的错误
+});
+</code></pre></div><h3 id="_1-3-常用的promise方法"><a href="#_1-3-常用的promise方法" class="header-anchor">#</a> 1.3 常用的promise方法</h3> <p><strong>Promise.all方法</strong></p> <blockquote><p><code>Promise.all</code>方法用于将多个<code>Promise</code>实例，包装成一个新的<code>Promise</code>实例</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>var p = Promise.all([p1,p2,p3]);
+</code></pre></div><ul><li>上面代码中，<code>Promise.all</code>方法接受一个数组作为参数，<code>p1</code>、<code>p2</code>、<code>p3</code>都是<code>Promise</code>对象的实例。（<code>Promise.all</code>方法的参数不一定是数组，但是必须具有<code>iterator</code>接口，且返回的每个成员都是<code>Promise</code>实例。）</li></ul> <blockquote><p><code>p</code>的状态由<code>p1</code>、<code>p2</code>、<code>p3</code>决定，分成两种情况</p></blockquote> <ul><li>只有<code>p1</code>、<code>p2</code>、<code>p3</code>的状态都变成<code>fulfilled</code>，<code>p</code>的状态才会变成<code>fulfilled</code>，此时<code>p1</code>、<code>p2</code>、<code>p3</code>的返回值组成一个数组，传递给<code>p</code>的回调函数</li> <li>只要<code>p1</code>、<code>p2</code>、<code>p3</code>之中有一个被<code>rejected</code>，<code>p</code>的状态就变成<code>rejected</code>，此时第一个被<code>reject</code>的实例的返回值，会传递给p的回调函数</li></ul> <div class="language- extra-class"><pre class="language-text"><code>// 生成一个Promise对象的数组
+var promises = [2, 3, 5, 7, 11, 13].map(function(id){
+  return getJSON(&quot;/get/addr&quot; + id + &quot;.json&quot;);
+});
+Promise.all(promises).then(function(posts) {
+  // ...  
+}).catch(function(reason){
+  // ...
+});
+</code></pre></div><p><strong>Promise.race方法</strong></p> <blockquote><p><code>Promise.race</code>方法同样是将多个<code>Promise</code>实例，包装成一个新的<code>Promise</code>实例。</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>var p = Promise.race([p1,p2,p3]);
+</code></pre></div><blockquote><p>上面代码中，只要<code>p1</code>、<code>p2</code>、<code>p3</code>之中有一个实例率先改变状态，p的状态就跟着改变。那个率先改变的Promise实例的返回值，就传递给p的返回值</p></blockquote> <ul><li>如果<code>Promise.all</code>方法和<code>Promise.race</code>方法的参数，不是<code>Promise</code>实例，就会先调用下面讲到的<code>Promise.resolve</code>方法，将参数转为<code>Promise</code>实例，再进一步处理</li></ul> <p><strong>Promise.resolve</strong></p> <blockquote><p>有时需要将现有对象转为<code>Promise</code>对象，<code>Promise.resolve</code>方法就起到这个作用</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>var jsPromise = Promise.resolve($.ajax('/whatever.json'));
+</code></pre></div><blockquote><p>上面代码将<code>jQuery</code>生成<code>deferred</code>对象，转为一个新的<code>ES6</code>的<code>Promise</code>对象</p></blockquote> <ul><li>如果<code>Promise.resolve</code>方法的参数，不是具有<code>then</code>方法的对象（又称<code>thenable</code>对象），则返回一个新的<code>Promise</code>对象，且它的状态为<code>fulfilled</code>。</li></ul> <div class="language- extra-class"><pre class="language-text"><code>var p = Promise.resolve('Hello');
+p.then(function (s){
+  console.log(s)
+});
+// Hello
+</code></pre></div><ul><li>上面代码生成一个新的<code>Promise</code>对象的实例<code>p</code>，它的状态为<code>fulfilled</code>，所以回调函数会立即执行，<code>Promise.resolve</code>方法的参数就是回调函数的参数</li> <li>如果<code>Promise.resolve</code>方法的参数是一个<code>Promise</code>对象的实例，则会被原封不动地返回</li> <li><code>Promise.reject(reason)</code>方法也会返回一个新的<code>Promise</code>实例，该实例的状态为<code>rejected</code>。<code>Promise.reject</code>方法的参数<code>reason</code>，会被传递给实例的回调函数</li></ul> <div class="language- extra-class"><pre class="language-text"><code>var p = Promise.reject('出错啦');
+p.then(null, function (error){
+  console.log(error)
+});
+// 出错了
+</code></pre></div><h3 id="_1-4-async-await简化写法"><a href="#_1-4-async-await简化写法" class="header-anchor">#</a> 1.4 Async/await简化写法</h3> <div class="language- extra-class"><pre class="language-text"><code>function getDataAsync (url) {
+    return new Promise((resolve, reject) =&gt; {
+        setTimeout(() =&gt; {
+            var res = {
+                url: url,
+                data: Math.random()
+            }
+            resolve(res)
+        }, 1000)
+    })
+}
+async function getData () {
+    var res1 = await getDataAsync('/page/1?param=123')
+    console.log(res1)
+    var res2 = await getDataAsync(`/page/2?param=${res1.data}`)
+    console.log(res2)
+    var res3 = await getDataAsync(`/page/2?param=${res2.data}`)
+    console.log(res3)
+}
+</code></pre></div><blockquote><p><code>async/await</code> 是基于 <code>Promise</code> 的，因为使用 <code>async</code> 修饰的方法最终返回一个 <code>Promise</code>， 实际上，<code>async/await</code> 可以看做是使用 <code>Generator</code> 函数处理异步的语法糖，我们来看看如何使用 <code>Generator</code> 函数处理异步</p></blockquote> <h3 id="_1-5-generator"><a href="#_1-5-generator" class="header-anchor">#</a> 1.5 Generator</h3> <p>首先异步函数依然是：</p> <div class="language- extra-class"><pre class="language-text"><code>function getDataAsync (url) {
+    return new Promise((resolve, reject) =&gt; {
+        setTimeout(() =&gt; {
+            var res = {
+                url: url,
+                data: Math.random()
+            }
+            resolve(res)
+        }, 1000)
+    })
+}
+</code></pre></div><blockquote><p>使用 <code>Generator</code> 函数可以这样写</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>function * getData () {
+    var res1 = yield getDataAsync('/page/1?param=123')
+    console.log(res1)
+    var res2 = yield getDataAsync(`/page/2?param=${res1.data}`)
+    console.log(res2)
+    var res3 = yield getDataAsync(`/page/2?param=${res2.data}`)
+    console.log(res3))
+}
+</code></pre></div><p>然后我们这样逐步执行</p> <div class="language- extra-class"><pre class="language-text"><code>var g = getData()
+g.next().value.then(res1 =&gt; {
+    g.next(res1).value.then(res2 =&gt; {
+        g.next(res2).value.then(() =&gt; {
+            g.next()
+        })
+    })
+})
+</code></pre></div><blockquote><p>上面的代码，我们逐步调用遍历器的 <code>next()</code> 方法，由于每一个 <code>next()</code> 方法返回值的 <code>value</code> 属性为一个 <code>Promise</code> 对象，所以我们为其添加 <code>then</code> 方法， 在 <code>then</code>方法里面接着运行 <code>next</code> 方法挪移遍历器指针，直到 <code>Generator</code> 函数运行完成，实际上，这个过程我们不必手动完成，可以封装成一个简单的执行器</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>function run (gen) {
+    var g = gen()
+
+    function next (data) {
+        var res = g.next(data)
+        if (res.done) return res.value
+        res.value.then((data) =&gt; {
+            next(data)
+        })
+    }
+
+    next()
+
+}
+</code></pre></div><blockquote><p><code>run</code>方法用来自动运行异步的 <code>Generator</code> 函数，其实就是一个递归的过程调用的过程。这样我们就不必手动执行 <code>Generator</code> 函数了。 有了 <code>run</code> 方法，我们只需要这样运行 getData 方法</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>run(getData)
+</code></pre></div><blockquote><p>这样，我们就可以把异步操作封装到 <code>Generator</code> 函数内部，使用 <code>run</code> 方法作为 <code>Generator</code> 函数的自执行器，来处理异步。其实我们不难发现， <code>async/await</code> 方法相比于 <code>Generator</code> 处理异步的方式，有很多相似的地方，只不过 <code>async/await</code> 在语义化方面更加明显，同时 <code>async/await</code> 不需要我们手写执行器，其内部已经帮我们封装好了，这就是为什么说 <code>async/await</code> 是 <code>Generator</code> 函数处理异步的语法糖了</p></blockquote> <h2 id="二、promise实现原理剖析"><a href="#二、promise实现原理剖析" class="header-anchor">#</a> 二、Promise实现原理剖析</h2> <h3 id="_2-1-promise标准"><a href="#_2-1-promise标准" class="header-anchor">#</a> 2.1 Promise标准</h3> <ul><li><code>Promise</code> 规范有很多，如<code>Promise/A</code>，<code>Promise/B</code>，<code>Promise/D</code>以及 <code>Promise/A</code> 的升级版 <code>Promise/A+</code>。<code>ES6</code>中采用了 <code>Promise/A+</code> 规范</li></ul> <p>中文版规范: <a href="http://www.ituring.com.cn/article/66566" target="_blank" rel="noopener noreferrer">Promises/A+规范(中文)<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><strong>Promise标准解读</strong></p> <ul><li>一个<code>promise</code>的当前状态只能是<code>pending</code>、<code>fulfilled</code>和<code>rejected</code>三种之一。状态改变只能是<code>pending</code>到<code>fulfilled</code>或者<code>pending</code>到<code>rejected</code>。状态改变不可逆</li> <li><code>promise</code>的<code>then</code>方法接收两个可选参数，表示该<code>promise</code>状态改变时的回调(<code>promise.then(onFulfilled, onRejected)</code>)。<code>then</code>方法返回一个<code>promise</code>。<code>then</code> 方法可以被同一个 <code>promise</code> 调用多次</li></ul> <h3 id="_2-2-实现promise"><a href="#_2-2-实现promise" class="header-anchor">#</a> 2.2 实现Promise</h3> <p><strong>构造函数</strong></p> <div class="language- extra-class"><pre class="language-text"><code>function Promise(resolver) {}
+</code></pre></div><p><strong>原型方法</strong></p> <div class="language- extra-class"><pre class="language-text"><code>Promise.prototype.then = function() {}
+Promise.prototype.catch = function() {}
+</code></pre></div><p><strong>静态方法</strong></p> <div class="language- extra-class"><pre class="language-text"><code>Promise.resolve = function() {}
+Promise.reject = function() {}
+Promise.all = function() {}
+Promise.race = function() {}
+</code></pre></div><h3 id="_2-3-极简promise雏形"><a href="#_2-3-极简promise雏形" class="header-anchor">#</a> 2.3 极简promise雏形</h3> <div class="language- extra-class"><pre class="language-text"><code>function Promise(fn) {
+    var value = null,
+        callbacks = [];  //callbacks为数组，因为可能同时有很多个回调
+    this.then = function (onFulfilled) {
+        callbacks.push(onFulfilled);
+    };
+    function resolve(value) {
+        callbacks.forEach(function (callback) {
+            callback(value);
+        });
+    }
+    fn(resolve);
+}
+</code></pre></div><p><strong>大致的逻辑是这样的</strong></p> <ul><li>调用<code>then</code>方法，将想要在<code>Promise</code>异步操作成功时执行的回调放入<code>callbacks</code>队列，其实也就是注册回调函数，可以向观察者模式方向思考</li> <li>创建<code>Promise</code>实例时传入的函数会被赋予一个函数类型的参数，即<code>resolve</code>，它接收一个参数<code>value</code>，代表异步操作返回的结果，当一步操作执行成功后，用户会调用<code>resolve</code>方法，这时候其实真正执行的操作是将<code>callbacks</code>队列中的回调一一执行</li></ul> <div class="language- extra-class"><pre class="language-text"><code>//例1
+function getUserId() {
+    return new Promise(function(resolve) {
+        //异步请求
+        http.get(url, function(results) {
+            resolve(results.id)
+        })
+    })
+}
+getUserId().then(function(id) {
+    //一些处理
+})
+// 结合例子1分析
+
+// fn 就是getUserId函数
+function Promise(fn) {
+    var value = null,
+        callbacks = [];  //callbacks为数组，因为可能同时有很多个回调
+    
+    // 当用户调用getUserId().then的时候开始注册传进来的回调函数
+    // onFulfilled就是例子中的function(id){}
+    // 把then的回调函数收集起来 在resolve的时候调用
+    this.then = function (onFulfilled) {
+        callbacks.push(onFulfilled);
+    };
+    
+    // value是fn函数执行后返回的值
+    function resolve(value) {
+        // callbacks是传给then的回调函数就是例子中的function(id){}
+        // 遍历用户通过then传递进来的回调函数把resolve成功的结果返回给then调用即then(function(data){ console.log(data) }) 这里的data就是通过这里调用返回
+        callbacks.forEach(function (callback) {
+            callback(value);
+        });
+    }
+    
+    //执行fn函数即getUserId()并且传入函数参数resolve 当fn执行完成返回的值传递给resolve函数
+    fn(resolve);
+}
+</code></pre></div><blockquote><p>结合例1中的代码来看，首先<code>new Promise</code>时，传给<code>promise</code>的函数发送异步请求，接着调用<code>promise</code>对象的<code>then</code>属性，注册请求成功的回调函数，然后当异步请求发送成功时，调用<code>resolve(results.id)</code>方法, 该方法执行<code>then</code>方法注册的回调数组</p></blockquote> <ul><li><code>then</code>方法应该能够链式调用，但是上面的最基础简单的版本显然无法支持链式调用。想让<code>then</code>方法支持链式调用，其实也是很简单的</li></ul> <div class="language- extra-class"><pre class="language-text"><code>this.then = function (onFulfilled) {
+    callbacks.push(onFulfilled);
+    return this;
+};
+</code></pre></div><blockquote><p>只要简单一句话就可以实现类似下面的链式调用</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>// 例2
+getUserId().then(function (id) {
+    // 一些处理
+}).then(function (id) {
+    // 一些处理
+});
+</code></pre></div><h3 id="_2-4-加入延时机制"><a href="#_2-4-加入延时机制" class="header-anchor">#</a> 2.4 加入延时机制</h3> <blockquote><p>上述代码可能还存在一个问题：如果在<code>then</code>方法注册回调之前，<code>resolve</code>函数就执行了，怎么办？比如<code>promise</code>内部的函数是同步函数</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>// 例3
+function getUserId() {
+    return new Promise(function (resolve) {
+        resolve(9876);
+    });
+}
+getUserId().then(function (id) {
+    // 一些处理
+});
+</code></pre></div><blockquote><p>这显然是不允许的，<code>Promises/A+</code>规范明确要求回调需要通过异步方式执行，用以保证一致可靠的执行顺序。因此我们要加入一些处理，保证在<code>resolve</code>执行之前，<code>then</code>方法已经注册完所有的回调。我们可以这样改造下<code>resolve</code>函数:</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>function resolve(value) {
+    setTimeout(function() {
+        callbacks.forEach(function (callback) {
+            callback(value);
+        });
+    }, 0)
+}
+</code></pre></div><blockquote><p>上述代码的思路也很简单，就是通过<code>setTimeout</code>机制，将<code>resolve</code>中执行回调的逻辑放置到<code>JS</code>任务队列末尾，以保证在<code>resolve</code>执行时，<code>then</code>方法的回调函数已经注册完成</p></blockquote> <ul><li>但是，这样好像还存在一个问题，可以细想一下：如果<code>Promise</code>异步操作已经成功，这时，在异步操作成功之前注册的回调都会执行，但是在<code>Promise</code>异步操作成功这之后调用的<code>then</code>注册的回调就再也不会执行了，这显然不是我们想要的</li></ul> <h3 id="_2-5-加入状态"><a href="#_2-5-加入状态" class="header-anchor">#</a> 2.5 加入状态</h3> <p>我们必须加入状态机制，也就是大家熟知的<code>pending</code>、<code>fulfilled</code>、<code>rejected</code></p> <blockquote><p><code>Promises/A+</code>规范中的<code>2.1 Promise States</code>中明确规定了，<code>pending</code>可以转化为<code>fulfilled</code>或<code>rejected</code>并且只能转化一次，也就是说如果<code>pending</code>转化到<code>fulfilled</code>状态，那么就不能再转化到r<code>ejected</code>。并且<code>fulfilled</code>和<code>rejected</code>状态只能由<code>pending</code>转化而来，两者之间不能互相转换</p></blockquote> <p><img src="https://mengera88.github.io/images/promiseState.png" alt="img"></p> <div class="language- extra-class"><pre class="language-text"><code>//改进后的代码是这样的：
+
+function Promise(fn) {
+    var state = 'pending',
+        value = null,
+        callbacks = [];
+    this.then = function (onFulfilled) {
+        if (state === 'pending') {
+            callbacks.push(onFulfilled);
+            return this;
+        }
+        onFulfilled(value);
+        return this;
+    };
+    function resolve(newValue) {
+        value = newValue;
+        state = 'fulfilled';
+        setTimeout(function () {
+            callbacks.forEach(function (callback) {
+                callback(value);
+            });
+        }, 0);
+    }
+    fn(resolve);
+}
+</code></pre></div><blockquote><p>上述代码的思路是这样的：<code>resolve</code>执行时，会将状态设置为<code>fulfilled</code>，在此之后调用<code>then</code>添加的新回调，都会立即执行</p></blockquote> <h3 id="_2-6-链式promise"><a href="#_2-6-链式promise" class="header-anchor">#</a> 2.6 链式Promise</h3> <blockquote><p>如果用户在<code>then</code>函数里面注册的仍然是一个<code>Promise</code>，该如何解决？比如下面的例4</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>// 例4
+getUserId()
+    .then(getUserJobById)
+    .then(function (job) {
+        // 对job的处理
+    });
+function getUserJobById(id) {
+    return new Promise(function (resolve) {
+        http.get(baseUrl + id, function(job) {
+            resolve(job);
+        });
+    });
+}
+</code></pre></div><ul><li>这种场景相信用过<code>promise</code>的人都知道会有很多，那么类似这种就是所谓的链式<code>Promise</code></li> <li>链式<code>Promise</code>是指在当前<code>promise</code>达到<code>fulfilled</code>状态后，即开始进行下一个<code>promise</code>（后邻<code>promise</code>）。那么我们如何衔接当前<code>promise</code>和后邻<code>promise</code>呢？（这是这里的难点</li> <li>只要在<code>then</code>方法里面<code>return</code>一个<code>promise</code>就好啦。<code>Promises/A+</code>规范中的<code>2.2.7</code>就是这样</li></ul> <blockquote><p>下面来看看这段暗藏玄机的<code>then</code>方法和<code>resolve</code>方法改造代码</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>function Promise(fn) {
+    var state = 'pending',
+        value = null,
+        callbacks = [];
+    this.then = function (onFulfilled) {
+        return new Promise(function (resolve) {
+            handle({
+                onFulfilled: onFulfilled || null,
+                resolve: resolve
+            });
+        });
+    };
+    function handle(callback) {
+        if (state === 'pending') {
+            callbacks.push(callback);
+            return;
+        }
+        //如果then中没有传递任何东西
+        if(!callback.onFulfilled) {
+            callback.resolve(value);
+            return;
+        }
+        var ret = callback.onFulfilled(value);
+        callback.resolve(ret);
+    }
+    
+    function resolve(newValue) {
+        if (newValue &amp;&amp; (typeof newValue === 'object' || typeof newValue === 'function')) {
+            var then = newValue.then;
+            if (typeof then === 'function') {
+                then.call(newValue, resolve);
+                return;
+            }
+        }
+        state = 'fulfilled';
+        value = newValue;
+        setTimeout(function () {
+            callbacks.forEach(function (callback) {
+                handle(callback);
+            });
+        }, 0);
+    }
+    fn(resolve);
+}
+</code></pre></div><blockquote><p>我们结合例4的代码，分析下上面的代码逻辑，为了方便阅读，我把例4的代码贴在这里</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>// 例4
+getUserId()
+    .then(getUserJobById)
+    .then(function (job) {
+        // 对job的处理
+    });
+function getUserJobById(id) {
+    return new Promise(function (resolve) {
+        http.get(baseUrl + id, function(job) {
+            resolve(job);
+        });
+    });
+}
+</code></pre></div><ul><li><code>then</code>方法中，创建并返回了新的<code>Promise</code>实例，这是串行<code>Promis</code>e的基础，并且支持链式调用</li> <li><code>handle</code>方法是<code>promise</code>内部的方法。<code>then</code>方法传入的形参<code>onFulfilled</code>以及创建新<code>Promise</code>实例时传入的<code>resolve</code>均被<code>push</code>到当前<code>promise</code>的<code>callbacks</code>队列中，这是衔接当前<code>promise</code>和后邻<code>promise</code>的关键所在</li> <li><code>getUserId</code>生成的<code>promise</code>（简称<code>getUserId promise</code>）异步操作成功，执行其内部方法<code>resolve</code>，传入的参数正是异步操作的结果<code>id</code></li> <li>调用<code>handle</code>方法处理<code>callbacks</code>队列中的回调：<code>getUserJobById</code>方法，生成新的<code>promise</code>（g<code>etUserJobById promise</code>）</li> <li>执行之前由<code>getUserId promise</code>的<code>then</code>方法生成的新<code>promise</code>(称为<code>bridge promise</code>)的<code>resolve</code>方法，传入参数为<code>getUserJobById promise</code>。这种情况下，会将该<code>resolve</code>方法传入<code>getUserJobById promise</code>的<code>then</code>方法中，并直接返回</li> <li>在<code>getUserJobById promise</code>异步操作成功时，执行其<code>callbacks</code>中的回调：<code>getUserId bridge promise</code>中的<code>resolve</code>方法</li> <li>最后执行<code>getUserId bridge promise</code>的后邻<code>promise</code>的<code>callbacks</code>中的回调</li></ul> <h3 id="_2-7-失败处理"><a href="#_2-7-失败处理" class="header-anchor">#</a> 2.7 失败处理</h3> <blockquote><p>在异步操作失败时，标记其状态为<code>rejected</code>，并执行注册的失败回调</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>//例5
+function getUserId() {
+    return new Promise(function(resolve) {
+        //异步请求
+        http.get(url, function(error, results) {
+            if (error) {
+                reject(error);
+            }
+            resolve(results.id)
+        })
+    })
+}
+getUserId().then(function(id) {
+    //一些处理
+}, function(error) {
+    console.log(error)
+})
+</code></pre></div><blockquote><p>有了之前处理<code>fulfilled</code>状态的经验，支持错误处理变得很容易,只需要在注册回调、处理状态变更上都要加入新的逻辑</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>function Promise(fn) {
+    var state = 'pending',
+        value = null,
+        callbacks = [];
+    this.then = function (onFulfilled, onRejected) {
+        return new Promise(function (resolve, reject) {
+            handle({
+                onFulfilled: onFulfilled || null,
+                onRejected: onRejected || null,
+                resolve: resolve,
+                reject: reject
+            });
+        });
+    };
+    function handle(callback) {
+        if (state === 'pending') {
+            callbacks.push(callback);
+            return;
+        }
+        var cb = state === 'fulfilled' ? callback.onFulfilled : callback.onRejected,
+            ret;
+        if (cb === null) {
+            cb = state === 'fulfilled' ? callback.resolve : callback.reject;
+            cb(value);
+            return;
+        }
+        ret = cb(value);
+        callback.resolve(ret);
+    }
+    function resolve(newValue) {
+        if (newValue &amp;&amp; (typeof newValue === 'object' || typeof newValue === 'function')) {
+            var then = newValue.then;
+            if (typeof then === 'function') {
+                then.call(newValue, resolve, reject);
+                return;
+            }
+        }
+        state = 'fulfilled';
+        value = newValue;
+        execute();
+    }
+    function reject(reason) {
+        state = 'rejected';
+        value = reason;
+        execute();
+    }
+    function execute() {
+        setTimeout(function () {
+            callbacks.forEach(function (callback) {
+                handle(callback);
+            });
+        }, 0);
+    }
+    fn(resolve, reject);
+}
+</code></pre></div><blockquote><p>上述代码增加了新的<code>reject</code>方法，供异步操作失败时调用，同时抽出了<code>resolve</code>和<code>reject</code>共用的部分，形成<code>execute</code>方法</p></blockquote> <p>错误冒泡是上述代码已经支持，且非常实用的一个特性。在<code>handle</code>中发现没有指定异步操作失败的回调时，会直接将<code>bridge promise</code>(<code>then</code>函数返回的<code>promise</code>，后同)设为<code>rejected</code>状态，如此达成执行后续失败回调的效果。这有利于简化串行Promise的失败处理成本，因为一组异步操作往往会对应一个实际功能，失败处理方法通常是一致的</p> <div class="language- extra-class"><pre class="language-text"><code>//例6
+getUserId()
+    .then(getUserJobById)
+    .then(function (job) {
+        // 处理job
+    }, function (error) {
+        // getUserId或者getUerJobById时出现的错误
+        console.log(error);
+    });
+</code></pre></div><h3 id="_2-8-异常处理"><a href="#_2-8-异常处理" class="header-anchor">#</a> 2.8 异常处理</h3> <blockquote><p>如果在执行成功回调、失败回调时代码出错怎么办？对于这类异常，可以使用<code>try-catch</code>捕获错误，并将<code>bridge promise</code>设为<code>rejected</code>状态。<code>handle</code>方法改造如下</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>function handle(callback) {
+    if (state === 'pending') {
+        callbacks.push(callback);
+        return;
+    }
+    var cb = state === 'fulfilled' ? callback.onFulfilled : callback.onRejected,
+        ret;
+    if (cb === null) {
+        cb = state === 'fulfilled' ? callback.resolve : callback.reject;
+        cb(value);
+        return;
+    }
+    try {
+        ret = cb(value);
+        callback.resolve(ret);
+    } catch (e) {
+        callback.reject(e);
+    } 
+}
+</code></pre></div><blockquote><p>如果在异步操作中，多次执行<code>resolve</code>或者<code>reject</code>会重复处理后续回调，可以通过内置一个标志位解决</p></blockquote> <h3 id="_2-9-完整实现"><a href="#_2-9-完整实现" class="header-anchor">#</a> 2.9 完整实现</h3> <div class="language- extra-class"><pre class="language-text"><code>// 三种状态
+const PENDING = &quot;pending&quot;;
+const RESOLVED = &quot;resolved&quot;;
+const REJECTED = &quot;rejected&quot;;
+// promise 接收一个函数参数，该函数会立即执行
+function MyPromise(fn) {
+  let _this = this;
+  _this.currentState = PENDING;
+  _this.value = undefined;
+  // 用于保存 then 中的回调，只有当 promise
+  // 状态为 pending 时才会缓存，并且每个实例至多缓存一个
+  _this.resolvedCallbacks = [];
+  _this.rejectedCallbacks = [];
+
+  _this.resolve = function (value) {
+    if (value instanceof MyPromise) {
+      // 如果 value 是个 Promise，递归执行
+      return value.then(_this.resolve, _this.reject)
+    }
+    setTimeout(() =&gt; { // 异步执行，保证执行顺序
+      if (_this.currentState === PENDING) {
+        _this.currentState = RESOLVED;
+        _this.value = value;
+        _this.resolvedCallbacks.forEach(cb =&gt; cb());
+      }
+    })
+  };
+
+  _this.reject = function (reason) {
+    setTimeout(() =&gt; { // 异步执行，保证执行顺序
+      if (_this.currentState === PENDING) {
+        _this.currentState = REJECTED;
+        _this.value = reason;
+        _this.rejectedCallbacks.forEach(cb =&gt; cb());
+      }
+    })
+  }
+  // 用于解决以下问题
+  // new Promise(() =&gt; throw Error('error))
+  try {
+    fn(_this.resolve, _this.reject);
+  } catch (e) {
+    _this.reject(e);
+  }
+}
+
+MyPromise.prototype.then = function (onResolved, onRejected) {
+  var self = this;
+  // 规范 2.2.7，then 必须返回一个新的 promise
+  var promise2;
+  // 规范 2.2.onResolved 和 onRejected 都为可选参数
+  // 如果类型不是函数需要忽略，同时也实现了透传
+  // Promise.resolve(4).then().then((value) =&gt; console.log(value))
+  onResolved = typeof onResolved === 'function' ? onResolved : v =&gt; v;
+  onRejected = typeof onRejected === 'function' ? onRejected : r =&gt; throw r;
+
+  if (self.currentState === RESOLVED) {
+    return (promise2 = new MyPromise(function (resolve, reject) {
+      // 规范 2.2.4，保证 onFulfilled，onRjected 异步执行
+      // 所以用了 setTimeout 包裹下
+      setTimeout(function () {
+        try {
+          var x = onResolved(self.value);
+          resolutionProcedure(promise2, x, resolve, reject);
+        } catch (reason) {
+          reject(reason);
+        }
+      });
+    }));
+  }
+
+  if (self.currentState === REJECTED) {
+    return (promise2 = new MyPromise(function (resolve, reject) {
+      setTimeout(function () {
+        // 异步执行onRejected
+        try {
+          var x = onRejected(self.value);
+          resolutionProcedure(promise2, x, resolve, reject);
+        } catch (reason) {
+          reject(reason);
+        }
+      });
+    }));
+  }
+
+  if (self.currentState === PENDING) {
+    return (promise2 = new MyPromise(function (resolve, reject) {
+      self.resolvedCallbacks.push(function () {
+        // 考虑到可能会有报错，所以使用 try/catch 包裹
+        try {
+          var x = onResolved(self.value);
+          resolutionProcedure(promise2, x, resolve, reject);
+        } catch (r) {
+          reject(r);
+        }
+      });
+
+      self.rejectedCallbacks.push(function () {
+        try {
+          var x = onRejected(self.value);
+          resolutionProcedure(promise2, x, resolve, reject);
+        } catch (r) {
+          reject(r);
+        }
+      });
+    }));
+  }
+};
+// 规范 2.3
+function resolutionProcedure(promise2, x, resolve, reject) {
+  // 规范 2.3.1，x 不能和 promise2 相同，避免循环引用
+  if (promise2 === x) {
+    return reject(new TypeError(&quot;Error&quot;));
+  }
+  // 规范 2.3.2
+  // 如果 x 为 Promise，状态为 pending 需要继续等待否则执行
+  if (x instanceof MyPromise) {
+    if (x.currentState === PENDING) {
+      x.then(function (value) {
+        // 再次调用该函数是为了确认 x resolve 的
+        // 参数是什么类型，如果是基本类型就再次 resolve
+        // 把值传给下个 then
+        resolutionProcedure(promise2, value, resolve, reject);
+      }, reject);
+    } else {
+      x.then(resolve, reject);
+    }
+    return;
+  }
+  // 规范 2.3.3.3.3
+  // reject 或者 resolve 其中一个执行过得话，忽略其他的
+  let called = false;
+  // 规范 2.3.3，判断 x 是否为对象或者函数
+  if (x !== null &amp;&amp; (typeof x === &quot;object&quot; || typeof x === &quot;function&quot;)) {
+    // 规范 2.3.3.2，如果不能取出 then，就 reject
+    try {
+      // 规范 2.3.3.1
+      let then = x.then;
+      // 如果 then 是函数，调用 x.then
+      if (typeof then === &quot;function&quot;) {
+        // 规范 2.3.3.3
+        then.call(
+          x,
+          y =&gt; {
+            if (called) return;
+            called = true;
+            // 规范 2.3.3.3.1
+            resolutionProcedure(promise2, y, resolve, reject);
+          },
+          e =&gt; {
+            if (called) return;
+            called = true;
+            reject(e);
+          }
+        );
+      } else {
+        // 规范 2.3.3.4
+        resolve(x);
+      }
+    } catch (e) {
+      if (called) return;
+      called = true;
+      reject(e);
+    }
+  } else {
+    // 规范 2.3.4，x 为基本类型
+    resolve(x);
+  }
+}
+</code></pre></div><h3 id="_2-10-小结"><a href="#_2-10-小结" class="header-anchor">#</a> 2.10 小结</h3> <p><strong>这里一定要注意的点是</strong>：<code>promise</code>里面的<code>then</code>函数仅仅是注册了后续需要执行的代码，真正的执行是在<code>resolve</code>方法里面执行的，理清了这层，再来分析源码会省力的多</p> <blockquote><p>现在回顾下<code>Promise</code>的实现过程，其主要使用了设计模式中的观察者模式</p></blockquote> <ul><li>通过<code>Promise.prototype.then</code>和<code>Promise.prototype.catch</code>方法将观察者方法注册到被观察者<code>Promise</code>对象中，同时返回一个新的<code>Promise</code>对象，以便可以链式调用</li> <li>被观察者管理内部<code>pending</code>、<code>fulfilled</code>和<code>rejected</code>的状态转变，同时通过构造函数中传递的<code>resolve</code>和<code>reject</code>方法以主动触发状态转变和通知观察者</li></ul></div> <!----> <div class="readMore-wrapper"><span class="readMore">阅读全文</span></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/FE-Interview-Questions/principle-docs/comprehensive/02-setTimeout实现原理和使用注意.html" class="prev">setTimeout实现原理和使用注意</a></span> <span class="next"><a href="/FE-Interview-Questions/principle-docs/comprehensive/04-浏览器渲染原理.html">浏览器渲染原理</a>
+      →
+    </span></p></div>  <div class="el-dialog__wrapper" style="display:none;"><div role="dialog" aria-modal="true" aria-label="请先阅读购买协议" class="el-dialog el-dialog--center" style="margin-top:15vh;width:30%;"><div class="el-dialog__header"><span class="el-dialog__title">请先阅读购买协议</span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><div class="el-dialog__footer"><span class="dialog-footer"><button disabled="disabled" type="button" class="el-button el-button--danger is-disabled" style="width:100%;"><!----><!----><span>我已阅读（8s）</span></button></span></div></div></div> <div class="el-dialog__wrapper" style="display:none;"><div role="dialog" aria-modal="true" aria-label="付费阅读" class="el-dialog" style="margin-top:15vh;width:30%;"><div class="el-dialog__header"><span class="el-dialog__title">付费阅读</span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><div class="el-dialog__footer"><span class="dialog-footer"><button disabled="disabled" type="button" class="el-button el-button--danger is-disabled" style="width:100%;"><!----><!----><span>确 定</span></button></span></div></div></div> <div class="el-dialog__wrapper" style="display:none;"><div role="dialog" aria-modal="true" aria-label="dialog" class="el-dialog" style="margin-top:15vh;width:30%;"><div class="el-dialog__header"><span class="el-dialog__title"></span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><!----></div></div> <img src="data:image/png;base64,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" class="theme-float-btn"></main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/FE-Interview-Questions/assets/js/app.13d69697.js" defer></script><script src="/FE-Interview-Questions/assets/js/6.b48232c6.js" defer></script><script src="/FE-Interview-Questions/assets/js/3.9d86cf58.js" defer></script><script src="/FE-Interview-Questions/assets/js/88.fb19aa58.js" defer></script><script src="/FE-Interview-Questions/assets/js/11.fb060006.js" defer></script>
+  </body>
+</html>

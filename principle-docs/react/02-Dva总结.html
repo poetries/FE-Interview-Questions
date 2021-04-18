@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>一、环境搭建 | 面试指南</title>
+    <meta name="description" content="前端面试指南，前端面试题整理，按模块分类整理总结，打造最全面的前端面试题">
+    <link rel="icon" href="/FE-Interview-Questions/logo.png">
+  <link rel="manifest" href="/FE-Interview-Questions/manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="/FE-Interview-Questions/icons/apple-touch-icon-152x152.png">
+  <link rel="mask-icon" href="/FE-Interview-Questions/icons/safari-pinned-tab.svg" color="#3eaf7c">
+  <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+  <meta name="apple-mobile-web-app-status-bar-style">
+    
+    <link rel="preload" href="/FE-Interview-Questions/assets/css/0.styles.0591d029.css" as="style"><link rel="preload" href="/FE-Interview-Questions/assets/js/app.13d69697.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/6.b48232c6.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/3.9d86cf58.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/99.dc5626e1.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/11.fb060006.js" as="script"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/1.9e1b498f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/10.fbc04ea9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/100.c06a0f53.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/101.54402ede.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/102.d3860a7d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/103.51a83ab2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/104.b19afdd3.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/105.aada2418.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/106.4ce7d3b7.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/107.ca87a327.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/108.df939701.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/109.9f0c8605.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/110.19cb01b2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/111.51fc9fa1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/112.ab20caec.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/113.6c12e76f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/114.48e1a019.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/115.f291caf1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/116.100da54b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/117.9b579bae.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/118.89da516f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/119.c70b5105.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/12.9774db85.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/120.fcf3186f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/13.ac14541c.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/14.155007f0.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/15.2d9ec2b2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/16.aec442e8.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/17.59c81a6b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/18.c38ff446.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/19.8203bd99.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/20.103004c4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/21.1e6e08c9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/22.5abbfd40.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/23.4cd5fd4d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/24.602403ee.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/25.da971f83.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/26.e9e76559.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/27.6d18f825.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/28.58923361.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/29.81e33cc0.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/30.7a4491ed.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/31.4275e9d2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/32.6e6c282b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/33.35641348.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/34.3d76a237.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/35.fb57a983.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/36.78f70288.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/37.ed0997e2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/38.0ece0665.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/39.3b4241bb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/4.cda2fc13.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/40.dd7b6d84.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/41.05fcd6ed.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/42.24fc3ac4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/43.21f8f3ec.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/44.ac552dd9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/45.b2d653cc.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/46.8bf4b340.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/47.57a13e6c.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/48.8ef881a7.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/49.b76df872.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/5.eb1f29dc.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/50.f04492e5.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/51.e000ebea.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/52.bfbd5e6e.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/53.fc0a60dd.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/54.a798cd42.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/55.5ccb6ae1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/56.1605b000.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/57.79350f4e.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/58.dcff3859.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/59.a366020b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/60.199914fb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/61.4d471001.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/62.07f7a685.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/63.3774b497.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/64.d8437f45.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/65.eaf10ccb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/66.74665605.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/67.072c35ca.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/68.764ab8cb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/69.6a27592a.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/7.aa832117.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/70.2e7f3527.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/71.c6365fbe.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/72.15cfe1be.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/73.d56ee920.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/74.f848ccac.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/75.905f5556.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/76.49d98a04.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/77.4b62003f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/78.5a4046ff.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/79.eb3ec067.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/8.bccf8145.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/80.bd38c9e9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/81.dfdea12a.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/82.4439fbe3.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/83.df1321d3.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/84.23d01b47.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/85.c983047a.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/86.29b0f2d4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/87.12e2e192.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/88.fb19aa58.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/89.ee2be7d8.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/9.ce1180ae.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/90.479f4d9d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/91.619e0c8d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/92.ae858703.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/93.f90a7ae1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/94.8894adb4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/95.683396f3.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/96.f65dc164.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/97.75bd77e0.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/98.892b530a.js">
+    <link rel="stylesheet" href="/FE-Interview-Questions/assets/css/0.styles.0591d029.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/FE-Interview-Questions/" class="home-link router-link-active"><img src="/FE-Interview-Questions/logo.png" alt="面试指南" class="logo"> <span class="site-name can-hide">面试指南</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!----> <div style="padding-left:1.5rem;"><div class="qr"><img src="/FE-Interview-Questions/assets/img/qr.ee193d28.jpg" alt="poetries" width="120" height="120" loading="lazy"> <p class="we-intro">
+    关注公众号，获取更多资讯
+  </p></div></div> <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Vue</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FE-Interview-Questions/principle-docs/vue/01-从源码解读Vue生命周期.html" class="sidebar-link">从源码解读Vue生命周期</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/02-组件的本质.html" class="sidebar-link">组件的本质</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/03-有状态组件的设计.html" class="sidebar-link">有状态组件的设计</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/04-设计 VNode.html" class="sidebar-link">设计 VNode</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/05-辅助创建 VNode 的 h 函数.html" class="sidebar-link">辅助创建 VNode 的 h 函数</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/06-自定义渲染器和异步渲染.html" class="sidebar-link">自定义渲染器和异步渲染</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/07-渲染器之挂载.html" class="sidebar-link">渲染器之挂载</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/08-渲染器的核心 Diff 算法.html" class="sidebar-link">渲染器的核心 Diff 算法</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/09-渲染器之patch.html" class="sidebar-link">渲染器之patch</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/10-图解 Vue 响应式原理.html" class="sidebar-link">图解 Vue 响应式原理</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/11-图解 Vue 异步更新.html" class="sidebar-link">图解 Vue 异步更新</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/12-剖析 Vue 内部运行机制.html" class="sidebar-link">剖析 Vue 内部运行机制</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/13-vue响应式原理模拟.html" class="sidebar-link">vue响应式原理模拟</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/14-vue状态管理之vuex.html" class="sidebar-link">vue状态管理之vuex</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>React</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FE-Interview-Questions/principle-docs/react/01-React-router原理.html" class="sidebar-link">React</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html" class="active sidebar-link">Dva总结</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html#一、环境搭建" class="sidebar-link">一、环境搭建</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html#二、初识dva" class="sidebar-link">二、初识Dva</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html#_2-1-dva的特性" class="sidebar-link">2.1 Dva的特性</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html#_2-2-dva的五个api" class="sidebar-link">2.2 Dva的五个API</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html#_2-3-dva九个概念" class="sidebar-link">2.3 Dva九个概念</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html#_2-4-整体架构" class="sidebar-link">2.4 整体架构</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html#_2-5-dva图解" class="sidebar-link">2.5 Dva图解</a></li></ul></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html#三、计数器例子" class="sidebar-link">三、计数器例子</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html#四、dva实践" class="sidebar-link">四、Dva实践</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html#_4-1-抽离model" class="sidebar-link">4.1 抽离Model</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html#_4-2-设计组件" class="sidebar-link">4.2 设计组件</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html#_4-3-添加reducer" class="sidebar-link">4.3 添加Reducer</a></li></ul></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html#五、使用dva框架和直接使用redux写法的区别" class="sidebar-link">五、使用dva框架和直接使用redux写法的区别</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html#_5-1-使用-redux" class="sidebar-link">5.1 使用 redux</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html#_5-2-使用dva" class="sidebar-link">5.2 使用dva</a></li></ul></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html#六、使用axios统一处理" class="sidebar-link">六、使用axios统一处理</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html#_6-1-示例代码" class="sidebar-link">6.1 示例代码</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html#_6-2-明确响应体" class="sidebar-link">6.2 明确响应体</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html#_6-3-依赖包分析" class="sidebar-link">6.3 依赖包分析</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html#_6-4-axios-全局配置" class="sidebar-link">6.4 axios 全局配置</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html#_6-5-加载-nprogress-过渡组件" class="sidebar-link">6.5 加载 NProgress 过渡组件</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html#_6-6-网络请求成功处理" class="sidebar-link">6.6 网络请求成功处理</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html#_6-7-网络请求失败处理" class="sidebar-link">6.7 网络请求失败处理</a></li></ul></li></ul></li><li><a href="/FE-Interview-Questions/principle-docs/react/03-MobX总结.html" class="sidebar-link">MobX总结</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/04-浅析redux-saga中间件及用法.html" class="sidebar-link">浅析redux</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/05-Redux之浅析中间件.html" class="sidebar-link">Redux之浅析中间件</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/06-Redux之源码分析.html" class="sidebar-link">Redux之源码分析</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/07-Redux之异步Action及操作.html" class="sidebar-link">Redux之异步Action及操作</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Webpack</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FE-Interview-Questions/principle-docs/webpack/01-Webpack4打包机制原理解析.html" class="sidebar-link">Webpack4打包机制原理解析</a></li><li><a href="/FE-Interview-Questions/principle-docs/webpack/02-webpack中的HMR热更新原理剖析.html" class="sidebar-link">webpack中的HMR热更新原理剖析</a></li><li><a href="/FE-Interview-Questions/principle-docs/webpack/03-从源码窥探Webpack4.x原理.html" class="sidebar-link">从源码窥探Webpack4.x原理</a></li><li><a href="/FE-Interview-Questions/principle-docs/webpack/04-实现webpack小型打包工具.html" class="sidebar-link">实现webpack小型打包工具</a></li><li><a href="/FE-Interview-Questions/principle-docs/webpack/05-Babel原理及其使用.html" class="sidebar-link">Babel原理及其使用</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>综合</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/01-虚拟DOM原理分析.html" class="sidebar-link">虚拟DOM原理分析</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/02-setTimeout实现原理和使用注意.html" class="sidebar-link">setTimeout实现原理和使用注意</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/03-浅析Promise原理.html" class="sidebar-link">浅析Promise原理</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/04-浏览器渲染原理.html" class="sidebar-link">浏览器渲染原理</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/05-前端面试之MVVM浅析.html" class="sidebar-link">前端面试之MVVM浅析</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/06-前端面试之组件化.html" class="sidebar-link">前端面试之组件化</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/07-虚拟DOM（一）.html" class="sidebar-link">虚拟DOM（一）</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/08-虚拟DOM（二）.html" class="sidebar-link">虚拟DOM（二）</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/09-前端性能之Performance.html" class="sidebar-link">前端性能之Performance</a></li></ul></section></li></ul> </aside> <main class="page"> <div id="container" class="theme-default-content lock"><div class="content__default"><h2 id="一、环境搭建"><a href="#一、环境搭建" class="header-anchor">#</a> 一、环境搭建</h2> <div class="language- extra-class"><pre class="language-text"><code>$ npm install dva-cli -g
+
+# 创建应用
+$ dva new dva-quickstart
+
+# 启动
+$ npm start
+</code></pre></div><blockquote><p>react项目的推荐目录结构（如果使用dva脚手架创建，则自动生成如下）</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>|── /mock/             # 数据mock的接口文件  
+|── /src/              # 项目源码目录（我们开发的主要工作区域）   
+|   |── /components/   # 项目组件（用于路由组件内引用的可复用组件）   
+|   |── /routes/       # 路由组件（页面维度） 
+|   |  |── route1.js  
+|   |  |── route2.js   # 根据router.js中的映射，在不同的url下，挂载不同的路由组件
+|   |  └── route3.js    
+|   |── /models/       # 数据模型（可以理解为store，用于存储数据与方法）  
+|   |  |── model1.js  
+|   |  |── model2.js   # 选择分离为多个model模型，是根据业务实体进行划分
+|   |  └── model3.js  
+|   |── /services/     # 数据接口（处理前台页面的ajax请求，转发到后台）   
+|   |── /utils/        # 工具函数（工具库，存储通用函数与配置参数）     
+|   |── router.js       # 路由配置（定义路由与对应的路由组件）  
+|   |── index.js       # 入口文件  
+|   |── index.less      
+|   └── index.html     
+|── package.json       # 项目信息  
+└── proxy.config.js    # 数据mock配置
+</code></pre></div><p><strong>使用 antd</strong></p> <div class="language- extra-class"><pre class="language-text"><code>npm i babel-plugin-import --save
+</code></pre></div><blockquote><p><code>babel-plugin-import</code> 是用来按需加载 <code>antd</code> 的脚本和样式的</p></blockquote> <ul><li>编辑 <code>.webpackrc</code>，使 <code>babel-plugin-import</code> 插件生效</li></ul> <div class="language- extra-class"><pre class="language-text"><code>{
++  &quot;extraBabelPlugins&quot;: [
++    [&quot;import&quot;, { &quot;libraryName&quot;: &quot;antd&quot;, &quot;libraryDirectory&quot;: &quot;es&quot;, &quot;style&quot;: &quot;css&quot; }]
++  ]
+}
+</code></pre></div><h2 id="二、初识dva"><a href="#二、初识dva" class="header-anchor">#</a> 二、初识Dva</h2> <h3 id="_2-1-dva的特性"><a href="#_2-1-dva的特性" class="header-anchor">#</a> 2.1 Dva的特性</h3> <div class="language- extra-class"><pre class="language-text"><code>dva = React-Router + Redux + Redux-saga
+</code></pre></div><ul><li>仅有 5 个<code>API</code>，仅有5个主要的<code>api</code></li> <li>支持 <code>HMR</code>，支持模块的热更新</li> <li>支持 <code>SSR (ServerSideRender)</code>，支持服务器端渲染</li> <li>支持 <code>Mobile/ReactNative</code>，支持移动手机端的代码编写</li> <li>支持<code>TypeScript</code></li> <li>支持路由和 <code>Model</code> 的动态加载</li></ul> <h3 id="_2-2-dva的五个api"><a href="#_2-2-dva的五个api" class="header-anchor">#</a> 2.2 Dva的五个API</h3> <p><img src="https://poetries1.gitee.io/img-repo/20191001/43.png" alt="img"></p> <h4 id="_2-2-1-app-dva-opts"><a href="#_2-2-1-app-dva-opts" class="header-anchor">#</a> 2.2.1 app = dva(Opts)</h4> <blockquote><p><code>app = dva(Opts)</code>：创建应用，返回 <code>dva</code> 实例。(注：dva 支持多实例)**</p></blockquote> <p>在<code>opts</code>可以配置所有的<code>hooks</code></p> <div class="language- extra-class"><pre class="language-text"><code>const app = dva({
+     history,
+     initialState,
+     onError,
+     onAction,
+     onStateChange,
+     onReducer,
+     onEffect,
+     onHmr,
+     extraReducers,
+     extraEnhancers,
+});
+</code></pre></div><blockquote><p>hooks包含如下配置项</p></blockquote> <p>1、 <code>onError((err, dispatch) =&gt; {})</code></p> <ul><li><code>effect</code> 执行错误或 <code>subscription</code> 通过<code>done</code> 主动抛错时触发，可用于管理全局出错状态</li> <li>注意：<code>subscription</code> 并没有加 <code>try...catch</code>，所以有错误时需通过第二个参数 <code>done</code> 主动抛错</li></ul> <div class="language- extra-class"><pre class="language-text"><code>app.model({
+  subscriptions: {
+    setup({ dispatch }, done) {
+      done(e)
+    },
+  },
+})
+</code></pre></div><p>2、 <code>onAction(fn | fn[])</code></p> <blockquote><p>在<code>action</code>被<code>dispatch</code>时触发，用于注册 <code>redux</code> 中间件。支持函数或函数数组格式</p></blockquote> <ul><li>例如我们要通过 <code>redux-logger</code> 打印日志</li></ul> <div class="language- extra-class"><pre class="language-text"><code>import createLogger from 'redux-logger';
+const app = dva({
+  onAction: createLogger(opts),
+})
+</code></pre></div><p>3、 <code>onStateChange(fn)</code></p> <blockquote><p><code>state</code> 改变时触发，可用于同步 state 到 <code>localStorage</code>，服务器端等</p></blockquote> <p>4、 <code>onReducer(fn)</code></p> <blockquote><p>封装 <code>reducer</code> 执行，比如借助 <code>redux-undo</code> 实现 <code>redo/undo</code></p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>import undoable from 'redux-undo';
+const app = dva({
+  onReducer: reducer =&gt; {
+    return (state, action) =&gt; {
+      const undoOpts = {};
+      const newState = undoable(reducer, undoOpts)(state, action);
+      // 由于 dva 同步了 routing 数据，所以需要把这部分还原
+      return { ...newState, routing: newState.present.routing };
+    },
+  },
+})
+</code></pre></div><p>5、 <code>onEffect(fn)</code></p> <blockquote><p>封装 <code>effect</code> 执行。比如 <code>dva-loading</code> 基于此实现了自动处理 <code>loading</code> 状态</p></blockquote> <p>6、 <code>onHmr(fn)</code></p> <blockquote><p>热替换相关，目前用于 <code>babel-plugin-dva-hmr</code></p></blockquote> <p>7、 <code>extraReducers</code></p> <blockquote><p>指定额外的 <code>reducer</code>，比如 <code>redux-form</code> 需要指定额外的 <code>form reducer</code></p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>import { reducer as formReducer } from 'redux-form'
+const app = dva({
+  extraReducers: {
+    form: formReducer,
+  },
+})
+</code></pre></div><blockquote><p>这里比较常用的是，<code>history</code>的配置，一般默认的是<code>hashHistory</code>，如果要配置 <code>history</code>为 <code>browserHistory</code>，可以这样</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>import createHistory from 'history/createBrowserHistory';
+const app = dva({
+  history: createHistory(),
+});
+</code></pre></div><blockquote><div class="language- extra-class"><pre class="language-text"><code>initialState`：指定初始数据，优先级高于 `model` 中的 `state`，默认是 `{}`，但是基本上都在`modal`里面设置相应的`state
+</code></pre></div></blockquote> <h4 id="_2-2-2-app-use-hooks"><a href="#_2-2-2-app-use-hooks" class="header-anchor">#</a> 2.2.2 app.use(Hooks)</h4> <blockquote><p>app.use(Hooks)：配置 hooks 或者注册插件</p></blockquote> <p>这里最常见的就是<code>dva-loading</code>插件的配置</p> <div class="language- extra-class"><pre class="language-text"><code>import createLoading from 'dva-loading';
+...
+app.use(createLoading(opts));
+</code></pre></div><blockquote><p>但是一般对于全局的<code>loading</code>我们会根据业务的不同来显示相应不同的<code>loading</code>图标，我们可以根据自己的需要来选择注册相应的插件</p></blockquote> <h4 id="_2-2-3-app-model-modelobject"><a href="#_2-2-3-app-model-modelobject" class="header-anchor">#</a> 2.2.3 app.model(ModelObject)</h4> <blockquote><p><code>app.model(ModelObject)</code>：这个是你数据逻辑处理，数据流动的地方</p></blockquote> <p><img src="https://poetries1.gitee.io/img-repo/20191001/44.png" alt="img"></p> <h4 id="_2-2-4-app-unmodel-namespace"><a href="#_2-2-4-app-unmodel-namespace" class="header-anchor">#</a> 2.2.4 app.unmodel(namespace)</h4> <blockquote><p>取消 <code>model</code> 注册，清理 <code>reducers</code>,<code>effects</code> 和 <code>subscriptions</code>。<code>subscription</code> 如果没有返回 <code>unlisten</code> 函数，使用 <code>app.unmodel</code> 会给予警告</p></blockquote> <h4 id="_2-2-5-app-router-function"><a href="#_2-2-5-app-router-function" class="header-anchor">#</a> 2.2.5 app.router(Function)</h4> <blockquote><p>注册路由表，这一操作步骤在dva中也很重要</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>// 注册路由
+app.router(require('./router'))
+
+
+// 路由文件
+import { Router, Route } from 'dva/router';
+import IndexPage from './routes/IndexPage'
+import TodoList from './routes/TodoList'
+
+function RouterConfig({ history }) {
+  return (
+    &lt;Router history={history}&gt;
+        &lt;Route path=&quot;/&quot; component={IndexPage} /&gt;
+        &lt;Route path='/todoList' components={TodoList}/&gt;
+    &lt;/Router&gt;
+  )
+}
+export default RouterConfig
+</code></pre></div><blockquote><p>如果我们想解决组件动态加载问题，我们的路由文件也可以按照下面的写法来写</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>import { Router, Switch, Route } from 'dva/router'
+import dynamic from 'dva/dynamic'
+
+function RouterConfig({ history, app }) {
+  const IndexPage = dynamic({
+    app,
+    component: () =&gt; import('./routes/IndexPage'),
+  })
+
+  const Users = dynamic({
+    app,
+    models: () =&gt; [import('./models/users')],
+    component: () =&gt; import('./routes/Users'),
+  })
+
+  return (
+    &lt;Router history={history}&gt;
+      &lt;Switch&gt;
+        &lt;Route exact path=&quot;/&quot; component={IndexPage} /&gt;
+        &lt;Route exact path=&quot;/users&quot; component={Users} /&gt;
+      &lt;/Switch&gt;
+    &lt;/Router&gt;
+  )
+}
+
+export default RouterConfig
+</code></pre></div><blockquote><p>其中<code>dynamic(opts)</code> 中<code>opt</code>包含三个配置项：</p></blockquote> <ul><li><code>app</code>: <code>dva</code> 实例，加载 <code>models</code> 时需要</li> <li><code>models</code>: 返回 <code>Promise</code> 数组的函数，<code>Promise</code>返回 dva model`</li> <li><code>component</code>：返回 <code>Promise</code>的函数，<code>Promise</code>返回 <code>React Component</code></li></ul> <h4 id="_2-2-6-app-start"><a href="#_2-2-6-app-start" class="header-anchor">#</a> 2.2.6 app.start</h4> <blockquote><p>启动应用，即将我们的应用跑起来</p></blockquote> <h3 id="_2-3-dva九个概念"><a href="#_2-3-dva九个概念" class="header-anchor">#</a> 2.3 Dva九个概念</h3> <h4 id="_2-3-1-state"><a href="#_2-3-1-state" class="header-anchor">#</a> 2.3.1 State</h4> <blockquote><p>初始值，我们在 <code>dva()</code> 初始化的时候和在 modal 里面的 <code>state</code> 对其两处进行定义，其中 modal 中的优先级低于传给 <code>dva()</code> 的 <code>opts.initialState</code></p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>// dva()初始化
+const app = dva({
+  initialState: { count: 1 },
+});
+
+// modal()定义事件
+app.model({
+  namespace: 'count',
+  state: 0,
+});
+</code></pre></div><h4 id="_2-3-2-action"><a href="#_2-3-2-action" class="header-anchor">#</a> 2.3.2 Action</h4> <blockquote><p>表示操作事件，可以是同步，也可以是异步</p></blockquote> <ul><li><code>action</code> 的格式如下，它需要有一个 <code>type</code>，表示这个 <code>action</code> 要触发什么操作；<code>payload</code> 则表示这个 <code>action</code> 将要传递的数据</li></ul> <div class="language- extra-class"><pre class="language-text"><code>{
+  type: String,
+  payload: data,
+}
+</code></pre></div><blockquote><p>我们通过 dispatch 方法来发送一个 action</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>dispatch({ type: 'todos/add', payload: 'Learn Dva' });
+</code></pre></div><blockquote><p>其实我们可以构建一个Action 创建函数，如下</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>function addTodo(text) {
+  return {
+    type: ADD_TODO,
+    text
+  }
+}
+
+//我们直接dispatch(addTodo()),就发送了一个action。
+dispatch(addTodo())
+</code></pre></div><h4 id="_2-3-3-model"><a href="#_2-3-3-model" class="header-anchor">#</a> 2.3.3 Model</h4> <blockquote><p><code>model</code> 是 <code>dva</code> 中最重要的概念，<code>Model</code> 非 <code>MVC</code> 中的 <code>M</code>，而是领域模型，用于把数据相关的逻辑聚合到一起，几乎所有的数据，逻辑都在这边进行处理分发</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>import queryString from 'query-string'
+import * as todoService from '../services/todo'
+
+export default {
+  namespace: 'todo',
+  state: {
+    list: []
+  },
+  reducers: {
+    save(state, { payload: { list } }) {
+      return { ...state, list }
+    }
+  },
+  effects: {
+    *addTodo({ payload: value }, { call, put, select }) {
+      // 模拟网络请求
+      const data = yield call(todoService.query, value)
+      console.log(data)
+      let tempList = yield select(state =&gt; state.todo.list)
+      let list = []
+      list = list.concat(tempList)
+      const tempObj = {}
+      tempObj.title = value
+      tempObj.id = list.length
+      tempObj.finished = false
+      list.push(tempObj)
+      yield put({ type: 'save', payload: { list }})
+    },
+    *toggle({ payload: index }, { call, put, select }) {
+      // 模拟网络请求
+      const data = yield call(todoService.query, index)
+      let tempList = yield select(state =&gt; state.todo.list)
+      let list = []
+      list = list.concat(tempList)
+      let obj = list[index]
+      obj.finished = !obj.finished
+      yield put({ type: 'save', payload: { list } })
+    },
+    *delete({ payload: index }, { call, put, select }) {
+      const data = yield call(todoService.query, index)
+      let tempList = yield select(state =&gt; state.todo.list)
+      let list = []
+      list = list.concat(tempList)
+      list.splice(index, 1)
+      yield put({ type: 'save', payload: { list } })
+    },
+    *modify({ payload: { value, index } }, { call, put, select }) {
+      const data = yield call(todoService.query, value)
+      let tempList = yield select(state =&gt; state.todo.list)
+      let list = []
+      list = list.concat(tempList)
+      let obj = list[index]
+      obj.title = value
+      yield put({ type: 'save', payload: { list } })
+    }
+  },
+  subscriptions: {
+    setup({ dispatch, history }) {
+      // 监听路由的变化，请求页面数据
+      return history.listen(({ pathname, search }) =&gt; {
+        const query = queryString.parse(search)
+        let list = []
+        if (pathname === 'todoList') {
+          dispatch({ type: 'save', payload: {list} })
+        }
+      })
+    }
+  }
+}
+</code></pre></div><blockquote><p><code>model</code>对象中包含5个重要的属性</p></blockquote> <p><strong>state</strong></p> <blockquote><p>这里的 state 跟我们刚刚讲的 state 的概念是一样的，只不过她的优先级比初始化的低，但是基本上项目中的 state 都是在这里定义的</p></blockquote> <p><strong>namespace</strong></p> <blockquote><div class="language- extra-class"><pre class="language-text"><code>model` 的命名空间，同时也是他在全局 `state` 上的属性，只能用字符串，我们发送在发送 `action` 到相应的 `reducer` 时，就会需要用到 `namespace
+</code></pre></div></blockquote> <p><strong>Reducer</strong></p> <blockquote><p>以<code>key/value</code> 格式定义 <code>reducer</code>，用于处理同步操作，唯一可以修改 <code>state</code> 的地方。由 <code>action</code> 触发。其实一个纯函数</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>namespace: 'todo',
+  state: {
+    list: []
+  },
+  // reducers 写法
+  reducers: {
+    save(state, { payload: { list } }) {
+      return { ...state, list }
+    }
+ }
+</code></pre></div><p><strong>Effect</strong></p> <blockquote><p>用于处理异步操作和业务逻辑，不直接修改 <code>state</code>，简单的来说，就是获取从服务端获取数据，并且发起一个 <code>action</code>交给<code>reducer</code> 的地方</p></blockquote> <p>其中它用到了<code>redux-saga</code>，里面有几个常用的函数。</p> <div class="language- extra-class"><pre class="language-text"><code>// effects 写法
+effects: {
+    *addTodo({ payload: value }, { call, put, select }) {
+      // 模拟网络请求
+      const data = yield call(todoService.query, value)
+      console.log(data)
+      let tempList = yield select(state =&gt; state.todo.list)
+      let list = []
+      list = list.concat(tempList)
+      const tempObj = {}
+      tempObj.title = value
+      tempObj.id = list.length
+      tempObj.finished = false
+      list.push(tempObj)
+      yield put({ type: 'save', payload: { list }})
+    },
+    *toggle({ payload: index }, { call, put, select }) {
+      // 模拟网络请求
+      const data = yield call(todoService.query, index)
+      let tempList = yield select(state =&gt; state.todo.list)
+      let list = []
+      list = list.concat(tempList)
+      let obj = list[index]
+      obj.finished = !obj.finished
+      yield put({ type: 'save', payload: { list } })
+    },
+    *delete({ payload: index }, { call, put, select }) {
+      const data = yield call(todoService.query, index)
+      let tempList = yield select(state =&gt; state.todo.list)
+      let list = []
+      list = list.concat(tempList)
+      list.splice(index, 1)
+      yield put({ type: 'save', payload: { list } })
+    },
+    *modify({ payload: { value, index } }, { call, put, select }) {
+      const data = yield call(todoService.query, value)
+      let tempList = yield select(state =&gt; state.todo.list)
+      let list = []
+      list = list.concat(tempList)
+      let obj = list[index]
+      obj.title = value
+      yield put({ type: 'save', payload: { list } })
+    }
+}
+</code></pre></div><p><img src="https://upload-images.jianshu.io/upload_images/1505342-9ecb8ba2d8fd3ec2.png" alt="img"></p> <blockquote><p>在项目中最主要的会用到的是 <code>put</code> 与 <code>call</code></p></blockquote> <p><strong>Subscription</strong></p> <blockquote><ul><li>以 <code>key/value</code> 格式定义 <code>subscription</code>，<code>subscription</code> 是订阅，用于订阅一个数据源，然后根据需要 dispatch 相应的 action</li> <li><code>subscription</code> 是订阅，用于订阅一个数据源，然后根据需要 <code>dispatch</code> 相应的<code>action</code>。在 <code>app.start()</code> 时被执行，数据源可以是当前的时间、当前页面的<code>url</code>、服务器的 <code>websocket</code> 连接、<code>history</code>路由变化等等。</li></ul></blockquote> <ul><li><strong>注意</strong>：如果要使用 <code>app.unmodel()</code>，<code>subscription</code> 必须返回 <code>unlisten</code> 方法，用于取消数据订阅</li></ul> <div class="language- extra-class"><pre class="language-text"><code>// subscriptions 写法
+subscriptions: {
+    setup({ dispatch, history }) {
+      // 监听路由的变化，请求页面数据
+      return history.listen(({ pathname, search }) =&gt; {
+        const query = queryString.parse(search)
+        let list = []
+        if (pathname === 'todoList') {
+          dispatch({ type: 'save', payload: {list} })
+        }
+      })
+    }
+  }
+</code></pre></div><h4 id="_2-3-4-router"><a href="#_2-3-4-router" class="header-anchor">#</a> 2.3.4 Router</h4> <blockquote><div class="language- extra-class"><pre class="language-text"><code>Router` 表示路由配置信息，项目中的 `router.js
+</code></pre></div></blockquote> <div class="language- extra-class"><pre class="language-text"><code>export default function({ history }){
+  return(
+    &lt;Router history={history}&gt;
+      &lt;Route path=&quot;/&quot; component={App} /&gt;
+    &lt;/Router&gt;
+  );
+}
+</code></pre></div><p><strong>RouteComponent</strong></p> <blockquote><p><code>RouteComponent</code> 表示<code>Router</code> 里匹配路径的 <code>Component</code>，通常会绑定<code>model</code>的数据。如下:</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>import { connect } from 'dva';
+
+function App() {
+  return &lt;div&gt;App&lt;/div&gt;;
+}
+
+function mapStateToProps(state) {
+  return { todos: state.todos };
+}
+
+export default connect(mapStateToProps)(App);
+</code></pre></div><h3 id="_2-4-整体架构"><a href="#_2-4-整体架构" class="header-anchor">#</a> 2.4 整体架构</h3> <p><img src="https://poetries1.gitee.io/img-repo/20191001/45.png" alt="img"></p> <ul><li>首先我们根据 <code>url</code> 访问相关的 <code>Route-Component</code>，在组件中我们通过 <code>dispatch</code>发送 <code>action</code> 到 <code>model</code> 里面的 <code>effect</code> 或者直接 <code>Reducer</code></li> <li>当我们将<code>action</code>发送给<code>Effect</code>，基本上是取服务器上面请求数据的，服务器返回数据之后，<code>effect</code> 会发送相应的 <code>action</code>给 <code>reducer</code>，由唯一能改变 <code>state</code>的 <code>reducer</code> 改变 <code>state</code> ，然后通过<code>connect</code>重新渲染组件。</li> <li>当我们将<code>action</code>发送给<code>reducer</code>，那直接由 <code>reducer</code> 改变 <code>state</code>，然后通过<code>connect</code>重新渲染组件</li></ul> <h3 id="_2-5-dva图解"><a href="#_2-5-dva图解" class="header-anchor">#</a> 2.5 Dva图解</h3> <p><strong>图解一：加入Saga</strong></p> <blockquote><div class="language- extra-class"><pre class="language-text"><code>React` 只负责页面渲染, 而不负责页面逻辑, 页面逻辑可以从中单独抽取出来, 变成 `store
+</code></pre></div></blockquote> <p><img src="https://poetries1.gitee.io/img-repo/20191001/46.png" alt="img"></p> <blockquote><p>使用 <code>Middleware</code> 拦截 <code>action</code>, 这样一来异步的网络操作也就很方便了, 做成一个 <code>Middleware</code>就行了, 这里使用<code>redux-saga</code> 这个类库</p></blockquote> <ul><li>点击创建 <code>Todo</code>的按钮, 发起一个 <code>type == addTodo</code> 的 <code>action</code></li> <li><code>saga</code> 拦截这个 <code>action</code>, 发起 <code>http</code> 请求, 如果请求成功, 则继续向 <code>reducer</code> 发一个 <code>type == addTodoSucc</code> 的 <code>action</code>, 提示创建成功, 反之则发送 <code>type == addTodoFail</code> 的<code>action</code> 即可</li></ul> <p><strong>图解二：Dva表示法</strong></p> <p><img src="https://poetries1.gitee.io/img-repo/20191001/47.png" alt="img"></p> <blockquote><p>dva做了 3 件很重要的事情</p></blockquote> <ul><li>把 <code>store</code>及 <code>saga</code> 统一为一个 <code>model</code> 的概念, 写在一个 js 文件里面</li> <li>增加了一个 <code>Subscriptions</code>, 用于收集其他来源的 <code>action</code>, eg: 键盘操作</li> <li><code>model</code> 写法很简约, 类似于 <code>DSL</code> 或者 <code>RoR</code></li></ul> <h2 id="三、计数器例子"><a href="#三、计数器例子" class="header-anchor">#</a> 三、计数器例子</h2> <div class="language- extra-class"><pre class="language-text"><code>$ dva new myapp
+</code></pre></div><p><strong>目录结构介绍</strong></p> <div class="language- extra-class"><pre class="language-text"><code>.
+├── mock    // mock数据文件夹
+├── node_modules // 第三方的依赖
+├── public  // 存放公共public文件的文件夹
+├── src  // 最重要的文件夹，编写代码都在这个文件夹下
+│   ├── assets // 可以放图片等公共资源
+│   ├── components // 就是react中的木偶组件
+│   ├── models // dva最重要的文件夹，所有的数据交互及逻辑都写在这里
+│   ├── routes // 就是react中的智能组件，不要被文件夹名字误导。
+│   ├── services // 放请求借口方法的文件夹
+│   ├── utils // 自己的工具方法可以放在这边
+│   ├── index.css // 入口文件样式
+│   ├── index.ejs // ejs模板引擎
+│   ├── index.js // 入口文件
+│   └── router.js // 项目的路由文件
+├── .eslintrc // bower安装目录的配置
+├── .editorconfig // 保证代码在不同编辑器可视化的工具
+├── .gitignore // git上传时忽略的文件
+├── .roadhogrc.js // 项目的配置文件，配置接口转发，css_module等都在这边。
+├── .roadhogrc.mock.js // 项目的配置文件
+└── package.json // 当前整一个项目的依赖
+</code></pre></div><p><strong>首先是前端的页面，我们使用 class 形式来创建组件，原例子中是使用无状态来创建的。react 创建组件的各种方式，大家可以看<a href="http://www.cnblogs.com/wonyun/p/5930333.html" target="_blank" rel="noopener noreferrer">React创建组件的三种方式及其区别<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></strong></p> <blockquote><p>我们先修改<code>route/IndexPage.js</code></p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>import React from 'react';
+import { connect } from 'dva';
+import styles from './IndexPage.css';
+
+class IndexPage extends React.Component {
+  render() {
+    const { dispatch } = this.props;
+
+    return (
+      &lt;div className={styles.normal}&gt;
+        &lt;div className={styles.record}&gt;Highest Record: 1&lt;/div&gt;
+        &lt;div className={styles.current}&gt;2&lt;/div&gt;
+        &lt;div className={styles.button}&gt;
+          &lt;button onClick={() =&gt; {}}&gt;+&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+export default connect()(IndexPage);
+</code></pre></div><blockquote><p>同时修改样式<code>routes/IndexPage.css</code></p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>.normal {
+  width: 200px;
+  margin: 100px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 20px #ccc;
+}
+.record {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 8px;
+  color: #ccc;
+}
+.current {
+  text-align: center;
+  font-size: 40px;
+  padding: 40px 0;
+}
+.button {
+  text-align: center;
+  button {
+    width: 100px;
+    height: 40px;
+    background: #aaa;
+    color: #fff;
+  }
+}
+</code></pre></div><blockquote><p>在 <code>model</code> 处理<code>state</code>，在页面里面输出 <code>model</code> 中的 <code>state</code></p></blockquote> <ul><li>首先我们在index.js中将<code>models/example.js</code>，即将model下一行的的注释打开</li></ul> <div class="language- extra-class"><pre class="language-text"><code>import dva from 'dva';
+import './index.css';
+
+// 1. Initialize
+const app = dva();
+
+// 2. Plugins
+// app.use({});
+
+// 3. Model
+app.model(require('./models/example')); // 打开注释
+
+// 4. Router
+app.router(require('./router'));
+
+// 5. Start
+app.start('#root');
+</code></pre></div><blockquote><p>接下来我们进入 <code>models/example.js</code>，将<code>namespace</code> 名字改为 <code>count</code>，<code>state</code>对象加上 <code>record</code> 与 <code>current</code> 属性。如下</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>export default {
+  namespace: 'count',
+  state: {
+    record: 0,
+    current: 0,
+  },
+  ...
+};
+</code></pre></div><blockquote><p>接着我们来到 <code>routes/indexpage.js</code> 页面，通过的 <code>mapStateToProps</code>引入相关的 <code>state</code></p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>import React from 'react';
+import { connect } from 'dva';
+import styles from './IndexPage.css';
+
+class IndexPage extends React.Component {
+  render() {
+    const { dispatch, count } = this.props;
+    
+    return (
+      &lt;div className={styles.normal}&gt;
+        &lt;div className={styles.record}&gt;
+         Highest Record: {count.record} // 将count的record输出
+        &lt;/div&gt;
+        &lt;div className={styles.current}&gt;
+         {count.current}
+        &lt;/div&gt;
+        &lt;div className={styles.button}&gt;
+          &lt;button onClick={() =&gt; {} } &gt;
+                 +
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+function mapStateToProps(state) {
+  return { count: state.count };
+} // 获取state
+
+export default connect(mapStateToProps)(IndexPage);
+</code></pre></div><blockquote><p>通过 <code>+</code> 发送 <code>action</code>，通过 <code>reducer</code> 改变相应的 <code>state</code></p></blockquote> <ul><li>首先我们在 <code>models/example.js</code>，写相应的 <code>reducer</code></li></ul> <div class="language- extra-class"><pre class="language-text"><code>export default {
+  ...
+  reducers: {
+    add1(state) {
+      const newCurrent = state.current + 1;
+      return { ...state,
+        record: newCurrent &gt; state.record ? newCurrent : state.record,
+        current: newCurrent,
+      };
+    },
+    minus(state) {
+      return { ...state, current: state.current - 1 };
+    },
+  },
+};
+</code></pre></div><blockquote><p>在页面的模板 <code>routes/IndexPage.js</code> 中 <code>+</code> 号点击的时候，<code>dispatch</code>一个 <code>action</code></p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>import React from 'react';
+import { connect } from 'dva';
+import styles from './IndexPage.css';
+
+class IndexPage extends React.Component {
+  render() {
+    const { dispatch, count } = this.props;
+    return (
+      &lt;div className={styles.normal}&gt;
+        &lt;div className={styles.record}&gt;Highest Record: {count.record}&lt;/div&gt;
+        &lt;div className={styles.current}&gt;{count.current}&lt;/div&gt;
+        &lt;div className={styles.button}&gt;
+          &lt;button 
++            onClick={() =&gt; { dispatch({ type: 'count/add1' });}
+          }&gt;+&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+function mapStateToProps(state) {
+  return { count: state.count };
+}
+
+export default connect(mapStateToProps)(IndexPage);
+</code></pre></div><blockquote><p>接下来我们来使用 <code>effect</code> 模拟一个数据接口请求，返回之后，通过 <code>yield put()</code> 改变相应的 <code>state</code></p></blockquote> <ul><li>首先我们替换相应的 <code>models/example.js</code> 的 <code>effect</code></li></ul> <div class="language- extra-class"><pre class="language-text"><code>effects: {
+    *add(action, { call, put }) {
+      yield call(delay, 1000);
+      yield put({ type: 'minus' });
+    },
+},
+</code></pre></div><blockquote><p>这里的 <code>delay</code>，是我这边写的一个延时的函数，我们在 <code>utils</code> 里面编写一个 <code>utils.js</code> ，一般请求接口的函数都会写在 <code>servers</code> 文件夹中</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>export function delay(timeout) {
+  return new Promise((resolve) =&gt; {
+    setTimeout(resolve, timeout);
+  });
+}
+</code></pre></div><blockquote><p>订阅订阅键盘事件，使用 <code>subscriptions</code>，当用户按住 <code>command+up</code> 时候触发添加数字的 <code>action</code></p></blockquote> <ul><li>在 <code>models/example.js</code> 中作如下修改</li></ul> <div class="language- extra-class"><pre class="language-text"><code>+import key from 'keymaster';
+...
+app.model({
+  namespace: 'count',
++ subscriptions: {
++   keyboardWatcher({ dispatch }) {
++     key('⌘+up, ctrl+up', () =&gt; { dispatch({type:'add'}) });
++   },
++ },
+});
+</code></pre></div><ul><li>在这里你需要安装 <code>keymaster</code> 这个依赖</li></ul> <div class="language- extra-class"><pre class="language-text"><code>npm install keymaster --save
+</code></pre></div><ul><li>现在你可以按住 <code>command+up</code> 就可以使 <code>current</code> 加1</li></ul> <h2 id="四、dva实践"><a href="#四、dva实践" class="header-anchor">#</a> 四、Dva实践</h2> <h3 id="_4-1-抽离model"><a href="#_4-1-抽离model" class="header-anchor">#</a> 4.1 抽离Model</h3> <blockquote><p>抽离<code>Model</code>，根据设计页面需求，设计相应的<code>Model</code></p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>// models/users.js
+// version1: 从数据维度抽取，更适用于无状态的数据
+// version2: 从业务状态抽取，将数据与组件的业务状态统一抽离成一个model
+// 新增部分为在数据维度基础上，改为从业务状态抽取而添加的代码
+export default {
+  namespace: 'users',
+  state: {
+    list: [],
+    total: null,
++   loading: false, // 控制加载状态
++   current: null, // 当前分页信息
++   currentItem: {}, // 当前操作的用户对象
++   modalVisible: false, // 弹出窗的显示状态
++   modalType: 'create', // 弹出窗的类型（添加用户，编辑用户）
+  },
+
+    // 异步操作
+    effects: {
+        *query(){},
+        *create(){},
+        *'delete'(){},   // 因为delete是关键字，特殊处理
+        *update(){},
+    },
+
+    // 替换状态树
+    reducers: {
++       showLoading(){}, // 控制加载状态的 reducer
++       showModel(){}, // 控制 Model 显示状态的 reducer
++       hideModel(){},
+        querySuccess(){},
+        createSuccess(){},
+        deleteSuccess(){},
+        updateSuccess(){},
+    }
+}
+</code></pre></div><h3 id="_4-2-设计组件"><a href="#_4-2-设计组件" class="header-anchor">#</a> 4.2 设计组件</h3> <blockquote><p>先设置容器组件的访问路径，再创建组件文件</p></blockquote> <h4 id="_4-2-1-容器组件"><a href="#_4-2-1-容器组件" class="header-anchor">#</a> 4.2.1 容器组件</h4> <blockquote><p>具有监听数据行为的组件，职责是绑定相关联的 model 数据，包含子组件；传入的数据来源于model</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>import React, { Component, PropTypes } from 'react';
+
+// dva 的 connect 方法可以将组件和数据关联在一起
+import { connect } from 'dva';
+
+// 组件本身
+const MyComponent = (props)=&gt;{};
+
+// propTypes属性，用于限制props的传入数据类型
+MyComponent.propTypes = {};
+
+// 声明模型传递函数，用于建立组件和数据的映射关系
+// 实际表示 将ModelA这一个数据模型，绑定到当前的组件中，则在当前组件中，随时可以取到ModelA的最新值
+// 可以绑定多个Model
+function mapStateToProps({ModelA}) {
+  return {ModelA};
+}
+
+// 关联 model
+// 正式调用模型传递函数，完成模型绑定
+export default connect(mapStateToProps)(MyComponent);
+</code></pre></div><h4 id="_4-2-2-展示组件"><a href="#_4-2-2-展示组件" class="header-anchor">#</a> 4.2.2 展示组件</h4> <blockquote><p>展示通过 <code>props</code> 传递到组件内部数据；传入的数据来源于容器组件向展示组件的<code>props</code></p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>import React, { Component, PropTypes } from 'react';
+
+// 组件本身
+// 所需要的数据通过 Container Component 通过 props 传递下来
+const MyComponent = (props)=&gt;{}
+MyComponent.propTypes = {};
+
+// 并不会监听数据
+export default MyComponent;
+</code></pre></div><h4 id="_4-2-3-设置路由"><a href="#_4-2-3-设置路由" class="header-anchor">#</a> 4.2.3 设置路由</h4> <div class="language- extra-class"><pre class="language-text"><code>// .src/router.js
+import React, { PropTypes } from 'react';
+import { Router, Route } from 'dva/router';
+import Users from './routes/Users';
+
+export default function({ history }) {
+  return (
+    &lt;Router history={history}&gt;
+      &lt;Route path=&quot;/users&quot; component={Users} /&gt;
+    &lt;/Router&gt;
+  );
+};
+</code></pre></div><p><strong>容器组件雏形</strong></p> <div class="language- extra-class"><pre class="language-text"><code>// .src/routes/Users.jsx
+import React, { PropTypes } from 'react';
+
+function Users() {
+  return (
+    &lt;div&gt;User Router Component&lt;/div&gt;
+  );
+}
+
+export default Users;
+</code></pre></div><h4 id="_4-2-4-设计容器组件"><a href="#_4-2-4-设计容器组件" class="header-anchor">#</a> 4.2.4 设计容器组件</h4> <blockquote><p>自顶向下的设计方法：先设计容器组件，再逐步细化内部的展示容器</p></blockquote> <p>组件的定义方式</p> <div class="language- extra-class"><pre class="language-text"><code>// 方法一： es6 的写法，当组件设计react生命周期时，可采用这种写法
+// 具有生命周期的组件，可以在接收到传入数据变化时，自定义执行方法，有自己的行为模式
+// 比如在组件生成后调用xx请求(componentDidMount)、可以自己决定要不要更新渲染(shouldComponentUpdate)等
+class App extends React.Component({});
+
+// 方法二： stateless 的写法，定义无状态组件
+// 无状态组件，仅仅根据传入的数据更新，修改自己的渲染内容
+const App = (props) =&gt; ({});
+</code></pre></div><p>容器组件：</p> <div class="language- extra-class"><pre class="language-text"><code>// ./src/routes/Users.jsx
+import React, { Component, PropTypes } from 'react';
+
+// 引入展示组件 （暂时都没实现）
+import UserList from '../components/Users/UserList';
+import UserSearch from '../components/Users/UserSearch';
+import UserModal from '../components/Users/UserModal';
+
+// 引入css样式表
+import styles from './style.less'
+
+function Users() {
+
+  // 向userListProps中传入静态数据
+  const userSearchProps = {};
+  const userListProps = {
+    total: 3,
+    current: 1,
+    loading: false,
+    dataSource: [
+      {
+        name: '张三',
+        age: 23,
+        address: '成都',
+      },
+      {
+        name: '李四',
+        age: 24,
+        address: '杭州',
+      },
+      {
+        name: '王五',
+        age: 25,
+        address: '上海',
+      },
+    ],
+  };
+  const userModalProps = {};
+
+  return (
+    &lt;div className={styles.normal}&gt;
+      {/* 用户筛选搜索框 */}
+      &lt;UserSearch {...userSearchProps} /&gt;
+      {/* 用户信息展示列表 */}
+      &lt;UserList {...userListProps} /&gt;
+      {/* 添加用户 &amp; 修改用户弹出的浮层 */}
+      &lt;UserModal {...userModalProps} /&gt;
+    &lt;/div&gt;
+  );
+}
+
+// 很关键的对外输出export；使外部可通过import引用使用此组件
+export default Users;
+</code></pre></div><p>展示组件UserList</p> <div class="language- extra-class"><pre class="language-text"><code>// ./src/components/Users/UserList.jsx
+import React, { Component, PropTypes } from 'react';
+
+// 采用antd的UI组件
+import { Table, message, Popconfirm } from 'antd';
+
+// 采用 stateless 的写法
+const UserList = ({
+    total,
+    current,
+    loading,
+    dataSource,
+}) =&gt; {
+  const columns = [{
+    title: '姓名',
+    dataIndex: 'name',
+    key: 'name',
+    render: (text) =&gt; &lt;a href=&quot;#&quot;&gt;{text}&lt;/a&gt;,
+  }, {
+    title: '年龄',
+    dataIndex: 'age',
+    key: 'age',
+  }, {
+    title: '住址',
+    dataIndex: 'address',
+    key: 'address',
+  }, {
+    title: '操作',
+    key: 'operation',
+    render: (text, record) =&gt; (
+      &lt;p&gt;
+        &lt;a onClick={()=&gt;{}}&gt;编辑&lt;/a&gt;
+         
+        &lt;Popconfirm title=&quot;确定要删除吗？&quot; onConfirm={()=&gt;{}}&gt;
+          &lt;a&gt;删除&lt;/a&gt;
+        &lt;/Popconfirm&gt;
+      &lt;/p&gt;
+    ),
+  }];
+
+  // 定义分页对象
+  const pagination = {
+    total,
+    current,
+    pageSize: 10,
+    onChange: ()=&gt;{},
+  };
+
+
+  // 此处的Table标签使用了antd组件，传入的参数格式是由antd组件库本身决定的
+  // 此外还需要在index.js中引入antd  import 'antd/dist/antd.css'
+  return (
+    &lt;div&gt;
+      &lt;Table
+        columns={columns}
+        dataSource={dataSource}
+        loading={loading}
+        rowKey={record =&gt; record.id}
+        pagination={pagination}
+      /&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default UserList;
+</code></pre></div><h3 id="_4-3-添加reducer"><a href="#_4-3-添加reducer" class="header-anchor">#</a> 4.3 添加Reducer</h3> <blockquote><p>在整个应用中，只有<code>model</code>中的<code>reducer</code>函数可以直接修改自己所在<code>model</code>的<code>state</code>参数，其余都是非法操作；
+并且必须使用<code>return {...state}</code>的形式进行修改</p></blockquote> <h4 id="_4-3-1-第一步：实现reducer函数"><a href="#_4-3-1-第一步：实现reducer函数" class="header-anchor">#</a> 4.3.1 第一步：实现reducer函数</h4> <div class="language- extra-class"><pre class="language-text"><code>// models/users.js
+// 使用静态数据返回，把userList中的静态数据移到此处
+// querySuccess这个action的作用在于，修改了model的数据
+export default {
+  namespace: 'users',
+  state： {}，
+  subscriptions: {},
+  effects: {},
+  reducers: {
+    querySuccess(state){
+        const mock = {
+          total: 3,
+          current: 1,
+          loading: false,
+          list: [
+            {
+              id: 1,
+              name: '张三',
+              age: 23,
+              address: '成都',
+            },
+            {
+              id: 2,
+              name: '李四',
+              age: 24,
+              address: '杭州',
+            },
+            {
+              id: 3,
+              name: '王五',
+              age: 25,
+              address: '上海',
+            },
+          ]
+        };
+        // return 的内容是一个对象，涵盖原state中的所有属性，以实现“更新替换”的效果
+        return {...state, ...mock, loading: false};
+      }
+  }
+}
+</code></pre></div><h4 id="_4-3-2-第二步：关联model中的数据源"><a href="#_4-3-2-第二步：关联model中的数据源" class="header-anchor">#</a> 4.3.2 第二步：关联Model中的数据源</h4> <div class="language- extra-class"><pre class="language-text"><code>// routes/Users.jsx
+
+import React, { PropTypes } from 'react';
+
+// 最后用到了connect函数，需要在头部预先引入connect
+import { connect } from 'dva';
+
+function Users({ location, dispatch, users }) {
+
+  const {
+    loading, list, total, current,
+    currentItem, modalVisible, modalType
+    } = users;
+
+  const userSearchProps={};
+
+  // 使用传入的数据源，进行数据渲染
+  const userListProps={
+    dataSource: list,
+    total,
+    loading,
+    current,
+  };
+  const userModalProps={};
+
+  return (
+    &lt;div className={styles.normal}&gt;
+      {/* 用户筛选搜索框 */}
+      &lt;UserSearch {...userSearchProps} /&gt;
+      {/* 用户信息展示列表 */}
+      &lt;UserList {...userListProps} /&gt;
+      {/* 添加用户 &amp; 修改用户弹出的浮层 */}
+      &lt;UserModal {...userModalProps} /&gt;
+    &lt;/div&gt;
+  );
+}
+
+// 声明组件的props类型
+Users.propTypes = {
+  users: PropTypes.object,
+};
+
+// 指定订阅数据，并且关联到users中
+function mapStateToProps({ users }) {
+  return {users};
+}
+
+// 建立数据关联关系
+export default connect(mapStateToProps)(Users);
+</code></pre></div><h4 id="_4-3-3-第三步：通过发起action，在组件中获取model中的数据"><a href="#_4-3-3-第三步：通过发起action，在组件中获取model中的数据" class="header-anchor">#</a> 4.3.3 第三步：通过发起Action，在组件中获取Model中的数据</h4> <div class="language- extra-class"><pre class="language-text"><code>// models/users.js
+// 在组件生成后发出action，示例：
+componentDidMount() {
+  this.props.dispatch({
+    type: 'model/action',     // type对应action的名字
+  });
+}
+
+// 在本次实践中，在访问/users/路由时，就是我们获取用户数据的时机
+// 因此把dispatch移至subscription中
+// subcription，订阅(或是监听)一个数据源，然后根据条件dispatch对应的action
+// 数据源可以是当前的时间、服务器的 websocket 连接、keyboard 输入、geolocation 变化、history 路由变化等等  
+// 此处订阅的数据源就是路由信息，当路由为/users，则派发'querySuccess'这个effects方法
+subscriptions: {
+    setup({ dispatch, history }) {
+      history.listen(location =&gt; {
+        if (location.pathname === '/users') {
+          dispatch({
+            type: 'querySuccess',
+            payload: {}
+          });
+        }
+      });
+    },
+  },
+</code></pre></div><h4 id="_4-3-4-第四步：-在index-js中添加models"><a href="#_4-3-4-第四步：-在index-js中添加models" class="header-anchor">#</a> 4.3.4 第四步： 在index.js中添加models</h4> <div class="language- extra-class"><pre class="language-text"><code>// model必须在此完成注册，才能全局有效
+// index.js
+app.model(require('./models/users.js'));
+</code></pre></div><h4 id="_4-4-添加effects"><a href="#_4-4-添加effects" class="header-anchor">#</a> 4.4 添加Effects</h4> <blockquote><div class="language- extra-class"><pre class="language-text"><code>Effects`的作用在于处理异步函数，控制数据流程。
+因为在真实场景中，数据都来自服务器，需要在发起异步请求获得返回值后再设置数据，更新`state`。
+因此我们往往在`Effects`中调用`reducer
+</code></pre></div></blockquote> <div class="language- extra-class"><pre class="language-text"><code>export default {
+  namespace: 'users',
+  state： {}，
+  subscriptions: {},
+  effects: {
+    // 添加effects函数
+    // call与put是dva的函数
+    // call调用执行一个函数
+    // put则是dispatch执行一个action
+    // select用于访问其他model
+    *query({ payload }, { select, call, put }) {
+        yield put({ type: 'showLoading' });
+        const { data } = yield call(query);
+        if (data) {
+          yield put({
+            type: 'querySuccess',
+            payload: {
+              list: data.data,
+              total: data.page.total,
+              current: data.page.current
+            }
+          });
+        }
+      },
+    },
+  reducers: {}
+}
+
+
+
+// 添加请求处理   包含了一个ajax请求
+// models/users.js
+import request from '../utils/request';
+import qs from 'qs';
+async function query(params) {
+  return request(`/api/users?${qs.stringify(params)}`);
+}
+</code></pre></div><h4 id="_4-5-把请求处理分离到service中"><a href="#_4-5-把请求处理分离到service中" class="header-anchor">#</a> 4.5 把请求处理分离到service中</h4> <blockquote><p>用意在于分离(可复用的)ajax请求</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>// services/users.js
+import request from '../utils/request';
+import qs from 'qs';
+export async function query(params) {
+  return request(`/api/users?${qs.stringify(params)}`);
+}
+
+// 在models中引用
+// models/users.js
+import {query} from '../services/users';
+</code></pre></div><h2 id="五、使用dva框架和直接使用redux写法的区别"><a href="#五、使用dva框架和直接使用redux写法的区别" class="header-anchor">#</a> 五、使用dva框架和直接使用redux写法的区别</h2> <h3 id="_5-1-使用-redux"><a href="#_5-1-使用-redux" class="header-anchor">#</a> 5.1 使用 redux</h3> <div class="language- extra-class"><pre class="language-text"><code>// action.js
+
+export const REQUEST_TODO = 'REQUEST_TODO';
+export const RESPONSE_TODO = 'RESPONSE_TODO';
+
+const request = count =&gt; ({type: REQUEST_TODO, payload: {loading: true, count}});
+
+const response = count =&gt; ({type: RESPONSE_TODO, payload: {loading: false, count}});
+
+export const fetch = count =&gt; {
+  return (dispatch) =&gt; {
+    dispatch(request(count));
+
+    return new Promise(resolve =&gt; {
+      setTimeout(() =&gt; {
+        resolve(count + 1);
+      }, 1000)
+    }).then(data =&gt; {
+      dispatch(response(data))
+    })
+  }
+}
+//reducer.js
+import { REQUEST_TODO, RESPONSE_TODO } from './actions';
+
+export default (state = {
+  loading: false,
+  count: 0
+}, action) =&gt; {
+  switch (action.type) {
+    case REQUEST_TODO:
+      return {...state, ...action.payload};
+    case RESPONSE_TODO:
+      return {...state, ...action.payload};
+    default:
+      return state;
+  }
+}
+// app.js
+import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import * as actions from './actions';
+
+const App = ({fetch, count, loading}) =&gt; {
+  return (
+    &lt;div&gt;
+      {loading ? &lt;div&gt;loading...&lt;/div&gt; : &lt;div&gt;{count}&lt;/div&gt;}
+      &lt;button onClick={() =&gt; fetch(count)}&gt;add&lt;/button&gt;
+    &lt;/div&gt;
+  )
+}
+
+function mapStateToProps(state) {
+  return state;
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actions, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
+//index.js
+import { render } from 'react-dom';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux'
+import thunkMiddleware from 'redux-thunk';
+
+import reducer from './app/reducer';
+import App from './app/app';
+
+const store = createStore(reducer, applyMiddleware(thunkMiddleware));
+
+render(
+  &lt;Provider store={store}&gt;
+    &lt;App/&gt;
+  &lt;/Provider&gt;
+  ,
+  document.getElementById('app')
+)
+</code></pre></div><h3 id="_5-2-使用dva"><a href="#_5-2-使用dva" class="header-anchor">#</a> 5.2 使用dva</h3> <div class="language- extra-class"><pre class="language-text"><code>// model.js
+export default {
+  namespace: 'demo',
+  state: {
+    loading: false,
+    count: 0
+  },
+  reducers: {
+    request(state, payload) {
+      return {...state, ...payload};
+    },
+    response(state, payload) {
+      return {...state, ...payload};
+    }
+  },
+  effects: {
+    *'fetch'(action, {put, call}) {
+      yield put({type: 'request', loading: true});
+
+      let count = yield call((count) =&gt; {
+        return new Promise(resolve =&gt; {
+          setTimeout(() =&gt; {
+            resolve(count + 1);
+          }, 1000);
+        });
+      }, action.count);
+
+      yield put({
+        type: 'response',
+        loading: false,
+        count
+      });
+    }
+  }
+}
+//app.js
+
+import React from 'react'
+import { connect } from 'dva';
+
+const App = ({fetch, count, loading}) =&gt; {
+  return (
+    &lt;div&gt;
+      {loading ? &lt;div&gt;loading...&lt;/div&gt; : &lt;div&gt;{count}&lt;/div&gt;}
+      &lt;button onClick={() =&gt; fetch(count)}&gt;add&lt;/button&gt;
+    &lt;/div&gt;
+  )
+}
+
+function mapStateToProps(state) {
+  return state.demo;
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetch(count){
+      dispatch({type: 'demo/fetch', count});
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
+// index.js
+import dva from 'dva';
+import model from './model';
+import App from './app';
+
+const app = dva();
+
+app.use({});
+
+app.model(model);
+
+app.router(() =&gt; &lt;App /&gt;);
+
+app.start();
+</code></pre></div><ul><li>使用 <code>redux</code> 需要拆分出<code>action</code>模块和<code>reducer</code>模块</li> <li><code>dva</code>将<code>action</code>和<code>reducer</code>封装到<code>model</code>中，异步流程采用<code>Generator</code>处理</li></ul> <h2 id="六、使用axios统一处理"><a href="#六、使用axios统一处理" class="header-anchor">#</a> 六、使用axios统一处理</h2> <h3 id="_6-1-示例代码"><a href="#_6-1-示例代码" class="header-anchor">#</a> 6.1 示例代码</h3> <div class="language- extra-class"><pre class="language-text"><code>// request.js
+import axios from 'axios';
+import NProgress from 'nprogress';
+import { notification, message } from 'antd';
+import { routerRedux } from 'dva/router';
+import store from '../index';
+
+/**
+ * 一、功能：
+ * 1. 统一拦截http错误请求码；
+ * 2. 统一拦截业务错误代码；
+ * 3. 统一设置请求前缀
+ * |-- 每个 http 加前缀 baseURL = /api/v1，从配置文件中获取 apiPrefix
+ * 4. 配置异步请求过渡状态：显示蓝色加载条表示正在请求中，避免给用户页面假死的不好体验。
+ * |-- 使用 NProgress 工具库。
+ * 
+ * 二、引包：
+ * |-- axios：http 请求工具库
+ * |-- NProgress：异步请求过度条，在浏览器主体部分顶部显示蓝色小条
+ * |-- notification：Antd组件 &gt; 处理错误响应码提示信息
+ * |-- routerRedux：dva/router对象，用于路由跳转，错误响应码跳转相应页面
+ * |-- store：dva中对象，使用里面的 dispatch 对象，用于触发路由跳转
+ */
+
+// 设置全局参数，如响应超市时间，请求前缀等。
+axios.defaults.timeout = 5000
+axios.defaults.baseURL = '/api/v1';
+axios.defaults.withCredentials = true;
+
+// 状态码错误信息
+const codeMessage = {
+  200: '服务器成功返回请求的数据。',
+  201: '新建或修改数据成功。',
+  202: '一个请求已经进入后台排队（异步任务）。',
+  204: '删除数据成功。',
+  400: '发出的请求有错误，服务器没有进行新建或修改数据的操作。',
+  401: '用户没有权限（令牌、用户名、密码错误）。',
+  403: '用户得到授权，但是访问是被禁止的。',
+  404: '发出的请求针对的是不存在的记录，服务器没有进行操作。',
+  406: '请求的格式不可得。',
+  410: '请求的资源被永久删除，且不会再得到的。',
+  422: '当创建一个对象时，发生一个验证错误。',
+  500: '服务器发生错误，请检查服务器。',
+  502: '网关错误。',
+  503: '服务不可用，服务器暂时过载或维护。',
+  504: '网关超时。',
+};
+
+// 添加一个请求拦截器，用于设置请求过渡状态
+axios.interceptors.request.use((config) =&gt; {
+  // 请求开始，蓝色过渡滚动条开始出现
+  NProgress.start();
+  return config;
+}, (error) =&gt; {
+  return Promise.reject(error);
+});
+
+// 添加一个返回拦截器
+axios.interceptors.response.use((response) =&gt; {
+  // 请求结束，蓝色过渡滚动条消失
+  NProgress.done();
+  return response;
+}, (error) =&gt; {
+  // 请求结束，蓝色过渡滚动条消失
+  // 即使出现异常，也要调用关闭方法，否则一直处于加载状态很奇怪
+  NProgress.done();
+  return Promise.reject(error);
+});
+
+export default function request (opt) {
+  // 调用 axios api，统一拦截
+  return axios(opt)
+    .then((response) =&gt; 
+      // &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; 请求成功 &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+      console.log(`【${opt.method} ${opt.url}】请求成功，响应数据：%o`, response);
+
+      // 打印业务错误提示
+      if (response.data &amp;&amp; response.data.code != '0000') {
+        message.error(response.data.message);
+      }
+
+      return { ...response.data };
+    })
+    .catch((error) =&gt; {
+      // &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; 请求失败 &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+      // 请求配置发生的错误
+      if (!error.response) {
+        return console.log('Error', error.message);
+      }
+
+      // 响应时状态码处理 
+      const status = error.response.status;
+      const errortext = codeMessage[status] || error.response.statusText;
+      
+      notification.error({
+        message: `请求错误 ${status}`,
+        description: errortext,
+      });
+      
+      // 存在请求，但是服务器的返回一个状态码，它们都在2xx之外
+      const { dispatch } = store;
+
+      if (status === 401) {
+        dispatch(routerRedux.push('/user/login'));
+      } else if (status === 403) {
+        dispatch(routerRedux.push('/exception/403'));
+      } else if (status &lt;= 504 &amp;&amp; status &gt;= 500) {
+        dispatch(routerRedux.push('/exception/500'));
+      } else if (status &gt;= 404 &amp;&amp; status &lt; 422) {
+        dispatch(routerRedux.push('/exception/404'));
+      }
+
+      // 开发时使用，上线时删除
+      console.log(`【${opt.method} ${opt.url}】请求失败，响应数据：%o`, error.response);
+
+      return { code: status, message: errortext }; 
+    });
+}
+</code></pre></div><h3 id="_6-2-明确响应体"><a href="#_6-2-明确响应体" class="header-anchor">#</a> 6.2 明确响应体</h3> <blockquote><p>以微信小程序为例，请求响应数据分为两部分：</p></blockquote> <ul><li>网络请求是否成功；</li> <li>业务场景值。即便网络请求成功了，业务处理上可能有时也会出错，比如校验不通过</li></ul> <p>我们在拦截响应时要分别对这两部分进行处理</p> <div class="language- extra-class"><pre class="language-text"><code>response = {
+  status: 200,                // 网络请求状态。
+  statusText: 'xxx',
+  data: {
+    code: '1001',             // 业务请求状态。这里 '0000' 表示业务没问题，其它都有问题
+    message: 'yyy',
+    data: {  },
+  }
+}
+</code></pre></div><h3 id="_6-3-依赖包分析"><a href="#_6-3-依赖包分析" class="header-anchor">#</a> 6.3 依赖包分析</h3> <div class="language- extra-class"><pre class="language-text"><code>import axios from 'axios';
+import NProgress from 'nprogress';
+import { notification, message } from 'antd';
+import { routerRedux } from 'dva/router';
+import store from '../index';
+</code></pre></div><blockquote><p><code>import store from '../index';</code>这是 <code>dva</code> 中导出的对象。即下面代码最终导出的 <code>app._store</code>，引入它是因为 <code>dispatch</code> 对象在里面，我们需要 dispatch 对象进行路由跳转</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>// index.js
+import dva from 'dva';
+import { message } from 'antd';
+import { createBrowserHistory as createHistory } from 'history';
+
+// 1. Initialize
+const app = dva({
+  history: createHistory(),
+});
+
+// 2. Plugins
+app.use(createLoading());
+
+// 3. Model
+app.model(require('./models/app/global').default);
+
+// 4. Router
+app.router(require('./router').default);
+
+// 5. Start
+app.start('#root');
+
+export default app._store;
+</code></pre></div><h3 id="_6-4-axios-全局配置"><a href="#_6-4-axios-全局配置" class="header-anchor">#</a> 6.4 axios 全局配置</h3> <div class="language- extra-class"><pre class="language-text"><code>// 设置全局参数，如响应超市时间，请求前缀等。
+axios.defaults.timeout = 5000
+axios.defaults.baseURL = '/api/v1';
+axios.defaults.withCredentials = true;
+</code></pre></div><blockquote><p>axios 可以设置很多全局配置，具体可参阅 https://segmentfault.com/a/1190000008470355</p></blockquote> <h3 id="_6-5-加载-nprogress-过渡组件"><a href="#_6-5-加载-nprogress-过渡组件" class="header-anchor">#</a> 6.5 加载 NProgress 过渡组件</h3> <div class="language- extra-class"><pre class="language-text"><code>/ 添加一个请求拦截器，用于设置请求过渡状态
+axios.interceptors.request.use((config) =&gt; {
+  // 请求开始，蓝色过渡滚动条开始出现
+  NProgress.start();
+  return config;
+}, (error) =&gt; {
+  return Promise.reject(error);
+});
+
+// 添加一个返回拦截器
+axios.interceptors.response.use((response) =&gt; {
+  // 请求结束，蓝色过渡滚动条消失
+  NProgress.done();
+  return response;
+}, (error) =&gt; {
+  // 请求结束，蓝色过渡滚动条消失
+  // 即使出现异常，也要调用关闭方法，否则一直处于加载状态很奇怪
+  NProgress.done();
+  return Promise.reject(error);
+});
+</code></pre></div><blockquote><p><code>NProgress</code> 的使用主要有两个方法，当调用 <code>NProgress.start();</code> 时在浏览器顶部就会出现蓝色小条，当调用 <code>NProgress.done();</code> 蓝色小条就会消失。我们分别在请求开始和接收到响应调用这两个方法</p></blockquote> <p><img src="https://upload-images.jianshu.io/upload_images/6693922-948c3efcfeeaf4fd.gif" alt="img"></p> <h3 id="_6-6-网络请求成功处理"><a href="#_6-6-网络请求成功处理" class="header-anchor">#</a> 6.6 网络请求成功处理</h3> <div class="language- extra-class"><pre class="language-text"><code>.then((response) =&gt; 
+      // &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; 请求成功 &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+      console.log(`【${opt.method} ${opt.url}】请求成功，响应数据：%o`, response);
+
+      // 打印业务错误提示
+      if (response.data &amp;&amp; response.data.code != '0000') {
+        message.error(response.data.message);
+      }
+
+      return { ...response.data };
+    })
+</code></pre></div><blockquote><p>网络请求状态码为 <code>200-300</code> 表示成功，此时还应该判断业务处理是否成功。这个根据具体项目具体规定，比如微信小程序有一套场景值。在实际项目中可以自行规定 <code>code = '0000'</code> 业务处理完全没问题，<code>code = '1111'</code>校验不通过，<code>code = '2222'</code> 数据库出错等等。</p></blockquote> <ul><li>最后别忘了要返回具体对象 <code>{ ...response.data }</code></li></ul> <h3 id="_6-7-网络请求失败处理"><a href="#_6-7-网络请求失败处理" class="header-anchor">#</a> 6.7 网络请求失败处理</h3> <div class="language- extra-class"><pre class="language-text"><code>// 状态码错误信息
+const codeMessage = {
+  200: '服务器成功返回请求的数据。',
+  201: '新建或修改数据成功。',
+  202: '一个请求已经进入后台排队（异步任务）。',
+  204: '删除数据成功。',
+  400: '发出的请求有错误，服务器没有进行新建或修改数据的操作。',
+  401: '用户没有权限（令牌、用户名、密码错误）。',
+  403: '用户得到授权，但是访问是被禁止的。',
+  404: '发出的请求针对的是不存在的记录，服务器没有进行操作。',
+  406: '请求的格式不可得。',
+  410: '请求的资源被永久删除，且不会再得到的。',
+  422: '当创建一个对象时，发生一个验证错误。',
+  500: '服务器发生错误，请检查服务器。',
+  502: '网关错误。',
+  503: '服务不可用，服务器暂时过载或维护。',
+  504: '网关超时。',
+};
+
+// ...........
+
+.catch((error) =&gt; {
+      // &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; 请求失败 &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+      // 请求配置发生的错误
+      if (!error.response) {
+        return console.log('Error', error.message);
+      }
+
+      // 响应时状态码处理 
+      const status = error.response.status;
+      const errortext = codeMessage[status] || error.response.statusText;
+      
+      notification.error({
+        message: `请求错误 ${status}`,
+        description: errortext,
+      });
+      
+      // 存在请求，但是服务器的返回一个状态码，它们都在2xx之外
+      const { dispatch } = store;
+
+      if (status === 401) {
+        dispatch(routerRedux.push('/user/login'));
+      } else if (status === 403) {
+        dispatch(routerRedux.push('/exception/403'));
+      } else if (status &lt;= 504 &amp;&amp; status &gt;= 500) {
+        dispatch(routerRedux.push('/exception/500'));
+      } else if (status &gt;= 404 &amp;&amp; status &lt; 422) {
+        dispatch(routerRedux.push('/exception/404'));
+      }
+
+      // 开发时使用，上线时删除
+      console.log(`【${opt.method} ${opt.url}】请求失败，响应数据：%o`, error.response);
+
+      return { code: status, message: errortext }; 
+    });
+</code></pre></div><ul><li>网络请求失败，首先需要根据 <code>status</code> 打印提示消息，告诉用户为什么请求失败。如响应码为 <code>401</code>，那么提示用户的文字就会是 用户没有权限（令牌、用户名、密码错误）</li> <li>如果是 <code>401</code> 错误，表示用户没有权限访问或者用户名密码输入错误，应该跳转到登录页面：`dispatch(routerRedux.push('/user/login'));</li></ul></div> <!----> <div class="readMore-wrapper"><span class="readMore">阅读全文</span></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/FE-Interview-Questions/principle-docs/react/01-React-router原理.html" class="prev">React</a></span> <span class="next"><a href="/FE-Interview-Questions/principle-docs/react/03-MobX总结.html">MobX总结</a>
+      →
+    </span></p></div>  <div class="el-dialog__wrapper" style="display:none;"><div role="dialog" aria-modal="true" aria-label="请先阅读购买协议" class="el-dialog el-dialog--center" style="margin-top:15vh;width:30%;"><div class="el-dialog__header"><span class="el-dialog__title">请先阅读购买协议</span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><div class="el-dialog__footer"><span class="dialog-footer"><button disabled="disabled" type="button" class="el-button el-button--danger is-disabled" style="width:100%;"><!----><!----><span>我已阅读（8s）</span></button></span></div></div></div> <div class="el-dialog__wrapper" style="display:none;"><div role="dialog" aria-modal="true" aria-label="付费阅读" class="el-dialog" style="margin-top:15vh;width:30%;"><div class="el-dialog__header"><span class="el-dialog__title">付费阅读</span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><div class="el-dialog__footer"><span class="dialog-footer"><button disabled="disabled" type="button" class="el-button el-button--danger is-disabled" style="width:100%;"><!----><!----><span>确 定</span></button></span></div></div></div> <div class="el-dialog__wrapper" style="display:none;"><div role="dialog" aria-modal="true" aria-label="dialog" class="el-dialog" style="margin-top:15vh;width:30%;"><div class="el-dialog__header"><span class="el-dialog__title"></span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><!----></div></div> <img src="data:image/png;base64,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" class="theme-float-btn"></main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/FE-Interview-Questions/assets/js/app.13d69697.js" defer></script><script src="/FE-Interview-Questions/assets/js/6.b48232c6.js" defer></script><script src="/FE-Interview-Questions/assets/js/3.9d86cf58.js" defer></script><script src="/FE-Interview-Questions/assets/js/99.dc5626e1.js" defer></script><script src="/FE-Interview-Questions/assets/js/11.fb060006.js" defer></script>
+  </body>
+</html>

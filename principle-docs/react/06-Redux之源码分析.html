@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>一、index.js | 面试指南</title>
+    <meta name="description" content="前端面试指南，前端面试题整理，按模块分类整理总结，打造最全面的前端面试题">
+    <link rel="icon" href="/FE-Interview-Questions/logo.png">
+  <link rel="manifest" href="/FE-Interview-Questions/manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="/FE-Interview-Questions/icons/apple-touch-icon-152x152.png">
+  <link rel="mask-icon" href="/FE-Interview-Questions/icons/safari-pinned-tab.svg" color="#3eaf7c">
+  <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+  <meta name="apple-mobile-web-app-status-bar-style">
+    
+    <link rel="preload" href="/FE-Interview-Questions/assets/css/0.styles.0591d029.css" as="style"><link rel="preload" href="/FE-Interview-Questions/assets/js/app.13d69697.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/6.b48232c6.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/3.9d86cf58.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/103.51a83ab2.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/11.fb060006.js" as="script"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/1.9e1b498f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/10.fbc04ea9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/100.c06a0f53.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/101.54402ede.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/102.d3860a7d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/104.b19afdd3.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/105.aada2418.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/106.4ce7d3b7.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/107.ca87a327.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/108.df939701.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/109.9f0c8605.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/110.19cb01b2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/111.51fc9fa1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/112.ab20caec.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/113.6c12e76f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/114.48e1a019.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/115.f291caf1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/116.100da54b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/117.9b579bae.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/118.89da516f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/119.c70b5105.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/12.9774db85.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/120.fcf3186f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/13.ac14541c.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/14.155007f0.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/15.2d9ec2b2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/16.aec442e8.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/17.59c81a6b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/18.c38ff446.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/19.8203bd99.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/20.103004c4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/21.1e6e08c9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/22.5abbfd40.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/23.4cd5fd4d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/24.602403ee.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/25.da971f83.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/26.e9e76559.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/27.6d18f825.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/28.58923361.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/29.81e33cc0.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/30.7a4491ed.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/31.4275e9d2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/32.6e6c282b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/33.35641348.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/34.3d76a237.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/35.fb57a983.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/36.78f70288.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/37.ed0997e2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/38.0ece0665.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/39.3b4241bb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/4.cda2fc13.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/40.dd7b6d84.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/41.05fcd6ed.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/42.24fc3ac4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/43.21f8f3ec.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/44.ac552dd9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/45.b2d653cc.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/46.8bf4b340.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/47.57a13e6c.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/48.8ef881a7.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/49.b76df872.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/5.eb1f29dc.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/50.f04492e5.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/51.e000ebea.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/52.bfbd5e6e.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/53.fc0a60dd.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/54.a798cd42.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/55.5ccb6ae1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/56.1605b000.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/57.79350f4e.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/58.dcff3859.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/59.a366020b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/60.199914fb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/61.4d471001.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/62.07f7a685.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/63.3774b497.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/64.d8437f45.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/65.eaf10ccb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/66.74665605.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/67.072c35ca.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/68.764ab8cb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/69.6a27592a.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/7.aa832117.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/70.2e7f3527.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/71.c6365fbe.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/72.15cfe1be.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/73.d56ee920.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/74.f848ccac.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/75.905f5556.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/76.49d98a04.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/77.4b62003f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/78.5a4046ff.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/79.eb3ec067.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/8.bccf8145.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/80.bd38c9e9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/81.dfdea12a.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/82.4439fbe3.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/83.df1321d3.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/84.23d01b47.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/85.c983047a.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/86.29b0f2d4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/87.12e2e192.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/88.fb19aa58.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/89.ee2be7d8.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/9.ce1180ae.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/90.479f4d9d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/91.619e0c8d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/92.ae858703.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/93.f90a7ae1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/94.8894adb4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/95.683396f3.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/96.f65dc164.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/97.75bd77e0.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/98.892b530a.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/99.dc5626e1.js">
+    <link rel="stylesheet" href="/FE-Interview-Questions/assets/css/0.styles.0591d029.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/FE-Interview-Questions/" class="home-link router-link-active"><img src="/FE-Interview-Questions/logo.png" alt="面试指南" class="logo"> <span class="site-name can-hide">面试指南</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!----> <div style="padding-left:1.5rem;"><div class="qr"><img src="/FE-Interview-Questions/assets/img/qr.ee193d28.jpg" alt="poetries" width="120" height="120" loading="lazy"> <p class="we-intro">
+    关注公众号，获取更多资讯
+  </p></div></div> <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Vue</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FE-Interview-Questions/principle-docs/vue/01-从源码解读Vue生命周期.html" class="sidebar-link">从源码解读Vue生命周期</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/02-组件的本质.html" class="sidebar-link">组件的本质</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/03-有状态组件的设计.html" class="sidebar-link">有状态组件的设计</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/04-设计 VNode.html" class="sidebar-link">设计 VNode</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/05-辅助创建 VNode 的 h 函数.html" class="sidebar-link">辅助创建 VNode 的 h 函数</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/06-自定义渲染器和异步渲染.html" class="sidebar-link">自定义渲染器和异步渲染</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/07-渲染器之挂载.html" class="sidebar-link">渲染器之挂载</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/08-渲染器的核心 Diff 算法.html" class="sidebar-link">渲染器的核心 Diff 算法</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/09-渲染器之patch.html" class="sidebar-link">渲染器之patch</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/10-图解 Vue 响应式原理.html" class="sidebar-link">图解 Vue 响应式原理</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/11-图解 Vue 异步更新.html" class="sidebar-link">图解 Vue 异步更新</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/12-剖析 Vue 内部运行机制.html" class="sidebar-link">剖析 Vue 内部运行机制</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/13-vue响应式原理模拟.html" class="sidebar-link">vue响应式原理模拟</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/14-vue状态管理之vuex.html" class="sidebar-link">vue状态管理之vuex</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>React</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FE-Interview-Questions/principle-docs/react/01-React-router原理.html" class="sidebar-link">React</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html" class="sidebar-link">Dva总结</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/03-MobX总结.html" class="sidebar-link">MobX总结</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/04-浅析redux-saga中间件及用法.html" class="sidebar-link">浅析redux</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/05-Redux之浅析中间件.html" class="sidebar-link">Redux之浅析中间件</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/06-Redux之源码分析.html" class="active sidebar-link">Redux之源码分析</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/06-Redux之源码分析.html#一、index-js" class="sidebar-link">一、index.js</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/06-Redux之源码分析.html#二、createstore-js" class="sidebar-link">二、createStore.js</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/06-Redux之源码分析.html#三、combinereducers-js" class="sidebar-link">三、combineReducers.js</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/06-Redux之源码分析.html#四、bindactioncreator-js" class="sidebar-link">四、bindActionCreator.js</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/06-Redux之源码分析.html#五、applymiddleware-js" class="sidebar-link">五、applyMiddleware.js</a></li></ul></li><li><a href="/FE-Interview-Questions/principle-docs/react/07-Redux之异步Action及操作.html" class="sidebar-link">Redux之异步Action及操作</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Webpack</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FE-Interview-Questions/principle-docs/webpack/01-Webpack4打包机制原理解析.html" class="sidebar-link">Webpack4打包机制原理解析</a></li><li><a href="/FE-Interview-Questions/principle-docs/webpack/02-webpack中的HMR热更新原理剖析.html" class="sidebar-link">webpack中的HMR热更新原理剖析</a></li><li><a href="/FE-Interview-Questions/principle-docs/webpack/03-从源码窥探Webpack4.x原理.html" class="sidebar-link">从源码窥探Webpack4.x原理</a></li><li><a href="/FE-Interview-Questions/principle-docs/webpack/04-实现webpack小型打包工具.html" class="sidebar-link">实现webpack小型打包工具</a></li><li><a href="/FE-Interview-Questions/principle-docs/webpack/05-Babel原理及其使用.html" class="sidebar-link">Babel原理及其使用</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>综合</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/01-虚拟DOM原理分析.html" class="sidebar-link">虚拟DOM原理分析</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/02-setTimeout实现原理和使用注意.html" class="sidebar-link">setTimeout实现原理和使用注意</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/03-浅析Promise原理.html" class="sidebar-link">浅析Promise原理</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/04-浏览器渲染原理.html" class="sidebar-link">浏览器渲染原理</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/05-前端面试之MVVM浅析.html" class="sidebar-link">前端面试之MVVM浅析</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/06-前端面试之组件化.html" class="sidebar-link">前端面试之组件化</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/07-虚拟DOM（一）.html" class="sidebar-link">虚拟DOM（一）</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/08-虚拟DOM（二）.html" class="sidebar-link">虚拟DOM（二）</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/09-前端性能之Performance.html" class="sidebar-link">前端性能之Performance</a></li></ul></section></li></ul> </aside> <main class="page"> <div id="container" class="theme-default-content lock"><div class="content__default"><h2 id="一、index-js"><a href="#一、index-js" class="header-anchor">#</a> 一、index.js</h2> <blockquote><p>https://github.com/reactjs/redux/blob/master/src/index.js</p></blockquote> <ul><li>暴露了几个核心<code>API</code></li></ul> <div class="language- extra-class"><pre class="language-text"><code>import createStore from './createStore';
+import combineReducers from './utils/combineReducers';
+import bindActionCreators from './utils/bindActionCreators';
+import applyMiddleware from './utils/applyMiddleware';
+import compose from './utils/compose';
+
+export {
+  createStore,
+  combineReducers,
+  bindActionCreators,
+  applyMiddleware,
+  compose
+};
+</code></pre></div><h2 id="二、createstore-js"><a href="#二、createstore-js" class="header-anchor">#</a> 二、createStore.js</h2> <blockquote><p>https://github.com/reactjs/redux/blob/master/src/createStore.js</p></blockquote> <ul><li><code>redux.createStore(reducer, initialState)</code> 传入了<code>reducer</code>、<code>initialState</code>，并返回一个<code>store</code>对象</li> <li><code>store</code>对象对外暴露了<code>dispatch</code>、<code>getStat</code>e、<code>subscribe</code>方法</li> <li><code>store</code>对象通过<code>getState()</code> 获取内部状态</li> <li><code>initialState</code>为 <code>store</code> 的初始状态，如果不传则为undefined</li> <li><code>store</code>对象通过<code>reducer</code>来修改内部状态</li> <li><code>store</code>对象创建的时候，内部会主动调用<code>dispatch({ type: ActionTypes.INIT })</code>;来对内部状态进行初始化。通过断点或者日志打印就可以看到，<code>store</code>对象创建的同时，<code>reducer</code>就会被调用进行初始化</li></ul> <div class="language- extra-class"><pre class="language-text"><code>import isPlainObject from './utils/isPlainObject';
+
+/**
+ * These are private action types reserved by Redux.
+ * For any unknown actions, you must return the current state.
+ * If the current state is undefined, you must return the initial state.
+ * Do not reference these action types directly in your code.
+ */
+// 初始化的时候(redux.createStore(reducer, initialState)时),传的action.type 就是这货啦
+export var ActionTypes = {
+  INIT: '@@redux/INIT'
+};
+
+/**
+ * Creates a Redux store that holds the state tree.
+ * The only way to change the data in the store is to call `dispatch()` on it.
+ *
+ * There should only be a single store in your app. To specify how different
+ * parts of the state tree respond to actions, you may combine several reducers
+ * into a single reducer function by using `combineReducers`.
+ *
+ * @param {Function} reducer A function that returns the next state tree, given
+ * the current state tree and the action to handle.
+ *
+ * @param {any} [initialState] The initial state. You may optionally specify it
+ * to hydrate the state from the server in universal apps, or to restore a
+ * previously serialized user session.
+ * If you use `combineReducers` to produce the root reducer function, this must be
+ * an object with the same shape as `combineReducers` keys.
+ *
+ * @returns {Store} A Redux store that lets you read the state, dispatch actions
+ * and subscribe to changes.
+ */
+export default function createStore(reducer, initialState) {
+  if (typeof reducer !== 'function') {
+    throw new Error('Expected the reducer to be a function.');
+  }
+
+  var currentReducer = reducer;
+  var currentState = initialState;
+  var listeners = [];
+  var isDispatching = false;
+
+  /**
+   * Reads the state tree managed by the store.
+   *
+   * @returns {any} The current state tree of your application.
+   */
+  // 这个方法没什么好讲的,返回当前的state
+  function getState() {
+    return currentState;
+  }
+
+  /**
+   * Adds a change listener. It will be called any time an action is dispatched,
+   * and some part of the state tree may potentially have changed. You may then
+   * call `getState()` to read the current state tree inside the callback.
+   *
+   * @param {Function} listener A callback to be invoked on every dispatch.
+   * @returns {Function} A function to remove this change listener.
+   */
+  // 很常见的监听函数添加方式,当store.dispatch 的时候被调用
+  // store.subscribe(listener) 返回一个方法(unscribe),可以用来取消监听
+  function subscribe(listener) {
+    listeners.push(listener);
+    var isSubscribed = true;
+
+    return function unsubscribe() {
+      if (!isSubscribed) {
+        return;
+      }
+
+      isSubscribed = false;
+      var index = listeners.indexOf(listener);
+      listeners.splice(index, 1);
+    };
+  }
+
+  /**
+   * Dispatches an action. It is the only way to trigger a state change.
+   *
+   * The `reducer` function, used to create the store, will be called with the
+   * current state tree and the given `action`. Its return value will
+   * be considered the **next** state of the tree, and the change listeners
+   * will be notified.
+   *
+   * The base implementation only supports plain object actions. If you want to
+   * dispatch a Promise, an Observable, a thunk, or something else, you need to
+   * wrap your store creating function into the corresponding middleware. For
+   * example, see the documentation for the `redux-thunk` package. Even the
+   * middleware will eventually dispatch plain object actions using this method.
+   *
+   * @param {Object} action A plain object representing “what changed”. It is
+   * a good idea to keep actions serializable so you can record and replay user
+   * sessions, or use the time travelling `redux-devtools`. An action must have
+   * a `type` property which may not be `undefined`. It is a good idea to use
+   * string constants for action types.
+   *
+   * @returns {Object} For convenience, the same action object you dispatched.
+   *
+   * Note that, if you use a custom middleware, it may wrap `dispatch()` to
+   * return something else (for example, a Promise you can await).
+   */
+  // 以下情况会报错
+  // 1. 传入的action不是一个对象
+  // 2. 传入的action是个对象,但是action.type 是undefined
+  function dispatch(action) {
+    if (!isPlainObject(action)) {
+      throw new Error(
+        'Actions must be plain objects. ' +
+        'Use custom middleware for async actions.'
+      );
+    }
+
+    if (typeof action.type === 'undefined') {
+      throw new Error(
+        'Actions may not have an undefined &quot;type&quot; property. ' +
+        'Have you misspelled a constant?'
+      );
+    }
+
+    if (isDispatching) {
+      throw new Error('Reducers may not dispatch actions.');
+    }
+
+    try {
+      isDispatching = true;
+      // 就是这一句啦, 将 currentState 设置为 reducer(currentState, action) 返回的值
+      currentState = currentReducer(currentState, action);
+    } finally {
+      isDispatching = false;
+    }
+
+    // 如果有监听函数,就顺序调用
+    listeners.slice().forEach(listener =&gt; listener());
+
+    // 最后,返回传入的action
+    return action;
+  }
+
+  /**
+   * Replaces the reducer currently used by the store to calculate the state.
+   *
+   * You might need this if your app implements code splitting and you want to
+   * load some of the reducers dynamically. You might also need this if you
+   * implement a hot reloading mechanism for Redux.
+   *
+   * @param {Function} nextReducer The reducer for the store to use instead.
+   * @returns {void}
+   */
+  function replaceReducer(nextReducer) {
+    currentReducer = nextReducer;
+    dispatch({ type: ActionTypes.INIT });
+  }
+
+  // When a store is created, an &quot;INIT&quot; action is dispatched so that every
+  // reducer returns their initial state. This effectively populates
+  // the initial state tree.
+  //
+  // redux.createStore(reducer, initialState) 的时候, 内部会 自己调用 dispatch({ type: ActionTypes.INIT });
+  // 来完成state的初始化
+  dispatch({ type: ActionTypes.INIT });
+
+  // 返回的就是这个东东了,只有四个方法
+  return {
+    dispatch,
+    subscribe,
+    getState,
+    replaceReducer
+  };
+}
+</code></pre></div><h2 id="三、combinereducers-js"><a href="#三、combinereducers-js" class="header-anchor">#</a> 三、combineReducers.js</h2> <blockquote><p>https://github.com/reactjs/redux/blob/master/src/combineReducers.js</p></blockquote> <ul><li><code>redux.combineReducers(reducerMap)</code> 的作用在于合并多个<code>reducer</code>函数，并返回一个新的<code>reducer</code>函数。因此可以看到，<code>combineReducers</code> 返回了一个函数，并且该函数的参数同样是<code>state</code>、<code>reducer</code></li> <li>最终 <code>store.getState()</code>返回的<code>state</code>，大概会是这么个样子<code>{todos: xx, filter: xx}</code>。简单的说，<code>state</code>被拆分成了两份，<code>TodoReducer</code>的返回值赋值给了<code>state.todos</code>，<code>FilterReducer</code>的返回值赋值给了<code>state.filter</code></li></ul> <div class="language- extra-class"><pre class="language-text"><code>function TodoReducer(state, action) {}
+function FilterReducer(state, action) {}
+
+var finalReducers = redux.combineReducers({
+    todos: TodoReducer,
+    filter: FilterReducer
+});
+</code></pre></div><ul><li><code>combineReducers(reducerMap)</code> 传入一个对象，并返回一个全新的<code>reducer</code>。调用方式跟跟普通的<code>reducer</code>一样，也是传入<code>state</code>、<code>action</code></li> <li>通过<code>combineReducers</code>，对 <code>store</code> 的状态<code>state</code>进行拆分</li> <li><code>reducerMap的key</code>，就是 <code>state</code> 的<code>key</code>，而 调用对应的<code>reducer</code>返回的值，则是这个<code>key</code>对应的值。如上面的例子，<code>state.todos == TodoReducer(state, action)</code></li> <li><code>redux.createStore(finalReducers, initialState)</code> 调用时，同样会对 <code>state</code>进行初始化。这个初始化跟通过普通的<code>reducer</code>进行初始化没多大区别。举例来说，如果 <code>initialState.todos = undefined</code>，那么 <code>TodoReducer(state, action)</code>初始传入的<code>state</code>就是<code>undefined</code>；如果<code>initialState.todos = []</code>，那么 <code>TodoReducer(state, action)</code>初始传入的<code>state</code>就是<code>[]</code></li> <li><code>store.dispatch(action)</code>，<code>finalReducers</code> 里面，会遍历整个<code>reducerMap</code>，依次调用每个<code>reducer</code>，并将每个<code>reducer</code>返回的子<code>state</code>赋给<code>state</code>对应的<code>key</code>。</li></ul> <div class="language- extra-class"><pre class="language-text"><code>import { ActionTypes } from '../createStore';
+import isPlainObject from '../utils/isPlainObject';
+import mapValues from '../utils/mapValues';
+import pick from '../utils/pick';
+
+/* eslint-disable no-console */
+
+function getUndefinedStateErrorMessage(key, action) {
+  var actionType = action &amp;&amp; action.type;
+  var actionName = actionType &amp;&amp; `&quot;${actionType.toString()}&quot;` || 'an action';
+
+  return (
+    `Reducer &quot;${key}&quot; returned undefined handling ${actionName}. ` +
+    `To ignore an action, you must explicitly return the previous state.`
+  );
+}
+
+function getUnexpectedStateKeyWarningMessage(inputState, outputState, action) {
+  var reducerKeys = Object.keys(outputState);
+  var argumentName = action &amp;&amp; action.type === ActionTypes.INIT ?
+    'initialState argument passed to createStore' :
+    'previous state received by the reducer';
+
+  if (reducerKeys.length === 0) {
+    return (
+      'Store does not have a valid reducer. Make sure the argument passed ' +
+      'to combineReducers is an object whose values are reducers.'
+    );
+  }
+
+  if (!isPlainObject(inputState)) {
+    return (
+      `The ${argumentName} has unexpected type of &quot;` +
+      ({}).toString.call(inputState).match(/\s([a-z|A-Z]+)/)[1] +
+      `&quot;. Expected argument to be an object with the following ` +
+      `keys: &quot;${reducerKeys.join('&quot;, &quot;')}&quot;`
+    );
+  }
+
+  var unexpectedKeys = Object.keys(inputState).filter(
+    key =&gt; reducerKeys.indexOf(key) &lt; 0
+  );
+
+  if (unexpectedKeys.length &gt; 0) {
+    return (
+      `Unexpected ${unexpectedKeys.length &gt; 1 ? 'keys' : 'key'} ` +
+      `&quot;${unexpectedKeys.join('&quot;, &quot;')}&quot; found in ${argumentName}. ` +
+      `Expected to find one of the known reducer keys instead: ` +
+      `&quot;${reducerKeys.join('&quot;, &quot;')}&quot;. Unexpected keys will be ignored.`
+    );
+  }
+}
+
+// 对reducer做合法性检测
+// store = Redux.createStore(reducer, initialState) --&gt;
+// currentState = initialState
+// currentState = currentReducer(currentState, action);
+//
+// 从调用关系,调用时机来看, store.getState() 的初始值(currentState)
+// 为 currentReducer(initialState, { type: ActionTypes.INIT })
+//
+// 1. 在初始化阶段,reducer 传入的 state 值是 undefined,此时,需要返回初始state,且初始state不能为undefined
+// 2. 当传入不认识的 actionType 时, reducer(state, {type}) 返回的不能是undefined
+// 3. redux/ 这个 namespace 下的action 不应该做处理,直接返回 currentState 就行 (谁运气这么差会去用这种actionType...)
+function assertReducerSanity(reducers) {
+  Object.keys(reducers).forEach(key =&gt; {
+    var reducer = reducers[key];
+    var initialState = reducer(undefined, { type: ActionTypes.INIT });
+
+    if (typeof initialState === 'undefined') {
+      throw new Error(
+        `Reducer &quot;${key}&quot; returned undefined during initialization. ` +
+        `If the state passed to the reducer is undefined, you must ` +
+        `explicitly return the initial state. The initial state may ` +
+        `not be undefined.`
+      );
+    }
+
+    var type = '@@redux/PROBE_UNKNOWN_ACTION_' + Math.random().toString(36).substring(7).split('').join('.');
+    if (typeof reducer(undefined, { type }) === 'undefined') {
+      throw new Error(
+        `Reducer &quot;${key}&quot; returned undefined when probed with a random type. ` +
+        `Don't try to handle ${ActionTypes.INIT} or other actions in &quot;redux/*&quot; ` +
+        `namespace. They are considered private. Instead, you must return the ` +
+        `current state for any unknown actions, unless it is undefined, ` +
+        `in which case you must return the initial state, regardless of the ` +
+        `action type. The initial state may not be undefined.`
+      );
+    }
+  });
+}
+
+/**
+ * Turns an object whose values are different reducer functions, into a single
+ * reducer function. It will call every child reducer, and gather their results
+ * into a single state object, whose keys correspond to the keys of the passed
+ * reducer functions.
+ *
+ * @param {Object} reducers An object whose values correspond to different
+ * reducer functions that need to be combined into one. One handy way to obtain
+ * it is to use ES6 `import * as reducers` syntax. The reducers may never return
+ * undefined for any action. Instead, they should return their initial state
+ * if the state passed to them was undefined, and the current state for any
+ * unrecognized action.
+ *
+ * @returns {Function} A reducer function that invokes every reducer inside the
+ * passed object, and builds a state object with the same shape.
+ */
+
+export default function combineReducers(reducers) {
+  // 返回一个对象, key =&gt; value 且value是function(其实就是过滤掉非function)
+  var finalReducers = pick(reducers, (val) =&gt; typeof val === 'function');
+  var sanityError;
+
+  try {
+    // 对所有的子reducer 做一些合法性断言,如果没有出错再继续下面的处理
+    // 合法性断言的内容,见API注释
+    assertReducerSanity(finalReducers);
+  } catch (e) {
+    sanityError = e;
+  }
+
+  // 所有的 key: value,将value置成了undefined,费解...
+  // 总而言之, 初始state 就是 类似 {hello: undefined, world: undefined} 的东东
+  // TODO 确认这里的逻辑
+  var defaultState = mapValues(finalReducers, () =&gt; undefined);
+
+  return function combination(state = defaultState, action) {
+    if (sanityError) {
+      throw sanityError;
+    }
+
+    var hasChanged = false;
+    // 这段代码,简单的说,就是循环一遍 finalState[key] = fn(reducer, key)
+    var finalState = mapValues(finalReducers, (reducer, key) =&gt; {
+      var previousStateForKey = state[key];
+      var nextStateForKey = reducer(previousStateForKey, action);
+      if (typeof nextStateForKey === 'undefined') {
+        // 其他一个reducer返回的是undefined,于是挂啦...抛出错误
+        var errorMessage = getUndefinedStateErrorMessage(key, action);
+        throw new Error(errorMessage);
+      }
+      // 这段代码有些费解,从redux的设计理念上来讲,除了不认识的action type,其他情况都应该返回全新的state
+      // 也就是说
+      // 1. action type 认识,返回新的state,于是这里 hasChanged 为 true
+      // 2. action type 不认识,返回原来的state,于是这里 hasChanged 为 false
+      // 3. 不管action type 是否认识, 在原来的state上修改,但是返回的是修改后的state(没有返回拷贝),那么,hasChanged还是为false
+      hasChanged = hasChanged || nextStateForKey !== previousStateForKey;
+      return nextStateForKey;
+    });
+
+    // 开发环境中(于是记得在生产环境去掉)
+    // 后面再研究这段代码,毕竟不是主线路...
+    if (process.env.NODE_ENV !== 'production') {
+      var warningMessage = getUnexpectedStateKeyWarningMessage(state, finalState, action);
+      if (warningMessage) {
+        console.error(warningMessage);
+      }
+    }
+
+    return hasChanged ? finalState : state;
+  };
+}
+</code></pre></div><h2 id="四、bindactioncreator-js"><a href="#四、bindactioncreator-js" class="header-anchor">#</a> 四、bindActionCreator.js</h2> <blockquote><p>https://github.com/reactjs/redux/blob/master/src/bindActionCreators.js</p></blockquote> <ul><li>先看个简单例子可能方便理解一些</li></ul> <div class="language- extra-class"><pre class="language-text"><code>var addTodo = function(text){
+    return {
+        type: 'add_todo',
+        text: text
+    };
+};
+
+var addTodos = function(){
+    return {
+        type: 'add_todos',
+        items: Array.prototype.slice.call(arguments, 0)
+    };
+};
+
+var reducer = function(state, action){
+    switch (action.type) {
+        case 'add_todo':
+            return state.concat(action.text);
+        case 'add_todos':
+            return state.concat(action.items);
+        default:
+            return state;
+    }
+};
+
+
+var store = redux.createStore(reducer, []);
+// 注意,关键代码在这里
+var actions = redux.bindActionCreators({
+    addTodo: addTodo,
+    addTodos: addTodos
+}, store.dispatch);
+
+console.log('state is: ' + store.getState());
+
+store.dispatch({type: 'add_todo', text: '读书'});
+store.dispatch({type: 'add_todos', items: ['阅读', '睡觉']});
+console.log('state is: ' + store.getState());  // state is: 读书,阅读,睡觉
+
+actions.addTodo('看电影');
+console.log('state is: ' + store.getState());  // state is: 读书,阅读,睡觉,看电影
+
+actions.addTodos(['刷牙', '洗澡']);
+console.log('state is: ' + store.getState());  // state is: 读书,阅读,睡觉,看电影,刷牙,洗澡
+</code></pre></div><ul><li>直接看代码</li></ul> <div class="language- extra-class"><pre class="language-text"><code>import mapValues from '../utils/mapValues';
+
+function bindActionCreator(actionCreator, dispatch) {
+  return (...args) =&gt; dispatch(actionCreator(...args));
+}
+
+/**
+ * Turns an object whose values are action creators, into an object with the
+ * same keys, but with every function wrapped into a `dispatch` call so they
+ * may be invoked directly. This is just a convenience method, as you can call
+ * `store.dispatch(MyActionCreators.doSomething())` yourself just fine.
+ *
+ * For convenience, you can also pass a single function as the first argument,
+ * and get a function in return.
+ *
+ * @param {Function|Object} actionCreators An object whose values are action
+ * creator functions. One handy way to obtain it is to use ES6 `import * as`
+ * syntax. You may also pass a single function.
+ *
+ * @param {Function} dispatch The `dispatch` function available on your Redux
+ * store.
+ *
+ * @returns {Function|Object} The object mimicking the original object, but with
+ * every action creator wrapped into the `dispatch` call. If you passed a
+ * function as `actionCreators`, the return value will also be a single
+ * function.
+ */
+// 假设 actionCreators === {addTodo: addTodo, removeTodo: removeTodo}
+// 简单的来说 bindActionCreators(actionCreators, dispatch)
+// 最后返回的是:
+// {
+//   addTodo: function(text){
+//      dispatch( actionCreators.addTodo(text) );
+//   },
+//   removeTodo: function(text){
+//      dispatch( actionCreators.removeTodo(text) );
+//   }
+// }
+//
+//  或者说 actionCreators === addTodo (addTodo 为 actionCreator)
+//  最后返回的是
+//  function() {
+//     dispatch(actionCreators());
+//  }
+export default function bindActionCreators(actionCreators, dispatch) {
+  if (typeof actionCreators === 'function') {
+    return bindActionCreator(actionCreators, dispatch);
+  }
+
+  if (typeof actionCreators !== 'object' || actionCreators === null || actionCreators === undefined) {  // eslint-disable-line no-eq-null
+    throw new Error(
+      `bindActionCreators expected an object or a function, instead received ${actionCreators === null ? 'null' : typeof actionCreators}. ` +
+      `Did you write &quot;import ActionCreators from&quot; instead of &quot;import * as ActionCreators from&quot;?`
+    );
+  }
+
+  return mapValues(actionCreators, actionCreator =&gt;
+    bindActionCreator(actionCreator, dispatch)
+  );
+}
+</code></pre></div><h2 id="五、applymiddleware-js"><a href="#五、applymiddleware-js" class="header-anchor">#</a> 五、applyMiddleware.js</h2> <blockquote><p>https://github.com/reactjs/redux/blob/master/src/applyMiddleware.js</p></blockquote> <ul><li>中间件应该是<code>redux</code>源码里面最绕的一部分</li></ul> <p><strong>例子：redux-thunk</strong></p> <div class="language- extra-class"><pre class="language-text"><code>export default function thunkMiddleware({ dispatch, getState }) {
+  return next =&gt; action =&gt;
+    typeof action === 'function' ?
+      action(dispatch, getState) :
+      next(action);
+}
+//es5
+function thunkMiddleware(store) {
+  var dispatch = store.dispatch;
+  var getState = store.getState;
+
+  return function (next) {
+    return function (action) {
+      return typeof action === 'function' ? action(dispatch, getState) : next(action);
+    };
+  };
+}
+</code></pre></div><p><strong>自定义中间件：logger</strong></p> <ul><li>先看<code>logger</code>的实现</li></ul> <div class="language- extra-class"><pre class="language-text"><code>function middleware(store){
+    return function(next){
+        return function(action){
+            return next(action);
+        }
+    }
+}
+</code></pre></div><blockquote><p>基本看出中间件声明的模版来了，就是下面这个样子。下面结合<code>applyMiddleware</code>的调用，来说明<code>store</code>、<code>next</code>、<code>action</code> 几个参数。</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>function logger(store){
+    return function(next){
+        return function(action){
+            console.log('logger: dispatching ' + action.type);
+            var result = next(action);
+            console.log('logger: next state ' + result);
+            return result;
+        }
+    }
+}
+</code></pre></div><p><strong>applyMiddleware调用例子</strong></p> <ul><li><code>applyMiddleware</code> 的调用方式为 <code>applyMiddleware(...middlewares)(react.createStore)</code>。其实这里直接先创建 <code>store</code>，然后<code>applyMiddleware(...middlewares)(store)</code> 也很容易实现相同的效果，不过作者是故意这样设计的，为了避免在同一个store上多次应用同一个<code>middlerware</code></li> <li>中间件顶层的<code>store</code>参数，并不是常规的<code>store</code>，虽然它也有 <code>getState</code>、<code>dispatch</code> 两个方法</li></ul> <div class="language- extra-class"><pre class="language-text"><code>// 上面的store参数，其实就是这个对象
+// 其中，store 为内部的store，我们在外面 storeWithMiddleWare.dipatch的时候，内部实现是转成 store.dispatch
+// 此外，可以看到 middlewareAPI.dispatch 方法，是最终封装后的dispatch（千万注意，如果在中间件内部 调用 store.dispatch，可能导致死循环 ）
+var middlewareAPI = {
+  getState: store.getState,
+  // 最后面, dispatch 被覆盖, 变成包装后的 dispatch 方法
+  dispatch: (action) =&gt; dispatch(action)
+};
+</code></pre></div><ul><li>第二层的next函数，其实是一个“dispatch”方法</li> <li>storeWithMiddleWare.dispatch(action) 的时候，会顺序进入各个中间件（按照定义时的顺序）。从当前的例子来看，大约如下，其实就是柯里化啦</li></ul> <div class="language- extra-class"><pre class="language-text"><code>storeWithMiddleWare.dispatch(action) --&gt; logger(store)(next)(action) --&gt; timer(store)(next)(action) --&gt; store.dispatch(action)
+</code></pre></div><p><strong>完整的示例代码</strong></p> <div class="language- extra-class"><pre class="language-text"><code>function reducer(state, action){
+    if(typeof state==='undefined') state = [];
+
+    switch(action.type){
+        case 'add_todo':
+            return state.concat(action.text);
+        default: 
+            return state;
+    }
+}
+
+function addTodo(text){
+    return {
+        type: 'add_todo',
+        text: text
+    };
+}
+
+// 这里的 store，并不是 redux.createStore(reducer, initialState) 出来的 store
+// 而是 {getState: store.getState, dispatch: function() { store.dispatch(action); }}
+// 
+function logger(store){    
+    //     
+    return function(next){
+        return function(action){
+            console.log('logger: dispatching ' + action.type);
+            var result = next(action);
+            console.log('logger: next state ' + result);
+            return result;
+        }
+    }
+}
+
+function timer(store){
+    return function(next){
+        return function(action){
+            console.log('timer: dispatching ' + action.type);
+            var result = next(action);
+            console.log('timer: next state ' + result);
+            return result;
+        }
+    }
+}
+
+var createStoreWidthMiddleware = redux.applyMiddleware(
+    logger, 
+    timer
+    )(redux.createStore);
+
+var storeWithMiddleWare = createStoreWidthMiddleware(reducer);
+storeWithMiddleWare.subscribe(function(){
+    console.log('subscribe: state is : ' + storeWithMiddleWare.getState());
+});
+console.log( storeWithMiddleWare.dispatch(addTodo('reading')) );
+</code></pre></div><p><strong>源码解析</strong></p> <div class="language- extra-class"><pre class="language-text"><code>import compose from './compose';
+
+/**
+ * Creates a store enhancer that applies middleware to the dispatch method
+ * of the Redux store. This is handy for a variety of tasks, such as expressing
+ * asynchronous actions in a concise manner, or logging every action payload.
+ *
+ * See `redux-thunk` package as an example of the Redux middleware.
+ *
+ * Because middleware is potentially asynchronous, this should be the first
+ * store enhancer in the composition chain.
+ *
+ * Note that each middleware will be given the `dispatch` and `getState` functions
+ * as named arguments.
+ *
+ * @param {...Function} middlewares The middleware chain to be applied.
+ * @returns {Function} A store enhancer applying the middleware.
+ */
+/*
+  从调用方法 applyMiddleware(...middlewares)(Redux.createStore) 可以看出
+  next 参数实际上是 Redux.createStore. 而 Redux.createStore 的调用方式为 Redux.createStore(reducer, initialState)
+  所以 applyMiddleware(...middlewares)
+  1. 参数: Redux.createStore
+  2. 返回值:一个function, 跟 Redux.createStore 接受的参数一样
+
+ */
+export default function applyMiddleware(...middlewares) {
+  return (next) =&gt; (reducer, initialState) =&gt; {
+    // 内部先创建一个store (相当于直接调用 Redux.createStore(reducer, initialState))
+    var store = next(reducer, initialState);
+    // 保存最初始的store.dispatch
+    var dispatch = store.dispatch;
+    var chain = [];
+
+    var middlewareAPI = {
+      getState: store.getState,
+      // 最后面, dispatch 被覆盖, 变成包装后的 dispatch 方法
+      dispatch: (action) =&gt; dispatch(action)
+    };
+    // 返回一个数组
+    // 贴个例子在这里做参考,redux-thunk
+    // function thunkMiddleware(store) {
+    //  var dispatch = store.dispatch;
+    //  var getState = store.getState;
+    //
+    //  这里的next其实就是dispatch
+    //  return function (next) {
+    //    return function (action) {
+    //      return typeof action === 'function' ? action(dispatch, getState) : next(action);
+    //    };
+    //  };
+    //}
+    /*
+      chain 是个数组, 参考上面的 middlleware (redux-thunk),可以看到,chain的每个元素为如下形式的function
+      并且, 传入的 store.getState 为原始的 store.getState,而 dispatch则是包装后的 dispatch(不是原始的store.dispatch)
+      似乎是为了确保, 在每个middleware里调用 dispatch(action), 最终都是 用原始的 store.dispatch(action)
+      避免 store.dispatch 被覆盖, 导致middleware 顺序调用的过程中, store.dispatch的值变化 --&gt; store.dispatch 返回的值可能会有不同
+      违背 redux 的设计理念
+
+      这里的 next 则为 原始的 store.dispatch (见下面 compose(...chain)(store.dispatch) )
+      function (next) {
+        return function (action) {
+
+        }
+      }
+     */
+    chain = middlewares.map(middleware =&gt; middleware(middlewareAPI));
+
+    // compose(...chain)(store.dispatch) 返回了一个function
+    // 伪代码如下,
+    // function (action) {
+    //   middleware(store)(store.dispatch);
+    // }
+    dispatch = compose(...chain)(store.dispatch);  // 从右到左, middleware1( middleware2( middleware3(dispatch) ) )
+
+    // 于是,最终调用 applyMiddleware(...middlewares)(Redux.createStore)
+    // 返回的 store, getState,subscribe 方法都是原始的那个 store.getState, store.subscribe
+    // 至于dispatch是封装过的
+    return {
+      ...store,
+      dispatch
+    };
+  };
+}
+</code></pre></div></div> <!----> <div class="readMore-wrapper"><span class="readMore">阅读全文</span></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/FE-Interview-Questions/principle-docs/react/05-Redux之浅析中间件.html" class="prev">Redux之浅析中间件</a></span> <span class="next"><a href="/FE-Interview-Questions/principle-docs/react/07-Redux之异步Action及操作.html">Redux之异步Action及操作</a>
+      →
+    </span></p></div>  <div class="el-dialog__wrapper" style="display:none;"><div role="dialog" aria-modal="true" aria-label="请先阅读购买协议" class="el-dialog el-dialog--center" style="margin-top:15vh;width:30%;"><div class="el-dialog__header"><span class="el-dialog__title">请先阅读购买协议</span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><div class="el-dialog__footer"><span class="dialog-footer"><button disabled="disabled" type="button" class="el-button el-button--danger is-disabled" style="width:100%;"><!----><!----><span>我已阅读（8s）</span></button></span></div></div></div> <div class="el-dialog__wrapper" style="display:none;"><div role="dialog" aria-modal="true" aria-label="付费阅读" class="el-dialog" style="margin-top:15vh;width:30%;"><div class="el-dialog__header"><span class="el-dialog__title">付费阅读</span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><div class="el-dialog__footer"><span class="dialog-footer"><button disabled="disabled" type="button" class="el-button el-button--danger is-disabled" style="width:100%;"><!----><!----><span>确 定</span></button></span></div></div></div> <div class="el-dialog__wrapper" style="display:none;"><div role="dialog" aria-modal="true" aria-label="dialog" class="el-dialog" style="margin-top:15vh;width:30%;"><div class="el-dialog__header"><span class="el-dialog__title"></span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><!----></div></div> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAU9ElEQVR4Xu1da5Ac1XX+TnfPa1crrQQiMY9YGGHAD6SdEWUjIdjVPiQgNhJa4VRBAgSIXZRRodgJOPED7DiACxts4yoHu0BKVaiYnVkJAkKPfQkBDgnSSmUIhKeEISSW0AO0O6/ue1K3R/uY2Xl0z3TPY3fuH6l2zj3n3HO+vn373nPPIdSbZQtEfnb4BmbxPRAtADAkDN5wzYbT9llmUIWEVIU6VaVKmx84usBQ9XcylBvqXj+/rSoVtqhUHQAWDdXz80OtxBjMJO9eP7+mbVjTylv0nSNkOQBwsHv9fPk6qNlW9QDg4e6rIHCEQuHdlbZyz08PbSHCVWN6EOjGtetP3VhpvUqRX5UA4Dcu9+GjxhsAbADhPAhxOi3p/aCUgTrVV84EkpemawfWbJh7wCm+leJTVQDgV9ecgqiyHky3gnCqaRTGHgqFl1TKQNNdblUAgPevOw8GfxOM60DwZxj9uxQM/2C6O6JS46soAHh4dTOE+iMQbgYouy4aXUgX9vyuUgaa7nIrBgDe030jAOn81FSftfEBCkbOnu5OqOT4yg4A3rvuM4D4FUBLCw6c8SCFwhsK0tUJirZAWQHAe6++F1DusK6tuIyCvc9ap69T2rVAWQBgru5Hlc0gWm5DQYGWsIcIwkafOqlNC7gOAN67ZhGgPAXQmbZ0Y36ZQpHP2+pTJ7ZtAVcBwHuv/nOA5PveZ1sz8GMUjFxrv1+9hx0LuAIA5lYNe0/9KQi32lEmg/ZOCobvK6F/vasFCzgOgJTz524Dqe0W5OcmIb6SWiJbS+JR71zQAo4CgN9p9esfND6v+QPBgpILEajiLFrU+14hsvrvpVnAMQDIA5zE+/yKd3bjOUCpbPkYBSNzSxtavbcVC5TqKVOGfPLjB72ve2fNOosUxYrcQjT7KBhuKURU/710C5QMAH7h4kAsNusdb2PgjxSPt3SNUhy2UTB8uVPM6nzyLLVKMQ4z1Nhg50HV6znD09BQCquMvryJghEZD1BvLlugpBkgvqvrtyz4i745cxxWU9xHwd47HWZaZ5fFAkUDIL571T1GPHlnoHkO4Mx7f0I9xt9TKPyPdY+5b4GiABAb6vqSSOhPepsaofqK2OQrPK5vUjD848JkxVPw3rUylu8qgJrBvBGKsYFathwrnmNt9rQNgNHdy/4Ecf9biqJqvubZbo16PQXDP3eLOe/pvh2EB9L4MzZQKPygWzKrla9tAEQHOt5nQ5zumzMbiqa5My7G1ygU/id3mAOpp5+uz+D/BAXDq92SWS18j3bf3AoiRjJ5cO6WjQdsASC2q+uXIqF/VfV64G1qcnNM7s4Ae7uHAFyWMYBdFAybEb/TtX247qZ9AC0aGx8LXmMZAMnnu1YkR/R+2dk/bw5IUd2zE+FvqCV8v1sCeAYCQD75gqbcbNpnGQCxgc4TwjAaNb8PnsZGt3yT4sv8bQpFfuiWkJkIgMNrb1pNCm3OsOlxSwCID3U+YiQNGcSJwLxmgBzZ7s3jX/EDCvZ+tw4A5yxwdN0tiwV4eDJHZjxREAD87PJPROOe9wFQWZ7+1BTwEAUjtzk3/HROM3EGkBY4vO4vbyCmu0D0Sel8leiuggCIDXXuFknjEvPd3zwHpLr47p/wUy8Fw2udAEBiR+tiHSTjEccvcfpmN0HxeNLYi2QS8Y8+nvgb8wENvMbbNeTY/f/L73vrdgJ/D0AzM4ZIUTds/duzHeNfjL3yAiCxe+UiPZY0FZSffPLTryyN+UUKRb7ohKzRnW1bABq/0Cl5WgJAai1yoKFr0JF7CavueWeBohhp+QUkCJ65c2FF8wvkBUBssOtVoevnS1t4Gxuh+l3Z9cvm5/cpGLYXRJoDLaM7V3DmT5YBAKChc6DgLGkFqKvueaNVUWhKfoGtdyx0hL8VHbLR5BSe3L2yIxlN7hyL7QicIuMzyqirFp1HFz59tNiBjfUb2dG2j2ji29fODMDA8cbOgeZSdZD9cwDg4NY7FlY0v0BOj8YGut4Uhn6OVF7u93tnufzpl2llRaygxb1Tnhi7zhjpa11NrKR9/lidAYhxY6BrwLH7/1fc++YWTMovAIEbt35roWP87dpG0mcFQHxXxwVGwvivsZ+zGawYYbb6OLg3Hx1sXQAdE4vAufMeJEUZ3xEzX/dC7I8fPXL7uI4aDgTahhy//y9ngpQM7cC2b53tOH9bNs4FgNhg14DQdXNxIkO8/HMdmQXt6ca8kUIRc+/B6TZTPwMtrQF4sNUf1dURgM3dHk9jAJo/4LQPCvNjHqZQpPTo4iyS6gCYMMqUV0Di2ZU/1uPJvx4j8c91ed8/NxQSaAkH3LgbWAdAHgDEBjqOCkOk5nwiBOZVMDpbNT5Piza/XHi6sEdRB0AOACSfv7wrORrfPvZzGY5983uO+TYKRR6y597C1Ly3e0sqGiitTfvj4IJrgNhg13NC15eNEXoaAtACFXj/j2vKfRSMdBZ2qT0K3tN9FwhyS3ZymxEBIZmWSlsDRPvbR1nwuMd9c5qgaOl75vZMXSI1wwDTKbSk53iJnNK683B3KzKzfhLaqCUsA0VmVBsHQLyv/UKDef/E6BmBU06pvDFIXEstvY85rQgPr14AoaXuHij6RmrZUvFvcqfHaIXfBAAGOh8xjNSZv2kTTYXz8f5WVMqgYX6cQpGvFNGz3sWCBcYBEB3oeI8NccZYn/Kd/RfQknkUPmUufa4nYWE8dRKbFjABwC+FGqJH5oxM3hg2Y/69ZTv9y682G5dTaPM2m2Ork1uwgAmAxLMrb9HjyYcn05cx+MOCmvwIBSM3WSCsk9i0gAmA+K6VTxiJ5Jcn9y378W8hxUV8Pi35t8OFyOq/27OACYDYYMebQhfm0a/ZSAZ/zrPHyW1qxt0UCt/ltpiZxt8EQOb3P2kq/I7f+C3ZtEfQNHI6nftMvGROdQYTz7pM8BAdCYxOtoni1eBrKlP8nx1nsPgqhXrT1ip2utc6rRngSsr1AC8G85aAB5uobaikC60U7busjVkdmGwc1eeFd9as6rMX89sIRhYSYUqcX/Up66xGPNjaPKrTOyRvM59szLypsWuwpEQaFBvsvF/oxjcmq6v5vfA0ViEApJKML1Eo/JSz5q1+btGdra0MJS1EjsHHGjsHSzqupdhQ13aR1LvSABDww9mUL44aeEae2mUDgLRqqVHLcgYYFrqxuIYAIOP1V1EoMn5s7Si8qpSZawCIDnS+zYaRdvnB0+CHFnAy6ZPTVuX3MF/5NJ3VE3Was1V+rcObmwPMZmBplGj/UMuakhZjheS6CICO/2NDnDZZgeoHgLkY+AkFI2lrl0JGdOr3VcObFzDEMAHmgoyBYwSlZVvLGtdOFN0DQH/7xyw4bcWnVfcaIOVHGSugGYvdCBkrBJRVwxG5IZUZUHL3tpa1rm1UuQaA0Z0rkjJIvWa+AiYrytiDIH2BqMco5DQnf181HJ6SYobBT2xv6XYsxYwZrwDtejDMewRscDMLPW2tJv+ueDwTQSzMx6BgE7VEZMibpUajO1Zw5vUQ1euFt6lKPwMzh+XgBRJLFgOwcjhyOyE9yRQDG7a3rHUkyZRZTY214q/FkX621QAXynZ5suLBoFY9kXoXxKEpF5W7tNzK4fCDxGQ+8Uy8ZXtL98StIlv6TyXm4atvACuPFs3GxrkJje5s48wbYopHg292FW4F57II410wXeh07GDRDiixIw+vXQ2eks7FOlcbs6KcAeT7My3nS9WEg1kfslwU7qBQeKWdLtVMy3u6j4FQXA5eO6+AaF97gpnTQ38VQmBuSTuMFbItf5+CkczVeYV0KU1sqqqqGbRqfmoKXV8gksnM3IYybP/ulCSWyZuOQaEt1NJjOesIRfvaTzDzlLvf5o2gHNVcSxuam72ZAe6iYG+fm1Iqwdu9z8D+9sMQPCX+2zd7FhzM/18+mzGOg/UQLdnyVvmEui/JNQBE+9rfZeazMofgaWyA5s8s5O3+QJ2RwAeg8vLpVHPINQDEBjr2CENMuYat+XzwlDsriDPeP8lleoHATQBEhCGuzrR9zX0KZgXP9AGBawCIDnX+kJPG3021HyEVGVzrbXqAQKa5YV1JSzMH5l0NXYMlJbim+K6Oa4yE+E02N9fsQnDKYKYHCDJzHjKJNY0dQ5b3/bP5mLIi6ySlvBour4hPi8b8FthYWetfB9JfwsDiBhVDpQaESr+aYeHZTgTl32tyRzAfWhkfAbh2JsYU5jLLyXsBHa+zEOdOJeLUBZGa2xDKiwJ59nEvWsLfdiP/UK3NlqmrYf2djxrCyBpeLBNEulQYqrK2YgygwbiGLtj8YWUVqaz01NWwXW1XiAQ9nU2Vqr0j4Ijd+D2wsppCPXscYVeDTFLXw+XtoBOB0ax5QyudKcxtozKSINyPuYe/T2cPxdwWV238xxNEjPa3H4LgU7MpOG1fA5MHy/x7ALfMtHDzcQDEBjufErpxZTYATLuvgfxfCptBia9T8Mn/qban1Q19xgGQ3N3RmoyJnNm5qythhBumSOMps6XchcX0QLkDTl0fWYaA9DRxfR0nmEXWvPC1fzhUjGn5VRDuo5bIpmJ610KfNADEdnVtEQk9M4NmahwyaYSMEppWewKWXSRfBz+DoF9Ol7jDsZGnASAxdNlFelL9j1xm8QQC0KbL1rBl36cRngD4kdStpN6DxbGorl5TsoVH+zqOM4scIcEyefScMtQNrC4jZdWGeTcIYajiX2nR5j9Uu8b8yrp5iOmLKbQ5LRfEFADEBzo2GYb4i1wDmplrgbzuFQA/B0YPNPF4NYGB9375dMAry+9dDcZyKPgatYR/PXk0UwDA25eeFlX8/5uvQpSsICIridRbNgvwswAiUNBPiyOvlNNGvH/NadDVS0AsE34vB+iicfmMwxQKz8/UJ2vNoOhg57+zbnwhl/LTe3vYUZfJyiv7wPSfIAxDNfY6cZmVX143C0kshOBPQcGnwCxD+pYC9Mmc2ueox5y9aFRf+2cMFq/kKxPnb54NUtPulDpquWnLjBEDZFJuOg5CDMwxEKIATfyfKQ7CLMAM128EqBEydJ9oLpjPAZG9LN5Spp/OoM/2HLE0A0iiWH/ny0IYn83liKrNJDZtkVPCwJh/QaHI17NxyFk3MLq7o5Xz7AxKZhWvJ1CCTWZQVwGVFtKinvR4wpMGyFsKNNrf8QYLsTCXsVIl5eT1tTJWFJ1BnnNmqByhYKQ7pw/zCUnsbgvpUXopn3/rC0Jn3OQKF2YdmvI5WtTz30UBQHaKDna9wLp+cT4Fqyq1vCuWrFmm/0DB8HfyaV9w7rayLyAF1PcGqgwkzG9TKDKRADyHegUBYH4RDLb/Suh8c14kqSrkp2F9PVAlQLBYBMsSAE6Wk/0Q4LzJA6umzEyV+KByavBjFIxca0W+JQBIRqN9rd1gpacQU+/sWVA93kJk9d9dswAfQ0AstBrtbBkA5qugf0VECEy5SJo2FoKZX0jR6ruErvk4L2O+iYKRR6zKtgWA1KtAeRfAlEOFTBDIghOkqlb1qNM5YQHm31Ao8md2WNkCgGQc39VxgZEw5DlB/r5E8M+R5wV1ENhxSNG0zMOYPXqx3YoqtgFgrgcGO+6ELu4pqGwdBAVN5BDBIQixiJb0fmCXX1EAkEKi/Sv6WKC9oEATBE31k8OChiqSQOZMVmkpLe7JGcqX9/O9SLFmscnYseZhZv50YR4Ef3MdBIXtVAQF820UijxURE+zS9EzgOws69hEhfI7CJxZUIH666CgiWwTFLHoy5RREgBMEMgQMq3hNQhROJ8MEXxNjbWZfs62d9ztYCQTL6pJdNIlT35ciqSSAWAuCrdfehapnteY8+8UjimaCiyVm4qOiC9l/LXXl4FkLPqah/RltHT7lAgfuwNyzAOxXZeey7pnDwtusqKE/Dz0zW6qB5daMdZJGhYCydGRd71GPERtQ46U0XUMABOvg8B+CP5jq+OSdQlkfYJ6y28BI5FEcnT0iF/TzqdLnznklL0cBYAJgueWNcXi/t+y4JzxhJnKyzL13qb6KyGrU1kgcWIUwjA+9FPyfKee/DFZjgNgjHG0r2OQWVjOYSfDy+S6oH6QNAEDoSeR+HgEikd73XfptvOceuon83ENAMyg6ED74xCcMx4t24DkIZJMSDGzt5AZyZFR6NE4tAbfv3gveeY6N5wveboGgDGFYwPt64WOn4DY1qGAGWvY0ADMsBtIRjyO5GgUzGxoAc/N3mXbNrrl/LIAQAqJ7bj0XKF4BsF8ht3BmCXsAoGCZ092+VYbvZFMIDkSBRsGSFMPKz5a7lu64zW39XR9BhgbAL8U8sQ+mvsoG8a1ticeuT5oCEDuH0y3ZiTkEx8zHS+b6vf2+pZvkxc6y9LKBoCx0cQH2q4SQn2MWdivTaso0Lxes44BqTV8OZUF9HjCnOohi5yksrIeU31qt2fptv6yeP6kkLIDQMqVgSUJ8vyzkTTWFTtYuUiUMYiaz1sz+QrkRo4+GoUej08aNrPi8f7a37r9r4q1RSn9KgKAMYUTz3cuFnH0CMPIefuo8ODYPFuQYDA/ISs6oqnayk85I6FDJBMQ+uQCpwzyaC/5VV5Ly/tklFVFWlWYKz60ap1hJB6GSFXIKqXJz0jF44HqUaFonjIvHhkiqZuOFskkjKSeKi2d0RSP9nvVo13nWbZV5hKoaKsKAIxZIDbQtV6w8Z1cCSuLsZR8VaiaCsXrMQNVSbH1NZpHJMvdObB0tq6bzh5byOXqRKp2SPVpd3iXbS2+KmgxRsjTp6oAMKZnfLDrK8x0nzCSuRMelGQIAilkzg4kQxvH/5X/VfLMGpxyuHS8EJY1UDR1P0Hc5WvrL6m4g2WBNgirEgDja4QXr1giRo17ha4vB7imToyIKK54tIiXlNudPLyx4VtLpFUNgMkjiO1u/1MY2jfkRVVmrsoNAVLUjxRVeUFV+Rfa8h1PWfJAhYlqBgBjdpJnDImhrquY+FaRFMsKXVdz2b5Mmvo+KbQVuv4jf/tAzRWrrDkAZDpUbjMzeS+GSlcCfBELcSYY6bWQHUIBESVIUQ4pqvqaIPG0L4qHaeWOEYfYV4RNzQMgm9VknGJc84dIURaBcYEgkpm0PsECTTI2Fcw+BlQwT76/ppNCMXmISQqNEHACjD8A/CYxDXlZ7KCO/mlXXeT/AQOtWhTnoNDfAAAAAElFTkSuQmCC" class="theme-float-btn"></main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/FE-Interview-Questions/assets/js/app.13d69697.js" defer></script><script src="/FE-Interview-Questions/assets/js/6.b48232c6.js" defer></script><script src="/FE-Interview-Questions/assets/js/3.9d86cf58.js" defer></script><script src="/FE-Interview-Questions/assets/js/103.51a83ab2.js" defer></script><script src="/FE-Interview-Questions/assets/js/11.fb060006.js" defer></script>
+  </body>
+</html>

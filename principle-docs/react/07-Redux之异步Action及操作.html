@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>一、创建同步Action | 面试指南</title>
+    <meta name="description" content="前端面试指南，前端面试题整理，按模块分类整理总结，打造最全面的前端面试题">
+    <link rel="icon" href="/FE-Interview-Questions/logo.png">
+  <link rel="manifest" href="/FE-Interview-Questions/manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="/FE-Interview-Questions/icons/apple-touch-icon-152x152.png">
+  <link rel="mask-icon" href="/FE-Interview-Questions/icons/safari-pinned-tab.svg" color="#3eaf7c">
+  <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+  <meta name="apple-mobile-web-app-status-bar-style">
+    
+    <link rel="preload" href="/FE-Interview-Questions/assets/css/0.styles.0591d029.css" as="style"><link rel="preload" href="/FE-Interview-Questions/assets/js/app.13d69697.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/6.b48232c6.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/3.9d86cf58.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/104.b19afdd3.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/11.fb060006.js" as="script"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/1.9e1b498f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/10.fbc04ea9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/100.c06a0f53.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/101.54402ede.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/102.d3860a7d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/103.51a83ab2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/105.aada2418.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/106.4ce7d3b7.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/107.ca87a327.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/108.df939701.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/109.9f0c8605.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/110.19cb01b2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/111.51fc9fa1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/112.ab20caec.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/113.6c12e76f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/114.48e1a019.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/115.f291caf1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/116.100da54b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/117.9b579bae.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/118.89da516f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/119.c70b5105.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/12.9774db85.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/120.fcf3186f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/13.ac14541c.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/14.155007f0.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/15.2d9ec2b2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/16.aec442e8.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/17.59c81a6b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/18.c38ff446.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/19.8203bd99.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/20.103004c4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/21.1e6e08c9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/22.5abbfd40.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/23.4cd5fd4d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/24.602403ee.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/25.da971f83.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/26.e9e76559.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/27.6d18f825.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/28.58923361.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/29.81e33cc0.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/30.7a4491ed.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/31.4275e9d2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/32.6e6c282b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/33.35641348.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/34.3d76a237.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/35.fb57a983.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/36.78f70288.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/37.ed0997e2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/38.0ece0665.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/39.3b4241bb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/4.cda2fc13.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/40.dd7b6d84.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/41.05fcd6ed.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/42.24fc3ac4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/43.21f8f3ec.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/44.ac552dd9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/45.b2d653cc.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/46.8bf4b340.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/47.57a13e6c.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/48.8ef881a7.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/49.b76df872.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/5.eb1f29dc.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/50.f04492e5.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/51.e000ebea.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/52.bfbd5e6e.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/53.fc0a60dd.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/54.a798cd42.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/55.5ccb6ae1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/56.1605b000.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/57.79350f4e.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/58.dcff3859.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/59.a366020b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/60.199914fb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/61.4d471001.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/62.07f7a685.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/63.3774b497.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/64.d8437f45.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/65.eaf10ccb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/66.74665605.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/67.072c35ca.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/68.764ab8cb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/69.6a27592a.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/7.aa832117.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/70.2e7f3527.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/71.c6365fbe.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/72.15cfe1be.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/73.d56ee920.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/74.f848ccac.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/75.905f5556.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/76.49d98a04.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/77.4b62003f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/78.5a4046ff.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/79.eb3ec067.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/8.bccf8145.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/80.bd38c9e9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/81.dfdea12a.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/82.4439fbe3.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/83.df1321d3.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/84.23d01b47.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/85.c983047a.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/86.29b0f2d4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/87.12e2e192.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/88.fb19aa58.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/89.ee2be7d8.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/9.ce1180ae.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/90.479f4d9d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/91.619e0c8d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/92.ae858703.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/93.f90a7ae1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/94.8894adb4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/95.683396f3.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/96.f65dc164.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/97.75bd77e0.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/98.892b530a.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/99.dc5626e1.js">
+    <link rel="stylesheet" href="/FE-Interview-Questions/assets/css/0.styles.0591d029.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/FE-Interview-Questions/" class="home-link router-link-active"><img src="/FE-Interview-Questions/logo.png" alt="面试指南" class="logo"> <span class="site-name can-hide">面试指南</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!----> <div style="padding-left:1.5rem;"><div class="qr"><img src="/FE-Interview-Questions/assets/img/qr.ee193d28.jpg" alt="poetries" width="120" height="120" loading="lazy"> <p class="we-intro">
+    关注公众号，获取更多资讯
+  </p></div></div> <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Vue</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FE-Interview-Questions/principle-docs/vue/01-从源码解读Vue生命周期.html" class="sidebar-link">从源码解读Vue生命周期</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/02-组件的本质.html" class="sidebar-link">组件的本质</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/03-有状态组件的设计.html" class="sidebar-link">有状态组件的设计</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/04-设计 VNode.html" class="sidebar-link">设计 VNode</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/05-辅助创建 VNode 的 h 函数.html" class="sidebar-link">辅助创建 VNode 的 h 函数</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/06-自定义渲染器和异步渲染.html" class="sidebar-link">自定义渲染器和异步渲染</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/07-渲染器之挂载.html" class="sidebar-link">渲染器之挂载</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/08-渲染器的核心 Diff 算法.html" class="sidebar-link">渲染器的核心 Diff 算法</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/09-渲染器之patch.html" class="sidebar-link">渲染器之patch</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/10-图解 Vue 响应式原理.html" class="sidebar-link">图解 Vue 响应式原理</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/11-图解 Vue 异步更新.html" class="sidebar-link">图解 Vue 异步更新</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/12-剖析 Vue 内部运行机制.html" class="sidebar-link">剖析 Vue 内部运行机制</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/13-vue响应式原理模拟.html" class="sidebar-link">vue响应式原理模拟</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/14-vue状态管理之vuex.html" class="sidebar-link">vue状态管理之vuex</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>React</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FE-Interview-Questions/principle-docs/react/01-React-router原理.html" class="sidebar-link">React</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html" class="sidebar-link">Dva总结</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/03-MobX总结.html" class="sidebar-link">MobX总结</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/04-浅析redux-saga中间件及用法.html" class="sidebar-link">浅析redux</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/05-Redux之浅析中间件.html" class="sidebar-link">Redux之浅析中间件</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/06-Redux之源码分析.html" class="sidebar-link">Redux之源码分析</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/07-Redux之异步Action及操作.html" class="active sidebar-link">Redux之异步Action及操作</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/07-Redux之异步Action及操作.html#一、创建同步action" class="sidebar-link">一、创建同步Action</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/07-Redux之异步Action及操作.html#二、创建异步action的多种方式" class="sidebar-link">二、创建异步action的多种方式</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/07-Redux之异步Action及操作.html#三、redux异步流程" class="sidebar-link">三、redux异步流程</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/07-Redux之异步Action及操作.html#四、redux异步方案选型" class="sidebar-link">四、Redux异步方案选型</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/07-Redux之异步Action及操作.html#五、redux异步操作代码演示" class="sidebar-link">五、redux异步操作代码演示</a></li></ul></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Webpack</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FE-Interview-Questions/principle-docs/webpack/01-Webpack4打包机制原理解析.html" class="sidebar-link">Webpack4打包机制原理解析</a></li><li><a href="/FE-Interview-Questions/principle-docs/webpack/02-webpack中的HMR热更新原理剖析.html" class="sidebar-link">webpack中的HMR热更新原理剖析</a></li><li><a href="/FE-Interview-Questions/principle-docs/webpack/03-从源码窥探Webpack4.x原理.html" class="sidebar-link">从源码窥探Webpack4.x原理</a></li><li><a href="/FE-Interview-Questions/principle-docs/webpack/04-实现webpack小型打包工具.html" class="sidebar-link">实现webpack小型打包工具</a></li><li><a href="/FE-Interview-Questions/principle-docs/webpack/05-Babel原理及其使用.html" class="sidebar-link">Babel原理及其使用</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>综合</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/01-虚拟DOM原理分析.html" class="sidebar-link">虚拟DOM原理分析</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/02-setTimeout实现原理和使用注意.html" class="sidebar-link">setTimeout实现原理和使用注意</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/03-浅析Promise原理.html" class="sidebar-link">浅析Promise原理</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/04-浏览器渲染原理.html" class="sidebar-link">浏览器渲染原理</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/05-前端面试之MVVM浅析.html" class="sidebar-link">前端面试之MVVM浅析</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/06-前端面试之组件化.html" class="sidebar-link">前端面试之组件化</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/07-虚拟DOM（一）.html" class="sidebar-link">虚拟DOM（一）</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/08-虚拟DOM（二）.html" class="sidebar-link">虚拟DOM（二）</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/09-前端性能之Performance.html" class="sidebar-link">前端性能之Performance</a></li></ul></section></li></ul> </aside> <main class="page"> <div id="container" class="theme-default-content lock"><div class="content__default"><h2 id="一、创建同步action"><a href="#一、创建同步action" class="header-anchor">#</a> 一、创建同步Action</h2> <blockquote><p><code>Action</code>是数据从应用传递到 <code>store</code>/<code>state</code> 的载体，也是开启一次完成数据流的开始</p></blockquote> <p><strong>普通的action对象</strong></p> <div class="language- extra-class"><pre class="language-text"><code>const action = {
+	type:'ADD_TODO',
+	name:'poetries'
+}
+
+dispatch(action)
+</code></pre></div><p><strong>封装action creator</strong></p> <div class="language- extra-class"><pre class="language-text"><code>function actionCreator(data){
+    return {
+    	type:'ADD_TODO',
+    	data:data
+    }
+}
+
+dispatch(actionCreator('poetries'))
+</code></pre></div><p><strong>bindActionCreators合并</strong></p> <div class="language- extra-class"><pre class="language-text"><code>function a(name,id){
+	reurn {
+		type:'a',
+		name,
+		id
+	}
+}
+function b(name,id){
+	reurn {
+		type:'b',
+		name,
+		id
+	}
+}
+
+let actions = Redux.bindActionCreators({a,b},store.dispatch)
+
+//调用
+actions.a('poetries','id001')
+actions.b('jing','id002')
+</code></pre></div><p><strong>action创建的标准</strong></p> <blockquote><p>在Flux的架构中，一个Action要符合 FSA(Flux Standard Action) 规范，需要满足如下条件</p></blockquote> <ul><li>是一个纯文本对象</li> <li>只具备 <code>type</code> 、<code>payload</code>、<code>error</code> 和 <code>meta</code>中的一个或者多个属性。<code>type</code> 字段不可缺省，其它字段可缺省</li> <li>若 <code>Action</code> 报错，<code>error</code> 字段不可缺省，切必须为 <code>true</code></li></ul> <blockquote><p><code>payload</code> 是一个对象，用作Action携带数据的载体</p></blockquote> <p><strong>标准action示例</strong></p> <ul><li>A basic Flux Standard Action:</li></ul> <div class="language- extra-class"><pre class="language-text"><code>{
+  type: 'ADD_TODO',
+  payload: {
+    text: 'Do something.'  
+  }
+}
+</code></pre></div><ul><li>An FSA that represents an error, analogous to a rejected Promise</li></ul> <div class="language- extra-class"><pre class="language-text"><code>{
+  type: 'ADD_TODO',
+  payload: new Error(),
+  error: true
+}
+</code></pre></div><blockquote><p>https://github.com/acdlite/flux-standard-action</p></blockquote> <ul><li>可以采用如下一个简单的方式检验一个<code>Action</code>是否符合FSA标准</li></ul> <div class="language- extra-class"><pre class="language-text"><code>// every有一个匹配不到返回false
+let isFSA = Object.keys(action).every((item)=&gt;{
+   return  ['payload','type','error','meta'].indexOf(item) &gt;  -1
+})
+</code></pre></div><h2 id="二、创建异步action的多种方式"><a href="#二、创建异步action的多种方式" class="header-anchor">#</a> 二、创建异步action的多种方式</h2> <blockquote><p>最简单的方式就是使用同步的方式来异步，将原来同步时一个<code>action</code>拆分成多个异步的<code>action</code>的，在异步开始前、异步请求中、异步正常返回（异常）操作分别使用同步的操作，从而模拟出一个异步操作了。这样的方式是比较麻烦的，现在已经有<code>redux-saga</code>等插件来解决这些问题了</p></blockquote> <p><strong>异步action的实现方式一：setTimeout</strong></p> <blockquote><p><code>redux-thunk</code>中间处理解析</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>function thunkAction(data) {
+    reutrn (dispatch)=&gt;{
+        setTimeout(function(){
+            dispatch({
+                type:'ADD_TODO',
+                data
+            })
+        },3000)
+    }
+}
+</code></pre></div><p><strong>异步action的实现方式二：promise实现异步action</strong></p> <blockquote><div class="language- extra-class"><pre class="language-text"><code>redux-promise`中间处理这种`action
+</code></pre></div></blockquote> <div class="language- extra-class"><pre class="language-text"><code>function promiseAction(name){
+    return new Promise((resolve,reject) =&gt; {
+        setTimeout((param)=&gt;{
+            resolve({
+                type:'ADD_TODO',
+                name
+            })
+        },3000)
+    }).then((param)=&gt;{
+        dispatch(action(&quot;action2&quot;))
+        return;
+    }).then((param)=&gt;{
+        dispatch(action(&quot;action3&quot;))
+    })
+}
+</code></pre></div><h2 id="三、redux异步流程"><a href="#三、redux异步流程" class="header-anchor">#</a> 三、redux异步流程</h2> <p><img src="https://poetries1.gitee.io/img-repo/2019/10/492.png" alt="img"></p> <ul><li>首先发起一个action，然后通过中间件，这里为什么要用中间件呢，因为这样<code>dispatch</code>的返回值才能是一个函数。</li> <li>通过<code>store.dispatch</code>，将状态的的改变传给<code>store</code>的小弟<code>reducer</code>，<code>reducer</code>根据<code>action</code>的改变，传递新的状态<code>state</code>。</li> <li>最后将所有的改变告诉给它的大哥，<code>store</code>。<code>store</code>保存着所有的数据，并将数据注入到组件的顶部，这样组件就可以获得它需要的数据了</li></ul> <h2 id="四、redux异步方案选型"><a href="#四、redux异步方案选型" class="header-anchor">#</a> 四、Redux异步方案选型</h2> <p><strong>redux-thunk</strong></p> <blockquote><p><code>Redux</code>本身只能处理同步的<code>Action</code>，但可以通过中间件来拦截处理其它类型的<code>action</code>，比如函数(<code>Thunk</code>)，再用回调触发普通<code>Action</code>，从而实现异步处理</p></blockquote> <ul><li>发送异步的<code>action</code>其实是被中间件捕获的，函数类型的action就被<code>middleware</code>捕获。至于怎么定义异步的<code>action</code>要看你用哪个中间件，根据他们的实例来定义，这样才会正确解析<code>action</code></li></ul> <blockquote><p><code>Redux</code> 本身不处理异步行为，需要依赖中间件。结合 <code>redux-actions</code> 使用，<code>Redux</code> 有两个推荐的异步中间件</p></blockquote> <ul><li><code>redux-thunk</code></li> <li><code>redux-promise</code></li></ul> <blockquote><p><code>redux-thunk</code> 的源码如下</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>function createThunkMiddleware(extraArgument) {
+  return ({ dispatch, getState }) =&gt; next =&gt; action =&gt; {
+    if (typeof action === 'function') {
+      return action(dispatch, getState, extraArgument);
+    }
+
+    return next(action);
+  };
+}
+
+const thunk = createThunkMiddleware();
+thunk.withExtraArgument = createThunkMiddleware;
+
+export default thunk;
+</code></pre></div><blockquote><p>源码可知，<code>action creator</code> 需要返回一个函数给 <code>redux-thunk</code> 进行调用，示例如下</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>export let addTodoWithThunk = (val) =&gt; async (dispatch, getState)=&gt;{
+    //请求之前的一些处理
+
+    let value = await Promise.resolve(val + ' thunk');
+    dispatch({
+        type:CONSTANT.ADD_TO_DO_THUNK,
+        payload:{
+            value
+        }
+    });
+};
+</code></pre></div><ul><li>而它使用起来最大的问题，就是重复的模板代码太多</li></ul> <div class="language- extra-class"><pre class="language-text"><code>//action types
+const GET_DATA = 'GET_DATA',
+    GET_DATA_SUCCESS = 'GET_DATA_SUCCESS',
+    GET_DATA_FAILED = 'GET_DATA_FAILED';
+    
+//action creator
+const getDataAction = (id) =&gt; (dispatch, getState) =&gt; {
+        dispatch({
+            type: GET_DATA, 
+            payload: id
+        })
+        api.getData(id) //注：本文所有示例的api.getData都返回promise对象
+            .then(response =&gt; {
+                dispatch({
+                    type: GET_DATA_SUCCESS,
+                    payload: response
+                })
+            })
+            .catch(error =&gt; {
+                dispatch({
+                    type: GET_DATA_FAILED,
+                    payload: error
+                })
+            }) 
+    }
+}
+
+//reducer
+const reducer = (oldState, action) =&gt; {
+    switch(action.type) {
+    case GET_DATA : 
+        return oldState;
+    case GET_DATA_SUCCESS : 
+        return successState;
+    case GET_DATA_FAILED : 
+        return errorState;
+    }
+}
+</code></pre></div><blockquote><p>这已经是最简单的场景了，请注意：我们甚至还没写一行业务逻辑，如果每个异步处理都像这样，重复且无意义的工作会变成明显的阻碍</p></blockquote> <ul><li>另一方面，像<code>GET_DATA_SUCCESS</code>、<code>GET_DATA_FAILED</code>这样的字符串声明也非常无趣且易错
+上例中，<code>GET_DATA</code>这个<code>action</code>并不是多数场景需要的</li></ul> <p><strong>redux-promise</strong></p> <blockquote><p>由于<code>redux-thunk</code>写起来实在是太麻烦了，社区当然会有其它轮子出现。<code>redux-promise</code>则是其中比较知名的</p></blockquote> <ul><li><p>它自定义了一个</p> <div class="language- extra-class"><pre class="language-text"><code>middleware
+</code></pre></div><p>，当检测到有</p> <div class="language- extra-class"><pre class="language-text"><code>action
+</code></pre></div><p>的</p> <div class="language- extra-class"><pre class="language-text"><code>payload
+</code></pre></div><p>属性是</p> <div class="language- extra-class"><pre class="language-text"><code>Promise
+</code></pre></div><p>对象时，就会</p> <ul><li>若<code>resolve</code>，触发一个此<code>action</code>的拷贝，但<code>payload</code>为<code>promise</code>的<code>value</code>，并设<code>status</code>属性为<code>&quot;success&quot;</code></li> <li>若<code>reject</code>，触发一个此<code>action</code>的拷贝，但<code>payload</code>为<code>promise</code>的<code>reason</code>，并设<code>status</code>属性为<code>&quot;error&quot;</code></li></ul></li></ul> <div class="language- extra-class"><pre class="language-text"><code>//action types
+const GET_DATA = 'GET_DATA';
+
+//action creator
+const getData = function(id) {
+    return {
+        type: GET_DATA,
+        payload: api.getData(id) //payload为promise对象
+    }
+}
+
+//reducer
+function reducer(oldState, action) {
+    switch(action.type) {
+        case GET_DATA: 
+            if (action.status === 'success') {
+                return successState
+            } else {
+                   return errorState
+            }
+        }
+}
+</code></pre></div><blockquote><p><code>redux-promise</code>为了精简而做出的妥协非常明显：无法处理乐观更新</p></blockquote> <p><strong>场景解析之：乐观更新</strong></p> <blockquote><p>多数异步场景都是悲观更新的，即等到请求成功才渲染数据。而与之相对的乐观更新，则是不等待请求成功，在发送请求的同时立即渲染数据</p></blockquote> <ul><li>由于乐观更新发生在用户操作时，要处理它，意味着必须有action表示用户的初始动作</li> <li>在上面<code>redux-thunk</code>的例子中，我们看到了<code>GET_DATA</code>, <code>GET_DATA_SUCCESS</code>、<code>GET_DATA_FAILED</code>三个<code>action</code>，分别表示初始动作、异步成功和异步失败，其中第一个<code>action</code>使得<code>redux-thunk</code>具备乐观更新的能力</li> <li>而在<code>redux-promise</code>中，最初触发的action被中间件拦截然后过滤掉了。原因很简单，<code>redux</code>认可的<code>action</code>对象是 <code>plain JavaScript objects</code>，即简单对象，而在<code>redux-promise</code>中，初始<code>action</code>的<code>payload</code>是个<code>Promise</code></li></ul> <p><strong>redux-promise-middleware</strong></p> <blockquote><div class="language- extra-class"><pre class="language-text"><code>redux-promise-middleware`相比`redux-promise`，采取了更为温和和渐进式的思路，保留了和`redux-thunk`类似的三个`action
+</code></pre></div></blockquote> <div class="language- extra-class"><pre class="language-text"><code>//action types
+const GET_DATA = 'GET_DATA',
+    GET_DATA_PENDING = 'GET_DATA_PENDING',
+    GET_DATA_FULFILLED = 'GET_DATA_FULFILLED',
+    GET_DATA_REJECTED = 'GET_DATA_REJECTED';
+    
+//action creator
+const getData = function(id) {
+    return {
+        type: GET_DATA,
+        payload: {
+            promise: api.getData(id),
+            data: id
+        }
+    }
+}
+
+//reducer
+const reducer = function(oldState, action) {
+    switch(action.type) {
+    case GET_DATA_PENDING :
+        return oldState; // 可通过action.payload.data获取id
+    case GET_DATA_FULFILLED : 
+        return successState;
+    case GET_DATA_REJECTED : 
+        return errorState;
+    }
+}
+</code></pre></div><h2 id="五、redux异步操作代码演示"><a href="#五、redux异步操作代码演示" class="header-anchor">#</a> 五、redux异步操作代码演示</h2> <ul><li>根据官网的async例子分析 https://github.com/lewis617/react-redux-tutorial/tree/master/redux-examples/async</li></ul> <p><strong>action/index.js</strong></p> <div class="language- extra-class"><pre class="language-text"><code>import fetch from 'isomorphic-fetch'
+export const RECEIVE_POSTS = 'RECEIVE_POSTS'
+
+//获取新闻成功的action
+function receivePosts(reddit, json) {
+  return {
+    type: RECEIVE_POSTS,
+    reddit: reddit,
+    posts: json.data.children.map(child =&gt;child.data)
+  }
+}
+
+function fetchPosts(subreddit) {
+
+  return function (dispatch) {
+    
+    return fetch(`http://www.subreddit.com/r/${subreddit}.json`)
+      .then(response =&gt; response.json())
+      .then(json =&gt;
+        dispatch(receivePosts(subreddit, json))
+      )
+  }
+}
+
+//如果需要则开始获取文章
+export function fetchPostsIfNeeded(subreddit) {
+
+  return (dispatch, getState) =&gt; {
+
+      return dispatch(fetchPosts(subreddit))
+
+    }
+}
+</code></pre></div><blockquote><p><code>fetchPostsIfNeeded</code>这里就是一个中间件。<code>redux-thunk</code>会拦截<code>fetchPostsIfNeeded</code>这个<code>action</code>，会先发起数据请求，如果成功，就将数据传给<code>action</code>从而到达<code>reducer</code>那里</p></blockquote> <p><strong>reducers/index.js</strong></p> <div class="language- extra-class"><pre class="language-text"><code>import { combineReducers } from 'redux'
+import {
+  RECEIVE_POSTS
+} from '../actions'
+
+
+function posts(state = {
+  items: []
+}, action) {
+  switch (action.type) {
+
+    case RECEIVE_POSTS:
+      // Object.assign是ES6的一个语法。合并对象，将对象合并为一个，前后相同的话，后者覆盖强者。详情可以看这里
+      //  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
+      return Object.assign({}, state, {
+        items: action.posts //数据都存在了这里
+      })
+    default:
+      return state
+  }
+}
+
+
+// 将所有的reducer结合为一个,传给store
+const rootReducer = combineReducers({
+  postsByReddit
+})
+
+export default rootReducer
+</code></pre></div><blockquote><p>这个跟正常的<code>reducer</code>差不多。判断<code>action</code>的类型，从而根据<code>action</code>的不同类型，返回不同的数据。这里将数据存储在了<code>items</code>这里。这里的<code>reducer</code>只有一个。最后结合成<code>rootReducer</code>,传给<code>store</code></p></blockquote> <p><strong>store/configureStore.js</strong></p> <div class="language- extra-class"><pre class="language-text"><code>import { createStore, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import createLogger from 'redux-logger'
+import rootReducer from '../reducers'
+
+const createStoreWithMiddleware = applyMiddleware(
+  thunkMiddleware,  
+  createLogger()  
+)(createStore)
+
+export default function configureStore(initialState) {
+  const store = createStoreWithMiddleware(rootReducer, initialState)
+
+  if (module.hot) {
+    // Enable Webpack hot module replacement for reducers
+    module.hot.accept('../reducers', () =&gt; {
+      const nextRootReducer = require('../reducers')
+      store.replaceReducer(nextRootReducer)
+    })
+  }
+
+  return store
+}
+</code></pre></div><ul><li>我们是如何在 <code>dispatch</code> 机制中引入 <code>Redux Thunk middleware</code> 的呢？
+我们使用了<code>applyMiddleware()</code></li> <li>通过使用指定的 <code>middleware</code>，<code>action creator</code> 除了返回 <code>action</code> 对象外还可以返回函数</li> <li>这时，这个 <code>action creator</code> 就成为了 <code>thunk</code></li></ul> <p><strong>界面上的调用：在containers/App.js</strong></p> <div class="language- extra-class"><pre class="language-text"><code>//初始化渲染后触发
+  componentDidMount() {
+    const { dispatch} = this.props
+    // 这里可以传两个值，一个是 reactjs 一个是 frontend
+    dispatch(fetchPostsIfNeeded('frontend'))
+  }
+</code></pre></div><blockquote><p>改变状态的时候也是需要通过<code>dispatch</code>来传递的</p></blockquote> <ul><li>数据的获取是通过<code>provider</code>,将<code>store</code>里面的数据注入给组件。让顶级组件提供给他们的子孙组件调用。代码如下：</li></ul> <div class="language- extra-class"><pre class="language-text"><code>import 'babel-core/polyfill'
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import App from './containers/App'
+import configureStore from './store/configureStore'
+const store = configureStore()
+render(
+  &lt;Provider store={store}&gt;
+    &lt;App /&gt;
+  &lt;/Provider&gt;,
+  document.getElementById('root')
+)
+</code></pre></div><blockquote><p>这样就完成了<code>redux</code>的异步操作。其实最主要的区别还是<code>action</code>里面还有中间件的调用，其他的地方基本跟同步的<code>redux</code>差不多的。搞懂了中间件，就基本搞懂了<code>redux</code>的异步操作</p></blockquote> <p><img src="https://poetries1.gitee.io/img-repo/2019/10/493.png" alt="img"></p></div> <!----> <div class="readMore-wrapper"><span class="readMore">阅读全文</span></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/FE-Interview-Questions/principle-docs/react/06-Redux之源码分析.html" class="prev">Redux之源码分析</a></span> <span class="next"><a href="/FE-Interview-Questions/principle-docs/webpack/01-Webpack4打包机制原理解析.html">Webpack4打包机制原理解析</a>
+      →
+    </span></p></div>  <div class="el-dialog__wrapper" style="display:none;"><div role="dialog" aria-modal="true" aria-label="请先阅读购买协议" class="el-dialog el-dialog--center" style="margin-top:15vh;width:30%;"><div class="el-dialog__header"><span class="el-dialog__title">请先阅读购买协议</span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><div class="el-dialog__footer"><span class="dialog-footer"><button disabled="disabled" type="button" class="el-button el-button--danger is-disabled" style="width:100%;"><!----><!----><span>我已阅读（8s）</span></button></span></div></div></div> <div class="el-dialog__wrapper" style="display:none;"><div role="dialog" aria-modal="true" aria-label="付费阅读" class="el-dialog" style="margin-top:15vh;width:30%;"><div class="el-dialog__header"><span class="el-dialog__title">付费阅读</span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><div class="el-dialog__footer"><span class="dialog-footer"><button disabled="disabled" type="button" class="el-button el-button--danger is-disabled" style="width:100%;"><!----><!----><span>确 定</span></button></span></div></div></div> <div class="el-dialog__wrapper" style="display:none;"><div role="dialog" aria-modal="true" aria-label="dialog" class="el-dialog" style="margin-top:15vh;width:30%;"><div class="el-dialog__header"><span class="el-dialog__title"></span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><!----></div></div> <img src="data:image/png;base64,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" class="theme-float-btn"></main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/FE-Interview-Questions/assets/js/app.13d69697.js" defer></script><script src="/FE-Interview-Questions/assets/js/6.b48232c6.js" defer></script><script src="/FE-Interview-Questions/assets/js/3.9d86cf58.js" defer></script><script src="/FE-Interview-Questions/assets/js/104.b19afdd3.js" defer></script><script src="/FE-Interview-Questions/assets/js/11.fb060006.js" defer></script>
+  </body>
+</html>

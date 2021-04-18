@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>一、redux-thunk | 面试指南</title>
+    <meta name="description" content="前端面试指南，前端面试题整理，按模块分类整理总结，打造最全面的前端面试题">
+    <link rel="icon" href="/FE-Interview-Questions/logo.png">
+  <link rel="manifest" href="/FE-Interview-Questions/manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="/FE-Interview-Questions/icons/apple-touch-icon-152x152.png">
+  <link rel="mask-icon" href="/FE-Interview-Questions/icons/safari-pinned-tab.svg" color="#3eaf7c">
+  <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+  <meta name="apple-mobile-web-app-status-bar-style">
+    
+    <link rel="preload" href="/FE-Interview-Questions/assets/css/0.styles.0591d029.css" as="style"><link rel="preload" href="/FE-Interview-Questions/assets/js/app.13d69697.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/6.b48232c6.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/3.9d86cf58.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/101.54402ede.js" as="script"><link rel="preload" href="/FE-Interview-Questions/assets/js/11.fb060006.js" as="script"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/1.9e1b498f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/10.fbc04ea9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/100.c06a0f53.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/102.d3860a7d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/103.51a83ab2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/104.b19afdd3.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/105.aada2418.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/106.4ce7d3b7.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/107.ca87a327.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/108.df939701.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/109.9f0c8605.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/110.19cb01b2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/111.51fc9fa1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/112.ab20caec.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/113.6c12e76f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/114.48e1a019.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/115.f291caf1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/116.100da54b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/117.9b579bae.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/118.89da516f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/119.c70b5105.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/12.9774db85.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/120.fcf3186f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/13.ac14541c.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/14.155007f0.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/15.2d9ec2b2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/16.aec442e8.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/17.59c81a6b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/18.c38ff446.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/19.8203bd99.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/20.103004c4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/21.1e6e08c9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/22.5abbfd40.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/23.4cd5fd4d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/24.602403ee.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/25.da971f83.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/26.e9e76559.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/27.6d18f825.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/28.58923361.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/29.81e33cc0.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/30.7a4491ed.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/31.4275e9d2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/32.6e6c282b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/33.35641348.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/34.3d76a237.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/35.fb57a983.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/36.78f70288.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/37.ed0997e2.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/38.0ece0665.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/39.3b4241bb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/4.cda2fc13.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/40.dd7b6d84.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/41.05fcd6ed.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/42.24fc3ac4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/43.21f8f3ec.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/44.ac552dd9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/45.b2d653cc.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/46.8bf4b340.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/47.57a13e6c.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/48.8ef881a7.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/49.b76df872.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/5.eb1f29dc.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/50.f04492e5.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/51.e000ebea.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/52.bfbd5e6e.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/53.fc0a60dd.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/54.a798cd42.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/55.5ccb6ae1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/56.1605b000.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/57.79350f4e.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/58.dcff3859.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/59.a366020b.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/60.199914fb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/61.4d471001.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/62.07f7a685.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/63.3774b497.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/64.d8437f45.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/65.eaf10ccb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/66.74665605.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/67.072c35ca.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/68.764ab8cb.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/69.6a27592a.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/7.aa832117.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/70.2e7f3527.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/71.c6365fbe.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/72.15cfe1be.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/73.d56ee920.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/74.f848ccac.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/75.905f5556.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/76.49d98a04.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/77.4b62003f.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/78.5a4046ff.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/79.eb3ec067.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/8.bccf8145.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/80.bd38c9e9.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/81.dfdea12a.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/82.4439fbe3.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/83.df1321d3.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/84.23d01b47.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/85.c983047a.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/86.29b0f2d4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/87.12e2e192.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/88.fb19aa58.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/89.ee2be7d8.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/9.ce1180ae.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/90.479f4d9d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/91.619e0c8d.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/92.ae858703.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/93.f90a7ae1.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/94.8894adb4.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/95.683396f3.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/96.f65dc164.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/97.75bd77e0.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/98.892b530a.js"><link rel="prefetch" href="/FE-Interview-Questions/assets/js/99.dc5626e1.js">
+    <link rel="stylesheet" href="/FE-Interview-Questions/assets/css/0.styles.0591d029.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/FE-Interview-Questions/" class="home-link router-link-active"><img src="/FE-Interview-Questions/logo.png" alt="面试指南" class="logo"> <span class="site-name can-hide">面试指南</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!----> <div style="padding-left:1.5rem;"><div class="qr"><img src="/FE-Interview-Questions/assets/img/qr.ee193d28.jpg" alt="poetries" width="120" height="120" loading="lazy"> <p class="we-intro">
+    关注公众号，获取更多资讯
+  </p></div></div> <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Vue</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FE-Interview-Questions/principle-docs/vue/01-从源码解读Vue生命周期.html" class="sidebar-link">从源码解读Vue生命周期</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/02-组件的本质.html" class="sidebar-link">组件的本质</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/03-有状态组件的设计.html" class="sidebar-link">有状态组件的设计</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/04-设计 VNode.html" class="sidebar-link">设计 VNode</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/05-辅助创建 VNode 的 h 函数.html" class="sidebar-link">辅助创建 VNode 的 h 函数</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/06-自定义渲染器和异步渲染.html" class="sidebar-link">自定义渲染器和异步渲染</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/07-渲染器之挂载.html" class="sidebar-link">渲染器之挂载</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/08-渲染器的核心 Diff 算法.html" class="sidebar-link">渲染器的核心 Diff 算法</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/09-渲染器之patch.html" class="sidebar-link">渲染器之patch</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/10-图解 Vue 响应式原理.html" class="sidebar-link">图解 Vue 响应式原理</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/11-图解 Vue 异步更新.html" class="sidebar-link">图解 Vue 异步更新</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/12-剖析 Vue 内部运行机制.html" class="sidebar-link">剖析 Vue 内部运行机制</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/13-vue响应式原理模拟.html" class="sidebar-link">vue响应式原理模拟</a></li><li><a href="/FE-Interview-Questions/principle-docs/vue/14-vue状态管理之vuex.html" class="sidebar-link">vue状态管理之vuex</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>React</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FE-Interview-Questions/principle-docs/react/01-React-router原理.html" class="sidebar-link">React</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/02-Dva总结.html" class="sidebar-link">Dva总结</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/03-MobX总结.html" class="sidebar-link">MobX总结</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/04-浅析redux-saga中间件及用法.html" class="active sidebar-link">浅析redux</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/04-浅析redux-saga中间件及用法.html#一、redux-thunk" class="sidebar-link">一、redux-thunk</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/04-浅析redux-saga中间件及用法.html#_1-1-redux的副作用处理" class="sidebar-link">1.1 redux的副作用处理</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/04-浅析redux-saga中间件及用法.html#_1-2-redux-thunk源码" class="sidebar-link">1.2 redux-thunk源码</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/04-浅析redux-saga中间件及用法.html#_1-3-redux-thunk的缺点" class="sidebar-link">1.3 redux-thunk的缺点</a></li></ul></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/04-浅析redux-saga中间件及用法.html#二、redux-saga-简介" class="sidebar-link">二、redux-saga 简介</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/04-浅析redux-saga中间件及用法.html#三、redux-saga使用案例" class="sidebar-link">三、redux-saga使用案例</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/04-浅析redux-saga中间件及用法.html#四、redux-saga使用细节" class="sidebar-link">四、redux-saga使用细节</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/04-浅析redux-saga中间件及用法.html#_4-1-声明式的effect" class="sidebar-link">4.1 声明式的Effect</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/04-浅析redux-saga中间件及用法.html#_4-2-effect提供的具体方法" class="sidebar-link">4.2 Effect提供的具体方法</a></li></ul></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/04-浅析redux-saga中间件及用法.html#五、案例分析一" class="sidebar-link">五、案例分析一</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/04-浅析redux-saga中间件及用法.html#_5-1-loginpanel-登陆页" class="sidebar-link">5.1 LoginPanel(登陆页)</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/04-浅析redux-saga中间件及用法.html#_5-2-loginsuccess" class="sidebar-link">5.2 LoginSuccess</a></li></ul></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/04-浅析redux-saga中间件及用法.html#六、案例分析二" class="sidebar-link">六、案例分析二</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/04-浅析redux-saga中间件及用法.html#_6-1-配置saga信息" class="sidebar-link">6.1 配置saga信息</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/04-浅析redux-saga中间件及用法.html#_6-2-配置reduce" class="sidebar-link">6.2 配置reduce</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/04-浅析redux-saga中间件及用法.html#_6-3-处理action" class="sidebar-link">6.3 处理action</a></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/04-浅析redux-saga中间件及用法.html#_6-4-处理sagas" class="sidebar-link">6.4 处理sagas</a></li></ul></li><li class="sidebar-sub-header"><a href="/FE-Interview-Questions/principle-docs/react/04-浅析redux-saga中间件及用法.html#七、总结" class="sidebar-link">七、总结</a></li></ul></li><li><a href="/FE-Interview-Questions/principle-docs/react/05-Redux之浅析中间件.html" class="sidebar-link">Redux之浅析中间件</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/06-Redux之源码分析.html" class="sidebar-link">Redux之源码分析</a></li><li><a href="/FE-Interview-Questions/principle-docs/react/07-Redux之异步Action及操作.html" class="sidebar-link">Redux之异步Action及操作</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Webpack</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FE-Interview-Questions/principle-docs/webpack/01-Webpack4打包机制原理解析.html" class="sidebar-link">Webpack4打包机制原理解析</a></li><li><a href="/FE-Interview-Questions/principle-docs/webpack/02-webpack中的HMR热更新原理剖析.html" class="sidebar-link">webpack中的HMR热更新原理剖析</a></li><li><a href="/FE-Interview-Questions/principle-docs/webpack/03-从源码窥探Webpack4.x原理.html" class="sidebar-link">从源码窥探Webpack4.x原理</a></li><li><a href="/FE-Interview-Questions/principle-docs/webpack/04-实现webpack小型打包工具.html" class="sidebar-link">实现webpack小型打包工具</a></li><li><a href="/FE-Interview-Questions/principle-docs/webpack/05-Babel原理及其使用.html" class="sidebar-link">Babel原理及其使用</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>综合</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/01-虚拟DOM原理分析.html" class="sidebar-link">虚拟DOM原理分析</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/02-setTimeout实现原理和使用注意.html" class="sidebar-link">setTimeout实现原理和使用注意</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/03-浅析Promise原理.html" class="sidebar-link">浅析Promise原理</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/04-浏览器渲染原理.html" class="sidebar-link">浏览器渲染原理</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/05-前端面试之MVVM浅析.html" class="sidebar-link">前端面试之MVVM浅析</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/06-前端面试之组件化.html" class="sidebar-link">前端面试之组件化</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/07-虚拟DOM（一）.html" class="sidebar-link">虚拟DOM（一）</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/08-虚拟DOM（二）.html" class="sidebar-link">虚拟DOM（二）</a></li><li><a href="/FE-Interview-Questions/principle-docs/comprehensive/09-前端性能之Performance.html" class="sidebar-link">前端性能之Performance</a></li></ul></section></li></ul> </aside> <main class="page"> <div id="container" class="theme-default-content lock"><div class="content__default"><h2 id="一、redux-thunk"><a href="#一、redux-thunk" class="header-anchor">#</a> 一、redux-thunk</h2> <h3 id="_1-1-redux的副作用处理"><a href="#_1-1-redux的副作用处理" class="header-anchor">#</a> 1.1 redux的副作用处理</h3> <blockquote><p>redux中的数据流大致是</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>UI—————&gt;action（plain）—————&gt;reducer——————&gt;state——————&gt;UI
+</code></pre></div><p><img src="https://poetries1.gitee.io/img-repo/2019/10/484.png" alt="img"></p> <ul><li><code>redux</code>是遵循函数式编程的规则，上述的数据流中，<code>action</code>是一个原始js对象（<code>plain object</code>）且<code>reducer</code>是一个纯函数，对于同步且没有副作用的操作，上述的数据流起到可以管理数据，从而控制视图层更新的目的</li> <li>如果存在副作用函数，那么我们需要首先处理副作用函数，然后生成原始的js对象。如何处理副作用操作，在<code>redux</code>中选择在发出<code>action</code>，到<code>reducer</code>处理函数之间使用中间件处理副作用</li></ul> <blockquote><p>redux增加中间件处理副作用后的数据流大致如下：</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>UI——&gt;action(side function)—&gt;middleware—&gt;action(plain)—&gt;reducer—&gt;state—&gt;UI
+</code></pre></div><p><img src="https://poetries1.gitee.io/img-repo/2019/10/485.png" alt="img"></p> <blockquote><p>在有副作用的<code>action</code>和原始的<code>action</code>之间增加中间件处理，从图中我们也可以看出，中间件的作用就是：</p></blockquote> <ul><li>转换异步操作，<strong>生成原始的action</strong>，这样，<code>reducer</code>函数就能处理相应的<code>action</code>，从而改变<code>state</code>，更新<code>UI</code></li></ul> <h3 id="_1-2-redux-thunk源码"><a href="#_1-2-redux-thunk源码" class="header-anchor">#</a> 1.2 redux-thunk源码</h3> <blockquote><p>在redux中，thunk是redux作者给出的中间件，实现极为简单，10多行代码</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>function createThunkMiddleware(extraArgument) {
+  return ({ dispatch, getState }) =&gt; next =&gt; action =&gt; {
+    if (typeof action === 'function') {
+      return action(dispatch, getState, extraArgument);
+    }
+
+    return next(action);
+  };
+}
+
+const thunk = createThunkMiddleware();
+thunk.withExtraArgument = createThunkMiddleware;
+
+export default thunk;
+</code></pre></div><blockquote><p>这几行代码做的事情也很简单，判别action的类型，如果action是函数，就调用这个函数，调用的步骤为</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>action(dispatch, getState, extraArgument);
+</code></pre></div><blockquote><p>发现实参为<code>dispatch</code>和<code>getState</code>，因此我们在定义<code>action</code>为<code>thunk</code>函数是，一般形参为<code>dispatch</code>和<code>getState</code></p></blockquote> <h3 id="_1-3-redux-thunk的缺点"><a href="#_1-3-redux-thunk的缺点" class="header-anchor">#</a> 1.3 redux-thunk的缺点</h3> <blockquote><div class="language- extra-class"><pre class="language-text"><code>thunk`的缺点也是很明显的，`thunk`仅仅做了执行这个函数，并不在乎函数主体内是什么，也就是说`thunk`使得`redux`可以接受函数作为`action`，但是函数的内部可以多种多样。比如下面是一个获取商品列表的异步操作所对应的`action
+</code></pre></div></blockquote> <div class="language- extra-class"><pre class="language-text"><code>export default ()=&gt;(dispatch)=&gt;{
+    fetch('/api/goodList',{ //fecth返回的是一个promise
+      method: 'get',
+      dataType: 'json',
+    }).then(function(json){
+      var json=JSON.parse(json);
+      if(json.msg==200){
+        dispatch({type:'init',data:json.data});
+      }
+    },function(error){
+      console.log(error);
+    });
+};
+</code></pre></div><blockquote><p>从这个具有副作用的<code>action</code>中，我们可以看出，函数内部极为复杂。如果需要为每一个异步操作都如此定义一个<code>action</code>，显然<code>action</code>不易维护</p></blockquote> <p><strong>action不易维护的原因</strong></p> <ul><li><code>action</code>的形式不统一</li> <li>就是异步操作太为分散，分散在了各个<code>action</code>中</li></ul> <h2 id="二、redux-saga-简介"><a href="#二、redux-saga-简介" class="header-anchor">#</a> 二、redux-saga 简介</h2> <blockquote><p><code>redux-saga</code>是一个 <code>redux</code>中间件，它具有如下特性</p></blockquote> <ul><li>集中处理 <code>redux</code> 副作用问题。</li> <li>被实现为 <code>generator</code> 。</li> <li>类 <code>redux-thunk</code> 中间件。</li> <li><code>watch</code>/<code>worker</code>（监听-&gt;执行） 的工作形式</li></ul> <p><strong>redux-saga的优点</strong></p> <ul><li>集中处理了所有的异步操作，异步接口部分一目了然</li> <li><code>action</code>是普通对象，这跟<code>redux</code>同步的<code>action</code>一模一样</li> <li>通过<code>Effect</code>，方便异步接口的测试</li> <li>通过<code>worker</code> 和<code>watcher</code>可以实现非阻塞异步调用，并且同时可以实现非阻塞调用下的事件监听</li> <li>异步操作的流程是可以控制的，可以随时取消相应的异步操作</li></ul> <blockquote><p>基本用法</p></blockquote> <ul><li>使用<code>createSagaMiddleware</code>方法创建<code>saga</code> 的<code>Middleware</code>，然后在创建的<code>redux</code>的<code>store</code>时，使用<code>applyMiddleware</code>函数将创建的<code>saga Middleware</code>实例绑定到<code>store</code>上，最后可以调用<code>saga Middleware</code>的<code>run</code>函数来执行某个或者某些<code>Middleware</code>。</li> <li>在<code>saga</code>的<code>Middleware</code>中，可以使用<code>takeEvery</code>或者<code>takeLatest</code>等<code>API</code>来监听某个<code>action</code>，当某个<code>action</code>触发后，<code>saga</code>可以使用<code>call</code>发起异步操作，操作完成后使用<code>put</code>函数触发<code>action</code>，同步更新<code>state</code>，从而完成整个<code>State</code>的更新。</li></ul> <h2 id="三、redux-saga使用案例"><a href="#三、redux-saga使用案例" class="header-anchor">#</a> 三、redux-saga使用案例</h2> <ul><li><code>redux-saga</code>是控制执行的<code>generator</code>，在<code>redux-saga</code>中<code>action</code>是原始的<code>js</code>对象，把所有的异步副作用操作放在了<code>saga</code>函数里面。这样既统一了<code>action</code>的形式，又使得异步操作集中可以被集中处理</li> <li><code>redux-saga</code>是通过<code>genetator</code>实现的，如果不支持<code>generator</code>需要通过插件<code>babel-polyfill</code>转义。我们接着来实现一个输出<code>hellosaga</code>的例子</li></ul> <p><strong>创建一个helloSaga.js文件</strong></p> <div class="language- extra-class"><pre class="language-text"><code>export function * helloSaga() {
+  console.log('Hello Sagas!');
+}
+</code></pre></div><p><strong>在redux中使用redux-saga中间件</strong></p> <blockquote><p>在<code>main.js</code>中</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>import { createStore, applyMiddleware } from 'redux'
+import createSagaMiddleware from 'redux-saga'
+import { helloSaga } from './sagas'
+const sagaMiddleware=createSagaMiddleware();
+const store = createStore(
+ reducer,
+ applyMiddleware(sagaMiddleware)
+);
+sagaMiddleware.run(helloSaga);
+//会输出Hello, Sagas!
+</code></pre></div><blockquote><p>和调用<code>redux</code>的其他中间件一样，如果想使用<code>redux-saga</code>中间件，那么只要在<code>applyMiddleware</code>中调用一个<code>createSagaMiddleware</code>的实例。唯一不同的是需要调用<code>run</code>方法使得<code>generator</code>可以开始执行</p></blockquote> <h2 id="四、redux-saga使用细节"><a href="#四、redux-saga使用细节" class="header-anchor">#</a> 四、redux-saga使用细节</h2> <h3 id="_4-1-声明式的effect"><a href="#_4-1-声明式的effect" class="header-anchor">#</a> 4.1 声明式的Effect</h3> <blockquote><p>在<code>redux-saga</code>中提供了一系列的<code>api</code>，比如<code>take</code>、<code>put</code>、<code>all</code>、<code>select</code>等<code>API</code>，在<code>redux-saga</code>中将这一系列的<code>api</code>都定义为Effect。这些<code>Effect</code>执行后，当函数<code>resolve</code>时返回一个描述对象，然后<code>redux-saga</code>中间件根据这个描述对象恢复执行<code>generator</code>中的函数</p></blockquote> <p><strong>redux-thunk的大体过程</strong></p> <blockquote><div class="language- extra-class"><pre class="language-text"><code>action1(side function)`—&gt;`redux-thunk`监听—&gt;执行相应的有副作用的方法—&gt;`action2(plain object)
+</code></pre></div></blockquote> <p><img src="https://poetries1.gitee.io/img-repo/2019/10/486.png" alt="img"></p> <blockquote><p>转化到<code>action2</code>是一个原始<code>js</code>对象形式的<code>action</code>，然后执行<code>reducer</code>函数就会更新<code>store</code>中的<code>state</code></p></blockquote> <p><strong>redux-saga的大体过程</strong></p> <blockquote><p>action1(plain object)——&gt;redux-saga监听—&gt;执行相应的Effect方法——&gt;返回描述对象—&gt;恢复执行异步和副作用函数—&gt;action2(plain object)</p></blockquote> <p><img src="https://poetries1.gitee.io/img-repo/2019/10/487.png" alt="img"></p> <blockquote><p>对比<code>redux-thunk</code>我们发现，<code>redux-saga</code>中监听到了原始<code>js</code>对象<code>action</code>，并不会马上执行副作用操作，会先通过<code>Effect</code>方法将其转化成一个描述对象，然后再将描述对象，作为标识，再恢复执行副作用函数</p></blockquote> <h3 id="_4-2-effect提供的具体方法"><a href="#_4-2-effect提供的具体方法" class="header-anchor">#</a> 4.2 Effect提供的具体方法</h3> <blockquote><p>下面来介绍几个<code>Effect</code>中常用的几个方法，从低阶的API，比如<code>take</code>，<code>call(apply)</code>，<code>fork</code>，<code>put</code>，<code>select</code>等，以及高阶<code>API</code>，比如<code>takeEvery</code>和<code>takeLatest</code>等</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>import {take,call,put,select,fork,takeEvery,takeLatest} from 'redux-saga/effects'
+</code></pre></div><h4 id="_4-2-1-take"><a href="#_4-2-1-take" class="header-anchor">#</a> 4.2.1 take</h4> <blockquote><p><code>take</code>这个方法，是用来监听<code>action</code>，返回的是监听到的<code>action</code>对象。比如</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>const loginAction = {
+   type:'login'
+}
+</code></pre></div><blockquote><p>在<code>UI Component</code>中<code>dispatch</code>一个<code>action</code></p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>dispatch(loginAction)
+</code></pre></div><p>在saga中使用：</p> <div class="language- extra-class"><pre class="language-text"><code>const action = yield take('login');
+</code></pre></div><blockquote><p>可以监听到UI传递到中间件的<code>Action</code>,上述<code>take</code>方法的返回，就是<code>dipath</code>的原始对象。一旦监听到<code>login</code>动作，返回的<code>action</code>为：</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>{
+  type:'login'
+}
+</code></pre></div><h4 id="_4-2-2-call-apply"><a href="#_4-2-2-call-apply" class="header-anchor">#</a> 4.2.2 call(apply)</h4> <blockquote><p><code>call</code>和<code>apply</code>方法与<code>js</code>中的<code>call</code>和<code>apply</code>相似，我们以<code>call</code>方法为例</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>call(fn, ...args)
+</code></pre></div><blockquote><p><code>call</code>方法调用<code>fn</code>，参数为<code>args</code>，返回一个描述对象。不过这里<code>call</code>方法传入的函数<code>fn</code>可以是普通函数，也可以是<code>generator</code>。<code>call</code>方法应用很广泛，在<code>redux-saga</code>中使用异步请求等常用<code>call</code>方法来实现</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>yield call(fetch,'/userInfo',username)
+</code></pre></div><h4 id="_4-2-3-put"><a href="#_4-2-3-put" class="header-anchor">#</a> 4.2.3 put</h4> <blockquote><p>redux-saga做为中间件，工作流是这样的</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>UI——&gt;action1————&gt;redux-saga中间件————&gt;action2————&gt;reducer..
+</code></pre></div><blockquote><p>从工作流中，我们发现<code>redux-saga</code>执行完副作用函数后，必须发出<code>action</code>，然后这个<code>action</code>被<code>reducer</code>监听，从而达到更新<code>state</code>的目的。相应的这里的<code>put</code>对应与<code>redux</code>中的<code>dispatch</code>，工作流程图如下</p></blockquote> <p><img src="https://poetries1.gitee.io/img-repo/2019/10/488.png" alt="img"></p> <blockquote><p>可以看出<code>redux-saga</code>执行副作用方法转化<code>action</code>时，<code>put</code>这个<code>Effect</code>方法跟<code>redux</code>原始的<code>dispatch</code>相似，都是可以发出<code>action</code>，且发出的<code>action</code>都会被<code>reducer</code>监听到。<code>put</code>的使用方法</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>yield put({type:'login'})
+</code></pre></div><h4 id="_4-2-4-select"><a href="#_4-2-4-select" class="header-anchor">#</a> 4.2.4 select</h4> <blockquote><p><code>put</code>方法与<code>redux</code>中的<code>dispatch</code>相对应，同样的如果我们想在中间件中获取<code>state</code>，那么需要使用<code>select</code>。<code>select</code>方法对应的是<code>redux</code>中的<code>getState</code>，用户获取<code>store</code>中的<code>state</code>，使用方法：</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>const id = yield select(state =&gt; state.id);
+</code></pre></div><h4 id="_4-2-5-fork"><a href="#_4-2-5-fork" class="header-anchor">#</a> 4.2.5 fork</h4> <blockquote><p><code>fork</code>方法相当于<code>web work</code>，<code>fork</code>方法不会阻塞主线程，在非阻塞调用中十分有用</p></blockquote> <h4 id="_4-2-6-takeevery和takelatest"><a href="#_4-2-6-takeevery和takelatest" class="header-anchor">#</a> 4.2.6 takeEvery和takeLatest</h4> <blockquote><p><code>takeEvery</code>和<code>takeLatest</code>用于监听相应的动作并执行相应的方法，是构建在<code>take</code>和<code>fork</code>上面的高阶<code>api</code>，比如要监听<code>login</code>动作，好用<code>takeEvery</code>方法可以</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>takeEvery('login',loginFunc)
+</code></pre></div><ul><li><code>takeEvery</code>监听到<code>login</code>的动作，就会执行<code>loginFunc</code>方法，除此之外，<code>takeEvery</code>可以同时监听到多个相同的<code>action</code>。</li> <li><code>takeLatest</code>方法跟<code>takeEvery</code>是相同方式调用</li></ul> <div class="language- extra-class"><pre class="language-text"><code>takeLatest('login',loginFunc)
+</code></pre></div><blockquote><p>与<code>takeLatest</code>不同的是，<code>takeLatest</code>是会监听执行最近的那个被触发的<code>action</code></p></blockquote> <h2 id="五、案例分析一"><a href="#五、案例分析一" class="header-anchor">#</a> 五、案例分析一</h2> <blockquote><p>接着我们来实现一个<code>redux-saga</code>样例，存在一个登陆页，登陆成功后，显示列表页，并且，在列表页，可以点击登出，返回到登陆页。例子的最终展示效果如下</p></blockquote> <p><img src="https://poetries1.gitee.io/img-repo/2019/10/489.png" alt="img"></p> <blockquote><p>样例的功能流程图为</p></blockquote> <p><img src="https://poetries1.gitee.io/img-repo/2019/10/490.png" alt="img"></p> <h3 id="_5-1-loginpanel-登陆页"><a href="#_5-1-loginpanel-登陆页" class="header-anchor">#</a> 5.1 LoginPanel(登陆页)</h3> <p><strong>输入时时保存用户名和密码</strong></p> <ul><li>用户名输入框和密码框onchange时触发的函数为</li></ul> <div class="language- extra-class"><pre class="language-text"><code>changeUsername:(e)=&gt;{
+    dispatch({type:'CHANGE_USERNAME',value:e.target.value});
+ },
+changePassword:(e)=&gt;{
+  dispatch({type:'CHANGE_PASSWORD',value:e.target.value});
+}
+</code></pre></div><blockquote><p>在函数中最后会<code>dispatch</code>两个<code>action：CHANGE_USERNAME和CHANGE_PASSWORD</code></p></blockquote> <ul><li>在<code>saga.js</code>文件中监听这两个方法并执行副作用函数，最后<code>put</code>发出转化后的<code>action</code>，给<code>reducer</code>函数调用</li></ul> <div class="language- extra-class"><pre class="language-text"><code>function * watchUsername(){
+  while(true){
+    const action= yield take('CHANGE_USERNAME');
+    yield put({type:'change_username',
+    value:action.value});
+  }
+}
+function * watchPassword(){
+  while(true){
+    const action=yield take('CHANGE_PASSWORD');
+    yield put({type:'change_password',
+    value:action.value});
+  }
+}
+</code></pre></div><blockquote><p>最后在<code>reducer</code>中接收到<code>redux-saga</code>的<code>put</code>方法传递过来的<code>action：change_username</code>和<code>change_password</code>，然后更新<code>state</code></p></blockquote> <p><strong>监听登陆事件判断登陆是否成功</strong></p> <blockquote><p>在UI中发出的登陆事件为</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>toLoginIn:(username,password)=&gt;{
+  dispatch({type:'TO_LOGIN_IN',username,password});
+}
+</code></pre></div><blockquote><p>登陆事件的<code>action</code>为：<code>TO_LOGIN_IN</code>.对于登入事件的处理函数为：</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>while(true){
+    //监听登入事件
+    const action1=yield take('TO_LOGIN_IN');
+    const res=yield call(fetchSmart,'/login',{
+      method:'POST',
+      body:JSON.stringify({
+        username:action1.username,
+        password:action1.password
+    })
+    if(res){
+      put({type:'to_login_in'});
+    }
+});
+</code></pre></div><blockquote><p>在上述的处理函数中，首先监听原始动作提取出传递来的用户名和密码，然后请求是否登陆成功，如果登陆成功有返回值，则执行<code>put</code>的<code>action:to_login_in</code></p></blockquote> <h3 id="_5-2-loginsuccess"><a href="#_5-2-loginsuccess" class="header-anchor">#</a> 5.2 LoginSuccess</h3> <blockquote><p>(登陆成功列表展示页)</p></blockquote> <ul><li>登陆成功后的页面功能包括：
+<ul><li>获取列表信息，展示列表信息</li> <li>登出功能，点击可以返回登陆页面</li></ul></li></ul> <p><strong>获取列表信息</strong></p> <div class="language- extra-class"><pre class="language-text"><code>import {delay} from 'redux-saga';
+
+function * getList(){
+  try {
+   yield delay(3000);
+   const res = yield call(fetchSmart,'/list',{
+     method:'POST',
+     body:JSON.stringify({})
+   });
+   yield put({type:'update_list',list:res.data.activityList});
+ } catch(error) {
+   yield put({type:'update_list_error', error});
+ }
+}
+</code></pre></div><blockquote><p>为了演示请求过程，我们在本地<code>mock</code>，通过<code>redux-saga</code>的工具函数<code>delay</code>，<code>delay</code>的功能相当于延迟xx秒，因为真实的请求存在延迟，因此可以用delay在本地模拟真实场景下的请求延迟</p></blockquote> <p><strong>登出功能</strong></p> <div class="language- extra-class"><pre class="language-text"><code>const action2=yield take('TO_LOGIN_OUT');
+yield put({type:'to_login_out'});
+</code></pre></div><blockquote><p>与登入相似，登出的功能从UI处接受<code>action:TO_LOGIN_OUT</code>,然后转发<code>action:to_login_out</code></p></blockquote> <p><strong>完整的实现登入登出和列表展示的代码</strong></p> <div class="language- extra-class"><pre class="language-text"><code>function * getList(){
+  try {
+   yield delay(3000);
+   const res = yield call(fetchSmart,'/list',{
+     method:'POST',
+     body:JSON.stringify({})
+   });
+   yield put({type:'update_list',list:res.data.activityList});
+ } catch(error) {
+   yield put({type:'update_list_error', error});
+ }
+}
+
+function * watchIsLogin(){
+  while(true){
+    //监听登入事件
+    const action1=yield take('TO_LOGIN_IN');
+    
+    const res=yield call(fetchSmart,'/login',{
+      method:'POST',
+      body:JSON.stringify({
+        username:action1.username,
+        password:action1.password
+      })
+    });
+    
+    //根据返回的状态码判断登陆是否成功
+    if(res.status===10000){
+      yield put({type:'to_login_in'});
+      //登陆成功后获取首页的活动列表
+      yield call(getList);
+    }
+    
+    //监听登出事件
+    const action2=yield take('TO_LOGIN_OUT');
+    yield put({type:'to_login_out'});
+  }
+}
+</code></pre></div><blockquote><p>通过请求状态码判断登入是否成功，在登陆成功后，可以通过</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>yield call(getList)
+</code></pre></div><blockquote><p>注意call方法调用是会阻塞主线程的，具体来说</p></blockquote> <ul><li>在call方法调用结束之前，call方法之后的语句是无法执行的</li> <li>如果<code>call(getList)</code>存在延迟，<code>call(getList)</code>之后的语句 <code>const action2=yieldtake('TO_LOGIN_OUT')</code>在<code>call</code>方法返回结果之前无法执行</li> <li>在延迟期间的登出操作会被忽略</li></ul> <p><img src="https://poetries1.gitee.io/img-repo/2019/10/491.png" alt="img"></p> <p><strong>无阻塞调用</strong></p> <div class="language- extra-class"><pre class="language-text"><code>yield call(getList)
+</code></pre></div><p>修改为</p> <div class="language- extra-class"><pre class="language-text"><code>yield fork(getList)
+</code></pre></div><blockquote><p>通过fork方法不会阻塞主线程，在白屏时点击登出，可以立刻响应登出功能，从而返回登陆页面</p></blockquote> <h2 id="六、案例分析二"><a href="#六、案例分析二" class="header-anchor">#</a> 六、案例分析二</h2> <h3 id="_6-1-配置saga信息"><a href="#_6-1-配置saga信息" class="header-anchor">#</a> 6.1 配置saga信息</h3> <blockquote><div class="language- extra-class"><pre class="language-text"><code>src/store/configureStore.js
+</code></pre></div></blockquote> <div class="language- extra-class"><pre class="language-text"><code>import { createStore, applyMiddleware, compose } from 'redux'
+// import {createLogger } from 'redux-logger'
+import createHistory from 'history/createBrowserHistory'
+import createSagaMiddleware from 'redux-saga';
+import { routerMiddleware } from 'react-router-redux'
+import rootSaga from '../sagas'
+import rootReducer from '../reducers/'
+
+export const history = createHistory()
+
+const middleware = routerMiddleware(history)
+
+//创建saga middleware
+const sagaMiddleware = createSagaMiddleware();
+
+
+const configureStore = preloadedState =&gt; {
+	// 安装 Redux-DevTools Chrome 插件后可用 composeEnhancers()
+	const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+	const store = createStore(
+		rootReducer,
+		preloadedState,
+		composeEnhancers(
+			applyMiddleware(sagaMiddleware,middleware)
+		)
+	)
+	sagaMiddleware.run(rootSaga);
+	if (module.hot) {
+		// Enable Webpack hot module replacement for reducers
+		module.hot.accept('../reducers', () =&gt; {
+			const nextRootReducer = require('../reducers').default
+			store.replaceReducer(nextRootReducer)
+		})
+	}
+
+	return store
+}
+
+
+export default configureStore
+</code></pre></div><h3 id="_6-2-配置reduce"><a href="#_6-2-配置reduce" class="header-anchor">#</a> 6.2 配置reduce</h3> <div class="language- extra-class"><pre class="language-text"><code>// src/reducers/index.js
+import {combineReducers} from 'redux'
+import {routerReducer as routing} from 'react-router-redux'
+
+const rootReducer = combineReducers({
+      routing,
+      poetry 				: require('./poetry').default
+})
+
+export default rootReducer
+// src/reducers/poetry.js
+
+import * as ActionTypes from '../actions'
+
+export default (state = {
+	fetching:false,
+	error:false,
+	errMsg:'',
+	data:[]
+},action) =&gt; {
+	if(action.type === ActionTypes.FETCH_POETRY_REQUEST){
+		return Object.assign({...state,fetching:true,errMsg:''})
+	}else if(action.type === ActionTypes.FETCH_POETRY_SUCCESS){
+		const data = action.payload.data
+		return Object.assign({...state,fetching:false,data,errMsg:''})
+	}else if(action.type === ActionTypes.FETCH_POETRY_FAILURE){
+		return Object.assign({...state,fetching:false,error:true,errMsg:action.payload.errMsg})
+	}
+	return state
+}
+</code></pre></div><h3 id="_6-3-处理action"><a href="#_6-3-处理action" class="header-anchor">#</a> 6.3 处理action</h3> <div class="language- extra-class"><pre class="language-text"><code>// src/action/index.js
+
+import { createAction } from 'redux-actions';
+
+export const COMMON_FETCHING = 'COMMON_FETCHING'
+export const COMMON_OVER = 'COMMON_OVER'
+export const MSG_SHOW = 'MSG_SHOW'
+export const MSG_INIT = 'MSG_INIT'
+export const POP_LOGIN = 'POP_LOGIN'
+export const initMsg = () =&gt; ({type : MSG_INIT})
+
+
+// 相比用thunk多了一步 多了个action 来触发saga woker
+export const FETCH_POETRY_REQUEST = 'FETCH_POETRY_REQUEST'
+export const FETCH_POETRY_SUCCESS = 'FETCH_POETRY_SUCCESS'
+export const FETCH_POETRY_FAILURE = 'FETCH_POETRY_FAILURE'
+export const fetchPoetryRequest = createAction(FETCH_POETRY_REQUEST)
+export const fetchPoetrySuccess = createAction(FETCH_POETRY_SUCCESS)
+export const fetchPoetryFauilure= createAction(FETCH_POETRY_FAILURE)
+</code></pre></div><h3 id="_6-4-处理sagas"><a href="#_6-4-处理sagas" class="header-anchor">#</a> 6.4 处理sagas</h3> <div class="language- extra-class"><pre class="language-text"><code>// src/sagas/index.js
+
+import { all } from 'redux-saga/effects'
+
+export default function* rootSaga() {
+    yield all([
+        ...require('./fetchPoetry').default
+    ])
+  }
+// src/fetchPoetry.js
+
+import {put,take,call,fork,takeEvery,select} from 'redux-saga/effects'
+import {delay} from 'redux-saga'
+import  * as api  from '../api'
+import * as actionTypes from '../actions/'
+
+// saga worker 监听FETCH_POETRY_REQUEST动作触发执行相应操作
+function* fetchPoetrySaga(){
+    // yield delay(100)
+    // ======== 写法一 ========= 
+    // yield takeEvery(actionTypes.FETCH_POETRY_REQUEST,function*(action){
+    //     // 调用this.props.fetchPoetryRequest({user:'poetries',age:23}) 传参进来这里
+    //     // 也可以通过这样获取state中的参数 const state = yield select()
+    //     const {user,age} = action
+    //     try{
+    //         const data =  yield call(api.get({
+    //             url:'/mock/5b7fd63f719c7b7241f4e2fa/tangshi/tang-shi'
+    //         }))
+    //         yield put(actionTypes.fetchPoetrySuccess({data:data.data.data}))
+    //     }catch(error){
+    //         yield put(actionTypes.fetchPoetryFauilure({errMsg:error.message}))
+    //     }
+     
+    // })
+    // === 写法二====
+  while(true){
+      // 当dispatch({type:FETCH_POETRY_REQUEST})的时候被这里监听 执行对应的请求
+    const {user,age} =  yield take(actionTypes.FETCH_POETRY_REQUEST)
+    try{
+         const data =  yield call(api.get({
+             url:'/mock/5b7fd63f719c7b7241f4e2fa/tangshi/tang-shi'
+         }))
+          yield put(actionTypes.fetchPoetrySuccess({data:data.data.data}))
+     }catch(error){
+         yield put(actionTypes.fetchPoetryFauilure({errMsg:error.message}))
+     }
+  }
+
+} 
+
+
+// 导出所有的saga
+export default  [
+    fork(fetchPoetrySaga)
+]
+</code></pre></div><blockquote><p>完整代码例子 https://github.com/poetries/redux-saga-template</p></blockquote> <h2 id="七、总结"><a href="#七、总结" class="header-anchor">#</a> 七、总结</h2> <blockquote><p><code>redux-saga</code>做为<code>redux</code>中间件的全部优点</p></blockquote> <ul><li>统一<code>action</code>的形式，在<code>redux-saga</code>中，从<code>UI</code>中<code>dispatch</code>的<code>action</code>为原始对象</li> <li>集中处理异步等存在副作用的逻辑</li> <li>通过转化<code>effects</code>函数，可以方便进行单元测试</li> <li>完善和严谨的流程控制，可以较为清晰的控制复杂的逻辑</li></ul></div> <!----> <div class="readMore-wrapper"><span class="readMore">阅读全文</span></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/FE-Interview-Questions/principle-docs/react/03-MobX总结.html" class="prev">MobX总结</a></span> <span class="next"><a href="/FE-Interview-Questions/principle-docs/react/05-Redux之浅析中间件.html">Redux之浅析中间件</a>
+      →
+    </span></p></div>  <div class="el-dialog__wrapper" style="display:none;"><div role="dialog" aria-modal="true" aria-label="请先阅读购买协议" class="el-dialog el-dialog--center" style="margin-top:15vh;width:30%;"><div class="el-dialog__header"><span class="el-dialog__title">请先阅读购买协议</span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><div class="el-dialog__footer"><span class="dialog-footer"><button disabled="disabled" type="button" class="el-button el-button--danger is-disabled" style="width:100%;"><!----><!----><span>我已阅读（8s）</span></button></span></div></div></div> <div class="el-dialog__wrapper" style="display:none;"><div role="dialog" aria-modal="true" aria-label="付费阅读" class="el-dialog" style="margin-top:15vh;width:30%;"><div class="el-dialog__header"><span class="el-dialog__title">付费阅读</span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><div class="el-dialog__footer"><span class="dialog-footer"><button disabled="disabled" type="button" class="el-button el-button--danger is-disabled" style="width:100%;"><!----><!----><span>确 定</span></button></span></div></div></div> <div class="el-dialog__wrapper" style="display:none;"><div role="dialog" aria-modal="true" aria-label="dialog" class="el-dialog" style="margin-top:15vh;width:30%;"><div class="el-dialog__header"><span class="el-dialog__title"></span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><!----></div></div> <img src="data:image/png;base64,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" class="theme-float-btn"></main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/FE-Interview-Questions/assets/js/app.13d69697.js" defer></script><script src="/FE-Interview-Questions/assets/js/6.b48232c6.js" defer></script><script src="/FE-Interview-Questions/assets/js/3.9d86cf58.js" defer></script><script src="/FE-Interview-Questions/assets/js/101.54402ede.js" defer></script><script src="/FE-Interview-Questions/assets/js/11.fb060006.js" defer></script>
+  </body>
+</html>
