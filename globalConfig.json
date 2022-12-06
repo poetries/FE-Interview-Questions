@@ -1,7 +1,7 @@
 {
     "showWeappQrLoginMode": true,
     "wxSlsBaseURL": "https://api.poetries.work/release",
-    "wxCloudBaseURL": "https://interview-koa-1853655-1258157827.ap-shanghai.run.tcloudbase.com",
+    "wxCloudBaseURL": "https://cloud.poetries.work",
     "wxCloudBaseURLEnable": true,
     "apiTimeout": 6000
 }
