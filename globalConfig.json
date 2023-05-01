@@ -3,5 +3,6 @@
     "wxSlsBaseURL": "https://api.poetries.work/release",
     "wxCloudBaseURL": "https://cloud.poetries.work",
     "wxCloudBaseURLEnable": true,
+    "showUpgradeNotice": false,
     "apiTimeout": 6000
 }
