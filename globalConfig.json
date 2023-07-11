@@ -4,6 +4,7 @@
     "wxCloudBaseURL": "https://cloud.poetries.work",
     "wxCloudBaseURLEnable": true,
     "showUpgradeNotice": false,
+    "showAiTools": true,
     "showUpgradeNoticeDesc": "",
     "apiTimeout": 6000
 }
