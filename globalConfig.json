@@ -5,6 +5,7 @@
     "wxCloudBaseURLEnable": true,
     "showUpgradeNotice": false,
     "showAiTools": true,
+    "showNavLinkAiTool": true,
     "showUpgradeNoticeDesc": "",
     "apiTimeout": 6000
 }
