@@ -56,4 +56,4 @@
 
 
 ![](http://img-repo.poetries.top/images/20211003165152.png)
-> 收藏面试题地址 [https://interview2.poetries.top](http://interview.poetries.top)，精选海量面试题型
+> 收藏面试题地址 [https://interview.poetries.top](http://interview.poetries.top)，精选海量面试题型
