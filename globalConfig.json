@@ -6,6 +6,7 @@
     "showUpgradeNotice": false,
     "showAiTools": false,
     "showNavLinkAiTool": true,
+    "showXunhuPay": false,
     "showUpgradeNoticeDesc": "",
     "apiTimeout": 6000
 }
