@@ -4,10 +4,10 @@
     <loc>https://interview.poetries.top/</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/algorithm/algorithm-interview/01-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E2%80%94%E2%80%94%E4%BB%8E0%E5%88%B01%E6%8E%8C%E6%8F%A1%E7%AE%97%E6%B3%95%E9%9D%A2%E8%AF%95%E9%9C%80%E8%A6%81%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%80%EF%BC%89.html</loc>
+    <loc>https://interview.poetries.top/ai-interview/AI%E9%9D%A2%E8%AF%95%E9%A2%98%E6%B1%87%E6%80%BB.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/ai-interview/AI%E9%9D%A2%E8%AF%95%E9%A2%98%E6%B1%87%E6%80%BB.html</loc>
+    <loc>https://interview.poetries.top/algorithm/algorithm-interview/01-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E2%80%94%E2%80%94%E4%BB%8E0%E5%88%B01%E6%8E%8C%E6%8F%A1%E7%AE%97%E6%B3%95%E9%9D%A2%E8%AF%95%E9%9C%80%E8%A6%81%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%80%EF%BC%89.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/algorithm/algorithm-interview/02-%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E2%80%94%E2%80%94%E4%BB%8E0%E5%88%B01%E6%8E%8C%E6%8F%A1%E7%AE%97%E6%B3%95%E9%9D%A2%E8%AF%95%E9%9C%80%E8%A6%81%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%BA%8C%EF%BC%89.html</loc>
@@ -67,13 +67,13 @@
     <loc>https://interview.poetries.top/algorithm/algorithm-interview/20-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98%EF%BC%88%E4%B8%8B%EF%BC%89.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/algorithm/algorithm-interview/21-%E6%99%AE%E9%80%9A%E4%BA%BA%E4%B9%9F%E8%83%BD%E5%90%83%E9%80%8F%E7%9A%84%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%80%9D%E6%83%B3%E4%B8%93%E9%A2%98%EF%BC%88%E4%B8%8A%EF%BC%89.html</loc>
+    <loc>https://interview.poetries.top/algorithm/algorithm-interview/22-%E6%99%AE%E9%80%9A%E4%BA%BA%E4%B9%9F%E8%83%BD%E5%90%83%E9%80%8F%E7%9A%84%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%80%9D%E6%83%B3%E4%B8%93%E9%A2%98%EF%BC%88%E4%B8%8B%EF%BC%89.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/algorithm/algorithm-summary/01-JS%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BB%8B%E7%BB%8D.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/algorithm/algorithm-interview/22-%E6%99%AE%E9%80%9A%E4%BA%BA%E4%B9%9F%E8%83%BD%E5%90%83%E9%80%8F%E7%9A%84%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%80%9D%E6%83%B3%E4%B8%93%E9%A2%98%EF%BC%88%E4%B8%8B%EF%BC%89.html</loc>
+    <loc>https://interview.poetries.top/algorithm/algorithm-interview/21-%E6%99%AE%E9%80%9A%E4%BA%BA%E4%B9%9F%E8%83%BD%E5%90%83%E9%80%8F%E7%9A%84%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%80%9D%E6%83%B3%E4%B8%93%E9%A2%98%EF%BC%88%E4%B8%8A%EF%BC%89.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/algorithm/algorithm-summary/02-JS%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF.html</loc>
@@ -85,13 +85,10 @@
     <loc>https://interview.poetries.top/docs/base/comprehensive.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/docs/base/design-pattern.html</loc>
+    <loc>https://interview.poetries.top/docs/base/handwritten.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/days/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98.html</loc>
-  </url>
-  <url>
-    <loc>https://interview.poetries.top/docs/base/other-questions.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/docs/excellent-docs/1-HTML%E6%A8%A1%E5%9D%97.html</loc>
@@ -100,16 +97,16 @@
     <loc>https://interview.poetries.top/docs/excellent-docs/10-%E7%A7%BB%E5%8A%A8%E5%A4%9A%E7%AB%AF%E5%BC%80%E5%8F%91.html</loc>
   </url>
   <url>
+    <loc>https://interview.poetries.top/docs/base/other-questions.html</loc>
+  </url>
+  <url>
     <loc>https://interview.poetries.top/docs/excellent-docs/11-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%A8%A1%E5%9D%97.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/docs/base/handwritten.html</loc>
+    <loc>https://interview.poetries.top/docs/excellent-docs/12-Uniapp%E6%A8%A1%E5%9D%97.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/docs/excellent-docs/13-%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9D%97.html</loc>
-  </url>
-  <url>
-    <loc>https://interview.poetries.top/docs/excellent-docs/14-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%A8%A1%E5%9D%97.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/docs/excellent-docs/15-HTTP%E6%A8%A1%E5%9D%97.html</loc>
@@ -118,7 +115,7 @@
     <loc>https://interview.poetries.top/docs/excellent-docs/16-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/docs/base/high-frequency.html</loc>
+    <loc>https://interview.poetries.top/docs/excellent-docs/17-%E6%A1%86%E6%9E%B6%E9%80%9A%E8%AF%86.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/docs/excellent-docs/18-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95.html</loc>
@@ -127,25 +124,22 @@
     <loc>https://interview.poetries.top/docs/excellent-docs/19-%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/docs/excellent-docs/17-%E6%A1%86%E6%9E%B6%E9%80%9A%E8%AF%86.html</loc>
-  </url>
-  <url>
     <loc>https://interview.poetries.top/docs/excellent-docs/2-CSS%E6%A8%A1%E5%9D%97.html</loc>
-  </url>
-  <url>
-    <loc>https://interview.poetries.top/docs/excellent-docs/4-ES6%E6%A8%A1%E5%9D%97.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/docs/excellent-docs/3-JS%E6%A8%A1%E5%9D%97.html</loc>
   </url>
   <url>
+    <loc>https://interview.poetries.top/docs/excellent-docs/4-ES6%E6%A8%A1%E5%9D%97.html</loc>
+  </url>
+  <url>
     <loc>https://interview.poetries.top/docs/excellent-docs/5-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%A8%A1%E5%9D%97.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/docs/excellent-docs/8-Node%E6%A8%A1%E5%9D%97.html</loc>
+    <loc>https://interview.poetries.top/docs/excellent-docs/6-React.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/docs/excellent-docs/6-React.html</loc>
+    <loc>https://interview.poetries.top/docs/excellent-docs/8-Node%E6%A8%A1%E5%9D%97.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/docs/excellent-docs/9-%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E6%A8%A1%E5%9D%97.html</loc>
@@ -157,16 +151,22 @@
     <loc>https://interview.poetries.top/docs/excellent-docs/%E9%9D%A2%E8%AF%95%E6%8C%87%E5%8D%97.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/improve-learn/canvas.html</loc>
+    <loc>https://interview.poetries.top/docs/base/design-pattern.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/improve-learn/npm-script.html</loc>
+    <loc>https://interview.poetries.top/improve-learn/canvas.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/docs/excellent-docs/%E9%AB%98%E9%A2%91%E6%A8%A1%E5%9D%97.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/improve-learn/docker.html</loc>
+    <loc>https://interview.poetries.top/docs/base/high-frequency.html</loc>
+  </url>
+  <url>
+    <loc>https://interview.poetries.top/improve-learn/npm-script.html</loc>
+  </url>
+  <url>
+    <loc>https://interview.poetries.top/interview-exp/%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F%E6%B1%87%E6%80%BB.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/mind-map/backend/architect/1.1%E6%9E%B6%E6%9E%84%E5%B8%88%E5%9B%BE%E8%B0%B1.html</loc>
@@ -178,28 +178,28 @@
     <loc>https://interview.poetries.top/mind-map/backend/architect/1.3%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%A7%98%E7%B1%8D.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/mind-map/backend/architect/1.4%E4%B8%80%E8%87%B4%E6%80%A7%E5%9B%BE%E8%B0%B1.html</loc>
-  </url>
-  <url>
     <loc>https://interview.poetries.top/mind-map/backend/architect/1.5%E4%BA%92%E8%81%94%E7%BD%91%E5%A4%A7%E6%B5%81%E9%87%8F%E7%9A%84%E6%96%B9%E6%B3%95.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/mind-map/backend/architect/1.6%E5%AE%89%E5%85%A8%E7%A7%98%E7%B1%8D.html</loc>
+    <loc>https://interview.poetries.top/mind-map/backend/architect/1.4%E4%B8%80%E8%87%B4%E6%80%A7%E5%9B%BE%E8%B0%B1.html</loc>
+  </url>
+  <url>
+    <loc>https://interview.poetries.top/docs/excellent-docs/14-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%A8%A1%E5%9D%97.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/mind-map/backend/architect/1.7%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%B8%B8%E7%94%A8%E5%B0%8F%E6%A1%86%E6%9E%B6.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/mind-map/backend/architect/1.9%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%A7%98%E7%B1%8D%E5%9B%BE%E8%B0%B1.html</loc>
-  </url>
-  <url>
     <loc>https://interview.poetries.top/mind-map/backend/architect/1.8%E6%9E%B6%E6%9E%84%E6%96%B9%E6%B3%95%E8%AE%BA%E5%9B%BE%E8%B0%B1.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/mind-map/backend/architect/2.2Java%E5%B9%B6%E5%8F%91%E5%9B%BE%E8%B0%B1.html</loc>
+    <loc>https://interview.poetries.top/mind-map/backend/architect/1.9%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%A7%98%E7%B1%8D%E5%9B%BE%E8%B0%B1.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/mind-map/backend/architect/2.1JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E5%9B%BE%E8%B0%B1.html</loc>
+  </url>
+  <url>
+    <loc>https://interview.poetries.top/mind-map/backend/architect/2.2Java%E5%B9%B6%E5%8F%91%E5%9B%BE%E8%B0%B1.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/mind-map/backend/architect/2.3Java%E9%9B%86%E5%90%88%E5%9B%BE%E8%B0%B1.html</loc>
@@ -226,10 +226,13 @@
     <loc>https://interview.poetries.top/mind-map/backend/architect/4.2%E4%BA%91%E8%AE%A1%E7%AE%97%E6%8A%80%E8%83%BD%E5%9B%BE%E8%B0%B1.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/mind-map/backend/architect/5.2OpenResty%E6%8A%80%E8%83%BD%E5%9B%BE%E8%B0%B1.html</loc>
+    <loc>https://interview.poetries.top/mind-map/backend/architect/5.1IOS%E6%8A%80%E8%83%BD%E5%9B%BE%E8%B0%B1.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/mind-map/backend/architect/5.1IOS%E6%8A%80%E8%83%BD%E5%9B%BE%E8%B0%B1.html</loc>
+    <loc>https://interview.poetries.top/mind-map/backend/architect/1.6%E5%AE%89%E5%85%A8%E7%A7%98%E7%B1%8D.html</loc>
+  </url>
+  <url>
+    <loc>https://interview.poetries.top/mind-map/backend/architect/5.2OpenResty%E6%8A%80%E8%83%BD%E5%9B%BE%E8%B0%B1.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/mind-map/backend/architect/5.4%E5%AE%B9%E5%99%A8%E6%8A%80%E8%83%BD%E5%9B%BE%E8%B0%B1.html</loc>
@@ -244,25 +247,25 @@
     <loc>https://interview.poetries.top/mind-map/backend/architect/5.7%E7%A7%BB%E5%8A%A8%E7%AB%AF%E6%B5%8B%E8%AF%95%E5%9B%BE%E8%B0%B1.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/mind-map/backend/java/RabbitMQ.html</loc>
-  </url>
-  <url>
     <loc>https://interview.poetries.top/mind-map/backend/architect/5.8%E8%BF%90%E7%BB%B4%E6%8A%80%E8%83%BD%E5%9B%BE%E8%B0%B1.html</loc>
-  </url>
-  <url>
-    <loc>https://interview.poetries.top/mind-map/backend/java/java%E6%80%BB%E7%BB%93.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/mind-map/backend/java/base.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/mind-map/backend/java/springboot.html</loc>
+    <loc>https://interview.poetries.top/mind-map/backend/java/java%E6%80%BB%E7%BB%93.html</loc>
+  </url>
+  <url>
+    <loc>https://interview.poetries.top/mind-map/backend/java/RabbitMQ.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/mind-map/backend/java/kafka.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/mind-map/backend/java/springcloud.html</loc>
+  </url>
+  <url>
+    <loc>https://interview.poetries.top/mind-map/backend/java/springboot.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/mind-map/backend/java/zookeeper.html</loc>
@@ -280,10 +283,10 @@
     <loc>https://interview.poetries.top/mind-map/compute-base/redis.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/mind-map/compute-base/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.html</loc>
+    <loc>https://interview.poetries.top/mind-map/compute-base/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/mind-map/compute-base/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html</loc>
+    <loc>https://interview.poetries.top/mind-map/compute-base/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/mind-map/frontend/comprehensive/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB.html</loc>
@@ -304,9 +307,6 @@
     <loc>https://interview.poetries.top/mind-map/frontend/css/CSS%E9%80%89%E6%8B%A9%E5%99%A8.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/mind-map/frontend/css/CSS%E5%AE%9A%E4%BD%8D.html</loc>
-  </url>
-  <url>
     <loc>https://interview.poetries.top/mind-map/frontend/css/Css3%E5%8F%98%E5%BD%A2transform.html</loc>
   </url>
   <url>
@@ -316,13 +316,10 @@
     <loc>https://interview.poetries.top/mind-map/frontend/css/Flex%E5%B8%83%E5%B1%80.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/mind-map/frontend/javascript/JS%E5%8F%98%E9%87%8F.html</loc>
-  </url>
-  <url>
-    <loc>https://interview.poetries.top/interview-exp/%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F%E6%B1%87%E6%80%BB.html</loc>
-  </url>
-  <url>
     <loc>https://interview.poetries.top/mind-map/frontend/javascript/DOM%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C.html</loc>
+  </url>
+  <url>
+    <loc>https://interview.poetries.top/mind-map/frontend/javascript/JS%E5%8F%98%E9%87%8F.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/mind-map/frontend/javascript/JS%E6%95%B0%E7%BB%84.html</loc>
@@ -340,19 +337,19 @@
     <loc>https://interview.poetries.top/mind-map/frontend/javascript/%E5%9F%BA%E6%9C%AC%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/mind-map/frontend/javascript/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0.html</loc>
+    <loc>https://interview.poetries.top/mind-map/frontend/css/CSS%E5%AE%9A%E4%BD%8D.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/mind-map/frontend/javascript/%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B.html</loc>
+    <loc>https://interview.poetries.top/mind-map/frontend/javascript/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/mind-map/frontend/javascript/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/mind-map/frontend/javascript/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html</loc>
+    <loc>https://interview.poetries.top/mind-map/frontend/javascript/%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/mind-map/frontend/javascript/%E6%B5%81%E7%A8%8B%E8%AF%AD%E5%8F%A5.html</loc>
+    <loc>https://interview.poetries.top/mind-map/frontend/javascript/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/mind-map/frontend/jquery/Jquery%20Ajax.html</loc>
@@ -362,6 +359,9 @@
   </url>
   <url>
     <loc>https://interview.poetries.top/mind-map/frontend/jquery/Jquery%E6%93%8D%E4%BD%9CDOM.html</loc>
+  </url>
+  <url>
+    <loc>https://interview.poetries.top/mind-map/frontend/javascript/%E6%B5%81%E7%A8%8B%E8%AF%AD%E5%8F%A5.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/mind-map/frontend/jquery/Jquery%E9%80%89%E6%8B%A9%E5%99%A8.html</loc>
@@ -400,22 +400,22 @@
     <loc>https://interview.poetries.top/mind-map/frontend/vue/vue-family/7-%E7%BC%96%E8%AF%91.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/mind-map/frontend/vue/vue-family/8-%E6%8B%93%E5%B1%95.html</loc>
-  </url>
-  <url>
     <loc>https://interview.poetries.top/mind-map/frontend/vue/vue-family/9-vue-router.html</loc>
-  </url>
-  <url>
-    <loc>https://interview.poetries.top/mind-map/tool/git.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/mind-map/tool/docker.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/openspec/changes/sync-vip-pricing-and-plugin-links/design.html</loc>
+    <loc>https://interview.poetries.top/mind-map/frontend/vue/vue-family/8-%E6%8B%93%E5%B1%95.html</loc>
+  </url>
+  <url>
+    <loc>https://interview.poetries.top/mind-map/tool/git.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/mind-map/tool/vim.html</loc>
+  </url>
+  <url>
+    <loc>https://interview.poetries.top/openspec/changes/sync-vip-pricing-and-plugin-links/design.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/openspec/changes/sync-vip-pricing-and-plugin-links/proposal.html</loc>
@@ -430,10 +430,10 @@
     <loc>https://interview.poetries.top/principle-docs/comprehensive/01-%E8%99%9A%E6%8B%9FDOM%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/principle-docs/comprehensive/04-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86.html</loc>
+    <loc>https://interview.poetries.top/principle-docs/comprehensive/03-%E6%B5%85%E6%9E%90Promise%E5%8E%9F%E7%90%86.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/principle-docs/comprehensive/03-%E6%B5%85%E6%9E%90Promise%E5%8E%9F%E7%90%86.html</loc>
+    <loc>https://interview.poetries.top/principle-docs/comprehensive/04-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/principle-docs/comprehensive/05-%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E4%B9%8BMVVM%E6%B5%85%E6%9E%90.html</loc>
@@ -463,10 +463,13 @@
     <loc>https://interview.poetries.top/principle-docs/comprehensive/14-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/principle-docs/comprehensive/13-%E6%89%93%E9%80%A0%E5%89%8D%E7%AB%AF%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F.html</loc>
+    <loc>https://interview.poetries.top/improve-learn/docker.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/principle-docs/comprehensive/15-%E5%89%8D%E7%AB%AF%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88%E8%A7%A3%E6%9E%90.html</loc>
+  </url>
+  <url>
+    <loc>https://interview.poetries.top/principle-docs/comprehensive/16-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8E%9F%E7%90%86.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/principle-docs/comprehensive/17-%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E9%A1%B5%E9%9D%A2%E7%9A%84%E6%B8%B2%E6%9F%93%E8%BF%87%E7%A8%8B.html</loc>
@@ -475,13 +478,13 @@
     <loc>https://interview.poetries.top/principle-docs/comprehensive/18-%E4%B8%80%E4%B8%AA%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E6%98%AF%E6%80%8E%E4%B9%88%E8%BF%9B%E8%A1%8C%E7%9A%84.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/principle-docs/js/01-JavaScript%20%E5%BC%95%E6%93%8E%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%20JavaScript%20%E4%BB%A3%E7%A0%81.html</loc>
-  </url>
-  <url>
     <loc>https://interview.poetries.top/principle-docs/comprehensive/19-%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E5%AE%9A%E4%BD%8D.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/principle-docs/js/02-%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%9A%84%20JavaScript%20%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E4%BB%BB%E5%8A%A1.html</loc>
+  </url>
+  <url>
+    <loc>https://interview.poetries.top/principle-docs/js/01-JavaScript%20%E5%BC%95%E6%93%8E%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%20JavaScript%20%E4%BB%A3%E7%A0%81.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/principle-docs/node/01-Node%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86.html</loc>
@@ -496,10 +499,13 @@
     <loc>https://interview.poetries.top/principle-docs/react/01-React%20router%E5%8E%9F%E7%90%86.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/principle-docs/react/03-MobX%E6%80%BB%E7%BB%93.html</loc>
+    <loc>https://interview.poetries.top/principle-docs/react/02-Dva%E6%80%BB%E7%BB%93.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/principle-docs/react/04-%E6%B5%85%E6%9E%90redux%20saga%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%8F%8A%E7%94%A8%E6%B3%95.html</loc>
+    <loc>https://interview.poetries.top/principle-docs/comprehensive/13-%E6%89%93%E9%80%A0%E5%89%8D%E7%AB%AF%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F.html</loc>
+  </url>
+  <url>
+    <loc>https://interview.poetries.top/principle-docs/react/03-MobX%E6%80%BB%E7%BB%93.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/principle-docs/react/05-Redux%E4%B9%8B%E6%B5%85%E6%9E%90%E4%B8%AD%E9%97%B4%E4%BB%B6.html</loc>
@@ -511,7 +517,7 @@
     <loc>https://interview.poetries.top/principle-docs/react/07-Redux%E4%B9%8B%E5%BC%82%E6%AD%A5Action%E5%8F%8A%E6%93%8D%E4%BD%9C.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/principle-docs/react/02-Dva%E6%80%BB%E7%BB%93.html</loc>
+    <loc>https://interview.poetries.top/principle-docs/react/04-%E6%B5%85%E6%9E%90redux%20saga%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%8F%8A%E7%94%A8%E6%B3%95.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/principle-docs/react/08-%E6%B5%85%E6%9E%90%E4%B8%AD%E9%97%B4%E4%BB%B6.html</loc>
@@ -526,34 +532,37 @@
     <loc>https://interview.poetries.top/principle-docs/react/12-React16%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9B%B4%E6%94%B9%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%B8%8B.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/principle-docs/react/10-Immutable%E6%80%BB%E7%BB%93.html</loc>
-  </url>
-  <url>
     <loc>https://interview.poetries.top/principle-docs/react/13-React%20Hooks%20%E8%AE%BE%E8%AE%A1%E5%8A%A8%E6%9C%BA%E4%B8%8E%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F.html</loc>
-  </url>
-  <url>
-    <loc>https://interview.poetries.top/principle-docs/react/15-%E7%9C%9F%E6%AD%A3%E7%90%86%E8%A7%A3%E8%99%9A%E6%8B%9FDOM.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/principle-docs/react/14-%E6%B7%B1%E5%85%A5%20React%20Hooks%20%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6.html</loc>
   </url>
   <url>
+    <loc>https://interview.poetries.top/principle-docs/react/15-%E7%9C%9F%E6%AD%A3%E7%90%86%E8%A7%A3%E8%99%9A%E6%8B%9FDOM.html</loc>
+  </url>
+  <url>
     <loc>https://interview.poetries.top/principle-docs/react/16-React%20%E4%B8%AD%E7%9A%84%E2%80%9C%E6%A0%88%E8%B0%83%E5%92%8C%E2%80%9D%20Stack%20Reconciler%20%E8%BF%87%E7%A8%8B%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84.html</loc>
+  </url>
+  <url>
+    <loc>https://interview.poetries.top/principle-docs/react/10-Immutable%E6%80%BB%E7%BB%93.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/principle-docs/react/18-%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%20Fiber%20%E6%9E%B6%E6%9E%84%E7%9A%84%E8%BF%AD%E4%BB%A3%E5%8A%A8%E6%9C%BA%E4%B8%8E%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/principle-docs/react/17-setState%20%E5%88%B0%E5%BA%95%E6%98%AF%E5%90%8C%E6%AD%A5%E7%9A%84%EF%BC%8C%E8%BF%98%E6%98%AF%E5%BC%82%E6%AD%A5%E7%9A%84.html</loc>
-  </url>
-  <url>
-    <loc>https://interview.poetries.top/principle-docs/react/20-%E5%89%96%E6%9E%90%20Fiber%20%E6%9E%B6%E6%9E%84%E4%B8%8B%20Concurrent%20%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.html</loc>
-  </url>
-  <url>
     <loc>https://interview.poetries.top/principle-docs/react/19-ReactDOM.render%20%E6%98%AF%E5%A6%82%E4%BD%95%E4%B8%B2%E8%81%94%E6%B8%B2%E6%9F%93%E9%93%BE%E8%B7%AF%E7%9A%84.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/docs/excellent-docs/12-Uniapp%E6%A8%A1%E5%9D%97.html</loc>
+    <loc>https://interview.poetries.top/principle-docs/react/17-setState%20%E5%88%B0%E5%BA%95%E6%98%AF%E5%90%8C%E6%AD%A5%E7%9A%84%EF%BC%8C%E8%BF%98%E6%98%AF%E5%BC%82%E6%AD%A5%E7%9A%84.html</loc>
+  </url>
+  <url>
+    <loc>https://interview.poetries.top/principle-docs/react/22-%E6%8F%AD%E7%A7%98%20Redux%20%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.html</loc>
+  </url>
+  <url>
+    <loc>https://interview.poetries.top/principle-docs/react/24-%E5%A6%82%E4%BD%95%E6%89%93%E9%80%A0%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%20React%20%E5%BA%94%E7%94%A8.html</loc>
+  </url>
+  <url>
+    <loc>https://interview.poetries.top/principle-docs/react/25-%E8%B7%9F%20React%20%E5%AD%A6%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/principle-docs/react/21-React%20%E4%BA%8B%E4%BB%B6%E4%B8%8E%20DOM%20%E4%BA%8B%E4%BB%B6%E6%9C%89%E4%BD%95%E4%B8%8D%E5%90%8C.html</loc>
@@ -562,19 +571,10 @@
     <loc>https://interview.poetries.top/principle-docs/react/23-%E4%BB%8E%20Redux%20%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E5%88%87%E5%85%A5%EF%BC%8C%E7%90%86%E8%A7%A3%E2%80%9C%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B%E2%80%9D.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/principle-docs/react/22-%E6%8F%AD%E7%A7%98%20Redux%20%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.html</loc>
-  </url>
-  <url>
-    <loc>https://interview.poetries.top/principle-docs/react/25-%E8%B7%9F%20React%20%E5%AD%A6%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html</loc>
-  </url>
-  <url>
-    <loc>https://interview.poetries.top/principle-docs/react/26-React%E5%85%A8%E9%83%A8api%E8%A7%A3%E8%AF%BB.html</loc>
+    <loc>https://interview.poetries.top/principle-docs/react/20-%E5%89%96%E6%9E%90%20Fiber%20%E6%9E%B6%E6%9E%84%E4%B8%8B%20Concurrent%20%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/principle-docs/vue/01-%E4%BB%8E%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BBVue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.html</loc>
-  </url>
-  <url>
-    <loc>https://interview.poetries.top/principle-docs/react/27-Taro%E5%8E%9F%E7%90%86.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/principle-docs/vue/02-%E7%BB%84%E4%BB%B6%E7%9A%84%E6%9C%AC%E8%B4%A8.html</loc>
@@ -586,28 +586,25 @@
     <loc>https://interview.poetries.top/principle-docs/vue/04-%E8%AE%BE%E8%AE%A1%20VNode.html</loc>
   </url>
   <url>
+    <loc>https://interview.poetries.top/principle-docs/react/27-Taro%E5%8E%9F%E7%90%86.html</loc>
+  </url>
+  <url>
     <loc>https://interview.poetries.top/principle-docs/vue/05-%E8%BE%85%E5%8A%A9%E5%88%9B%E5%BB%BA%20VNode%20%E7%9A%84%20h%20%E5%87%BD%E6%95%B0.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/principle-docs/vue/06-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B8%B2%E6%9F%93%E5%99%A8%E5%92%8C%E5%BC%82%E6%AD%A5%E6%B8%B2%E6%9F%93.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/principle-docs/react/24-%E5%A6%82%E4%BD%95%E6%89%93%E9%80%A0%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%20React%20%E5%BA%94%E7%94%A8.html</loc>
+    <loc>https://interview.poetries.top/principle-docs/react/26-React%E5%85%A8%E9%83%A8api%E8%A7%A3%E8%AF%BB.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/principle-docs/comprehensive/16-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8E%9F%E7%90%86.html</loc>
-  </url>
-  <url>
-    <loc>https://interview.poetries.top/principle-docs/vue/08-%E6%B8%B2%E6%9F%93%E5%99%A8%E7%9A%84%E6%A0%B8%E5%BF%83%20Diff%20%E7%AE%97%E6%B3%95.html</loc>
-  </url>
-  <url>
-    <loc>https://interview.poetries.top/principle-docs/vue/11-%E5%9B%BE%E8%A7%A3%20Vue%20%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0.html</loc>
+    <loc>https://interview.poetries.top/principle-docs/vue/09-%E6%B8%B2%E6%9F%93%E5%99%A8%E4%B9%8Bpatch.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/principle-docs/vue/10-%E5%9B%BE%E8%A7%A3%20Vue%20%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/principle-docs/vue/07-%E6%B8%B2%E6%9F%93%E5%99%A8%E4%B9%8B%E6%8C%82%E8%BD%BD.html</loc>
+    <loc>https://interview.poetries.top/principle-docs/vue/11-%E5%9B%BE%E8%A7%A3%20Vue%20%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/principle-docs/vue/13-vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86%E6%A8%A1%E6%8B%9F.html</loc>
@@ -617,9 +614,6 @@
   </url>
   <url>
     <loc>https://interview.poetries.top/principle-docs/vue/15-%E7%90%86%E8%A7%A3Vue%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3%E5%8F%8A%E5%AE%9E%E7%8E%B0Vue.html</loc>
-  </url>
-  <url>
-    <loc>https://interview.poetries.top/principle-docs/vue/12-%E5%89%96%E6%9E%90%20Vue%20%E5%86%85%E9%83%A8%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/principle-docs/vue/16-diff%E7%AE%97%E6%B3%95%E6%B7%B1%E5%85%A5.html</loc>
@@ -637,16 +631,13 @@
     <loc>https://interview.poetries.top/principle-docs/vue/20-vue%E7%BB%84%E4%BB%B6%E5%8C%96%E5%AE%9E%E8%B7%B5.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/principle-docs/vue/09-%E6%B8%B2%E6%9F%93%E5%99%A8%E4%B9%8Bpatch.html</loc>
-  </url>
-  <url>
     <loc>https://interview.poetries.top/principle-docs/webpack/01-Webpack4%E6%89%93%E5%8C%85%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/principle-docs/webpack/02-webpack%E4%B8%AD%E7%9A%84HMR%E7%83%AD%E6%9B%B4%E6%96%B0%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/principle-docs/webpack/03-%E4%BB%8E%E6%BA%90%E7%A0%81%E7%AA%A5%E6%8E%A2Webpack4.x%E5%8E%9F%E7%90%86.html</loc>
+    <loc>https://interview.poetries.top/principle-docs/vue/07-%E6%B8%B2%E6%9F%93%E5%99%A8%E4%B9%8B%E6%8C%82%E8%BD%BD.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/principle-docs/webpack/04-%E5%AE%9E%E7%8E%B0webpack%E5%B0%8F%E5%9E%8B%E6%89%93%E5%8C%85%E5%B7%A5%E5%85%B7.html</loc>
@@ -655,7 +646,10 @@
     <loc>https://interview.poetries.top/principle-docs/webpack/05-Babel%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/principle-docs/webpack/07-%E5%89%8D%E7%AB%AF%E6%9E%84%E5%BB%BA%E6%96%B0%E7%8E%A9%E6%B3%95%20Vite%20%E4%B8%8A%E6%89%8B%E4%B8%8E%E6%80%9D%E8%80%83.html</loc>
+    <loc>https://interview.poetries.top/principle-docs/webpack/03-%E4%BB%8E%E6%BA%90%E7%A0%81%E7%AA%A5%E6%8E%A2Webpack4.x%E5%8E%9F%E7%90%86.html</loc>
+  </url>
+  <url>
+    <loc>https://interview.poetries.top/principle-docs/vue/12-%E5%89%96%E6%9E%90%20Vue%20%E5%86%85%E9%83%A8%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/principle-docs/webpack/08-%E5%88%A9%E7%94%A8%20Webpack%20CodeSplitting%20%E5%AE%8C%E6%88%90%E5%A4%8D%E6%9D%82%E5%BA%94%E7%94%A8%E6%8B%86%E5%8C%85.html</loc>
@@ -664,7 +658,10 @@
     <loc>https://interview.poetries.top/principle-docs/webpack/09-%E7%8E%A9%E8%BD%AC%20Webpack%20%E7%9A%84%20TreeShaking%20%E4%B8%8E%20sideEffects%20%E7%89%B9%E6%80%A7.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/principle-docs/webpack/06-Webpack%20%E4%B8%8E%20Rollup%20%E4%BA%8C%E8%80%85%E4%B9%8B%E9%97%B4%E8%AF%A5%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9.html</loc>
+    <loc>https://interview.poetries.top/principle-docs/webpack/10-%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%20Webpack%20SourceMap%20%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5.html</loc>
+  </url>
+  <url>
+    <loc>https://interview.poetries.top/principle-docs/webpack/11-Webpack%20%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/qa/1-%E5%89%8D%E7%AB%AF100%E9%A2%98%E8%87%AA%E6%A3%80.html</loc>
@@ -679,19 +676,22 @@
     <loc>https://interview.poetries.top/roadmap/backend.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/tools/chrome%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6.html</loc>
+    <loc>https://interview.poetries.top/roadmap/frontend.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/roadmap/frontend.html</loc>
+    <loc>https://interview.poetries.top/tools/chrome%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/tools/vscode%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/principle-docs/webpack/11-Webpack%20%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6%E4%B8%8E%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.html</loc>
+    <loc>https://interview.poetries.top/principle-docs/vue/08-%E6%B8%B2%E6%9F%93%E5%99%A8%E7%9A%84%E6%A0%B8%E5%BF%83%20Diff%20%E7%AE%97%E6%B3%95.html</loc>
   </url>
   <url>
-    <loc>https://interview.poetries.top/principle-docs/webpack/10-%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%20Webpack%20SourceMap%20%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5.html</loc>
+    <loc>https://interview.poetries.top/principle-docs/webpack/07-%E5%89%8D%E7%AB%AF%E6%9E%84%E5%BB%BA%E6%96%B0%E7%8E%A9%E6%B3%95%20Vite%20%E4%B8%8A%E6%89%8B%E4%B8%8E%E6%80%9D%E8%80%83.html</loc>
+  </url>
+  <url>
+    <loc>https://interview.poetries.top/principle-docs/webpack/06-Webpack%20%E4%B8%8E%20Rollup%20%E4%BA%8C%E8%80%85%E4%B9%8B%E9%97%B4%E8%AF%A5%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9.html</loc>
   </url>
   <url>
     <loc>https://interview.poetries.top/docs/base/improve.html</loc>
