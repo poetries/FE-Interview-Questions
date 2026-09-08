@@ -1,0 +1,36 @@
+{
+  "enabled": false,
+  "level": "warning",
+  "title": "版本发布维护",
+  "message": "站点正在进行版本发布，期间部分功能可能短暂不可用，请稍后重试。",
+  "startAt": "",
+  "recoverAt": "",
+  "closable": true,
+  "autoHideAfterRecoverAt": false,
+  "link": {
+    "text": "",
+    "href": ""
+  },
+  "excludePaths": [],
+  "pollIntervalSeconds": 60,
+  "version": "1",
+  "texts": {
+    "pending": "计划于 {startAt} 开始维护，预计 {recoverAt} 恢复服务（{startCountdown}后开始）。",
+    "pendingWithoutRecoverAt": "计划于 {startAt} 开始维护（{startCountdown}后开始）。",
+    "ongoing": "预计 {recoverAt} 恢复服务（{recoverCountdown}后）。",
+    "overrun": "预计恢复时间已过，服务仍在恢复中，请稍后刷新页面。",
+    "closeLabel": "关闭维护通知"
+  },
+  "timeFormat": {
+    "today": "[今天] HH:mm",
+    "tomorrow": "[明天] HH:mm",
+    "other": "MM月DD日 HH:mm"
+  },
+  "countdownFormat": {
+    "daysHours": "约 {days} 天 {hours} 小时",
+    "days": "约 {days} 天",
+    "hoursMinutes": "约 {hours} 小时 {minutes} 分钟",
+    "hours": "约 {hours} 小时",
+    "minutes": "约 {minutes} 分钟"
+  }
+}
