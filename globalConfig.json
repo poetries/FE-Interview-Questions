@@ -1,8 +1,8 @@
 {
     "showWeappQrLoginMode": true,
     "wxSlsBaseURL": "https://api.poetries.top",
-    "wxCloudBaseURL": "https://cloud.poetries.top",
-    "wxCloudBaseURLEnable": true,
+    "wxCloudBaseURL": "https://api.poetries.top",
+    "wxCloudBaseURLEnable": false,
     "showUpgradeNotice": false,
     "showAiTools": false,
     "showNavLinkAiTool": false,
