@@ -1,3 +1,27 @@
 User-agent: *
 Allow: /
+
+# AI 检索 / 训练爬虫：显式放行（GEO）。站点说明见 /llms.txt
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: Bytespider
+User-agent: Amazonbot
+User-agent: meta-externalagent
+User-agent: DuckAssistBot
+User-agent: CCBot
+Allow: /
+
+# 四个专题子站（/fe-*-docs/）和主站共用这个根目录，各自构建出自己的 sitemap
 Sitemap: https://interview.poetries.top/sitemap.xml
+Sitemap: https://interview.poetries.top/fe-base-docs/sitemap.xml
+Sitemap: https://interview.poetries.top/fe-node-docs/sitemap.xml
+Sitemap: https://interview.poetries.top/fe-blog-docs/sitemap.xml
+Sitemap: https://interview.poetries.top/fe-improve-docs/sitemap.xml

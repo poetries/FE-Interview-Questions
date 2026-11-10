@@ -1,0 +1,40 @@
+# 前端进阶之旅
+
+> 前端面试题库与学习文档：基础、进阶、高频、手写、原理、面经、AI 面试题和每日一题，附参考答案与讲解。
+
+前端进阶之旅（interview.poetries.top）是程序员poetry 维护的中文前端面试与学习网站。页面是预渲染的静态 HTML，可直接抓取；会员内容只有预览段公开。
+
+另有四个专题子站（计算机与前端基础、Node.js、技术文章、系统进阶），各自有 llms.txt，见下方「专题子站」。
+
+共 231 个页面，全量目录见 https://interview.poetries.top/llms-full.txt。引用请附上页面原文链接。
+
+## 面试题
+
+- [基础篇](https://interview.poetries.top/docs/base.html): HTML、CSS、JavaScript、浏览器、网络等前端基础面试题
+- [进阶篇](https://interview.poetries.top/docs/base/improve.html): 框架原理、工程化、性能优化、安全等进阶面试题
+- [高频篇](https://interview.poetries.top/docs/base/high-frequency.html): 面试出现频率最高的题目合集
+- [精选篇](https://interview.poetries.top/docs/excellent-docs/1-HTML%E6%A8%A1%E5%9D%97.html): 按模块整理的精选面试总结
+- [手写篇](https://interview.poetries.top/docs/base/handwritten.html): 手写 Promise、防抖节流、深拷贝等手写题
+- [面经篇](https://interview.poetries.top/interview-exp/%E5%89%8D%E7%AB%AF%E9%9D%A2%E7%BB%8F%E6%B1%87%E6%80%BB.html): 各公司真实前端面经汇总
+- [AI 篇](https://interview.poetries.top/ai-interview/AI%E9%9D%A2%E8%AF%95%E9%A2%98%E6%B1%87%E6%80%BB.html): 大模型、Prompt、RAG、Agent 等 AI 应用岗面试题
+- [原理篇](https://interview.poetries.top/principle-docs/react/01-React%20router%E5%8E%9F%E7%90%86.html): React、Vue 等源码与原理解析
+- [每日一题](https://interview.poetries.top/days/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98.html): 每天一道前端面试题
+- [专项自测](https://interview.poetries.top/qa/1-%E5%89%8D%E7%AB%AF100%E9%A2%98%E8%87%AA%E6%A3%80.html): 前端 100 题自检清单
+- [设计模式](https://interview.poetries.top/docs/base/design-pattern.html): 前端常用设计模式
+
+## 学习资料
+
+- [思维导图](https://interview.poetries.top/mind-map/frontend/javascript/JS%E5%8F%98%E9%87%8F.html): 前端知识点思维导图
+- [学习路线](https://interview.poetries.top/roadmap/frontend.html): 前端学习路线
+
+## 专题子站
+
+- [计算机与前端基础](https://interview.poetries.top/fe-base-docs/llms.txt): HTTP、浏览器原理、计算机网络、操作系统、数据库
+- [Node.js 学习指南](https://interview.poetries.top/fe-node-docs/llms.txt): Node.js 从基础到实战
+- [前端综合文章](https://interview.poetries.top/fe-blog-docs/llms.txt): JavaScript、CSS、Vue、React 等技术文章
+- [前端系统进阶](https://interview.poetries.top/fe-improve-docs/llms.txt): 前端系统进阶专题：算法、移动端、工程化、框架源码等
+
+## Optional
+
+- [全量内容目录](https://interview.poetries.top/llms-full.txt): 全部页面的标题、地址和摘要
+- [Sitemap](https://interview.poetries.top/sitemap.xml)
